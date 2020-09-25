@@ -23,7 +23,7 @@ public struct Port: Hashable, Codable {
 
 extension Port: CustomStringConvertible {
     public var description: String {
-        "\(name), \(countryCode) (\(timeZoneIdentifier)"
+        "\(name), \(countryCode) (\(timeZoneIdentifier))"
     }
 }
 
