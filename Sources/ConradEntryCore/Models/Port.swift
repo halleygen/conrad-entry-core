@@ -10,7 +10,7 @@ import Foundation
 public struct Port: Hashable, Codable {
     public let name: String
     public let countryCode: String
-    private let timeZoneIdentifier: String
+    public let timeZoneIdentifier: String
 
     public var flag: String {
         countryCode.unicodeScalars.reduce(into: "") { result, scalar in
