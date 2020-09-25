@@ -1,15 +1,15 @@
-import XCTest
+//
+// ConradEntryCore
+// Copyright © 2020 Jesse Halley. All rights reserved.
+//
+
 @testable import ConradEntryCore
+import XCTest
 
 final class ConradEntryCoreTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(ConradEntryCore().text, "Hello, World!")
-    }
+    func testExample() {}
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testExample", testExample)
     ]
 }
