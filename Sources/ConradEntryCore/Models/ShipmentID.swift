@@ -5,11 +5,19 @@
 
 import Foundation
 
-struct ShipmentID: Codable {
-    var dateComponents: DateComponents?
-    var client: String?
-    var vesselName: String?
-    var dischargePort: String?
+public struct ShipmentID: Codable {
+    public var dateComponents: DateComponents?
+    public var client: String?
+    public var vesselName: String?
+    public var dischargePort: String?
+    
+    public init(dateComponents: DateComponents? = nil, client: String? = nil, vesselName: String? = nil, dischargePort: String? = nil) {
+        precondition(dateComponents != nil || client != nil || vesselName != nil || dischargePort != nil, "[ShipmentID]: At least one property must not be nil.")
+        self.dateComponents = dateComponents
+        self.client = client
+        self.vesselName = vesselName
+        self.dischargePort = dischargePort
+    }
 
-    var date: Date? { dateComponents.flatMap(Calendar.iso8601.date) }
+    public var date: Date? { dateComponents.flatMap(Calendar.iso8601.date) }
 }
