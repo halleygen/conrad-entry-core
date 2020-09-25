@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ShipmentID: Codable {
+public struct ShipmentDetails: Codable {
     public var dateComponents: DateComponents?
     public var client: String?
     public var vesselName: String?
