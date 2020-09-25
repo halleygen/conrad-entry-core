@@ -12,7 +12,6 @@ public struct ShipmentDetails: Codable {
     public var dischargePort: Port?
     
     public init(dateComponents: DateComponents? = nil, client: String? = nil, vesselName: String? = nil, dischargePort: Port? = nil) {
-        precondition(dateComponents != nil || client != nil || vesselName != nil || dischargePort != nil, "[ShipmentID]: At least one property must not be nil.")
         self.dateComponents = dateComponents
         self.client = client
         self.vesselName = vesselName
