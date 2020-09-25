@@ -20,4 +20,8 @@ public struct ShipmentID: Codable {
     }
 
     public var date: Date? { dateComponents.flatMap(Calendar.iso8601.date) }
+    
+    public var isValid: Bool {
+        dateComponents != nil || client != nil || vesselName != nil || dischargePort != nil
+    }
 }
