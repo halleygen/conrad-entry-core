@@ -25,9 +25,9 @@ public struct RemoteConfiguration: Codable {
         self.port = port
     }
 
-    private let smelter, dischargeMethod, samplingCompany, sampleReductionLocation, qualityLotSamplePreparationPulverizer, sampleReductionGridSize, sampleReductionMethod, samplingPoint, qualityLotSamplePreparationDivisionMethod, qualityLotSamplePreparationScreenAperture, client, samplingTransparency, trader, samplingLocation, samplingMethod, qualityLotSamplePreparationMethod: [String]
-    private let weighingMethod: [WeighingMethod]
-    private let port: [Port]
+    public let smelter, dischargeMethod, samplingCompany, sampleReductionLocation, qualityLotSamplePreparationPulverizer, sampleReductionGridSize, sampleReductionMethod, samplingPoint, qualityLotSamplePreparationDivisionMethod, qualityLotSamplePreparationScreenAperture, client, samplingTransparency, trader, samplingLocation, samplingMethod, qualityLotSamplePreparationMethod: [String]
+    public let weighingMethod: [WeighingMethod]
+    public let port: [Port]
 
     public enum CodingKeys: String, CodingKey {
         case smelter, client, trader, port
