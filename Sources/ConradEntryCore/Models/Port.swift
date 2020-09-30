@@ -28,6 +28,12 @@ public struct Port: Hashable, Codable {
     }
 }
 
+public extension Port {
+    enum CodingKeys: String, CodingKey {
+        case name, countryCode, timeZoneIdentifier
+    }
+}
+
 extension Port: CustomStringConvertible {
     public var description: String {
         "\(name), \(countryCode) (\(timeZoneIdentifier))"
