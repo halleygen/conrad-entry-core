@@ -1,12 +1,10 @@
 //
-//  File.swift
-//  
-//
-//  Created by Jesse Halley on 30/9/20.
+// ConradEntryCore
+// Copyright © 2020 Jesse Halley. All rights reserved.
 //
 
 public struct RemoteConfiguration: Codable {
-    public init(smelter: [String], dischargeMethod: [String], samplingCompany: [String], sampleReductionLocation: [String], qualityLotSamplePreparationPulverizer: [String], sampleReductionGridSize: [String], sampleReductionMethod: [String], samplingPoint: [String], qualityLotSamplePreparationDivisionMethod: [String], qualityLotSamplePreparationScreenAperture: [String], client: [String], samplingTransparency: [String], trader: [String], samplingLocation: [String], samplingMethod: [String], qualityLotSamplePreparationMethod: [String], weighingMethod: [RemoteConfiguration.WeighingMethod], port: [RemoteConfiguration.Port]) {
+    public init(smelter: [String], dischargeMethod: [String], samplingCompany: [String], sampleReductionLocation: [String], qualityLotSamplePreparationPulverizer: [String], sampleReductionGridSize: [String], sampleReductionMethod: [String], samplingPoint: [String], qualityLotSamplePreparationDivisionMethod: [String], qualityLotSamplePreparationScreenAperture: [String], client: [String], samplingTransparency: [String], trader: [String], samplingLocation: [String], samplingMethod: [String], qualityLotSamplePreparationMethod: [String], weighingMethod: [WeighingMethod], port: [Port]) {
         self.smelter = smelter
         self.dischargeMethod = dischargeMethod
         self.samplingCompany = samplingCompany
@@ -26,7 +24,7 @@ public struct RemoteConfiguration: Codable {
         self.weighingMethod = weighingMethod
         self.port = port
     }
-    
+
     private let smelter, dischargeMethod, samplingCompany, sampleReductionLocation, qualityLotSamplePreparationPulverizer, sampleReductionGridSize, sampleReductionMethod, samplingPoint, qualityLotSamplePreparationDivisionMethod, qualityLotSamplePreparationScreenAperture, client, samplingTransparency, trader, samplingLocation, samplingMethod, qualityLotSamplePreparationMethod: [String]
     private let weighingMethod: [WeighingMethod]
     private let port: [Port]
@@ -49,4 +47,3 @@ public struct RemoteConfiguration: Codable {
         case qualityLotSamplePreparationMethod = "quality_lot_sample_preparation_method"
     }
 }
-

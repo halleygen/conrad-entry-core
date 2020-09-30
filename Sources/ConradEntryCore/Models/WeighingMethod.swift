@@ -1,8 +1,6 @@
 //
-//  File.swift
-//  
-//
-//  Created by Jesse Halley on 30/9/20.
+// ConradEntryCore
+// Copyright © 2020 Jesse Halley. All rights reserved.
 //
 
 public struct WeighingMethod: Codable {
