@@ -34,7 +34,7 @@ public struct RemoteConfiguration: Codable {
 
     public enum CodingKeys: String, CodingKey {
         case smelter, client, trader
-        case port = "maritime_port"
+        case maritimePort = "maritime_port"
         case dischargeMethod = "discharge_method"
         case inspectionCompany = "inspection_company"
         case samplingCompany = "sampling_company"
