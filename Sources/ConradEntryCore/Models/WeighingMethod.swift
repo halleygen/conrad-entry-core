@@ -7,7 +7,7 @@ public struct WeighingMethod: Codable {
     public let value: String
     public let usesEquipment: Bool
     public let supportsABCChecks: Bool
-    
+
     public init(value: String, usesEquipment: Bool, supportsABCChecks: Bool) {
         self.value = value
         self.usesEquipment = usesEquipment

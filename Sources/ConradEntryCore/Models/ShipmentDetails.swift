@@ -9,9 +9,9 @@ public struct ShipmentDetails: Codable {
     public var date: Date?
     public var client: String?
     public var vesselName: String?
-    public var dischargePort: Port?
+    public var dischargePort: MaritimePort?
 
-    public init(date: Date? = nil, client: String? = nil, vesselName: String? = nil, dischargePort: Port? = nil) {
+    public init(date: Date? = nil, client: String? = nil, vesselName: String? = nil, dischargePort: MaritimePort? = nil) {
         self.date = date
         self.client = client
         self.vesselName = vesselName

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct Port: Hashable, Codable {
+public struct MaritimePort: Hashable, Codable {
     public let name: String
     public let countryCode: String
     public let timeZoneIdentifier: String
@@ -26,13 +26,13 @@ public struct Port: Hashable, Codable {
     }
 }
 
-public extension Port {
+public extension MaritimePort {
     enum CodingKeys: String, CodingKey {
         case name, countryCode, timeZoneIdentifier
     }
 }
 
-extension Port: CustomStringConvertible {
+extension MaritimePort: CustomStringConvertible {
     public var description: String {
         "\(name), \(countryCode) (\(timeZoneIdentifier))"
     }
