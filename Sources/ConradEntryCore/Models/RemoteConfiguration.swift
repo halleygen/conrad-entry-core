@@ -4,7 +4,7 @@
 //
 
 public struct RemoteConfiguration: Codable {
-    public init(smelter: [String], dischargeMethod: [String], inspectionCompany: [String], samplingCompany: [String], sampleReductionLocation: [String], qualityLotSamplePreparationPulverizer: [String], sampleReductionGridSize: [String], sampleReductionMethod: [String], qualityLotSamplePreparationDivisionMethod: [String], qualityLotSamplePreparationScreenAperture: [String], client: [String], trader: [String], samplingLocation: [String], samplingMethod: [String], qualityLotSamplePreparationMethod: [String], samplingTransparency: [SamplingTransparency], samplingPoint: [SamplingPoint], weighingMethod: [WeighingMethod], port: [MaritimePort]) {
+    public init(smelter: [String], dischargeMethod: [String], inspectionCompany: [String], samplingCompany: [String], sampleReductionLocation: [String], qualityLotSamplePreparationPulverizer: [String], sampleReductionGridSize: [String], sampleReductionMethod: [String], qualityLotSamplePreparationDivisionMethod: [String], qualityLotSamplePreparationScreenAperture: [String], client: [String], trader: [String], samplingLocation: [String], samplingMethod: [String], qualityLotSamplePreparationMethod: [String], samplingTransparency: [SamplingTransparency], samplingPoint: [SamplingPoint], weighingMethod: [WeighingMethod], maritimePort: [MaritimePort]) {
         self.smelter = smelter
         self.dischargeMethod = dischargeMethod
         self.inspectionCompany = inspectionCompany
@@ -23,14 +23,14 @@ public struct RemoteConfiguration: Codable {
         self.samplingMethod = samplingMethod
         self.qualityLotSamplePreparationMethod = qualityLotSamplePreparationMethod
         self.weighingMethod = weighingMethod
-        self.port = port
+        self.maritimePort = maritimePort
     }
 
     public let smelter, dischargeMethod, inspectionCompany, samplingCompany, sampleReductionLocation, qualityLotSamplePreparationPulverizer, sampleReductionGridSize, sampleReductionMethod, qualityLotSamplePreparationDivisionMethod, qualityLotSamplePreparationScreenAperture, client, trader, samplingLocation, samplingMethod, qualityLotSamplePreparationMethod: [String]
     public let samplingPoint: [SamplingPoint]
     public let samplingTransparency: [SamplingTransparency]
     public let weighingMethod: [WeighingMethod]
-    public let port: [MaritimePort]
+    public let maritimePort: [MaritimePort]
 
     public enum CodingKeys: String, CodingKey {
         case smelter, client, trader
