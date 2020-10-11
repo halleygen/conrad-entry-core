@@ -25,12 +25,34 @@ public struct RemoteConfiguration: Codable {
         self.weighingMethod = weighingMethod
         self.maritimePort = maritimePort
     }
+    
+    public init() {
+        self.smelter = []
+        self.dischargeMethod = []
+        self.inspectionCompany = []
+        self.samplingCompany = []
+        self.sampleReductionLocation = []
+        self.qualityLotSamplePreparationPulverizer = []
+        self.sampleReductionGridSize = []
+        self.sampleReductionMethod = []
+        self.samplingPoint = []
+        self.qualityLotSamplePreparationDivisionMethod = []
+        self.qualityLotSamplePreparationScreenAperture = []
+        self.client = []
+        self.samplingTransparency = []
+        self.trader = []
+        self.samplingLocation = []
+        self.samplingMethod = []
+        self.qualityLotSamplePreparationMethod = []
+        self.weighingMethod = []
+        self.maritimePort = []
+    }
 
-    public let smelter, dischargeMethod, inspectionCompany, samplingCompany, sampleReductionLocation, qualityLotSamplePreparationPulverizer, sampleReductionGridSize, sampleReductionMethod, qualityLotSamplePreparationDivisionMethod, qualityLotSamplePreparationScreenAperture, client, trader, samplingLocation, samplingMethod, qualityLotSamplePreparationMethod: [String]
-    public let samplingPoint: [SamplingPoint]
-    public let samplingTransparency: [SamplingTransparency]
-    public let weighingMethod: [WeighingMethod]
-    public let maritimePort: [MaritimePort]
+    public var smelter, dischargeMethod, inspectionCompany, samplingCompany, sampleReductionLocation, qualityLotSamplePreparationPulverizer, sampleReductionGridSize, sampleReductionMethod, qualityLotSamplePreparationDivisionMethod, qualityLotSamplePreparationScreenAperture, client, trader, samplingLocation, samplingMethod, qualityLotSamplePreparationMethod: [String]
+    public var samplingPoint: [SamplingPoint]
+    public var samplingTransparency: [SamplingTransparency]
+    public var weighingMethod: [WeighingMethod]
+    public var maritimePort: [MaritimePort]
 
     public enum CodingKeys: String, CodingKey {
         case smelter, client, trader
