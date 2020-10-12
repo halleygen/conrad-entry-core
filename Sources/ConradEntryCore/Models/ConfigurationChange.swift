@@ -11,11 +11,11 @@ public extension RemoteConfiguration {
         public let data: Data
         public let operation: Operation
 
-        public static func deleting(_ data: Data, fromItemNamed key: String) -> ConfigurationChange {
+        public static func deleting(_ data: Data, fromItemNamed key: String) -> Change {
             self.init(key: key, data: data, operation: .delete)
         }
 
-        public static func updating(_ data: Data, fromItemNamed key: String) -> ConfigurationChange {
+        public static func updating(_ data: Data, fromItemNamed key: String) -> Change {
             self.init(key: key, data: data, operation: .update)
         }
     }
