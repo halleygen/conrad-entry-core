@@ -5,9 +5,9 @@
 
 public struct SamplingTransparency: Codable {
     public let value: String
-    public let ranking: Int16
+    public let ranking: Int
 
-    public init(value: String, ranking: Int16) {
+    public init(value: String, ranking: Int) {
         self.value = value
         self.ranking = ranking
     }

@@ -25,7 +25,7 @@ public struct RemoteConfiguration: Codable {
         self.weighingMethod = weighingMethod
         self.maritimePort = maritimePort
     }
-    
+
     public init() {
         self.smelter = []
         self.dischargeMethod = []
