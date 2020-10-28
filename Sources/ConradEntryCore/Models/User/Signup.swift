@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Signup: Codable {
+public struct Signup: Codable, Hashable {
     public var firstName: String
     public var lastName: String
     public var email: String
