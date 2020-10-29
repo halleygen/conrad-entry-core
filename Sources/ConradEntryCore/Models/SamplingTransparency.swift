@@ -3,11 +3,15 @@
 // Copyright © 2020 Jesse Halley. All rights reserved.
 //
 
-public struct SamplingTransparency: Codable {
+import Foundation
+
+public struct SamplingTransparency: Codable, Identifiable {
+    public let id: UUID
     public let value: String
     public let ranking: Int
 
-    public init(value: String, ranking: Int) {
+    public init(id: UUID, value: String, ranking: Int) {
+        self.id = id
         self.value = value
         self.ranking = ranking
     }
@@ -31,6 +35,6 @@ extension SamplingTransparency: Comparable {
 
 public extension SamplingTransparency {
     enum CodingKeys: String, CodingKey {
-        case value, ranking
+        case id, value, ranking
     }
 }

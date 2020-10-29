@@ -4,7 +4,7 @@
 //
 
 public struct RemoteConfiguration: Codable {
-    public init(smelter: [String], dischargeMethod: [String], inspectionCompany: [String], samplingCompany: [String], sampleReductionLocation: [String], qualityLotSamplePreparationPulverizer: [String], sampleReductionGridSize: [String], sampleReductionMethod: [String], qualityLotSamplePreparationDivisionMethod: [String], qualityLotSamplePreparationScreenAperture: [String], client: [String], trader: [String], samplingLocation: [String], samplingMethod: [String], qualityLotSamplePreparationMethod: [String], samplingTransparency: [SamplingTransparency], samplingPoint: [SamplingPoint], weighingMethod: [WeighingMethod], maritimePort: [MaritimePort]) {
+    public init(smelter: [SimpleConstant], dischargeMethod: [SimpleConstant], inspectionCompany: [SimpleConstant], samplingCompany: [SimpleConstant], sampleReductionLocation: [SimpleConstant], qualityLotSamplePreparationPulverizer: [SimpleConstant], sampleReductionGridSize: [SimpleConstant], sampleReductionMethod: [SimpleConstant], qualityLotSamplePreparationDivisionMethod: [SimpleConstant], qualityLotSamplePreparationScreenAperture: [SimpleConstant], client: [SimpleConstant], trader: [SimpleConstant], samplingLocation: [SimpleConstant], samplingMethod: [SimpleConstant], qualityLotSamplePreparationMethod: [SimpleConstant], samplingTransparency: [SamplingTransparency], samplingPoint: [SamplingPoint], weighingMethod: [WeighingMethod], maritimePort: [MaritimePort]) {
         self.smelter = smelter
         self.dischargeMethod = dischargeMethod
         self.inspectionCompany = inspectionCompany
@@ -48,7 +48,7 @@ public struct RemoteConfiguration: Codable {
         self.maritimePort = []
     }
 
-    public var smelter, dischargeMethod, inspectionCompany, samplingCompany, sampleReductionLocation, qualityLotSamplePreparationPulverizer, sampleReductionGridSize, sampleReductionMethod, qualityLotSamplePreparationDivisionMethod, qualityLotSamplePreparationScreenAperture, client, trader, samplingLocation, samplingMethod, qualityLotSamplePreparationMethod: [String]
+    public var smelter, dischargeMethod, inspectionCompany, samplingCompany, sampleReductionLocation, qualityLotSamplePreparationPulverizer, sampleReductionGridSize, sampleReductionMethod, qualityLotSamplePreparationDivisionMethod, qualityLotSamplePreparationScreenAperture, client, trader, samplingLocation, samplingMethod, qualityLotSamplePreparationMethod: [SimpleConstant]
     public var samplingPoint: [SamplingPoint]
     public var samplingTransparency: [SamplingTransparency]
     public var weighingMethod: [WeighingMethod]

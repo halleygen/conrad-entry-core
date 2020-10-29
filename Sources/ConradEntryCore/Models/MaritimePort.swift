@@ -5,7 +5,8 @@
 
 import Foundation
 
-public struct MaritimePort: Hashable, Codable {
+public struct MaritimePort: Hashable, Codable, Identifiable {
+    public let id: UUID
     public let name: String
     public let countryCode: String
     public let timeZoneIdentifier: String
@@ -18,8 +19,9 @@ public struct MaritimePort: Hashable, Codable {
 
     public var timeZone: TimeZone { TimeZone(identifier: timeZoneIdentifier)! }
 
-    public init(name: String, countryCode: String, timeZoneIdentifier: String) {
+    public init(id: UUID, name: String, countryCode: String, timeZoneIdentifier: String) {
         precondition(TimeZone(identifier: timeZoneIdentifier) != nil, "Port initialized with invalid time zone identifier.")
+        self.id = id
         self.name = name
         self.countryCode = countryCode
         self.timeZoneIdentifier = timeZoneIdentifier
@@ -28,27 +30,16 @@ public struct MaritimePort: Hashable, Codable {
 
 public extension MaritimePort {
     enum CodingKeys: String, CodingKey {
-        case name, countryCode, timeZoneIdentifier
+        case id, name, countryCode, timeZoneIdentifier
     }
 }
 
-extension MaritimePort: CustomStringConvertible {
+extension MaritimePort: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         "\(name), \(countryCode) (\(timeZoneIdentifier))"
     }
-
-    public init?(string: String) {
-        guard
-            let endOfName = string.firstIndex(of: ","),
-            let startOfTimeZone = string.firstIndex(of: "(").map(string.index(after:)),
-            let endOfTimeZone = string.lastIndex(of: ")")
-        else { return nil }
-
-        let startOfCountryCode = string.index(endOfName, offsetBy: 2)
-        guard let endOfCountryCode = string[startOfCountryCode...].firstIndex(of: " ") else { return nil }
-
-        self.name = String(string[string.startIndex ..< endOfName])
-        self.countryCode = String(string[startOfCountryCode ..< endOfCountryCode])
-        self.timeZoneIdentifier = String(string[startOfTimeZone ..< endOfTimeZone])
+    
+    public var debugDescription: String {
+        "[\(id)] " + description
     }
 }

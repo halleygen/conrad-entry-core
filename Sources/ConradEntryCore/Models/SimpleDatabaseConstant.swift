@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SimpleDatabaseConstant: Codable, Hashable, Identifiable {
+public struct SimpleConstant: Codable, Hashable, Identifiable {
     public var id: UUID
     public var value: String
     

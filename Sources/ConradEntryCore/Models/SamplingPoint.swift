@@ -3,11 +3,15 @@
 // Copyright © 2020 Jesse Halley. All rights reserved.
 //
 
-public struct SamplingPoint: Codable {
+import Foundation
+
+public struct SamplingPoint: Codable, Identifiable {
+    public let id: UUID
     public let value: String
     public let isFromTruck: Bool
 
-    public init(value: String, isFromTruck: Bool) {
+    public init(id: UUID, value: String, isFromTruck: Bool) {
+        self.id = id
         self.value = value
         self.isFromTruck = isFromTruck
     }
@@ -25,6 +29,6 @@ extension SamplingPoint: Hashable {
 
 public extension SamplingPoint {
     enum CodingKeys: String, CodingKey {
-        case value, isFromTruck
+        case id, value, isFromTruck
     }
 }

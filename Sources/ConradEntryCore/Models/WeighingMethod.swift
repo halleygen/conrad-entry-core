@@ -3,12 +3,16 @@
 // Copyright © 2020 Jesse Halley. All rights reserved.
 //
 
-public struct WeighingMethod: Codable {
+import Foundation
+
+public struct WeighingMethod: Codable, Identifiable {
+    public let id: UUID
     public let value: String
     public let usesEquipment: Bool
     public let supportsABCChecks: Bool
 
-    public init(value: String, usesEquipment: Bool, supportsABCChecks: Bool) {
+    public init(id: UUID, value: String, usesEquipment: Bool, supportsABCChecks: Bool) {
+        self.id = id
         self.value = value
         self.usesEquipment = usesEquipment
         self.supportsABCChecks = supportsABCChecks
@@ -17,6 +21,6 @@ public struct WeighingMethod: Codable {
 
 public extension WeighingMethod {
     enum CodingKeys: String, CodingKey {
-        case supportsABCChecks, value, usesEquipment
+        case id, supportsABCChecks, value, usesEquipment
     }
 }
