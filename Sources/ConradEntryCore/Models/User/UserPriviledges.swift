@@ -5,6 +5,7 @@
 //  Created by Jesse Halley on 29/10/20.
 //
 
+extension User {
 public struct Priviledges: OptionSet, Codable, Hashable {
     public let rawValue: Int
     
@@ -20,4 +21,5 @@ public struct Priviledges: OptionSet, Codable, Hashable {
     public static let none: Priviledges = []
     public static let administrator: Priviledges = [.readAllShipments, .writeAllShipments, .editConfigurationConstants]
     public static let superuser: Priviledges = [.administrator, .manageUsers]
+}
 }
