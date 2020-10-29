@@ -7,21 +7,21 @@ import Foundation
 
 public struct ShipmentDetails: Codable {
     public var date: Date?
-    public var client: String?
+    public var clientID: UUID?
     public var vesselName: String?
-    public var dischargePort: MaritimePort?
+    public var dischargePortID: UUID?
 
-    public init(date: Date? = nil, client: String? = nil, vesselName: String? = nil, dischargePort: MaritimePort? = nil) {
+    public init(date: Date? = nil, clientID: UUID? = nil, vesselName: String? = nil, dischargePortID: UUID? = nil) {
         self.date = date
-        self.client = client
+        self.clientID = clientID
         self.vesselName = vesselName
-        self.dischargePort = dischargePort
+        self.dischargePortID = dischargePortID
     }
 
     public var month: Int? { date.map { Calendar.iso8601.component(.month, from: $0) } }
     public var year: Int? { date.map { Calendar.iso8601.component(.year, from: $0) } }
 
     public var isValid: Bool {
-        date != nil || client != nil || vesselName != nil || dischargePort != nil
+        date != nil || clientID != nil || vesselName != nil || dischargePortID != nil
     }
 }
