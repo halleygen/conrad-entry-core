@@ -19,7 +19,7 @@ public struct DischargeWeightDTO: Codable {
     public let abcCheck: ABCCheck?
     public let comments: String
 
-    public init(id: UUID?, methodID: UUID, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, isSettlementWeight: Bool, equipmentName: String?, equipmentModel: String?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck, abcCheck: ABCCheck, comments: String) {
+    public init(id: UUID?, methodID: UUID, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, isSettlementWeight: Bool, equipmentName: String?, equipmentModel: String?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, comments: String) {
         self.id = id
         self.methodID = methodID
         self.wetMetricTonnes = wetMetricTonnes
