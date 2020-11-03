@@ -20,15 +20,15 @@ public struct ShipmentDTO: Codable {
     public let createdAt: Date?
     public let updatedAt: Date?
 
-    public let billOfLading: BillOfLadingDTO
+    public let billOfLading: BillOfLadingDTO?
     public let dischargeWeights: [DischargeWeightDTO]
-    public let discharge: DischargeDTO
-    public let sampleCollection: SampleCollectionDTO
-    public let sampleReduction: SampleReductionDTO
-    public let moistureDetermination: MoistureDeterminationDTO
-    public let qualityLotSamplePreparation: QualityLotSamplePreparationDTO
+    public let discharge: DischargeDTO?
+    public let sampleCollection: SampleCollectionDTO?
+    public let sampleReduction: SampleReductionDTO?
+    public let moistureDetermination: MoistureDeterminationDTO?
+    public let qualityLotSamplePreparation: QualityLotSamplePreparationDTO?
 
-    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: UUID, traderID: UUID?, smelterID: UUID, dischargePortID: UUID, inspectionCompanyIDs: Set<UUID>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: BillOfLadingDTO, dischargeWeights: [DischargeWeightDTO], discharge: DischargeDTO, sampleCollection: SampleCollectionDTO, sampleReduction: SampleReductionDTO, moistureDetermination: MoistureDeterminationDTO, qualityLotSamplePreparation: QualityLotSamplePreparationDTO) {
+    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: UUID, traderID: UUID?, smelterID: UUID, dischargePortID: UUID, inspectionCompanyIDs: Set<UUID>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: BillOfLadingDTO?, dischargeWeights: [DischargeWeightDTO], discharge: DischargeDTO?, sampleCollection: SampleCollectionDTO?, sampleReduction: SampleReductionDTO?, moistureDetermination: MoistureDeterminationDTO?, qualityLotSamplePreparation: QualityLotSamplePreparationDTO?) {
         self.id = id
         self.shipmentDate = shipmentDate
         self.norTime = norTime
