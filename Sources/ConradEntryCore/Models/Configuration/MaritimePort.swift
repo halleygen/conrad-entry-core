@@ -38,7 +38,7 @@ extension MaritimePort: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         "\(name), \(countryCode) (\(timeZoneIdentifier))"
     }
-    
+
     public var debugDescription: String {
         "[\(id)] " + description
     }

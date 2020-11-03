@@ -1,8 +1,6 @@
 //
-//  File.swift
-//  
-//
-//  Created by Jesse Halley on 29/10/20.
+// ConradEntryCore
+// Copyright © 2020 Jesse Halley. All rights reserved.
 //
 
 import Foundation
@@ -14,7 +12,7 @@ public struct User: Codable, Hashable {
     public let email: String
     public let priviledges: Priviledges
     public let creationDate: Date
-    
+
     public init(id: UUID, firstName: String, lastName: String, email: String, priviledges: User.Priviledges, creationDate: Date) {
         self.id = id
         self.firstName = firstName
@@ -23,7 +21,7 @@ public struct User: Codable, Hashable {
         self.priviledges = priviledges
         self.creationDate = creationDate
     }
-    
+
     public enum CodingKeys: String, CodingKey {
         case id, firstName, lastName, email, priviledges, creationDate
     }

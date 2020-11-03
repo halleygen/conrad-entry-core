@@ -1,8 +1,6 @@
 //
-//  File.swift
-//  
-//
-//  Created by Jesse Halley on 29/10/20.
+// ConradEntryCore
+// Copyright © 2020 Jesse Halley. All rights reserved.
 //
 
 import Foundation
@@ -17,7 +15,7 @@ public struct Signup: Codable, Hashable {
     public enum CodingKeys: String, CodingKey {
         case firstName, lastName, email, password, confirmPassword
     }
-    
+
     public init(firstName: String, lastName: String, email: String, password: String, confirmPassword: String) {
         self.firstName = firstName
         self.lastName = lastName
