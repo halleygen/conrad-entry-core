@@ -7,18 +7,18 @@ import Foundation
 
 public struct MoistureDeterminationDTO: Codable {
     public let id: UUID?
-    public let moistureDeterminationCompanyID: UUID
-    public let locationID: UUID
+    public let moistureDeterminationCompanyID: Int
+    public let locationID: Int
     public let lotSampleWeightKilograms: Double
     public let dryingStartTime: Date?
     public let dryingFinishTime: Date?
     public let dryingHoursInOven: TimeInterval?
     public let checkedForConstantWeight: Bool
     public let resultsWaitTimeDays: Int
-    public let transparencyID: UUID
+    public let transparencyID: Int
     public let comments: String
 
-    public init(id: UUID?, moistureDeterminationCompanyID: UUID, locationID: UUID, lotSampleWeightKilograms: Double, dryingStartTime: Date?, dryingFinishTime: Date?, dryingHoursInOven: TimeInterval?, checkedForConstantWeight: Bool, resultsWaitTimeDays: Int, transparencyID: UUID, comments: String) {
+    public init(id: UUID?, moistureDeterminationCompanyID: Int, locationID: Int, lotSampleWeightKilograms: Double, dryingStartTime: Date?, dryingFinishTime: Date?, dryingHoursInOven: TimeInterval?, checkedForConstantWeight: Bool, resultsWaitTimeDays: Int, transparencyID: Int, comments: String) {
         self.id = id
         self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
         self.locationID = locationID

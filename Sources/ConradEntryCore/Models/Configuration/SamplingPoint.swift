@@ -6,11 +6,11 @@
 import Foundation
 
 public struct SamplingPoint: Codable, Identifiable {
-    public let id: UUID
+    public let id: Int
     public let value: String
     public let isFromTruck: Bool
 
-    public init(id: UUID, value: String, isFromTruck: Bool) {
+    public init(id: Int, value: String, isFromTruck: Bool) {
         self.id = id
         self.value = value
         self.isFromTruck = isFromTruck

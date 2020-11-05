@@ -6,7 +6,7 @@
 import Foundation
 
 public struct MaritimePort: Hashable, Codable, Identifiable {
-    public let id: UUID
+    public let id: Int
     public let name: String
     public let countryCode: String
     public let timeZoneIdentifier: String
@@ -19,7 +19,7 @@ public struct MaritimePort: Hashable, Codable, Identifiable {
 
     public var timeZone: TimeZone { TimeZone(identifier: timeZoneIdentifier)! }
 
-    public init(id: UUID, name: String, countryCode: String, timeZoneIdentifier: String) {
+    public init(id: Int, name: String, countryCode: String, timeZoneIdentifier: String) {
         precondition(TimeZone(identifier: timeZoneIdentifier) != nil, "Port initialized with invalid time zone identifier.")
         self.id = id
         self.name = name
@@ -40,6 +40,6 @@ extension MaritimePort: CustomStringConvertible, CustomDebugStringConvertible {
     }
 
     public var debugDescription: String {
-        "[\(id)] " + description
+        "[ID:\(id)] " + description
     }
 }

@@ -7,14 +7,14 @@ import Foundation
 
 public struct SampleReductionDTO: Codable {
     public let id: UUID?
-    public let locationID: UUID
+    public let locationID: Int
     public let wasScreened: Bool
     public let screenApertureMillimetres: Double?
-    public let methodID: UUID
-    public let gridSizeID: UUID
+    public let methodID: Int
+    public let gridSizeID: Int
     public let comments: String
 
-    public init(id: UUID?, locationID: UUID, wasScreened: Bool, screenApertureMillimetres: Double?, methodID: UUID, gridSizeID: UUID, comments: String) {
+    public init(id: UUID?, locationID: Int, wasScreened: Bool, screenApertureMillimetres: Double?, methodID: Int, gridSizeID: Int, comments: String) {
         self.id = id
         self.locationID = locationID
         self.wasScreened = wasScreened

@@ -7,15 +7,15 @@ import Foundation
 
 public struct BillOfLadingDTO: Codable {
     public let id: UUID?
-    public let loadPortID: UUID
+    public let loadPortID: Int
     public let vesselHolds: Set<Int>
-    public let weighingMethodID: UUID
+    public let weighingMethodID: Int
     public let wetMetricTonnes: Double
-    public let moisturePercentage: Double
-    public let dryMetricTonnes: Double
+    public let moisturePercentage: Double?
+    public let dryMetricTonnes: Double?
     public let comments: String
 
-    public init(id: UUID?, loadPortID: UUID, vesselHolds: Set<Int>, weighingMethodID: UUID, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, comments: String) {
+    public init(id: UUID?, loadPortID: Int, vesselHolds: Set<Int>, weighingMethodID: Int, wetMetricTonnes: Double, moisturePercentage: Double?, dryMetricTonnes: Double?, comments: String) {
         self.id = id
         self.loadPortID = loadPortID
         self.vesselHolds = vesselHolds

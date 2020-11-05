@@ -7,10 +7,10 @@ import Foundation
 
 public struct SampleCollectionDTO: Codable {
     public let id: UUID?
-    public let samplingCompanyID: UUID
-    public let locationID: UUID
-    public let samplingPointID: UUID
-    public let methodID: UUID
+    public let samplingCompanyID: Int
+    public let locationID: Int
+    public let samplingPointID: Int
+    public let methodID: Int
     public let sampleIncrementsWetTonnes: Double
     public let typicalSampleWeightKilograms: Double
     public let numberOfTrucksPerBag: Int?
@@ -18,7 +18,7 @@ public struct SampleCollectionDTO: Codable {
     public let sublotSizeWetTonnes: Int?
     public let comments: String
 
-    public init(id: UUID?, samplingCompanyID: UUID, locationID: UUID, samplingPointID: UUID, methodID: UUID, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, comments: String) {
+    public init(id: UUID?, samplingCompanyID: Int, locationID: Int, samplingPointID: Int, methodID: Int, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, comments: String) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.locationID = locationID

@@ -10,11 +10,11 @@ public struct ShipmentDTO: Codable {
     public let shipmentDate: Date
     public let norTime: Date
     public let vesselName: String
-    public let clientID: UUID
-    public let traderID: UUID?
-    public let smelterID: UUID
-    public let dischargePortID: UUID
-    public let inspectionCompanyIDs: Set<UUID>
+    public let clientID: Int
+    public let traderID: Int?
+    public let smelterID: Int
+    public let dischargePortID: Int
+    public let inspectionCompanyIDs: Set<Int>
     public let conradTeamSize: Int
     public let comments: String
     public let createdAt: Date?
@@ -28,7 +28,7 @@ public struct ShipmentDTO: Codable {
     public let moistureDetermination: MoistureDeterminationDTO?
     public let qualityLotSamplePreparation: QualityLotSamplePreparationDTO?
 
-    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: UUID, traderID: UUID?, smelterID: UUID, dischargePortID: UUID, inspectionCompanyIDs: Set<UUID>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: BillOfLadingDTO?, dischargeWeights: [DischargeWeightDTO], discharge: DischargeDTO?, sampleCollection: SampleCollectionDTO?, sampleReduction: SampleReductionDTO?, moistureDetermination: MoistureDeterminationDTO?, qualityLotSamplePreparation: QualityLotSamplePreparationDTO?) {
+    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: BillOfLadingDTO?, dischargeWeights: [DischargeWeightDTO], discharge: DischargeDTO?, sampleCollection: SampleCollectionDTO?, sampleReduction: SampleReductionDTO?, moistureDetermination: MoistureDeterminationDTO?, qualityLotSamplePreparation: QualityLotSamplePreparationDTO?) {
         self.id = id
         self.shipmentDate = shipmentDate
         self.norTime = norTime

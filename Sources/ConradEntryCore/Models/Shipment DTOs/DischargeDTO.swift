@@ -7,14 +7,14 @@ import Foundation
 
 public struct DischargeDTO: Codable {
     public let id: UUID?
-    public let methodID: UUID
+    public let methodID: Int
     public let startTime: Date
     public let finishTime: Date
     public let duration: TimeInterval
     public let dischargeRate: Double
     public let comments: String
 
-    public init(id: UUID?, methodID: UUID, startTime: Date, finishTime: Date, duration: TimeInterval, dischargeRate: Double, comments: String) {
+    public init(id: UUID?, methodID: Int, startTime: Date, finishTime: Date, duration: TimeInterval, dischargeRate: Double, comments: String) {
         self.id = id
         self.methodID = methodID
         self.startTime = startTime

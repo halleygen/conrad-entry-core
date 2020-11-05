@@ -7,19 +7,19 @@ import Foundation
 
 public struct QualityLotSamplePreparationDTO: Codable {
     public let id: UUID?
-    public let preparationCompanyID: UUID
-    public let methodID: UUID
+    public let preparationCompanyID: Int
+    public let methodID: Int
     public let wasScreened: Bool
-    public let screenApertureID: UUID?
+    public let screenApertureID: Int?
     public let oversizePulverizedSeparately: Bool?
-    public let pulverizerID: UUID
+    public let pulverizerID: Int
     public let pulverizingDurationSeconds: TimeInterval
-    public let divisionMethodID: UUID
+    public let divisionMethodID: Int
     public let numberOfSets: Int
-    public let transparencyID: UUID
+    public let transparencyID: Int
     public let comments: String
 
-    public init(id: UUID?, preparationCompanyID: UUID, methodID: UUID, wasScreened: Bool, screenApertureID: UUID?, oversizePulverizedSeparately: Bool?, pulverizerID: UUID, pulverizingDurationSeconds: TimeInterval, divisionMethodID: UUID, numberOfSets: Int, transparencyID: UUID, comments: String) {
+    public init(id: UUID?, preparationCompanyID: Int, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, numberOfSets: Int, transparencyID: Int, comments: String) {
         self.id = id
         self.preparationCompanyID = preparationCompanyID
         self.methodID = methodID

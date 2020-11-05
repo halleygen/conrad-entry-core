@@ -6,12 +6,12 @@
 import Foundation
 
 public struct WeighingMethod: Codable, Identifiable {
-    public let id: UUID
+    public let id: Int
     public let value: String
     public let usesEquipment: Bool
     public let supportsABCChecks: Bool
 
-    public init(id: UUID, value: String, usesEquipment: Bool, supportsABCChecks: Bool) {
+    public init(id: Int, value: String, usesEquipment: Bool, supportsABCChecks: Bool) {
         self.id = id
         self.value = value
         self.usesEquipment = usesEquipment

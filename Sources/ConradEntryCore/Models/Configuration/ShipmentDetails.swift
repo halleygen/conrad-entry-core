@@ -7,11 +7,11 @@ import Foundation
 
 public struct ShipmentDetails: Codable {
     public var date: Date?
-    public var clientID: UUID?
+    public var clientID: Int?
     public var vesselName: String?
-    public var dischargePortID: UUID?
+    public var dischargePortID: Int?
 
-    public init(date: Date? = nil, clientID: UUID? = nil, vesselName: String? = nil, dischargePortID: UUID? = nil) {
+    public init(date: Date? = nil, clientID: Int? = nil, vesselName: String? = nil, dischargePortID: Int? = nil) {
         self.date = date
         self.clientID = clientID
         self.vesselName = vesselName

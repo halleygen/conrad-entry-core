@@ -6,11 +6,11 @@
 import Foundation
 
 public struct SamplingTransparency: Codable, Identifiable {
-    public let id: UUID
+    public let id: Int
     public let value: String
     public let ranking: Int
 
-    public init(id: UUID, value: String, ranking: Int) {
+    public init(id: Int, value: String, ranking: Int) {
         self.id = id
         self.value = value
         self.ranking = ranking
