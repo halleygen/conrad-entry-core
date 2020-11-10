@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct DischargeDTO: Codable {
+public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let methodID: Int
     public let startTime: Date

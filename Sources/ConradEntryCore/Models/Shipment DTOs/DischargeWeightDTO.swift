@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct DischargeWeightDTO: Codable {
+public struct DischargeWeightDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let methodID: Int
     public let wetMetricTonnes: Double

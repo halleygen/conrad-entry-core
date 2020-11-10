@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SampleReductionDTO: Codable {
+public struct SampleReductionDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let locationID: Int
     public let wasScreened: Bool

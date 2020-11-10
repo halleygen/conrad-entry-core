@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ShipmentDTO: Codable {
+public struct ShipmentDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let shipmentDate: Date
     public let norTime: Date
@@ -20,15 +20,15 @@ public struct ShipmentDTO: Codable {
     public let createdAt: Date?
     public let updatedAt: Date?
 
-    public let billOfLading: BillOfLadingDTO?
+    public let billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?
     public let dischargeWeights: [DischargeWeightDTO]
-    public let discharge: DischargeDTO?
-    public let sampleCollection: SampleCollectionDTO?
-    public let sampleReduction: SampleReductionDTO?
-    public let moistureDetermination: MoistureDeterminationDTO?
-    public let qualityLotSamplePreparation: QualityLotSamplePreparationDTO?
+    public let discharge: DatabaseDTO<UUID, DischargeDTO>?
+    public let sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?
+    public let sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?
+    public let moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?
+    public let qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?
 
-    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: BillOfLadingDTO?, dischargeWeights: [DischargeWeightDTO], discharge: DischargeDTO?, sampleCollection: SampleCollectionDTO?, sampleReduction: SampleReductionDTO?, moistureDetermination: MoistureDeterminationDTO?, qualityLotSamplePreparation: QualityLotSamplePreparationDTO?) {
+    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?, dischargeWeights: [DischargeWeightDTO], discharge: DatabaseDTO<UUID, DischargeDTO>?, sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?, sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?, moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?, qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?) {
         self.id = id
         self.shipmentDate = shipmentDate
         self.norTime = norTime

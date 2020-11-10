@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MoistureDeterminationDTO: Codable {
+public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let moistureDeterminationCompanyID: Int
     public let locationID: Int
