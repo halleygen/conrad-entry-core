@@ -21,14 +21,14 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
     public let updatedAt: Date?
 
     public let billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?
-    public let dischargeWeights: [DischargeWeightDTO]
+    public let dischargeWeights: [DatabaseDTO<UUID, DischargeWeightDTO>]
     public let discharge: DatabaseDTO<UUID, DischargeDTO>?
     public let sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?
     public let sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?
     public let moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?
     public let qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?
 
-    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?, dischargeWeights: [DischargeWeightDTO], discharge: DatabaseDTO<UUID, DischargeDTO>?, sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?, sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?, moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?, qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?) {
+    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?, dischargeWeights: [DatabaseDTO<UUID, DischargeWeightDTO>], discharge: DatabaseDTO<UUID, DischargeDTO>?, sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?, sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?, moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?, qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?) {
         self.id = id
         self.shipmentDate = shipmentDate
         self.norTime = norTime
