@@ -42,3 +42,13 @@ public enum DatabaseDTO<ID, Value>: Equatable, Hashable, Codable, Identifiable w
         }
     }
 }
+
+public extension DatabaseDTO {
+    init(value: Value) {
+        self = .value(value)
+    }
+    
+    init(id: ID) {
+        self = .id(id)
+    }
+}
