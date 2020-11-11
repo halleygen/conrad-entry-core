@@ -12,6 +12,7 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let wasScreened: Bool
     public let screenApertureID: Int?
     public let oversizePulverizedSeparately: Bool?
+    public let sampleChargeWeightGrams: Int
     public let pulverizerID: Int
     public let pulverizingDurationSeconds: TimeInterval
     public let divisionMethodID: Int
@@ -19,13 +20,14 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let transparencyID: Int
     public let comments: String
 
-    public init(id: UUID?, preparationCompanyID: Int, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, numberOfSets: Int, transparencyID: Int, comments: String) {
+    public init(id: UUID?, preparationCompanyID: Int, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, numberOfSets: Int, transparencyID: Int, comments: String) {
         self.id = id
         self.preparationCompanyID = preparationCompanyID
         self.methodID = methodID
         self.wasScreened = wasScreened
         self.screenApertureID = screenApertureID
         self.oversizePulverizedSeparately = oversizePulverizedSeparately
+        self.sampleChargeWeightGrams = sampleChargeWeightGrams
         self.pulverizerID = pulverizerID
         self.pulverizingDurationSeconds = pulverizingDurationSeconds
         self.divisionMethodID = divisionMethodID
@@ -41,6 +43,7 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
         case wasScreened
         case screenApertureID
         case oversizePulverizedSeparately
+        case sampleChargeWeightGrams
         case pulverizerID
         case pulverizingDurationSeconds
         case divisionMethodID
