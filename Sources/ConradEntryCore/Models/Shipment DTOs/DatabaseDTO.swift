@@ -47,7 +47,7 @@ public extension DatabaseDTO {
     init(value: Value) {
         self = .value(value)
     }
-    
+
     init(id: ID) {
         self = .id(id)
     }

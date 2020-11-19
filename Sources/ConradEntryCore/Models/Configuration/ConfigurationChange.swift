@@ -5,51 +5,70 @@
 
 import Foundation
 
- public extension RemoteConfiguration {
+public extension RemoteConfiguration {
     struct Change: Codable {
         public let schema: RemoteConfiguration.CodingKeys
-        public let data: Data
         public let operation: Operation
-        
-        public init(schema: RemoteConfiguration.CodingKeys, data: Data, operation: Operation) {
+
+        public init(schema: RemoteConfiguration.CodingKeys, operation: Operation) {
             self.schema = schema
-            self.data = data
             self.operation = operation
         }
     }
- }
+}
 
- public extension RemoteConfiguration.Change {
+public extension RemoteConfiguration.Change {
     enum Operation: Codable {
-        case add, update(primaryKey: Int)
-        
+        case add(Data), update(primaryKey: Int, Data), delete(primaryKey: Int)
+
         public enum CodingKeys: String, CodingKey {
-            case add, update
+            case primaryKey, data
         }
-        
+
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-            if container.contains(.add) {
-                self = .add
-            } else if let primaryKey = try container.decodeIfPresent(Int.self, forKey: .update) {
-                self = .update(primaryKey: primaryKey)
-            } else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "Container did not contain either add or update key."))
+
+            let hasPrimaryKey = container.contains(.primaryKey)
+            let hasData = container.contains(.data)
+
+            switch (hasPrimaryKey, hasData) {
+            case (true, false):
+                let primaryKey = try container.decode(Int.self, forKey: .primaryKey)
+                self = .delete(primaryKey: primaryKey)
+
+            case (true, true):
+                let primaryKey = try container.decode(Int.self, forKey: .primaryKey)
+                let data = try container.decode(Data.self, forKey: .data)
+                self = .update(primaryKey: primaryKey, data)
+
+            case (false, true):
+                let data = try container.decode(Data.self, forKey: .data)
+                self = .add(data)
+
+            case (false, false):
+                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "Container did not contain either a primary key or data."))
             }
         }
-        
+
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             switch self {
-            case .add: try container.encodeNil(forKey: .add)
-            case .update(let primaryKey): try container.encode(primaryKey, forKey: .update)
+            case let .add(data):
+                try container.encode(data, forKey: .data)
+
+            case let .update(primaryKey, data):
+                try container.encode(primaryKey, forKey: .primaryKey)
+                try container.encode(data, forKey: .data)
+
+            case let .delete(primaryKey):
+                try container.encode(primaryKey, forKey: .primaryKey)
             }
         }
     }
- }
+}
 
- extension RemoteConfiguration.Change: CustomStringConvertible {
+extension RemoteConfiguration.Change: CustomStringConvertible {
     public var description: String {
         "ConfigurationChange: \(operation) in table '\(schema)'"
     }
- }
+}
