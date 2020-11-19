@@ -7,11 +7,11 @@ import Foundation
 
  public extension RemoteConfiguration {
     struct Change: Codable {
-        public let schema: String
+        public let schema: RemoteConfiguration.CodingKeys
         public let data: Data
         public let operation: Operation
         
-        public init(schema: String, data: Data, operation: Operation) {
+        public init(schema: RemoteConfiguration.CodingKeys, data: Data, operation: Operation) {
             self.schema = schema
             self.data = data
             self.operation = operation
