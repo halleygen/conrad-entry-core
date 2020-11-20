@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SamplingPoint: Codable, Identifiable {
+public struct SampleCollectionPoint: Codable, Identifiable {
     public let id: Int
     public let value: String
     public let isFromTruck: Bool
@@ -17,7 +17,7 @@ public struct SamplingPoint: Codable, Identifiable {
     }
 }
 
-extension SamplingPoint: Hashable {
+extension SampleCollectionPoint: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(value)
     }
@@ -27,7 +27,7 @@ extension SamplingPoint: Hashable {
     }
 }
 
-public extension SamplingPoint {
+public extension SampleCollectionPoint {
     enum CodingKeys: String, CodingKey {
         case id, value, isFromTruck
     }
