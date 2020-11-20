@@ -6,7 +6,7 @@
 import Foundation
 
 public extension RemoteConfiguration {
-    struct Change: Codable {
+    struct Change: Codable, Hashable {
         public let schema: RemoteConfiguration.CodingKeys
         public let operation: Operation
 
@@ -18,7 +18,7 @@ public extension RemoteConfiguration {
 }
 
 public extension RemoteConfiguration.Change {
-    enum Operation: Codable {
+    enum Operation: Codable, Hashable {
         case add(Data), update(primaryKey: Int, Data), delete(primaryKey: Int)
 
         public enum CodingKeys: String, CodingKey {
