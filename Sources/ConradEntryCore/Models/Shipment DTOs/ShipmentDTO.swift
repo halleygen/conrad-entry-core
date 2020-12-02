@@ -11,6 +11,7 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
     public let norTime: Date
     public let vesselName: String
     public let clientID: Int
+    public let commodityID: Int
     public let traderID: Int?
     public let smelterID: Int
     public let dischargePortID: Int
@@ -28,12 +29,13 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
     public let moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?
     public let qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?
 
-    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?, dischargeWeights: [DatabaseDTO<UUID, DischargeWeightDTO>], discharge: DatabaseDTO<UUID, DischargeDTO>?, sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?, sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?, moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?, qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?) {
+    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?, dischargeWeights: [DatabaseDTO<UUID, DischargeWeightDTO>], discharge: DatabaseDTO<UUID, DischargeDTO>?, sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?, sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?, moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?, qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?) {
         self.id = id
         self.shipmentDate = shipmentDate
         self.norTime = norTime
         self.vesselName = vesselName
         self.clientID = clientID
+        self.commodityID = commodityID
         self.traderID = traderID
         self.smelterID = smelterID
         self.dischargePortID = dischargePortID
@@ -57,6 +59,7 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
         case norTime
         case vesselName
         case clientID
+        case commodityID
         case traderID
         case smelterID
         case dischargePortID
