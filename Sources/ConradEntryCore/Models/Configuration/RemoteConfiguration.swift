@@ -4,7 +4,8 @@
 //
 
 public struct RemoteConfiguration: Codable {
-    public init(smelters: [SimpleConstant], dischargeMethods: [SimpleConstant], inspectionCompanies: [SimpleConstant], samplingCompanies: [SimpleConstant], sampleReductionLocations: [SimpleConstant], qualityLotSamplePreparationPulverizers: [SimpleConstant], sampleReductionGridSizes: [SimpleConstant], sampleReductionMethods: [SimpleConstant], qualityLotSamplePreparationDivisionMethods: [SimpleConstant], qualityLotSamplePreparationScreenApertures: [SimpleConstant], clients: [SimpleConstant], traders: [SimpleConstant], samplingLocations: [SimpleConstant], sampleCollectionMethods: [SimpleConstant], qualityLotSamplePreparationMethods: [SimpleConstant], samplingTransparencies: [SamplingTransparency], sampleCollectionPoints: [SampleCollectionPoint], weighingMethods: [WeighingMethod], maritimePorts: [MaritimePort]) {
+    public init(commodities: [SimpleConstant], smelters: [SimpleConstant], dischargeMethods: [SimpleConstant], inspectionCompanies: [SimpleConstant], samplingCompanies: [SimpleConstant], sampleReductionLocations: [SimpleConstant], qualityLotSamplePreparationPulverizers: [SimpleConstant], sampleReductionGridSizes: [SimpleConstant], sampleReductionMethods: [SimpleConstant], qualityLotSamplePreparationDivisionMethods: [SimpleConstant], qualityLotSamplePreparationScreenApertures: [SimpleConstant], clients: [SimpleConstant], traders: [SimpleConstant], samplingLocations: [SimpleConstant], sampleCollectionMethods: [SimpleConstant], qualityLotSamplePreparationMethods: [SimpleConstant], samplingTransparencies: [SamplingTransparency], sampleCollectionPoints: [SampleCollectionPoint], weighingMethods: [WeighingMethod], maritimePorts: [MaritimePort]) {
+        self.commodities = commodities
         self.smelters = smelters
         self.dischargeMethods = dischargeMethods
         self.inspectionCompanies = inspectionCompanies
@@ -27,6 +28,7 @@ public struct RemoteConfiguration: Codable {
     }
 
     public init() {
+        self.commodities = []
         self.smelters = []
         self.dischargeMethods = []
         self.inspectionCompanies = []
@@ -48,14 +50,14 @@ public struct RemoteConfiguration: Codable {
         self.maritimePorts = []
     }
 
-    public var smelters, dischargeMethods, inspectionCompanies, samplingCompanies, sampleReductionLocations, qualityLotSamplePreparationPulverizers, sampleReductionGridSizes, sampleReductionMethods, qualityLotSamplePreparationDivisionMethods, qualityLotSamplePreparationScreenApertures, clients, traders, samplingLocations, sampleCollectionMethods, qualityLotSamplePreparationMethods: [SimpleConstant]
+    public var commodities, smelters, dischargeMethods, inspectionCompanies, samplingCompanies, sampleReductionLocations, qualityLotSamplePreparationPulverizers, sampleReductionGridSizes, sampleReductionMethods, qualityLotSamplePreparationDivisionMethods, qualityLotSamplePreparationScreenApertures, clients, traders, samplingLocations, sampleCollectionMethods, qualityLotSamplePreparationMethods: [SimpleConstant]
     public var sampleCollectionPoints: [SampleCollectionPoint]
     public var samplingTransparencies: [SamplingTransparency]
     public var weighingMethods: [WeighingMethod]
     public var maritimePorts: [MaritimePort]
 
     public enum CodingKeys: String, CodingKey, Codable {
-        case smelters, clients, traders
+        case commodities, smelters, clients, traders
         case maritimePorts = "maritime_ports"
         case dischargeMethods = "discharge_methods"
         case inspectionCompanies = "inspection_companies"
