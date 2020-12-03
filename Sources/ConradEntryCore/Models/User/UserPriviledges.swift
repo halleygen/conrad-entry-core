@@ -4,10 +4,12 @@
 //
 
 public extension User {
-    struct Priviledges: OptionSet, Codable, Hashable {
-        public let rawValue: Int
+    struct Priviledges: OptionSet, Hashable {
+        public typealias RawValue = Int
 
-        public init(rawValue: Int) {
+        public let rawValue: RawValue
+
+        public init(rawValue: RawValue) {
             self.rawValue = rawValue
         }
 
@@ -17,7 +19,18 @@ public extension User {
         public static let manageUsers = Priviledges(rawValue: 1 << 3)
 
         public static let none: Priviledges = []
-//        public static let superuser: Priviledges = [.readAllShipments, .writeAllShipments, .editConfigurationConstants]
-//        public static let administrator: Priviledges = [.administrator, .manageUsers]
+    }
+}
+
+extension User.Priviledges: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(RawValue.self)
+        self.init(rawValue: rawValue)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
     }
 }
