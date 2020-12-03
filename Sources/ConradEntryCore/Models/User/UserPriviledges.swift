@@ -17,7 +17,7 @@ public extension User {
         public static let manageUsers = Priviledges(rawValue: 1 << 3)
 
         public static let none: Priviledges = []
-        public static let administrator: Priviledges = [.readAllShipments, .writeAllShipments, .editConfigurationConstants]
-        public static let superuser: Priviledges = [.administrator, .manageUsers]
+//        public static let superuser: Priviledges = [.readAllShipments, .writeAllShipments, .editConfigurationConstants]
+//        public static let administrator: Priviledges = [.administrator, .manageUsers]
     }
 }
