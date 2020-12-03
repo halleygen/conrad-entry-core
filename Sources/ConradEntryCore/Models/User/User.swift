@@ -7,17 +7,17 @@ import Foundation
 
 public struct User: Codable, Hashable, Identifiable {
     public let id: UUID
-    public let firstName: String
-    public let lastName: String
+    public let givenName: String
+    public let familyName: String
     public let email: String
     public let priviledges: Priviledges
     public let isLocked: Bool
     public let creationDate: Date
 
-    public init(id: UUID, firstName: String, lastName: String, email: String, priviledges: User.Priviledges, isLocked: Bool, creationDate: Date) {
+    public init(id: UUID, givenName: String, familyName: String, email: String, priviledges: User.Priviledges, isLocked: Bool, creationDate: Date) {
         self.id = id
-        self.firstName = firstName
-        self.lastName = lastName
+        self.givenName = givenName
+        self.familyName = familyName
         self.email = email
         self.priviledges = priviledges
         self.isLocked = isLocked
@@ -25,6 +25,13 @@ public struct User: Codable, Hashable, Identifiable {
     }
 
     public enum CodingKeys: String, CodingKey {
-        case id, firstName, lastName, email, priviledges, isLocked, creationDate
+        case id, givenName, familyName, email, priviledges, isLocked, creationDate
+    }
+
+    public var nameComponents: PersonNameComponents {
+        var components = PersonNameComponents()
+        components.givenName = givenName
+        components.familyName = familyName
+        return components
     }
 }

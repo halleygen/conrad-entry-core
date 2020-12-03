@@ -6,19 +6,19 @@
 import Foundation
 
 public struct Signup: Codable, Hashable {
-    public var firstName: String
-    public var lastName: String
+    public var givenName: String
+    public var familyName: String
     public var email: String
     public var password: String
     public var confirmPassword: String
 
     public enum CodingKeys: String, CodingKey {
-        case firstName, lastName, email, password, confirmPassword
+        case givenName, familyName, email, password, confirmPassword
     }
 
-    public init(firstName: String, lastName: String, email: String, password: String, confirmPassword: String) {
-        self.firstName = firstName
-        self.lastName = lastName
+    public init(givenName: String, familyName: String, email: String, password: String, confirmPassword: String) {
+        self.givenName = givenName
+        self.familyName = familyName
         self.email = email
         self.password = password
         self.confirmPassword = confirmPassword
