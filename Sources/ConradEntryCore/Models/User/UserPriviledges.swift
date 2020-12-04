@@ -34,3 +34,14 @@ extension User.Priviledges: Codable {
         try container.encode(rawValue)
     }
 }
+
+extension User.Priviledges: CaseIterable {
+    public static var allCases: [User.Priviledges] {
+        [
+            .editConfigurationConstants,
+            .readAllShipments,
+            .writeAllShipments,
+            .manageUsers
+        ]
+    }
+}
