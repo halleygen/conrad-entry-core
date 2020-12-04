@@ -34,4 +34,12 @@ public struct User: Codable, Hashable, Identifiable {
         components.familyName = familyName
         return components
     }
+    
+    public func withLockState(_ locked: Bool) -> User {
+        User(id: id, givenName: givenName, familyName: familyName, email: email, priviledges: priviledges, isLocked: locked, creationDate: creationDate)
+    }
+    
+    public func withPriviledges(_ priviledges: Priviledges) -> User {
+        User(id: id, givenName: givenName, familyName: familyName, email: email, priviledges: priviledges, isLocked: isLocked, creationDate: creationDate)
+    }
 }
