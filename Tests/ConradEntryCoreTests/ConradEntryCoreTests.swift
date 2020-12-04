@@ -7,7 +7,9 @@
 import XCTest
 
 final class ConradEntryCoreTests: XCTestCase {
-    func testExample() {}
+    func testExample() {
+        print(User.Privilege.allCases.map(String.init(describing:)))
+    }
 
     static var allTests = [
         ("testExample", testExample)

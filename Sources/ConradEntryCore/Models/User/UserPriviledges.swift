@@ -3,45 +3,25 @@
 // Copyright © 2020 Jesse Halley. All rights reserved.
 //
 
+import Foundation
+
 public extension User {
-    struct Priviledges: OptionSet, Hashable {
-        public typealias RawValue = Int
+    enum Privilege: Int, CaseIterable, Codable {
+        case readAllShipments, writeAllShipments, editConfigurationValues, manageUsers
+    }
+}
 
-        public let rawValue: RawValue
+extension User.Privilege: Identifiable {
+    public var id: User.Privilege { self }
+}
 
-        public init(rawValue: RawValue) {
-            self.rawValue = rawValue
+extension User.Privilege: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .readAllShipments: return NSLocalizedString("user.privileges.read-all-shipments", bundle: .module, comment: "")
+        case .writeAllShipments: return NSLocalizedString("user.privileges.write-all-shipments", bundle: .module, comment: "")
+        case .editConfigurationValues: return NSLocalizedString("user.privileges.edit-configuration-values", bundle: .module, comment: "")
+        case .manageUsers: return NSLocalizedString("user.privileges.manage-users", bundle: .module, comment: "")
         }
-
-        public static let editConfigurationConstants = Priviledges(rawValue: 1 << 0)
-        public static let readAllShipments = Priviledges(rawValue: 1 << 1)
-        public static let writeAllShipments = Priviledges(rawValue: 1 << 2)
-        public static let manageUsers = Priviledges(rawValue: 1 << 3)
-
-        public static let none: Priviledges = []
-    }
-}
-
-extension User.Priviledges: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(RawValue.self)
-        self.init(rawValue: rawValue)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
-}
-
-extension User.Priviledges: CaseIterable {
-    public static var allCases: [User.Priviledges] {
-        [
-            .editConfigurationConstants,
-            .readAllShipments,
-            .writeAllShipments,
-            .manageUsers
-        ]
     }
 }

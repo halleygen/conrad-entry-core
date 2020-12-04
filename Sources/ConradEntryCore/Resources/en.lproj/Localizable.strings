@@ -1,0 +1,4 @@
+"user.privileges.read-all-shipments" = "Read All Shipments";
+"user.privileges.write-all-shipments" = "Write All Shipments";
+"user.privileges.edit-configuration-values" = "Edit Configuration Values";
+"user.privileges.manage-users" = "Manager Users";

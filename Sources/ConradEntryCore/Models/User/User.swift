@@ -10,22 +10,22 @@ public struct User: Codable, Hashable, Identifiable {
     public let givenName: String
     public let familyName: String
     public let email: String
-    public var priviledges: Priviledges
+    public var privileges: Set<Privilege>
     public var isLocked: Bool
     public let creationDate: Date
 
-    public init(id: UUID, givenName: String, familyName: String, email: String, priviledges: User.Priviledges, isLocked: Bool, creationDate: Date) {
+    public init(id: UUID, givenName: String, familyName: String, email: String, privileges: Set<Privilege>, isLocked: Bool, creationDate: Date) {
         self.id = id
         self.givenName = givenName
         self.familyName = familyName
         self.email = email
-        self.priviledges = priviledges
+        self.privileges = privileges
         self.isLocked = isLocked
         self.creationDate = creationDate
     }
 
     public enum CodingKeys: String, CodingKey {
-        case id, givenName, familyName, email, priviledges, isLocked, creationDate
+        case id, givenName, familyName, email, privileges, isLocked, creationDate
     }
 
     public var nameComponents: PersonNameComponents {
