@@ -10,8 +10,8 @@ public struct User: Codable, Hashable, Identifiable {
     public let givenName: String
     public let familyName: String
     public let email: String
-    public let priviledges: Priviledges
-    public let isLocked: Bool
+    public var priviledges: Priviledges
+    public var isLocked: Bool
     public let creationDate: Date
 
     public init(id: UUID, givenName: String, familyName: String, email: String, priviledges: User.Priviledges, isLocked: Bool, creationDate: Date) {
@@ -33,13 +33,5 @@ public struct User: Codable, Hashable, Identifiable {
         components.givenName = givenName
         components.familyName = familyName
         return components
-    }
-    
-    public func withLockState(_ locked: Bool) -> User {
-        User(id: id, givenName: givenName, familyName: familyName, email: email, priviledges: priviledges, isLocked: locked, creationDate: creationDate)
-    }
-    
-    public func withPriviledges(_ priviledges: Priviledges) -> User {
-        User(id: id, givenName: givenName, familyName: familyName, email: email, priviledges: priviledges, isLocked: isLocked, creationDate: creationDate)
     }
 }
