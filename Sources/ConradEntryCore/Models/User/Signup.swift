@@ -23,4 +23,16 @@ public struct Signup: Codable, Hashable {
         self.password = password
         self.confirmPassword = confirmPassword
     }
+    
+    public init() {
+        self.init(givenName: "", familyName: "", email: "", password: "", confirmPassword: "")
+    }
+    
+    public var isValid: Bool {
+        !givenName.isEmpty && !familyName.isEmpty && !email.isEmpty && password.count >= 8 && password == confirmPassword
+    }
+    
+    public var passwordsDoNotMatch: Bool {
+        (!password.isEmpty && !confirmPassword.isEmpty) && password != confirmPassword
+    }
 }
