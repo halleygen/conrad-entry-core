@@ -10,22 +10,24 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
     public let moistureDeterminationCompanyID: Int
     public let locationID: Int
     public let lotSampleWeightKilograms: Double
-    public let dryingStartTime: Date?
-    public let dryingFinishTime: Date?
-    public let dryingHoursInOven: TimeInterval?
+    public let ovenOnTime: Date
+    public let ovenOffTime: Date
+    public let hoursInOven: Int
+    public let ovenTemperatureCelsius: Int
     public let checkedForConstantWeight: Bool
     public let resultsWaitTimeDays: Int
     public let transparencyID: Int
     public let comments: String
 
-    public init(id: UUID?, moistureDeterminationCompanyID: Int, locationID: Int, lotSampleWeightKilograms: Double, dryingStartTime: Date?, dryingFinishTime: Date?, dryingHoursInOven: TimeInterval?, checkedForConstantWeight: Bool, resultsWaitTimeDays: Int, transparencyID: Int, comments: String) {
+    public init(id: UUID?, moistureDeterminationCompanyID: Int, locationID: Int, lotSampleWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, hoursInOven: Int, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, resultsWaitTimeDays: Int, transparencyID: Int, comments: String) {
         self.id = id
         self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
         self.locationID = locationID
         self.lotSampleWeightKilograms = lotSampleWeightKilograms
-        self.dryingStartTime = dryingStartTime
-        self.dryingFinishTime = dryingFinishTime
-        self.dryingHoursInOven = dryingHoursInOven
+        self.ovenOnTime = ovenOnTime
+        self.ovenOffTime = ovenOffTime
+        self.hoursInOven = hoursInOven
+        self.ovenTemperatureCelsius = ovenTemperatureCelsius
         self.checkedForConstantWeight = checkedForConstantWeight
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
@@ -37,9 +39,10 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
         case moistureDeterminationCompanyID
         case locationID
         case lotSampleWeightKilograms
-        case dryingStartTime
-        case dryingFinishTime
-        case dryingHoursInOven
+        case ovenOnTime
+        case ovenOffTime
+        case hoursInOven
+        case ovenTemperatureCelsius
         case checkedForConstantWeight
         case resultsWaitTimeDays
         case transparencyID

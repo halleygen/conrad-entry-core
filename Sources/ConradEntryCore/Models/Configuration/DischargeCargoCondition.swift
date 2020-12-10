@@ -1,11 +1,13 @@
 //
-// ConradEntryCore
-// Copyright © 2020 Jesse Halley. All rights reserved.
+//  File.swift
+//  
+//
+//  Created by Jesse Halley on 10/12/20.
 //
 
 import Foundation
 
-public struct SamplingTransparency: Codable, Identifiable {
+public struct DischargeCargoCondition: Codable, Identifiable {
     public let id: Int
     public let value: String
     public let ranking: Int
@@ -17,7 +19,7 @@ public struct SamplingTransparency: Codable, Identifiable {
     }
 }
 
-extension SamplingTransparency: Hashable {
+extension DischargeCargoCondition: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
@@ -27,13 +29,13 @@ extension SamplingTransparency: Hashable {
     }
 }
 
-extension SamplingTransparency: Comparable {
-    public static func < (lhs: SamplingTransparency, rhs: SamplingTransparency) -> Bool {
+extension DischargeCargoCondition: Comparable {
+    public static func < (lhs: DischargeCargoCondition, rhs: DischargeCargoCondition) -> Bool {
         lhs.ranking < rhs.ranking
     }
 }
 
-public extension SamplingTransparency {
+public extension DischargeCargoCondition {
     enum CodingKeys: String, CodingKey {
         case id, value, ranking
     }
