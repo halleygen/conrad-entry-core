@@ -12,14 +12,14 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
     public let lotSampleWeightKilograms: Double
     public let ovenOnTime: Date
     public let ovenOffTime: Date
-    public let hoursInOven: Int
+    public let hoursInOven: Double
     public let ovenTemperatureCelsius: Int
     public let checkedForConstantWeight: Bool
     public let resultsWaitTimeDays: Int
     public let transparencyID: Int
     public let comments: String
 
-    public init(id: UUID?, moistureDeterminationCompanyID: Int, locationID: Int, lotSampleWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, hoursInOven: Int, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, resultsWaitTimeDays: Int, transparencyID: Int, comments: String) {
+    public init(id: UUID?, moistureDeterminationCompanyID: Int, locationID: Int, lotSampleWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, hoursInOven: Double, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, resultsWaitTimeDays: Int, transparencyID: Int, comments: String) {
         self.id = id
         self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
         self.locationID = locationID
