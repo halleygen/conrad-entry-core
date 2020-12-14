@@ -15,11 +15,12 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let finishTimeCleanup: Date
     public let duration: TimeInterval
     public let dischargeRate: Double
+    public let saveAllTarpaulinsUsed: Bool
     public let holdsCleaned: Bool
     public let wharfCleaned: Bool
     public let comments: String
 
-    public init(id: UUID?, methodID: Int, cargoConditionID: Int, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, holdsCleaned: Bool, wharfCleaned: Bool, comments: String) {
+    public init(id: UUID?, methodID: Int, cargoConditionID: Int, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: String) {
         self.id = id
         self.methodID = methodID
         self.cargoConditionID = cargoConditionID
@@ -29,6 +30,7 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
         self.finishTimeCleanup = finishTimeCleanup
         self.duration = duration
         self.dischargeRate = dischargeRate
+        self.saveAllTarpaulinsUsed = saveAllTarpaulinsUsed
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
         self.comments = comments
@@ -44,6 +46,7 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
         case finishTimeCleanup
         case duration
         case dischargeRate
+        case saveAllTarpaulinsUsed
         case holdsCleaned
         case wharfCleaned
         case comments
