@@ -8,7 +8,7 @@ import Foundation
 public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let methodID: Int
-    public let cargoConditionID: Int
+    public let cargoCondition: CargoConditionDTO
     public let weatherConditionsID: Int
     public let startTime: Date
     public let finishTimeLastGrab: Date
@@ -20,10 +20,10 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let wharfCleaned: Bool
     public let comments: String
 
-    public init(id: UUID?, methodID: Int, cargoConditionID: Int, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: String) {
+    public init(id: UUID?, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: String) {
         self.id = id
         self.methodID = methodID
-        self.cargoConditionID = cargoConditionID
+        self.cargoCondition = cargoCondition
         self.weatherConditionsID = weatherConditionsID
         self.startTime = startTime
         self.finishTimeLastGrab = finishTimeLastGrab
@@ -39,7 +39,7 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
     public enum CodingKeys: String, CodingKey {
         case id
         case methodID
-        case cargoConditionID
+        case cargoCondition
         case weatherConditionsID
         case startTime
         case finishTimeLastGrab
