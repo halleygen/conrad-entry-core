@@ -1,6 +1,6 @@
 //
 // ConradEntryCore
-// Copyright © 2020 Jesse Halley. All rights reserved.
+// Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
 public struct RemoteConfiguration: Codable {

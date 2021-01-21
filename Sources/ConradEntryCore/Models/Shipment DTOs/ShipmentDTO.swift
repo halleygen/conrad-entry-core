@@ -1,12 +1,13 @@
 //
 // ConradEntryCore
-// Copyright © 2020 Jesse Halley. All rights reserved.
+// Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
 import Foundation
 
 public struct ShipmentDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
+    public let clientReference: String
     public let shipmentDate: Date
     public let norTime: Date
     public let vesselName: String
@@ -29,8 +30,9 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
     public let moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?
     public let qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?
 
-    public init(id: UUID?, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?, dischargeWeights: [DatabaseDTO<UUID, DischargeWeightDTO>], discharge: DatabaseDTO<UUID, DischargeDTO>?, sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?, sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?, moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?, qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?) {
+    public init(id: UUID?, clientReference: String, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?, dischargeWeights: [DatabaseDTO<UUID, DischargeWeightDTO>], discharge: DatabaseDTO<UUID, DischargeDTO>?, sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?, sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?, moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?, qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?) {
         self.id = id
+        self.clientReference = clientReference
         self.shipmentDate = shipmentDate
         self.norTime = norTime
         self.vesselName = vesselName
@@ -55,6 +57,7 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
 
     public enum CodingKeys: String, CodingKey {
         case id
+        case clientReference
         case shipmentDate
         case norTime
         case vesselName

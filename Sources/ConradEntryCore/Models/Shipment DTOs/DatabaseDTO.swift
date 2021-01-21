@@ -1,6 +1,6 @@
 //
 // ConradEntryCore
-// Copyright © 2020 Jesse Halley. All rights reserved.
+// Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
 public enum DatabaseDTO<ID, Value>: Equatable, Hashable, Codable, Identifiable where ID: Codable, Value: Hashable & Codable & Identifiable, Value.ID == ID? {
