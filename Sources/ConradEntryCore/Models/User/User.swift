@@ -13,8 +13,9 @@ public struct User: Codable, Hashable, Identifiable {
     public var privileges: Set<Privilege>
     public var isLocked: Bool
     public let creationDate: Date
+    public var token: SessionToken?
 
-    public init(id: UUID, givenName: String, familyName: String, email: String, privileges: Set<Privilege>, isLocked: Bool, creationDate: Date) {
+    public init(id: UUID, givenName: String, familyName: String, email: String, privileges: Set<Privilege>, isLocked: Bool, creationDate: Date, token: SessionToken?) {
         self.id = id
         self.givenName = givenName
         self.familyName = familyName
@@ -22,10 +23,11 @@ public struct User: Codable, Hashable, Identifiable {
         self.privileges = privileges
         self.isLocked = isLocked
         self.creationDate = creationDate
+        self.token = token
     }
 
     public enum CodingKeys: String, CodingKey {
-        case id, givenName, familyName, email, privileges, isLocked, creationDate
+        case id, givenName, familyName, email, privileges, isLocked, creationDate, token
     }
 
     public var nameComponents: PersonNameComponents {
@@ -33,5 +35,9 @@ public struct User: Codable, Hashable, Identifiable {
         components.givenName = givenName
         components.familyName = familyName
         return components
+    }
+
+    public func fullName(style: PersonNameComponentsFormatter.Style = .default) -> String {
+        PersonNameComponentsFormatter.localizedString(from: nameComponents, style: style)
     }
 }
