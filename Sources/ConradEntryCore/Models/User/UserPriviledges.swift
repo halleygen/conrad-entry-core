@@ -26,3 +26,8 @@ extension User.Privilege: CustomStringConvertible {
         }
     }
 }
+
+public extension Set where Element == User.Privilege {
+    static var all: Set<Element> { Set(Element.allCases) }
+    static var none: Set<Element> { Set() }
+}
