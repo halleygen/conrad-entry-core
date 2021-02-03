@@ -6,6 +6,7 @@
 import Foundation
 
 public extension User {
+    @objc
     enum Privilege: Int, CaseIterable, Codable {
         case readAllShipments, writeAllShipments, editConfigurationValues, manageUsers
     }
