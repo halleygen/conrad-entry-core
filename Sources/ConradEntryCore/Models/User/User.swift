@@ -37,7 +37,13 @@ public struct User: Codable, Hashable, Identifiable {
         return components
     }
 
-    public func fullName(style: PersonNameComponentsFormatter.Style = .default) -> String {
-        PersonNameComponentsFormatter.localizedString(from: nameComponents, style: style)
-    }
+    #if os(Linux)
+        public func fullName(style: Any = false) -> String {
+            "\(givenName) \(familyName)"
+        }
+    #else
+        public func fullName(style: PersonNameComponentsFormatter.Style = .default) -> String {
+            PersonNameComponentsFormatter.localizedString(from: nameComponents, style: style)
+        }
+    #endif
 }
