@@ -18,9 +18,9 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let divisionMethodID: Int
     public let numberOfSets: Int
     public let transparencyID: Int
-    public let comments: String
+    public let comments: [String]
 
-    public init(id: UUID?, preparationCompanyID: Int, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, numberOfSets: Int, transparencyID: Int, comments: String) {
+    public init(id: UUID?, preparationCompanyID: Int, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, numberOfSets: Int, transparencyID: Int, comments: [String]) {
         self.id = id
         self.preparationCompanyID = preparationCompanyID
         self.methodID = methodID

@@ -13,9 +13,9 @@ public struct BillOfLadingDTO: Codable, Hashable, Identifiable {
     public let wetMetricTonnes: Double
     public let moisturePercentage: Double?
     public let dryMetricTonnes: Double?
-    public let comments: String
+    public let comments: [String]
 
-    public init(id: UUID?, loadPortID: Int, vesselHolds: Set<Int>, weighingMethodID: Int, wetMetricTonnes: Double, moisturePercentage: Double?, dryMetricTonnes: Double?, comments: String) {
+    public init(id: UUID?, loadPortID: Int, vesselHolds: Set<Int>, weighingMethodID: Int, wetMetricTonnes: Double, moisturePercentage: Double?, dryMetricTonnes: Double?, comments: [String]) {
         self.id = id
         self.loadPortID = loadPortID
         self.vesselHolds = vesselHolds

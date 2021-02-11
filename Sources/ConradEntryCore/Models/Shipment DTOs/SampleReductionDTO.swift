@@ -12,9 +12,9 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable {
     public let screenApertureMillimetres: Double?
     public let methodID: Int
     public let gridSizeID: Int
-    public let comments: String
+    public let comments: [String]
 
-    public init(id: UUID?, locationID: Int, wasScreened: Bool, screenApertureMillimetres: Double?, methodID: Int, gridSizeID: Int, comments: String) {
+    public init(id: UUID?, locationID: Int, wasScreened: Bool, screenApertureMillimetres: Double?, methodID: Int, gridSizeID: Int, comments: [String]) {
         self.id = id
         self.locationID = locationID
         self.wasScreened = wasScreened

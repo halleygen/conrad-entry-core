@@ -18,7 +18,9 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
     public let dischargePortID: Int
     public let inspectionCompanyIDs: Set<Int>
     public let conradTeamSize: Int
-    public let comments: String
+    public let proceduralExceptions: [String]
+    public let samplingProcedure: [String]
+    public let comments: [String]
     public let createdAt: Date?
     public let updatedAt: Date?
 
@@ -30,7 +32,7 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
     public let moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?
     public let qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?
 
-    public init(id: UUID?, clientReference: String, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, comments: String, createdAt: Date?, updatedAt: Date?, billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?, dischargeWeights: [DatabaseDTO<UUID, DischargeWeightDTO>], discharge: DatabaseDTO<UUID, DischargeDTO>?, sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?, sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?, moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?, qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?) {
+    public init(id: UUID?, clientReference: String, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyIDs: Set<Int>, conradTeamSize: Int, proceduralExceptions: [String], samplingProcedure: [String], comments: [String], createdAt: Date?, updatedAt: Date?, billOfLading: DatabaseDTO<UUID, BillOfLadingDTO>?, dischargeWeights: [DatabaseDTO<UUID, DischargeWeightDTO>], discharge: DatabaseDTO<UUID, DischargeDTO>?, sampleCollection: DatabaseDTO<UUID, SampleCollectionDTO>?, sampleReduction: DatabaseDTO<UUID, SampleReductionDTO>?, moistureDetermination: DatabaseDTO<UUID, MoistureDeterminationDTO>?, qualityLotSamplePreparation: DatabaseDTO<UUID, QualityLotSamplePreparationDTO>?) {
         self.id = id
         self.clientReference = clientReference
         self.shipmentDate = shipmentDate
@@ -43,6 +45,8 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
         self.dischargePortID = dischargePortID
         self.inspectionCompanyIDs = inspectionCompanyIDs
         self.conradTeamSize = conradTeamSize
+        self.proceduralExceptions = proceduralExceptions
+        self.samplingProcedure = samplingProcedure
         self.comments = comments
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -68,6 +72,8 @@ public struct ShipmentDTO: Codable, Hashable, Identifiable {
         case dischargePortID
         case inspectionCompanyIDs
         case conradTeamSize
+        case proceduralExceptions
+        case samplingProcedure
         case comments
         case createdAt
         case updatedAt

@@ -19,9 +19,9 @@ public struct DischargeWeightDTO: Codable, Hashable, Identifiable {
     public let equipmentCertificationDate: Date?
     public let calibrationCheck: CalibrationCheck?
     public let abcCheck: ABCCheck?
-    public let comments: String
+    public let comments: [String]
 
-    public init(id: UUID?, methodID: Int, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, isSettlementWeight: Bool, equipmentName: String?, equipmentModel: String?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, comments: String) {
+    public init(id: UUID?, methodID: Int, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, isSettlementWeight: Bool, equipmentName: String?, equipmentModel: String?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, comments: [String]) {
         self.id = id
         self.methodID = methodID
         self.startTime = startTime

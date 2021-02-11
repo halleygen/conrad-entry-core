@@ -19,9 +19,9 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let saveAllTarpaulinsUsed: Bool
     public let holdsCleaned: Bool
     public let wharfCleaned: Bool
-    public let comments: String
+    public let comments: [String]
 
-    public init(id: UUID?, berth: String, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: String) {
+    public init(id: UUID?, berth: String, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
         self.id = id
         self.berth = berth
         self.methodID = methodID

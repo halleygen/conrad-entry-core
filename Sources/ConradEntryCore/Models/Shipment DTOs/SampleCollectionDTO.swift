@@ -16,9 +16,9 @@ public struct SampleCollectionDTO: Codable, Hashable, Identifiable {
     public let numberOfTrucksPerBag: Int?
     public let lotSizeWetTonnes: Int
     public let sublotSizeWetTonnes: Int?
-    public let comments: String
+    public let comments: [String]
 
-    public init(id: UUID?, samplingCompanyID: Int, locationID: Int, samplingPointID: Int, methodID: Int, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, comments: String) {
+    public init(id: UUID?, samplingCompanyID: Int, locationID: Int, samplingPointID: Int, methodID: Int, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, comments: [String]) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.locationID = locationID
