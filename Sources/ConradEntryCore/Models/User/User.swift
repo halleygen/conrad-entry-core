@@ -14,8 +14,9 @@ public struct User: Codable, Hashable, Identifiable {
     public var isLocked: Bool
     public let creationDate: Date
     public var token: SessionToken?
+    public var devices: [Device]
 
-    public init(id: UUID, givenName: String, familyName: String, email: String, privileges: Set<Privilege>, isLocked: Bool, creationDate: Date, token: SessionToken?) {
+    public init(id: UUID, givenName: String, familyName: String, email: String, privileges: Set<Privilege>, isLocked: Bool, creationDate: Date, token: SessionToken?, devices: [Device]) {
         self.id = id
         self.givenName = givenName
         self.familyName = familyName
@@ -24,10 +25,11 @@ public struct User: Codable, Hashable, Identifiable {
         self.isLocked = isLocked
         self.creationDate = creationDate
         self.token = token
+        self.devices = devices
     }
 
     public enum CodingKeys: String, CodingKey {
-        case id, givenName, familyName, email, privileges, isLocked, creationDate, token
+        case id, givenName, familyName, email, privileges, isLocked, creationDate, token, devices
     }
 
     public var nameComponents: PersonNameComponents {
