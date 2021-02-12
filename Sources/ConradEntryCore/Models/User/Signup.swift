@@ -11,21 +11,23 @@ public struct Signup: Codable, Hashable {
     public var email: String
     public var password: String
     public var confirmPassword: String
+    public var device: Device
 
     public enum CodingKeys: String, CodingKey {
-        case givenName, familyName, email, password, confirmPassword
+        case givenName, familyName, email, password, confirmPassword, device
     }
 
-    public init(givenName: String, familyName: String, email: String, password: String, confirmPassword: String) {
+    public init(givenName: String, familyName: String, email: String, password: String, confirmPassword: String, device: Device) {
         self.givenName = givenName
         self.familyName = familyName
         self.email = email
         self.password = password
         self.confirmPassword = confirmPassword
+        self.device = device
     }
 
-    public init() {
-        self.init(givenName: "", familyName: "", email: "", password: "", confirmPassword: "")
+    public init(device: Device) {
+        self.init(givenName: "", familyName: "", email: "", password: "", confirmPassword: "", device: device)
     }
 
     public var isValid: Bool {

@@ -53,4 +53,13 @@ public struct Device: Hashable, Identifiable, Codable {
         case notificationToken
         case creationDate
     }
+
+    public static func == (lhs: Device, rhs: Device) -> Bool {
+        lhs.id == rhs.id && lhs.notificationToken == rhs.notificationToken
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(notificationToken)
+    }
 }
