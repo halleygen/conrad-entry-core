@@ -2,3 +2,6 @@
 "user.privileges.write-all-shipments" = "Write All Shipments";
 "user.privileges.edit-configuration-values" = "Edit Configuration Values";
 "user.privileges.manage-users" = "Manager Users";
+
+"discharge-weight.kind.settlement" = "Settlement Weight";
+"discharge-weight.kind.reference" = "Reference Weight";

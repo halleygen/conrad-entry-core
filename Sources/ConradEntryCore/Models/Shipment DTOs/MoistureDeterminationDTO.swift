@@ -8,27 +8,35 @@ import Foundation
 public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let moistureDeterminationCompanyID: Int
-    public let locationID: Int
-    public let lotSampleWeightKilograms: Double
+    public let siteID: Int
+    public let location: Location
+    public let lotSampleTrayWeightKilograms: Double
     public let ovenOnTime: Date
     public let ovenOffTime: Date
-    public let hoursInOven: Double
     public let ovenTemperatureCelsius: Int
     public let checkedForConstantWeight: Bool
+    public let constantWeightDuration: TimeInterval?
+    public let numberOfWeighBacks: Int?
     public let resultsWaitTimeDays: Int
     public let transparencyID: Int
     public let comments: [String]
 
-    public init(id: UUID?, moistureDeterminationCompanyID: Int, locationID: Int, lotSampleWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, hoursInOven: Double, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String]) {
+    public var durationInOven: TimeInterval {
+        ovenOffTime.timeIntervalSince(ovenOnTime)
+    }
+
+    public init(id: UUID?, moistureDeterminationCompanyID: Int, siteID: Int, location: Location, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String]) {
         self.id = id
         self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
-        self.locationID = locationID
-        self.lotSampleWeightKilograms = lotSampleWeightKilograms
+        self.siteID = siteID
+        self.location = location
+        self.lotSampleTrayWeightKilograms = lotSampleTrayWeightKilograms
         self.ovenOnTime = ovenOnTime
         self.ovenOffTime = ovenOffTime
-        self.hoursInOven = hoursInOven
         self.ovenTemperatureCelsius = ovenTemperatureCelsius
         self.checkedForConstantWeight = checkedForConstantWeight
+        self.constantWeightDuration = constantWeightDuration
+        self.numberOfWeighBacks = numberOfWeighBacks
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
         self.comments = comments
@@ -37,13 +45,15 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
     public enum CodingKeys: String, CodingKey {
         case id
         case moistureDeterminationCompanyID
-        case locationID
-        case lotSampleWeightKilograms
+        case siteID
+        case location
+        case lotSampleTrayWeightKilograms
         case ovenOnTime
         case ovenOffTime
-        case hoursInOven
         case ovenTemperatureCelsius
         case checkedForConstantWeight
+        case constantWeightDuration
+        case numberOfWeighBacks
         case resultsWaitTimeDays
         case transparencyID
         case comments

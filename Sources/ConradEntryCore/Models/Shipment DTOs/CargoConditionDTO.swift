@@ -6,19 +6,19 @@
 import Foundation
 
 public struct CargoConditionDTO: Codable, Hashable {
-    public let isUntrimmed: Bool
+    public let isTrimmed: Bool
     public let isContaminated: Bool
     public let sufferedWaterIngress: Bool
     public let comment: String
 
-    public init(isUntrimmed: Bool, isContaminated: Bool, sufferedWaterIngress: Bool, comment: String) {
-        self.isUntrimmed = isUntrimmed
+    public init(isTrimmed: Bool, isContaminated: Bool, sufferedWaterIngress: Bool, comment: String) {
+        self.isTrimmed = isTrimmed
         self.isContaminated = isContaminated
         self.sufferedWaterIngress = sufferedWaterIngress
         self.comment = comment
     }
 
     public enum CodingKeys: String, CodingKey {
-        case isUntrimmed, isContaminated, sufferedWaterIngress, comment
+        case isTrimmed, isContaminated, sufferedWaterIngress, comment
     }
 }

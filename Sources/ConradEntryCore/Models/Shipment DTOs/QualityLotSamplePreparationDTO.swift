@@ -8,6 +8,10 @@ import Foundation
 public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let preparationCompanyID: Int
+    public let siteID: Int
+    public let location: Location
+    public let startTime: Date
+    public let finishTime: Date
     public let methodID: Int
     public let wasScreened: Bool
     public let screenApertureID: Int?
@@ -16,13 +20,22 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let pulverizerID: Int
     public let pulverizingDurationSeconds: TimeInterval
     public let divisionMethodID: Int
+    public let rsdNumberOfSegments: Int?
+    public let incrementISOScoopUsed: Bool?
+    public let incrementBackingPlateUsed: Bool?
+    public let incrementDividedToExtinction: Bool?
+    public let riffleApertureMillimetres: Int?
     public let numberOfSets: Int
     public let transparencyID: Int
     public let comments: [String]
 
-    public init(id: UUID?, preparationCompanyID: Int, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, numberOfSets: Int, transparencyID: Int, comments: [String]) {
+    public init(id: UUID?, preparationCompanyID: Int, siteID: Int, location: Location, startTime: Date, finishTime: Date, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, rsdNumberOfSegments: Int?, incrementISOScoopUsed: Bool?, incrementBackingPlateUsed: Bool?, incrementDividedToExtinction: Bool?, riffleApertureMillimetres: Int?, numberOfSets: Int, transparencyID: Int, comments: [String]) {
         self.id = id
         self.preparationCompanyID = preparationCompanyID
+        self.siteID = siteID
+        self.location = location
+        self.startTime = startTime
+        self.finishTime = finishTime
         self.methodID = methodID
         self.wasScreened = wasScreened
         self.screenApertureID = screenApertureID
@@ -31,6 +44,11 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
         self.pulverizerID = pulverizerID
         self.pulverizingDurationSeconds = pulverizingDurationSeconds
         self.divisionMethodID = divisionMethodID
+        self.rsdNumberOfSegments = rsdNumberOfSegments
+        self.incrementISOScoopUsed = incrementISOScoopUsed
+        self.incrementBackingPlateUsed = incrementBackingPlateUsed
+        self.incrementDividedToExtinction = incrementDividedToExtinction
+        self.riffleApertureMillimetres = riffleApertureMillimetres
         self.numberOfSets = numberOfSets
         self.transparencyID = transparencyID
         self.comments = comments
@@ -39,6 +57,10 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public enum CodingKeys: String, CodingKey {
         case id
         case preparationCompanyID
+        case siteID
+        case location
+        case startTime
+        case finishTime
         case methodID
         case wasScreened
         case screenApertureID
@@ -47,6 +69,11 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
         case pulverizerID
         case pulverizingDurationSeconds
         case divisionMethodID
+        case rsdNumberOfSegments
+        case incrementISOScoopUsed
+        case incrementBackingPlateUsed
+        case incrementDividedToExtinction
+        case riffleApertureMillimetres
         case numberOfSets
         case transparencyID
         case comments

@@ -7,7 +7,9 @@ import Foundation
 
 public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
-    public let berth: String
+    public let berthName: String
+    public let berthLocation: Location
+    public let dischargeGearID: Int
     public let methodID: Int
     public let cargoCondition: CargoConditionDTO
     public let weatherConditionsID: Int
@@ -21,9 +23,11 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let wharfCleaned: Bool
     public let comments: [String]
 
-    public init(id: UUID?, berth: String, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
+    public init(id: UUID?, berthName: String, berthLocation: Location, dischargeGearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
         self.id = id
-        self.berth = berth
+        self.berthName = berthName
+        self.berthLocation = berthLocation
+        self.dischargeGearID = dischargeGearID
         self.methodID = methodID
         self.cargoCondition = cargoCondition
         self.weatherConditionsID = weatherConditionsID
@@ -40,7 +44,9 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
 
     public enum CodingKeys: String, CodingKey {
         case id
-        case berth
+        case berthName
+        case berthLocation
+        case dischargeGearID
         case methodID
         case cargoCondition
         case weatherConditionsID
