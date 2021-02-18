@@ -8,7 +8,7 @@ import Foundation
 public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let berthName: String
-    public let berthLocation: Location
+    public let berthLocation: LocationDTO
     public let dischargeGearID: Int
     public let methodID: Int
     public let cargoCondition: CargoConditionDTO
@@ -23,7 +23,7 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let wharfCleaned: Bool
     public let comments: [String]
 
-    public init(id: UUID?, berthName: String, berthLocation: Location, dischargeGearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
+    public init(id: UUID?, berthName: String, berthLocation: LocationDTO, dischargeGearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
         self.id = id
         self.berthName = berthName
         self.berthLocation = berthLocation

@@ -9,7 +9,7 @@ public struct SampleCollectionDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let samplingCompanyID: Int
     public let siteID: Int
-    public let location: Location
+    public let location: LocationDTO
     public let samplingPointID: Int
     public let startTime: Date
     public let finishTime: Date
@@ -22,7 +22,7 @@ public struct SampleCollectionDTO: Codable, Hashable, Identifiable {
     public let numberOfLots: Int
     public let comments: [String]
 
-    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, location: Location, samplingPointID: Int, startTime: Date, finishTime: Date, methodID: Int, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, numberOfLots: Int, comments: [String]) {
+    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, location: LocationDTO, samplingPointID: Int, startTime: Date, finishTime: Date, methodID: Int, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, numberOfLots: Int, comments: [String]) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.siteID = siteID

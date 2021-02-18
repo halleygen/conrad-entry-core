@@ -9,7 +9,7 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let moistureDeterminationCompanyID: Int
     public let siteID: Int
-    public let location: Location
+    public let location: LocationDTO
     public let lotSampleTrayWeightKilograms: Double
     public let ovenOnTime: Date
     public let ovenOffTime: Date
@@ -25,7 +25,7 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
         ovenOffTime.timeIntervalSince(ovenOnTime)
     }
 
-    public init(id: UUID?, moistureDeterminationCompanyID: Int, siteID: Int, location: Location, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String]) {
+    public init(id: UUID?, moistureDeterminationCompanyID: Int, siteID: Int, location: LocationDTO, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String]) {
         self.id = id
         self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
         self.siteID = siteID

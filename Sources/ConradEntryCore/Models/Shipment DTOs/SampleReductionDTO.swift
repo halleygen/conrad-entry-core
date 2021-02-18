@@ -8,7 +8,7 @@ import Foundation
 public struct SampleReductionDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let samplingCompanyID: Int
-    public let location: Location
+    public let location: LocationDTO
     public let siteID: Int
     public let laboratoryID: Int?
     public let pointID: Int?
@@ -21,7 +21,7 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable {
     public let gridSizeID: Int?
     public let comments: [String]
 
-    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, laboratoryID: Int, location: Location, pointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String]) {
+    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, laboratoryID: Int, location: LocationDTO, pointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String]) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.siteID = siteID

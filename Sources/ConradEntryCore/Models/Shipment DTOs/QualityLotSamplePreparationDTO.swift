@@ -9,7 +9,7 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let id: UUID?
     public let preparationCompanyID: Int
     public let siteID: Int
-    public let location: Location
+    public let location: LocationDTO
     public let startTime: Date
     public let finishTime: Date
     public let methodID: Int
@@ -29,7 +29,7 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let transparencyID: Int
     public let comments: [String]
 
-    public init(id: UUID?, preparationCompanyID: Int, siteID: Int, location: Location, startTime: Date, finishTime: Date, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, rsdNumberOfSegments: Int?, incrementISOScoopUsed: Bool?, incrementBackingPlateUsed: Bool?, incrementDividedToExtinction: Bool?, riffleApertureMillimetres: Int?, numberOfSets: Int, transparencyID: Int, comments: [String]) {
+    public init(id: UUID?, preparationCompanyID: Int, siteID: Int, location: LocationDTO, startTime: Date, finishTime: Date, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, rsdNumberOfSegments: Int?, incrementISOScoopUsed: Bool?, incrementBackingPlateUsed: Bool?, incrementDividedToExtinction: Bool?, riffleApertureMillimetres: Int?, numberOfSets: Int, transparencyID: Int, comments: [String]) {
         self.id = id
         self.preparationCompanyID = preparationCompanyID
         self.siteID = siteID

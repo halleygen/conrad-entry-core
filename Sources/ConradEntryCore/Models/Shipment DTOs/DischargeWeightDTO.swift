@@ -18,7 +18,7 @@ public struct DischargeWeightDTO: Codable, Hashable, Identifiable {
     public let dryMetricTonnes: Double
     public let equipmentName: String?
     public let equipmentModel: String?
-    public let equipmentLocation: Location?
+    public let equipmentLocation: LocationDTO?
     public let equipmentCertificationDate: Date?
     public let calibrationCheck: CalibrationCheck?
     public let abcCheck: ABCCheck?
@@ -29,7 +29,7 @@ public struct DischargeWeightDTO: Codable, Hashable, Identifiable {
     public var isSettlementWeight: Bool { kind == .settlement }
     public var isReferenceWeight: Bool { kind == .reference }
 
-    public init(id: UUID?, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocation: Location?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String]) {
+    public init(id: UUID?, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocation: LocationDTO?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String]) {
         self.id = id
         self.kind = kind
         self.methodID = methodID

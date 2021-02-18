@@ -6,7 +6,7 @@
 import Foundation
 
 /// The latitude, longitude, and course information reported by the system.
-public struct Location: Hashable, Codable {
+public struct LocationDTO: Hashable, Codable {
     /// The geographical coordinate information.
     var coordinate: Coordinate
 
@@ -22,7 +22,7 @@ public struct Location: Hashable, Codable {
     /// The time at which this location was determined.
     var timestamp: Date
 
-    public init(coordinate: Location.Coordinate, altitude: Double, horizontalAccuracy: Double, verticalAccuracy: Double, timestamp: Date) {
+    public init(coordinate: Coordinate, altitude: Double, horizontalAccuracy: Double, verticalAccuracy: Double, timestamp: Date) {
         self.coordinate = coordinate
         self.altitude = altitude
         self.horizontalAccuracy = horizontalAccuracy
@@ -31,7 +31,7 @@ public struct Location: Hashable, Codable {
     }
 }
 
-public extension Location {
+public extension LocationDTO {
     /// The latitude and longitude associated with a location, specified using the WGS 84 reference frame.
     struct Coordinate: Hashable, Codable {
         /// The latitude in degrees.
