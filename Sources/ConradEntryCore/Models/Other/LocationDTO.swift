@@ -44,5 +44,10 @@ public extension LocationDTO {
         public var isValid: Bool {
             (-90 ... 90).contains(latitude) && (-180 ... 180).contains(longitude)
         }
+
+        public init(latitude: Double, longitude: Double) {
+            self.latitude = latitude
+            self.longitude = longitude
+        }
     }
 }
