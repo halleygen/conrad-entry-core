@@ -8,19 +8,19 @@ import Foundation
 /// The latitude, longitude, and course information reported by the system.
 public struct LocationDTO: Hashable, Codable {
     /// The geographical coordinate information.
-    var coordinate: Coordinate
+    public var coordinate: Coordinate
 
     /// The altitude, measured in meters.
-    var altitude: Double
+    public var altitude: Double
 
     /// The radius of uncertainty for the location, measured in meters.
-    var horizontalAccuracy: Double
+    public var horizontalAccuracy: Double
 
     /// The accuracy of the altitude value, measured in meters.
-    var verticalAccuracy: Double
+    public var verticalAccuracy: Double
 
     /// The time at which this location was determined.
-    var timestamp: Date
+    public var timestamp: Date
 
     public init(coordinate: Coordinate, altitude: Double, horizontalAccuracy: Double, verticalAccuracy: Double, timestamp: Date) {
         self.coordinate = coordinate
@@ -35,13 +35,13 @@ public extension LocationDTO {
     /// The latitude and longitude associated with a location, specified using the WGS 84 reference frame.
     struct Coordinate: Hashable, Codable {
         /// The latitude in degrees.
-        var latitude: Double
+        public var latitude: Double
 
         /// The longitude in degrees.
-        var longitude: Double
+        public var longitude: Double
 
         /// Returns a Boolean value indicating whether the specified coordinate is valid.
-        var isValid: Bool {
+        public var isValid: Bool {
             (-90 ... 90).contains(latitude) && (-180 ... 180).contains(longitude)
         }
     }
