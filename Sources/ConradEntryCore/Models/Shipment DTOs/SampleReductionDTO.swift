@@ -21,7 +21,7 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable {
     public let gridSizeID: Int?
     public let comments: [String]
 
-    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, laboratoryID: Int, location: LocationDTO, pointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String]) {
+    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, laboratoryID: Int?, location: LocationDTO, pointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String]) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.siteID = siteID
