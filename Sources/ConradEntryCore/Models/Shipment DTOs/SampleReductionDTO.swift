@@ -11,7 +11,7 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable {
     public let location: LocationDTO
     public let siteID: Int
     public let laboratoryID: Int?
-    public let pointID: Int?
+    public let pointID: Int
     public let startTime: Date
     public let finishTime: Date
     public let wasScreened: Bool
