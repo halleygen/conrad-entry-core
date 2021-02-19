@@ -5,7 +5,7 @@
 
 import Foundation
 
-/// The latitude, longitude, and course information reported by the system.
+/// The latitude, longitude, and altitude reported by the system.
 public struct LocationDTO: Hashable, Codable {
     /// The geographical coordinate information.
     public var coordinate: Coordinate
