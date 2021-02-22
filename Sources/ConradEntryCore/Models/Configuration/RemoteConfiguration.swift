@@ -4,14 +4,14 @@
 //
 
 public struct RemoteConfiguration: Codable {
-    public init(agents: [SimpleConstant], commodities: [SimpleConstant], dischargeGear: [SimpleConstant], dischargeMethods: [SimpleConstant], dischargeWeatherConditions: [SimpleConstant], dischargeWeightWeighingLocations: [SimpleConstant], smelters: [SimpleConstant], inspectionCompanies: [SimpleConstant], samplingCompanies: [SimpleConstant], sampleReductionLaboratories: [SimpleConstant], sampleReductionPoints: [SimpleConstant], qualityLotSamplePreparationPulverizers: [SimpleConstant], sampleReductionGridSizes: [SimpleConstant], sampleReductionMethods: [SimpleConstant], qualityLotSamplePreparationDivisionMethods: [SimpleConstant], qualityLotSamplePreparationScreenApertures: [SimpleConstant], clients: [SimpleConstant], traders: [SimpleConstant], samplingSites: [SimpleConstant], sampleCollectionMethods: [SimpleConstant], qualityLotSamplePreparationMethods: [SimpleConstant], samplingTransparencies: [SamplingTransparency], sampleCollectionPoints: [SampleCollectionPoint], sampleReductionSites: [SampleReductionSite], weighingMethods: [WeighingMethod], maritimePorts: [MaritimePort]) {
+    public init(agents: [SimpleConstant], commodities: [SimpleConstant], dischargeGear: [SimpleConstant], dischargeMethods: [SimpleConstant], dischargeWeatherConditions: [SimpleConstant], dischargeWeightWeighingPoints: [SimpleConstant], smelters: [SimpleConstant], inspectionCompanies: [SimpleConstant], samplingCompanies: [SimpleConstant], sampleReductionLaboratories: [SimpleConstant], sampleReductionPoints: [SimpleConstant], qualityLotSamplePreparationPulverizers: [SimpleConstant], sampleReductionGridSizes: [SimpleConstant], sampleReductionMethods: [SimpleConstant], qualityLotSamplePreparationDivisionMethods: [SimpleConstant], qualityLotSamplePreparationScreenApertures: [SimpleConstant], clients: [SimpleConstant], traders: [SimpleConstant], samplingSites: [SimpleConstant], sampleCollectionMethods: [SimpleConstant], qualityLotSamplePreparationMethods: [SimpleConstant], samplingTransparencies: [SamplingTransparency], sampleCollectionPoints: [SampleCollectionPoint], sampleReductionSites: [SampleReductionSite], weighingMethods: [WeighingMethod], maritimePorts: [MaritimePort]) {
         self.agents = agents
         self.commodities = commodities
         self.smelters = smelters
         self.dischargeGear = dischargeGear
         self.dischargeMethods = dischargeMethods
         self.dischargeWeatherConditions = dischargeWeatherConditions
-        self.dischargeWeightWeighingLocations = dischargeWeightWeighingLocations
+        self.dischargeWeightWeighingPoints = dischargeWeightWeighingPoints
         self.inspectionCompanies = inspectionCompanies
         self.samplingCompanies = samplingCompanies
         self.sampleReductionSites = sampleReductionSites
@@ -40,7 +40,7 @@ public struct RemoteConfiguration: Codable {
         self.dischargeGear = []
         self.dischargeMethods = []
         self.dischargeWeatherConditions = []
-        self.dischargeWeightWeighingLocations = []
+        self.dischargeWeightWeighingPoints = []
         self.inspectionCompanies = []
         self.samplingCompanies = []
         self.sampleReductionLaboratories = []
@@ -62,7 +62,7 @@ public struct RemoteConfiguration: Codable {
         self.maritimePorts = []
     }
 
-    public var agents, commodities, dischargeGear, dischargeMethods, dischargeWeatherConditions, dischargeWeightWeighingLocations, smelters, inspectionCompanies, samplingCompanies, sampleReductionLaboratories, sampleReductionPoints, qualityLotSamplePreparationPulverizers, sampleReductionGridSizes, sampleReductionMethods, qualityLotSamplePreparationDivisionMethods, qualityLotSamplePreparationScreenApertures, clients, traders, samplingSites, sampleCollectionMethods, qualityLotSamplePreparationMethods: [SimpleConstant]
+    public var agents, commodities, dischargeGear, dischargeMethods, dischargeWeatherConditions, dischargeWeightWeighingPoints, smelters, inspectionCompanies, samplingCompanies, sampleReductionLaboratories, sampleReductionPoints, qualityLotSamplePreparationPulverizers, sampleReductionGridSizes, sampleReductionMethods, qualityLotSamplePreparationDivisionMethods, qualityLotSamplePreparationScreenApertures, clients, traders, samplingSites, sampleCollectionMethods, qualityLotSamplePreparationMethods: [SimpleConstant]
     public var sampleCollectionPoints: [SampleCollectionPoint]
     public var sampleReductionSites: [SampleReductionSite]
     public var samplingTransparencies: [SamplingTransparency]
@@ -73,7 +73,7 @@ public struct RemoteConfiguration: Codable {
         case agents, commodities, smelters, clients, traders
         case dischargeGear = "discharge_gear"
         case dischargeWeatherConditions = "discharge_weather_conditions"
-        case dischargeWeightWeighingLocations = "discharge_weight_weighing_locations"
+        case dischargeWeightWeighingPoints = "discharge_weight_weighing_points"
         case maritimePorts = "maritime_ports"
         case dischargeMethods = "discharge_methods"
         case inspectionCompanies = "inspection_companies"
