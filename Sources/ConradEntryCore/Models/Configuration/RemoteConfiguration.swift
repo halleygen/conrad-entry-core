@@ -69,7 +69,7 @@ public struct RemoteConfiguration: Codable {
     public var weighingMethods: [WeighingMethod]
     public var maritimePorts: [MaritimePort]
 
-    public enum CodingKeys: String, CodingKey, Codable {
+    public enum CodingKeys: String, CodingKey, Codable, CaseIterable {
         case agents, commodities, smelters, clients, traders
         case dischargeGear = "discharge_gear"
         case dischargeWeatherConditions = "discharge_weather_conditions"
