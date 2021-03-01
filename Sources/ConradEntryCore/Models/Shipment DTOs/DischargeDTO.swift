@@ -16,14 +16,19 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let startTime: Date
     public let finishTimeLastGrab: Date
     public let finishTimeCleanup: Date
-    public let duration: TimeInterval
-    public let dischargeRate: Double
+    public let dischargeRateTonnesPerHour: Double
     public let saveAllTarpaulinsUsed: Bool
     public let holdsCleaned: Bool
     public let wharfCleaned: Bool
     public let comments: [String]
 
-    public init(id: UUID?, berthName: String, berthLocation: LocationDTO, dischargeGearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, duration: TimeInterval, dischargeRate: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
+    @inlinable public var finishTimeForCalculations: Date { finishTimeCleanup }
+
+    public var interval: DateInterval {
+        .init(start: startTime, end: finishTimeCleanup)
+    }
+
+    public init(id: UUID?, berthName: String, berthLocation: LocationDTO, dischargeGearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, dischargeRateTonnesPerHour: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
         self.id = id
         self.berthName = berthName
         self.berthLocation = berthLocation
@@ -34,8 +39,7 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
         self.startTime = startTime
         self.finishTimeLastGrab = finishTimeLastGrab
         self.finishTimeCleanup = finishTimeCleanup
-        self.duration = duration
-        self.dischargeRate = dischargeRate
+        self.dischargeRateTonnesPerHour = dischargeRateTonnesPerHour
         self.saveAllTarpaulinsUsed = saveAllTarpaulinsUsed
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
@@ -53,8 +57,7 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
         case startTime
         case finishTimeLastGrab
         case finishTimeCleanup
-        case duration
-        case dischargeRate
+        case dischargeRateTonnesPerHour
         case saveAllTarpaulinsUsed
         case holdsCleaned
         case wharfCleaned
