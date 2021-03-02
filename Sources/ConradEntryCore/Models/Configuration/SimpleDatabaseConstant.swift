@@ -8,9 +8,9 @@ import Foundation
 public struct SimpleConstant: ConfigurationConstant {
     public var id: Int
     public var value: String
-    public var representsOtherValue: Bool = false
+    public var representsOtherValue: Bool
 
-    public init(id: Int, value: String, representsOtherValue: Bool = false) {
+    public init(id: Int, value: String, representsOtherValue: Bool) {
         self.id = id
         self.value = value
         self.representsOtherValue = representsOtherValue
