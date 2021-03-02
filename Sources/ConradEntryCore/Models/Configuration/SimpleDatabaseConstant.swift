@@ -5,12 +5,20 @@
 
 import Foundation
 
-public struct SimpleConstant: Codable, Hashable, Identifiable {
+public struct SimpleConstant: ConfigurationConstant {
     public var id: Int
     public var value: String
+    public var representsOtherValue: Bool = false
 
-    public init(id: Int, value: String) {
+    public init(id: Int, value: String, representsOtherValue: Bool = false) {
         self.id = id
         self.value = value
+        self.representsOtherValue = representsOtherValue
+    }
+}
+
+public extension SimpleConstant {
+    enum CodingKeys: String, CodingKey, CaseIterable {
+        case id, value, representsOtherValue
     }
 }

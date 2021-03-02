@@ -5,12 +5,14 @@
 
 import Foundation
 
-public struct WeighingMethod: Codable, Identifiable {
+public struct WeighingMethod: ConfigurationConstant {
     public let id: Int
     public let value: String
     public let usesEquipment: Bool
     public let usesTallymen: Bool
     public let supportsABCChecks: Bool
+
+    public var representsOtherValue: Bool { false }
 
     public init(id: Int, value: String, usesEquipment: Bool, usesTallymen: Bool, supportsABCChecks: Bool) {
         self.id = id
@@ -22,7 +24,7 @@ public struct WeighingMethod: Codable, Identifiable {
 }
 
 public extension WeighingMethod {
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey, CaseIterable {
         case id, supportsABCChecks, value, usesEquipment, usesTallymen
     }
 }

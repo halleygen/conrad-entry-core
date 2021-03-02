@@ -5,11 +5,13 @@
 
 import Foundation
 
-public struct MaritimePort: Hashable, Codable, Identifiable {
+public struct MaritimePort: ConfigurationConstant {
     public let id: Int
-    public let name: String
+    public let value: String
     public let countryCode: String
     public let timeZoneIdentifier: String
+
+    public var representsOtherValue: Bool { false }
 
     public var flag: String {
         countryCode.unicodeScalars.reduce(into: "") { result, scalar in
@@ -22,21 +24,21 @@ public struct MaritimePort: Hashable, Codable, Identifiable {
     public init(id: Int, name: String, countryCode: String, timeZoneIdentifier: String) {
         precondition(TimeZone(identifier: timeZoneIdentifier) != nil, "Port initialized with invalid time zone identifier.")
         self.id = id
-        self.name = name
+        self.value = name
         self.countryCode = countryCode
         self.timeZoneIdentifier = timeZoneIdentifier
     }
 }
 
 public extension MaritimePort {
-    enum CodingKeys: String, CodingKey {
-        case id, name, countryCode, timeZoneIdentifier
+    enum CodingKeys: String, CodingKey, CaseIterable {
+        case id, value, countryCode, timeZoneIdentifier
     }
 }
 
 extension MaritimePort: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
-        "\(name), \(countryCode) (\(timeZoneIdentifier))"
+        "\(value), \(countryCode) (\(timeZoneIdentifier))"
     }
 
     public var debugDescription: String {

@@ -5,10 +5,12 @@
 
 import Foundation
 
-public struct SampleCollectionPoint: Codable, Identifiable {
+public struct SampleCollectionPoint: ConfigurationConstant {
     public let id: Int
     public let value: String
     public let isFromTruck: Bool
+
+    public var representsOtherValue: Bool { false }
 
     public init(id: Int, value: String, isFromTruck: Bool) {
         self.id = id
@@ -17,18 +19,8 @@ public struct SampleCollectionPoint: Codable, Identifiable {
     }
 }
 
-extension SampleCollectionPoint: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(value)
-    }
-
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.value == rhs.value
-    }
-}
-
 public extension SampleCollectionPoint {
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey, CaseIterable {
         case id, value, isFromTruck
     }
 }

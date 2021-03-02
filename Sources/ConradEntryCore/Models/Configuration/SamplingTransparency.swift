@@ -5,25 +5,17 @@
 
 import Foundation
 
-public struct SamplingTransparency: Codable, Identifiable {
+public struct SamplingTransparency: ConfigurationConstant {
     public let id: Int
     public let value: String
     public let ranking: Int
+
+    public var representsOtherValue: Bool { false }
 
     public init(id: Int, value: String, ranking: Int) {
         self.id = id
         self.value = value
         self.ranking = ranking
-    }
-}
-
-extension SamplingTransparency: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
     }
 }
 
@@ -34,7 +26,7 @@ extension SamplingTransparency: Comparable {
 }
 
 public extension SamplingTransparency {
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey, CaseIterable {
         case id, value, ranking
     }
 }

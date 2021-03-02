@@ -3,10 +3,12 @@
 // Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
-public struct SampleReductionSite: Codable, Identifiable {
+public struct SampleReductionSite: ConfigurationConstant {
     public let id: Int
     public let value: String
     public let isLabFacility: Bool
+
+    public var representsOtherValue: Bool { false }
 
     public init(id: Int, value: String, isLabFacility: Bool) {
         self.id = id
@@ -15,18 +17,8 @@ public struct SampleReductionSite: Codable, Identifiable {
     }
 }
 
-extension SampleReductionSite: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(value)
-    }
-
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.value == rhs.value
-    }
-}
-
 public extension SampleReductionSite {
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey, CaseIterable {
         case id, value, isLabFacility
     }
 }
