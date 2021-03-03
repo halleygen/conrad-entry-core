@@ -3,84 +3,58 @@
 // Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
-public enum AttachmentRole: Hashable {
-    case special(SpecialRole)
-    case billOfLading
-    case sampleCollection
-    case sampleReduction
-    case moistureDetermination
-    case samplePreparation
+import Foundation
 
-    public enum SpecialRole: String, Codable, Hashable {
-        case noticeOfReadiness, vesselPhoto, statementOfFacts, moistureCertificate, lotByLotMoistureProfile, stowagePlan
+public struct AttachmentRole: RawRepresentable, Hashable, ExpressibleByStringLiteral, CustomStringConvertible {
+    public let rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
     }
 
-    private enum CodingKeys: String, CodingKey {
-        case special
-        case billOfLading
-        case sampleCollection
-        case sampleReduction
-        case moistureDetermination
-        case samplePreparation
+    public init(stringLiteral value: String) {
+        self.init(rawValue: value)
     }
+
+    public var description: String {
+        NSLocalizedString("attachment-role.\(rawValue)", bundle: .module, comment: "")
+    }
+
+    public var isDocument: Bool { rawValue.hasPrefix("doc-") }
+}
+
+public extension AttachmentRole {
+    static let discharge: AttachmentRole = "discharge"
+    static let settlementWeight: AttachmentRole = "settlement-weight"
+    static let referenceWeight: AttachmentRole = "reference-weight"
+    static let sampleCollection: AttachmentRole = "sample-collection"
+    static let sampleReduction: AttachmentRole = "sample-reduction"
+    static let moistureDetermination: AttachmentRole = "moisture-determination"
+    static let samplePreparation: AttachmentRole = "sample-preparation"
+
+    static let noticeOfReadiness: AttachmentRole = "doc-notice-of-readiness"
+    static let vesselPhoto: AttachmentRole = "doc-vessel-photo"
+    static let statementOfFacts: AttachmentRole = "doc-statement-of-facts"
+    static let moistureCertificate: AttachmentRole = "doc-moisture-certificate"
+    static let lotByLotMoistureProfile: AttachmentRole = "doc-lot-by-lot-moisture-profile"
+    static let stowagePlan: AttachmentRole = "doc-stowage-plan"
+
+    static var allDocuments: [AttachmentRole] { [.noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan] }
+    static var all: [AttachmentRole] { [.discharge, .settlementWeight, .referenceWeight, .sampleCollection, .sampleReduction, .moistureDetermination, .samplePreparation, .noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan] }
 }
 
 extension AttachmentRole: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        let description = try container.decode(String.self)
-        if let role = Self(description) {
-            self = role
-        } else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Could not parse role from description string: '\(description)'")
+        let rawValue = try container.decode(RawValue.self)
+        guard let match = Self.all.first(where: { $0.rawValue == rawValue }) else {
+            throw DecodingError.valueNotFound(Self.self, .init(codingPath: [], debugDescription: "No AttachmentRole with a raw value of `\(rawValue)` exists."))
         }
+        self = match
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        try container.encode(description)
-    }
-}
-
-extension AttachmentRole: LosslessStringConvertible {
-    public var description: String {
-        switch self {
-        case let .special(id):
-            return CodingKeys.special.rawValue + ":" + id.rawValue
-        case .billOfLading:
-            return CodingKeys.billOfLading.rawValue
-        case .sampleCollection:
-            return CodingKeys.sampleCollection.rawValue
-        case .sampleReduction:
-            return CodingKeys.sampleReduction.rawValue
-        case .moistureDetermination:
-            return CodingKeys.moistureDetermination.rawValue
-        case .samplePreparation:
-            return CodingKeys.samplePreparation.rawValue
-        }
-    }
-
-    public init?(_ description: String) {
-        if let key = CodingKeys(rawValue: description) {
-            switch key {
-            case .special:
-                return nil
-            case .billOfLading:
-                self = .billOfLading
-            case .sampleCollection:
-                self = .sampleCollection
-            case .sampleReduction:
-                self = .sampleReduction
-            case .moistureDetermination:
-                self = .moistureDetermination
-            case .samplePreparation:
-                self = .samplePreparation
-            }
-            return
-        }
-
-        let split = description.split(separator: ":")
-        guard split.count == 2, let specialRole = SpecialRole(rawValue: String(split[1])) else { return nil }
-        self = .special(specialRole)
+        try container.encode(rawValue)
     }
 }

@@ -9,6 +9,7 @@ import XCTest
 final class ConradEntryCoreTests: XCTestCase {
     func testExample() {
         print(User.Privilege.allCases.map(String.init(describing:)))
+        print(AttachmentRole.all.map(String.init(describing:)))
     }
 
     static var allTests = [

@@ -5,3 +5,17 @@
 
 "discharge-weight.kind.settlement" = "Settlement Weight";
 "discharge-weight.kind.reference" = "Reference Weight";
+
+"attachment-role.discharge" = "Discharge";
+"attachment-role.settlement-weight" = "Settlement Weight";
+"attachment-role.reference-weight" = "Reference Weight";
+"attachment-role.sample-collection" = "Sampling";
+"attachment-role.sample-reduction" = "Sample Reduction";
+"attachment-role.moisture-determination" = "Moisture Determination";
+"attachment-role.sample-preparation" = "Sample Preparation";
+"attachment-role.doc-notice-of-readiness" = "Notice of Readiness";
+"attachment-role.doc-vessel-photo" = "Vessel";
+"attachment-role.doc-statement-of-facts" = "Statement of Facts";
+"attachment-role.doc-moisture-certificate" = "Moisture Certificate";
+"attachment-role.doc-lot-by-lot-moisture-profile" = "Lot By Lot Moisture Profile";
+"attachment-role.doc-stowage-plan" = "Stowage Plan";
