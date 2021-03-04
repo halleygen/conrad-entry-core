@@ -11,9 +11,6 @@ public struct Device: Hashable, Identifiable, Codable {
     /// Corresponds to `UIDevice.identifierForVendor`
     public let id: UUID
 
-    /// The ID of this device's user.
-    public let userID: UUID
-
     /// The model of the device.
     ///
     /// e.g. `iPhone`
@@ -34,9 +31,8 @@ public struct Device: Hashable, Identifiable, Codable {
 
     public let creationDate: Date?
 
-    public init(id: UUID, userID: UUID, model: String, systemName: String, systemVersion: String, notificationToken: String?, creationDate: Date?) {
+    public init(id: UUID, model: String, systemName: String, systemVersion: String, notificationToken: String?, creationDate: Date?) {
         self.id = id
-        self.userID = userID
         self.model = model
         self.systemName = systemName
         self.systemVersion = systemVersion
@@ -46,7 +42,6 @@ public struct Device: Hashable, Identifiable, Codable {
 
     public enum CodingKeys: String, CodingKey {
         case id
-        case userID
         case model
         case systemName
         case systemVersion
