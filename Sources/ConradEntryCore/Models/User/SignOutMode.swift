@@ -32,7 +32,7 @@ public enum SignOutMode: Codable, Hashable {
     }
 
     public enum CodingKeys: String, CodingKey {
-        case singleDevice = "device", allDevices
+        case singleDevice = "device", allDevices = "all-devices"
     }
 
     public var queryItem: URLQueryItem {
