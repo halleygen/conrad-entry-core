@@ -34,4 +34,14 @@ public enum SignOutMode: Codable, Hashable {
     public enum CodingKeys: String, CodingKey {
         case singleDevice = "device", allDevices
     }
+
+    public var queryItem: URLQueryItem {
+        switch self {
+        case let .singleDevice(deviceID):
+            return URLQueryItem(name: CodingKeys.singleDevice.rawValue, value: deviceID.uuidString)
+
+        case .allDevices:
+            return URLQueryItem(name: CodingKeys.allDevices, value: nil)
+        }
+    }
 }
