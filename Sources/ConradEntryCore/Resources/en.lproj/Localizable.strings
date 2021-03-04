@@ -19,3 +19,6 @@
 "attachment-role.doc-moisture-certificate" = "Moisture Certificate";
 "attachment-role.doc-lot-by-lot-moisture-profile" = "Lot By Lot Moisture Profile";
 "attachment-role.doc-stowage-plan" = "Stowage Plan";
+
+"notification-action.approve" = "Approve";
+"notification-action.deny" = "Deny";
