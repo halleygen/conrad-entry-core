@@ -41,7 +41,7 @@ public enum SignOutMode: Codable, Hashable {
             return URLQueryItem(name: CodingKeys.singleDevice.rawValue, value: deviceID.uuidString)
 
         case .allDevices:
-            return URLQueryItem(name: CodingKeys.allDevices.rawValue, value: nil)
+            return URLQueryItem(name: CodingKeys.allDevices.rawValue, value: String(true))
         }
     }
 }
