@@ -16,7 +16,7 @@ public enum NotificationUserInfoKey {
     import UserNotifications
 
     public enum NotificationAction: String {
-        case approve = "APPROVE_ACTION", deny = "DENY_ACTION"
+        case approveSignup = "APPROVE_SIGNUP_ACTION", denySignup = "DENY_SIGNUP_ACTION"
 
         public var localizedTitle: String {
             NSLocalizedString("notification-action.\(rawValue)", bundle: .module, comment: "")
@@ -24,10 +24,10 @@ public enum NotificationUserInfoKey {
 
         public var unAction: UNNotificationAction {
             switch self {
-            case .approve:
+            case .approveSignup:
                 return UNNotificationAction(identifier: rawValue, title: localizedTitle, options: .authenticationRequired)
 
-            case .deny:
+            case .denySignup:
                 return UNNotificationAction(identifier: rawValue, title: localizedTitle, options: [.authenticationRequired, .destructive])
             }
         }
