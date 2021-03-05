@@ -5,9 +5,11 @@
 
 import Foundation
 
-public enum SignOutMode: Codable, Hashable {
+public enum SignOutMode: Codable, Hashable, Identifiable {
     case singleDevice(UUID)
     case allDevices
+
+    public var id: Self { self }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

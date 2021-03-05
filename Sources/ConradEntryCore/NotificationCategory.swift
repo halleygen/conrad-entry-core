@@ -55,7 +55,7 @@ public enum NotificationUserInfoKey {
                 return []
 
             case .newUserSignup:
-                return [NotificationAction.approve.unAction, NotificationAction.deny.unAction]
+                return [NotificationAction.approveSignup.unAction, NotificationAction.denySignup.unAction]
             }
         }
     }
