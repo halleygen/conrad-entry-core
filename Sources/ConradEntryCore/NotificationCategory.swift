@@ -34,10 +34,11 @@ public enum NotificationUserInfoKey {
     }
 
     public extension NotificationCategory {
-        static var allCategories: [UNNotificationCategory] {
-            allCases.map { category -> UNNotificationCategory in
+        static var allCategories: Set<UNNotificationCategory> {
+            let categories = allCases.map { category -> UNNotificationCategory in
                 UNNotificationCategory(identifier: category.rawValue, actions: category.actions, intentIdentifiers: [], options: category.options)
             }
+            return Set(categories)
         }
 
         private var options: UNNotificationCategoryOptions {
