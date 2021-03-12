@@ -10,7 +10,7 @@ public struct Device: Hashable, Identifiable, Codable {
     ///
     /// Corresponds to `UIDevice.identifierForVendor`
     public let id: UUID
-    
+
     /// The name of the device.
     ///
     /// e.g. `Steve's iPhone`
