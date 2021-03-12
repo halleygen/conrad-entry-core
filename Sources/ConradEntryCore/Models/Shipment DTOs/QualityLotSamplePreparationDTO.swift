@@ -12,7 +12,7 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let location: LocationDTO
     public let startTime: Date
     public let finishTime: Date
-    public let methodID: Int
+    public let standardsID: Int
     public let wasScreened: Bool
     public let screenApertureID: Int?
     public let oversizePulverizedSeparately: Bool?
@@ -29,14 +29,14 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let transparencyID: Int
     public let comments: [String]
 
-    public init(id: UUID?, preparationCompanyID: Int, siteID: Int, location: LocationDTO, startTime: Date, finishTime: Date, methodID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, rsdNumberOfSegments: Int?, incrementISOScoopUsed: Bool?, incrementBackingPlateUsed: Bool?, incrementDividedToExtinction: Bool?, riffleApertureMillimetres: Int?, numberOfSets: Int, transparencyID: Int, comments: [String]) {
+    public init(id: UUID?, preparationCompanyID: Int, siteID: Int, location: LocationDTO, startTime: Date, finishTime: Date, standardsID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, rsdNumberOfSegments: Int?, incrementISOScoopUsed: Bool?, incrementBackingPlateUsed: Bool?, incrementDividedToExtinction: Bool?, riffleApertureMillimetres: Int?, numberOfSets: Int, transparencyID: Int, comments: [String]) {
         self.id = id
         self.preparationCompanyID = preparationCompanyID
         self.siteID = siteID
         self.location = location
         self.startTime = startTime
         self.finishTime = finishTime
-        self.methodID = methodID
+        self.standardsID = standardsID
         self.wasScreened = wasScreened
         self.screenApertureID = screenApertureID
         self.oversizePulverizedSeparately = oversizePulverizedSeparately
@@ -61,7 +61,7 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
         case location
         case startTime
         case finishTime
-        case methodID
+        case standardsID
         case wasScreened
         case screenApertureID
         case oversizePulverizedSeparately
