@@ -19,10 +19,10 @@ public extension RemoteConfiguration {
 
 public extension RemoteConfiguration.Change {
     enum Operation: Codable, Hashable {
-        case add(Data), update(primaryKey: Int, Data), delete(primaryKey: Int)
+        case add(Data), update(primaryKey: Int, Data), delete(primaryKey: Int, replacementPrimaryKey: Int?)
 
         public enum CodingKeys: String, CodingKey {
-            case primaryKey, data
+            case primaryKey, replacementPrimaryKey, data
         }
 
         public init(from decoder: Decoder) throws {
@@ -34,7 +34,8 @@ public extension RemoteConfiguration.Change {
             switch (hasPrimaryKey, hasData) {
             case (true, false):
                 let primaryKey = try container.decode(Int.self, forKey: .primaryKey)
-                self = .delete(primaryKey: primaryKey)
+                let replacementPrimaryKey = try container.decodeIfPresent(Int.self, forKey: .replacementPrimaryKey)
+                self = .delete(primaryKey: primaryKey, replacementPrimaryKey: replacementPrimaryKey)
 
             case (true, true):
                 let primaryKey = try container.decode(Int.self, forKey: .primaryKey)
@@ -60,8 +61,9 @@ public extension RemoteConfiguration.Change {
                 try container.encode(primaryKey, forKey: .primaryKey)
                 try container.encode(data, forKey: .data)
 
-            case let .delete(primaryKey):
+            case let .delete(primaryKey, replacementPrimaryKey):
                 try container.encode(primaryKey, forKey: .primaryKey)
+                try container.encodeIfPresent(replacementPrimaryKey, forKey: .replacementPrimaryKey)
             }
         }
     }
