@@ -6,10 +6,16 @@
 import Foundation
 
 public extension User {
-    @objc
-    enum Privilege: Int, CaseIterable, Codable {
-        case readAllShipments, writeAllShipments, editConfigurationValues, manageUsers
-    }
+    #if os(Linux)
+        enum Privilege: Int, CaseIterable, Codable {
+            case readAllShipments, writeAllShipments, editConfigurationValues, manageUsers
+        }
+    #else
+        @objc
+        enum Privilege: Int, CaseIterable, Codable {
+            case readAllShipments, writeAllShipments, editConfigurationValues, manageUsers
+        }
+    #endif
 }
 
 extension User.Privilege: Identifiable {
