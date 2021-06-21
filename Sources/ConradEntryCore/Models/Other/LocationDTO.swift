@@ -6,7 +6,9 @@
 import Foundation
 
 /// The latitude, longitude, and altitude reported by the system.
-public struct LocationDTO: Hashable, Codable {
+public struct LocationDTO: Hashable, Codable, Identifiable {
+    public var id: UUID?
+
     /// The latitude in degrees.
     public var latitude: Double
 
@@ -25,7 +27,8 @@ public struct LocationDTO: Hashable, Codable {
     /// The time at which this location was determined.
     public var timestamp: Date
 
-    public init(latitude: Double, longitude: Double, altitude: Double?, horizontalAccuracy: Double, verticalAccuracy: Double, timestamp: Date) {
+    public init(id: UUID?, latitude: Double, longitude: Double, altitude: Double?, horizontalAccuracy: Double, verticalAccuracy: Double, timestamp: Date) {
+        self.id = id
         self.latitude = latitude
         self.longitude = longitude
         self.altitude = altitude
