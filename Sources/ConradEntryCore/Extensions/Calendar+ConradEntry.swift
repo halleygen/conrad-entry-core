@@ -60,3 +60,19 @@ extension Calendar.Identifier: LosslessStringConvertible {
         }
     }
 }
+
+extension Calendar.Identifier: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        guard let id = Self(rawValue) else {
+            throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Calendar identifier '\(rawValue)' is not recognised.", underlyingError: nil))
+        }
+        self = id
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(description)
+    }
+}
