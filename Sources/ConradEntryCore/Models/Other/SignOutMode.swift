@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum SignOutMode: Hashable, Codable {
+public enum SignOutMode: Hashable {
     case devices([UUID])
     case allDevices
 
@@ -18,7 +18,13 @@ public enum SignOutMode: Hashable, Codable {
             return ids.map { URLQueryItem(name: "\(CodingKeys.devices.stringValue)[]", value: $0.uuidString) }
         }
     }
+}
 
+extension SignOutMode: Identifiable {
+    public var id: Self { self }
+}
+
+extension SignOutMode: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -28,7 +34,7 @@ public enum SignOutMode: Hashable, Codable {
             let ids = try container.decode([UUID].self, forKey: .devices)
             self = .devices(ids)
         } else {
-            throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Did not contain either a devices or all-devices key.", underlyingError: nil))
+            throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Did not contain either a device or all-devices key.", underlyingError: nil))
         }
     }
 
