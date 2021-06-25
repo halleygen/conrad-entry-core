@@ -13,3 +13,11 @@ public enum ShipmentChildEntity: String, Codable {
     case moistureDetermination = "moisture-determination"
     case samplePreparation = "sample-preparation"
 }
+
+extension ShipmentChildEntity: LosslessStringConvertible {
+    public var description: String { rawValue }
+
+    public init?(_ description: String) {
+        self.init(rawValue: description)
+    }
+}
