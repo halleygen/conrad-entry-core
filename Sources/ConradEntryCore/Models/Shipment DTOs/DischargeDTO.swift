@@ -21,6 +21,8 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
     public let holdsCleaned: Bool
     public let wharfCleaned: Bool
     public let comments: [String]
+    public let createdAt: Date?
+    public let updatedAt: Date?
 
     @inlinable public var finishTimeForCalculations: Date { finishTimeCleanup }
 
@@ -28,7 +30,7 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
         .init(start: startTime, end: finishTimeCleanup)
     }
 
-    public init(id: UUID?, berthName: String, berthLocation: LocationDTO, dischargeGearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, dischargeRateTonnesPerHour: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
+    public init(id: UUID?, berthName: String, berthLocation: LocationDTO, dischargeGearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, dischargeRateTonnesPerHour: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String], createdAt: Date?, updatedAt: Date?) {
         self.id = id
         self.berthName = berthName
         self.berthLocation = berthLocation
@@ -44,6 +46,8 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
         self.comments = comments
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -62,5 +66,7 @@ public struct DischargeDTO: Codable, Hashable, Identifiable {
         case holdsCleaned
         case wharfCleaned
         case comments
+        case createdAt
+        case updatedAt
     }
 }

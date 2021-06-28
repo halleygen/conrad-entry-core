@@ -21,8 +21,10 @@ public struct SampleCollectionDTO: Codable, Hashable, Identifiable {
     public let sublotSizeWetTonnes: Int?
     public let numberOfLots: Int
     public let comments: [String]
+    public let createdAt: Date?
+    public let updatedAt: Date?
 
-    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, location: LocationDTO, samplingPointID: Int, startTime: Date, finishTime: Date, methodID: Int, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, numberOfLots: Int, comments: [String]) {
+    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, location: LocationDTO, samplingPointID: Int, startTime: Date, finishTime: Date, methodID: Int, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, numberOfLots: Int, comments: [String], createdAt: Date?, updatedAt: Date?) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.siteID = siteID
@@ -38,6 +40,8 @@ public struct SampleCollectionDTO: Codable, Hashable, Identifiable {
         self.sublotSizeWetTonnes = sublotSizeWetTonnes
         self.numberOfLots = numberOfLots
         self.comments = comments
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -56,5 +60,7 @@ public struct SampleCollectionDTO: Codable, Hashable, Identifiable {
         case sublotSizeWetTonnes
         case numberOfLots
         case comments
+        case createdAt
+        case updatedAt
     }
 }

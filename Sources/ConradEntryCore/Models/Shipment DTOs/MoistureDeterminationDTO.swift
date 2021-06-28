@@ -20,12 +20,14 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
     public let resultsWaitTimeDays: Int
     public let transparencyID: Int
     public let comments: [String]
+    public let createdAt: Date?
+    public let updatedAt: Date?
 
     public var durationInOven: TimeInterval {
         ovenOffTime.timeIntervalSince(ovenOnTime)
     }
 
-    public init(id: UUID?, moistureDeterminationCompanyID: Int, siteID: Int, location: LocationDTO, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String]) {
+    public init(id: UUID?, moistureDeterminationCompanyID: Int, siteID: Int, location: LocationDTO, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String], createdAt: Date?, updatedAt: Date?) {
         self.id = id
         self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
         self.siteID = siteID
@@ -40,6 +42,8 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
         self.comments = comments
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -57,5 +61,7 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable {
         case resultsWaitTimeDays
         case transparencyID
         case comments
+        case createdAt
+        case updatedAt
     }
 }

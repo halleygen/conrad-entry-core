@@ -28,8 +28,10 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
     public let numberOfSets: Int
     public let transparencyID: Int
     public let comments: [String]
+    public let createdAt: Date?
+    public let updatedAt: Date?
 
-    public init(id: UUID?, preparationCompanyID: Int, siteID: Int, location: LocationDTO, startTime: Date, finishTime: Date, standardsID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, rsdNumberOfSegments: Int?, incrementISOScoopUsed: Bool?, incrementBackingPlateUsed: Bool?, incrementDividedToExtinction: Bool?, riffleApertureMillimetres: Int?, numberOfSets: Int, transparencyID: Int, comments: [String]) {
+    public init(id: UUID?, preparationCompanyID: Int, siteID: Int, location: LocationDTO, startTime: Date, finishTime: Date, standardsID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, rsdNumberOfSegments: Int?, incrementISOScoopUsed: Bool?, incrementBackingPlateUsed: Bool?, incrementDividedToExtinction: Bool?, riffleApertureMillimetres: Int?, numberOfSets: Int, transparencyID: Int, comments: [String], createdAt: Date?, updatedAt: Date?) {
         self.id = id
         self.preparationCompanyID = preparationCompanyID
         self.siteID = siteID
@@ -52,6 +54,8 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
         self.numberOfSets = numberOfSets
         self.transparencyID = transparencyID
         self.comments = comments
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -77,5 +81,7 @@ public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable {
         case numberOfSets
         case transparencyID
         case comments
+        case createdAt
+        case updatedAt
     }
 }

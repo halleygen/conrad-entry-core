@@ -25,11 +25,13 @@ public struct DischargeWeightDTO: Codable, Hashable, Identifiable {
     public let tallymen: Tallymen?
     public let transparencyID: Int
     public let comments: [String]
+    public let createdAt: Date?
+    public let updatedAt: Date?
 
     public var isSettlementWeight: Bool { kind == .settlement }
     public var isReferenceWeight: Bool { kind == .reference }
 
-    public init(id: UUID?, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocation: LocationDTO?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String]) {
+    public init(id: UUID?, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocation: LocationDTO?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String], createdAt: Date?, updatedAt: Date?) {
         self.id = id
         self.kind = kind
         self.methodID = methodID
@@ -49,6 +51,8 @@ public struct DischargeWeightDTO: Codable, Hashable, Identifiable {
         self.tallymen = tallymen
         self.transparencyID = transparencyID
         self.comments = comments
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -71,5 +75,7 @@ public struct DischargeWeightDTO: Codable, Hashable, Identifiable {
         case tallymen
         case transparencyID
         case comments
+        case createdAt
+        case updatedAt
     }
 }

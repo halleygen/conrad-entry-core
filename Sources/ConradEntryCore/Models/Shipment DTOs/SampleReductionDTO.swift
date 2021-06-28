@@ -20,8 +20,10 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable {
     public let methodID: Int
     public let gridSizeID: Int?
     public let comments: [String]
+    public let createdAt: Date?
+    public let updatedAt: Date?
 
-    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, laboratoryID: Int?, location: LocationDTO, pointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String]) {
+    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, laboratoryID: Int?, location: LocationDTO, pointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String], createdAt: Date?, updatedAt: Date?) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.siteID = siteID
@@ -36,6 +38,8 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable {
         self.methodID = methodID
         self.gridSizeID = gridSizeID
         self.comments = comments
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -53,5 +57,7 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable {
         case methodID
         case gridSizeID
         case comments
+        case createdAt
+        case updatedAt
     }
 }
