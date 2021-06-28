@@ -6,7 +6,7 @@
 public enum PartialShipmentEntity: Codable {
     public typealias CodingKeys = Key
 
-    case details(ShipmentDTO)
+    case details(ShipmentDetailsDTO)
     case billOfLading(BillOfLadingDTO)
     case discharge(DischargeDTO)
     case dischargeWeight(DischargeWeightDTO)
