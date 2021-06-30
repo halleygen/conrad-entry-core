@@ -9,11 +9,26 @@ public enum PartialShipmentEntity: Codable {
     case details(ShipmentDetailsDTO)
     case billOfLading(BillOfLadingDTO)
     case discharge(DischargeDTO)
-    case dischargeWeight(DischargeWeightDTO)
+    case settlementWeight(DischargeWeightDTO)
+    case referenceWeight(DischargeWeightDTO)
     case sampleCollection(SampleCollectionDTO)
     case sampleReduction(SampleReductionDTO)
     case moistureDetermination(MoistureDeterminationDTO)
     case samplePreparation(QualityLotSamplePreparationDTO)
+
+    public var key: Key {
+        switch self {
+        case .details: return .details
+        case .billOfLading: return .billOfLading
+        case .discharge: return .discharge
+        case .settlementWeight: return .settlementWeight
+        case .referenceWeight: return .referenceWeight
+        case .sampleCollection: return .sampleCollection
+        case .sampleReduction: return .sampleReduction
+        case .moistureDetermination: return .moistureDetermination
+        case .samplePreparation: return .samplePreparation
+        }
+    }
 }
 
 public extension PartialShipmentEntity {
@@ -21,7 +36,8 @@ public extension PartialShipmentEntity {
         case details
         case billOfLading = "bill-of-lading"
         case discharge
-        case dischargeWeight = "discharge-weight"
+        case settlementWeight = "settlement-weight"
+        case referenceWeight = "reference-weight"
         case sampleCollection = "sample-collection"
         case sampleReduction = "sample-reduction"
         case moistureDetermination = "moisture-determination"
