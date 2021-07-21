@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct DischargeDTO: Codable, Hashable, Identifiable {
+public struct DischargeDTO: Codable, Hashable, Identifiable, VersionedDTO {
     public let id: UUID?
     public let berthName: String
     public let berthLocation: LocationDTO

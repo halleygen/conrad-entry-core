@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SampleReductionDTO: Codable, Hashable, Identifiable {
+public struct SampleReductionDTO: Codable, Hashable, Identifiable, VersionedDTO {
     public let id: UUID?
     public let samplingCompanyID: Int
     public let location: LocationDTO

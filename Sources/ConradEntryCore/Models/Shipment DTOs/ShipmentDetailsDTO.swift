@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ShipmentDetailsDTO: Codable, Hashable, Identifiable {
+public struct ShipmentDetailsDTO: Codable, Hashable, Identifiable, VersionedDTO {
     public let id: UUID?
     public let clientReference: String
     public let shipmentDate: Date

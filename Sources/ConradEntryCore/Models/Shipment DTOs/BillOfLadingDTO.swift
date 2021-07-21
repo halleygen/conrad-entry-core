@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct BillOfLadingDTO: Codable, Hashable, Identifiable {
+public struct BillOfLadingDTO: Codable, Hashable, Identifiable, VersionedDTO {
     public let id: UUID?
     public let loadPortID: Int
     public let vesselHolds: Set<Int>

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ShipmentDTO: Codable, Hashable, Identifiable {
+public struct ShipmentDTO: Codable, Hashable, Identifiable, VersionedDTO {
     @inlinable
     public var id: UUID? { details.id }
 
