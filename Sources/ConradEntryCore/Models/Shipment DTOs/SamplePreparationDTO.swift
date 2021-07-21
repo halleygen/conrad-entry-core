@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct QualityLotSamplePreparationDTO: Codable, Hashable, Identifiable, VersionedDTO {
+public struct SamplePreparationDTO: Codable, Hashable, Identifiable, VersionedDTO {
     public let id: UUID?
     public let preparationCompanyID: Int
     public let siteID: Int

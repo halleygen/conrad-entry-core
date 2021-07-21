@@ -3,7 +3,7 @@
 // Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
-public struct QualityLotSamplePreparationDivisionMethod: ConfigurationConstant {
+public struct SamplePreparationDivisionMethod: ConfigurationConstant {
     public let id: Int
     public let value: String
     public let usesRotarySampleDivider: Bool

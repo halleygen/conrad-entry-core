@@ -14,7 +14,7 @@ public enum PartialShipmentEntity: Codable {
     case sampleCollection(SampleCollectionDTO)
     case sampleReduction(SampleReductionDTO)
     case moistureDetermination(MoistureDeterminationDTO)
-    case samplePreparation(QualityLotSamplePreparationDTO)
+    case samplePreparation(SamplePreparationDTO)
 
     public var key: Key {
         switch self {
@@ -87,7 +87,7 @@ extension PartialShipmentEntity.Key: CodingKey {
             case .moistureDetermination:
                 self = .moistureDetermination(try container.decode(MoistureDeterminationDTO.self, forKey: .moistureDetermination))
             case .samplePreparation:
-                self = .samplePreparation(try container.decode(QualityLotSamplePreparationDTO.self, forKey: .samplePreparation))
+                self = .samplePreparation(try container.decode(SamplePreparationDTO.self, forKey: .samplePreparation))
             }
         }
 
@@ -110,8 +110,8 @@ extension PartialShipmentEntity.Key: CodingKey {
                 try container.encode(sampleReductionDTO, forKey: .sampleReduction)
             case let .moistureDetermination(moistureDeterminationDTO):
                 try container.encode(moistureDeterminationDTO, forKey: .moistureDetermination)
-            case let .samplePreparation(qualityLotSamplePreparationDTO):
-                try container.encode(qualityLotSamplePreparationDTO, forKey: .samplePreparation)
+            case let .samplePreparation(samplePreparationDTO):
+                try container.encode(samplePreparationDTO, forKey: .samplePreparation)
             }
         }
     }
