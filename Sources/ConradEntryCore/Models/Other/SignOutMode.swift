@@ -6,7 +6,7 @@
 import Foundation
 
 public enum SignOutMode: Hashable {
-    case devices([UUID])
+    case devices([Device.ID])
     case allDevices
 
     public func queryItems() -> [URLQueryItem] {
@@ -16,6 +16,13 @@ public enum SignOutMode: Hashable {
 
         case let .devices(ids):
             return ids.map { URLQueryItem(name: "\(CodingKeys.devices.stringValue)[]", value: $0.uuidString) }
+        }
+    }
+
+    public func contains(id: Device.ID) -> Bool {
+        switch self {
+        case .allDevices: return true
+        case .devices(let ids): return ids.contains(id)
         }
     }
 }
