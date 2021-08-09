@@ -22,7 +22,7 @@ public enum SignOutMode: Hashable {
     public func contains(id: Device.ID) -> Bool {
         switch self {
         case .allDevices: return true
-        case .devices(let ids): return ids.contains(id)
+        case let .devices(ids): return ids.contains(id)
         }
     }
 }
