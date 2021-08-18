@@ -18,7 +18,7 @@ public extension Data {
                 p[1] = utf8Digits[Int(byte % 16)]
                 p += 2
             }
-            return 2 * self.count
+            return 2 * count
         }
     }
 }
