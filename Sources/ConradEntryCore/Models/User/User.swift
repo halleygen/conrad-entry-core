@@ -39,6 +39,23 @@ public struct User: Codable, Hashable, Identifiable {
         return components
     }
 
+    public func ensureAuthenticated() -> AuthenticatedUser? {
+        guard let token = token else {
+            return nil
+        }
+        return AuthenticatedUser(user: self, token: token)
+    }
+
+    public func authenticating(with token: SessionToken) -> AuthenticatedUser {
+        var copy = self
+        return copy.authenticate(with: token)
+    }
+
+    public mutating func authenticate(with token: SessionToken) -> AuthenticatedUser {
+        self.token = token
+        return AuthenticatedUser(user: self, token: token)
+    }
+
     #if os(Linux)
         public func fullName(style: Any = false) -> String {
             "\(givenName) \(familyName)"
