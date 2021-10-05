@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum CreateResponse<Item: Codable & Identifiable>: Codable where Item.ID: Codable & LosslessStringConvertible {
+public enum CreateResponse<Item: Codable & Identifiable>: Codable where Item.ID: Codable {
     case success(id: Item.ID, updatedAt: Date)
     case alreadyExists(existing: Item)
 }
