@@ -5,10 +5,6 @@
 
 import Foundation
 
-public extension Calendar {
-    static let iso8601 = Calendar(identifier: .iso8601)
-}
-
 public extension Calendar.Identifier {
     init?(_ identifier: NSCalendar.Identifier) {
         switch identifier {
