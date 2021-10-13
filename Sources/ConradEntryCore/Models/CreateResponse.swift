@@ -5,10 +5,22 @@
 
 import Foundation
 
-public enum CreateResponse<Item: Codable & Identifiable>: Codable where Item.ID: Codable {
-    case success(id: Item.ID, updatedAt: Date)
+public typealias CreateResponseFor<Item: Identifiable> = CreateResponse<Item.ID, Item>
+
+public enum CreateResponse<ID, Item> {
+    case success(id: ID, updatedAt: Date)
     case alreadyExists(existing: Item)
 }
 
-extension CreateResponse: Equatable where Item: Equatable {}
-extension CreateResponse: Hashable where Item: Hashable {}
+extension CreateResponse: Encodable where Item: Encodable, ID: Encodable {}
+extension CreateResponse: Decodable where Item: Decodable, ID: Decodable {}
+extension CreateResponse: Equatable where Item: Equatable, ID: Equatable {}
+extension CreateResponse: Hashable where Item: Hashable, ID: Hashable {}
+extension CreateResponse: Identifiable where Item: Identifiable, Item.ID == ID {
+    public var id: ID {
+        switch self {
+        case let .success(id, _): return id
+        case let .alreadyExists(existing): return existing.id
+        }
+    }
+}
