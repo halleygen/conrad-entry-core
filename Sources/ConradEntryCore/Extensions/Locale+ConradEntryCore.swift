@@ -1,8 +1,6 @@
 //
-//  File.swift
-//  
-//
-//  Created by Jesse Halley on 8/10/21.
+// ConradEntryCore
+// Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
 import Foundation
