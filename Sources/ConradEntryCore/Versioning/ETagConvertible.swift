@@ -5,7 +5,7 @@
 
 import Foundation
 
-public protocol ETagConvertible {
+public protocol ETagConvertible: Hashable {
     var eTagValue: String { get }
 }
 
