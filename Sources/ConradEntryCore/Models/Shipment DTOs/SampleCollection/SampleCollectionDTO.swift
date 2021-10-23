@@ -5,8 +5,8 @@
 
 import Foundation
 
-public struct SampleCollectionDTO: Codable, Hashable, Identifiable, VersionedDTO {
-    public let id: UUID?
+public struct SampleCollectionDTO: SampleCollectionProtocol, Codable, Identifiable, VersionedResource {
+    public let id: UUID
     public let samplingCompanyID: Int
     public let siteID: Int
     public let location: LocationDTO
@@ -21,10 +21,12 @@ public struct SampleCollectionDTO: Codable, Hashable, Identifiable, VersionedDTO
     public let sublotSizeWetTonnes: Int?
     public let numberOfLots: Int
     public let comments: [String]
-    public let createdAt: Date?
-    public let updatedAt: Date?
+    public let createdAt: Date
+    public let updatedAt: Date
 
-    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, location: LocationDTO, samplingPointID: Int, startTime: Date, finishTime: Date, methodID: Int, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, numberOfLots: Int, comments: [String], createdAt: Date?, updatedAt: Date?) {
+    public var version: Date { updatedAt }
+
+    public init(id: ID, samplingCompanyID: Int, siteID: Int, location: LocationDTO, samplingPointID: Int, startTime: Date, finishTime: Date, methodID: Int, sampleIncrementsWetTonnes: Double, typicalSampleWeightKilograms: Double, numberOfTrucksPerBag: Int?, lotSizeWetTonnes: Int, sublotSizeWetTonnes: Int?, numberOfLots: Int, comments: [String], createdAt: Date, updatedAt: Date) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.siteID = siteID
@@ -42,6 +44,10 @@ public struct SampleCollectionDTO: Codable, Hashable, Identifiable, VersionedDTO
         self.comments = comments
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+    }
+
+    public init(_ other: SampleCollectionProtocol, id: ID, createdAt: Date, updatedAt: Date) {
+        self.init(id: id, samplingCompanyID: other.samplingCompanyID, siteID: other.siteID, location: other.location, samplingPointID: other.samplingPointID, startTime: other.startTime, finishTime: other.finishTime, methodID: other.methodID, sampleIncrementsWetTonnes: other.sampleIncrementsWetTonnes, typicalSampleWeightKilograms: other.typicalSampleWeightKilograms, numberOfTrucksPerBag: other.numberOfTrucksPerBag, lotSizeWetTonnes: other.lotSizeWetTonnes, sublotSizeWetTonnes: other.sublotSizeWetTonnes, numberOfLots: other.numberOfLots, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
     }
 
     public enum CodingKeys: String, CodingKey {

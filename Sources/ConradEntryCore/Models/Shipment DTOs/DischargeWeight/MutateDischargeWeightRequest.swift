@@ -5,8 +5,10 @@
 
 import Foundation
 
-public struct DischargeWeightDTO: Codable, Hashable, Identifiable, VersionedDTO {
-    public let id: UUID?
+public struct MutateDischargeWeightRequest: DischargeWeightProtocol, Codable {
+    public typealias ID = UUID?
+
+    public let id: ID
     public let kind: DischargeWeightKind
     public let methodID: Int
     public let weighingPointID: Int
@@ -25,13 +27,8 @@ public struct DischargeWeightDTO: Codable, Hashable, Identifiable, VersionedDTO 
     public let tallymen: Tallymen?
     public let transparencyID: Int
     public let comments: [String]
-    public let createdAt: Date?
-    public let updatedAt: Date?
 
-    public var isSettlementWeight: Bool { kind == .settlement }
-    public var isReferenceWeight: Bool { kind == .reference }
-
-    public init(id: UUID?, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocation: LocationDTO?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String], createdAt: Date?, updatedAt: Date?) {
+    public init(id: ID = nil, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocation: LocationDTO?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String]) {
         self.id = id
         self.kind = kind
         self.methodID = methodID
@@ -51,8 +48,10 @@ public struct DischargeWeightDTO: Codable, Hashable, Identifiable, VersionedDTO 
         self.tallymen = tallymen
         self.transparencyID = transparencyID
         self.comments = comments
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
+    }
+
+    public init(_ other: DischargeWeightProtocol, id: ID = nil) {
+        self.init(id: id, kind: other.kind, methodID: other.methodID, weighingPointID: other.weighingPointID, weighingCompany: other.weighingCompany, startTime: other.startTime, finishTime: other.finishTime, wetMetricTonnes: other.wetMetricTonnes, moisturePercentage: other.moisturePercentage, dryMetricTonnes: other.dryMetricTonnes, equipmentName: other.equipmentName, equipmentModel: other.equipmentModel, equipmentLocation: other.equipmentLocation, equipmentCertificationDate: other.equipmentCertificationDate, calibrationCheck: other.calibrationCheck, abcCheck: other.abcCheck, tallymen: other.tallymen, transparencyID: other.transparencyID, comments: other.comments)
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -75,7 +74,5 @@ public struct DischargeWeightDTO: Codable, Hashable, Identifiable, VersionedDTO 
         case tallymen
         case transparencyID
         case comments
-        case createdAt
-        case updatedAt
     }
 }

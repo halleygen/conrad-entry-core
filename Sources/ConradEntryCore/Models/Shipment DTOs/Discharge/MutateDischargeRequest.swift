@@ -5,8 +5,10 @@
 
 import Foundation
 
-public struct DischargeDTO: Codable, Hashable, Identifiable, VersionedDTO {
-    public let id: UUID?
+public struct MutateDischargeRequest: DischargeProtocol, Codable {
+    public typealias ID = UUID?
+
+    public let id: ID
     public let berthName: String
     public let berthLocation: LocationDTO
     public let dischargeGearID: Int
@@ -21,16 +23,8 @@ public struct DischargeDTO: Codable, Hashable, Identifiable, VersionedDTO {
     public let holdsCleaned: Bool
     public let wharfCleaned: Bool
     public let comments: [String]
-    public let createdAt: Date?
-    public let updatedAt: Date?
 
-    @inlinable public var finishTimeForCalculations: Date { finishTimeCleanup }
-
-    public var interval: DateInterval {
-        .init(start: startTime, end: finishTimeCleanup)
-    }
-
-    public init(id: UUID?, berthName: String, berthLocation: LocationDTO, dischargeGearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, dischargeRateTonnesPerHour: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String], createdAt: Date?, updatedAt: Date?) {
+    public init(id: ID = nil, berthName: String, berthLocation: LocationDTO, dischargeGearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, dischargeRateTonnesPerHour: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
         self.id = id
         self.berthName = berthName
         self.berthLocation = berthLocation
@@ -46,8 +40,10 @@ public struct DischargeDTO: Codable, Hashable, Identifiable, VersionedDTO {
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
         self.comments = comments
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
+    }
+
+    public init(_ other: DischargeProtocol, id: ID = nil) {
+        self.init(id: id, berthName: other.berthName, berthLocation: other.berthLocation, dischargeGearID: other.dischargeGearID, methodID: other.methodID, cargoCondition: other.cargoCondition, weatherConditionsID: other.weatherConditionsID, startTime: other.startTime, finishTimeLastGrab: other.finishTimeLastGrab, finishTimeCleanup: other.finishTimeCleanup, dischargeRateTonnesPerHour: other.dischargeRateTonnesPerHour, saveAllTarpaulinsUsed: other.saveAllTarpaulinsUsed, holdsCleaned: other.holdsCleaned, wharfCleaned: other.wharfCleaned, comments: other.comments)
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -66,7 +62,5 @@ public struct DischargeDTO: Codable, Hashable, Identifiable, VersionedDTO {
         case holdsCleaned
         case wharfCleaned
         case comments
-        case createdAt
-        case updatedAt
     }
 }

@@ -5,8 +5,10 @@
 
 import Foundation
 
-public struct SampleReductionDTO: Codable, Hashable, Identifiable, VersionedDTO {
-    public let id: UUID?
+public struct MutateSampleReductionRequest: SampleReductionProtocol, Codable {
+    public typealias ID = UUID?
+
+    public let id: ID
     public let samplingCompanyID: Int
     public let location: LocationDTO
     public let siteID: Int
@@ -20,10 +22,8 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable, VersionedDTO 
     public let methodID: Int
     public let gridSizeID: Int?
     public let comments: [String]
-    public let createdAt: Date?
-    public let updatedAt: Date?
 
-    public init(id: UUID?, samplingCompanyID: Int, siteID: Int, laboratoryID: Int?, location: LocationDTO, pointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String], createdAt: Date?, updatedAt: Date?) {
+    public init(id: ID = nil, samplingCompanyID: Int, siteID: Int, laboratoryID: Int?, location: LocationDTO, pointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String]) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.siteID = siteID
@@ -38,8 +38,10 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable, VersionedDTO 
         self.methodID = methodID
         self.gridSizeID = gridSizeID
         self.comments = comments
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
+    }
+
+    public init(_ other: SampleReductionProtocol, id: ID = nil) {
+        self.init(id: id, samplingCompanyID: other.samplingCompanyID, siteID: other.siteID, laboratoryID: other.laboratoryID, location: other.location, pointID: other.pointID, startTime: other.startTime, finishTime: other.finishTime, wasScreened: other.wasScreened, screenApertureMillimetres: other.screenApertureMillimetres, wasConedAndQuartered: other.wasConedAndQuartered, methodID: other.methodID, gridSizeID: other.gridSizeID, comments: other.comments)
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -57,7 +59,5 @@ public struct SampleReductionDTO: Codable, Hashable, Identifiable, VersionedDTO 
         case methodID
         case gridSizeID
         case comments
-        case createdAt
-        case updatedAt
     }
 }

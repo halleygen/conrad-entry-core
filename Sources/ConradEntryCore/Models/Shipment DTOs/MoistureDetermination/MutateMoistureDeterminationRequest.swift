@@ -5,8 +5,10 @@
 
 import Foundation
 
-public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable, VersionedDTO {
-    public let id: UUID?
+public struct MutateMoistureDeterminationRequest: MoistureDeterminationProtocol, Codable {
+    public typealias ID = UUID?
+
+    public let id: ID
     public let moistureDeterminationCompanyID: Int
     public let siteID: Int
     public let location: LocationDTO
@@ -20,14 +22,8 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable, Version
     public let resultsWaitTimeDays: Int
     public let transparencyID: Int
     public let comments: [String]
-    public let createdAt: Date?
-    public let updatedAt: Date?
 
-    public var durationInOven: TimeInterval {
-        ovenOffTime.timeIntervalSince(ovenOnTime)
-    }
-
-    public init(id: UUID?, moistureDeterminationCompanyID: Int, siteID: Int, location: LocationDTO, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String], createdAt: Date?, updatedAt: Date?) {
+    public init(id: ID = nil, moistureDeterminationCompanyID: Int, siteID: Int, location: LocationDTO, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String]) {
         self.id = id
         self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
         self.siteID = siteID
@@ -42,8 +38,10 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable, Version
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
         self.comments = comments
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
+    }
+
+    public init(_ other: MoistureDeterminationProtocol, id: ID = nil) {
+        self.init(id: id, moistureDeterminationCompanyID: other.moistureDeterminationCompanyID, siteID: other.siteID, location: other.location, lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms, ovenOnTime: other.ovenOnTime, ovenOffTime: other.ovenOffTime, ovenTemperatureCelsius: other.ovenTemperatureCelsius, checkedForConstantWeight: other.checkedForConstantWeight, constantWeightDuration: other.constantWeightDuration, numberOfWeighBacks: other.numberOfWeighBacks, resultsWaitTimeDays: other.resultsWaitTimeDays, transparencyID: other.transparencyID, comments: other.comments)
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -61,7 +59,5 @@ public struct MoistureDeterminationDTO: Codable, Hashable, Identifiable, Version
         case resultsWaitTimeDays
         case transparencyID
         case comments
-        case createdAt
-        case updatedAt
     }
 }

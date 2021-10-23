@@ -5,8 +5,8 @@
 
 import Foundation
 
-public struct SamplePreparationDTO: Codable, Hashable, Identifiable, VersionedDTO {
-    public let id: UUID?
+public struct SamplePreparationDTO: SamplePreparationProtocol, Codable, Identifiable, VersionedResource {
+    public let id: UUID
     public let preparationCompanyID: Int
     public let siteID: Int
     public let location: LocationDTO
@@ -28,10 +28,12 @@ public struct SamplePreparationDTO: Codable, Hashable, Identifiable, VersionedDT
     public let numberOfSets: Int
     public let transparencyID: Int
     public let comments: [String]
-    public let createdAt: Date?
-    public let updatedAt: Date?
+    public let createdAt: Date
+    public let updatedAt: Date
 
-    public init(id: UUID?, preparationCompanyID: Int, siteID: Int, location: LocationDTO, startTime: Date, finishTime: Date, standardsID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, rsdNumberOfSegments: Int?, incrementISOScoopUsed: Bool?, incrementBackingPlateUsed: Bool?, incrementDividedToExtinction: Bool?, riffleApertureMillimetres: Int?, numberOfSets: Int, transparencyID: Int, comments: [String], createdAt: Date?, updatedAt: Date?) {
+    public var version: Date { updatedAt }
+
+    public init(id: ID, preparationCompanyID: Int, siteID: Int, location: LocationDTO, startTime: Date, finishTime: Date, standardsID: Int, wasScreened: Bool, screenApertureID: Int?, oversizePulverizedSeparately: Bool?, sampleChargeWeightGrams: Int, pulverizerID: Int, pulverizingDurationSeconds: TimeInterval, divisionMethodID: Int, rsdNumberOfSegments: Int?, incrementISOScoopUsed: Bool?, incrementBackingPlateUsed: Bool?, incrementDividedToExtinction: Bool?, riffleApertureMillimetres: Int?, numberOfSets: Int, transparencyID: Int, comments: [String], createdAt: Date, updatedAt: Date) {
         self.id = id
         self.preparationCompanyID = preparationCompanyID
         self.siteID = siteID
@@ -56,6 +58,10 @@ public struct SamplePreparationDTO: Codable, Hashable, Identifiable, VersionedDT
         self.comments = comments
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+    }
+
+    public init(_ other: SamplePreparationProtocol, id: ID, createdAt: Date, updatedAt: Date) {
+        self.init(id: id, preparationCompanyID: other.preparationCompanyID, siteID: other.siteID, location: other.location, startTime: other.startTime, finishTime: other.finishTime, standardsID: other.standardsID, wasScreened: other.wasScreened, screenApertureID: other.screenApertureID, oversizePulverizedSeparately: other.oversizePulverizedSeparately, sampleChargeWeightGrams: other.sampleChargeWeightGrams, pulverizerID: other.pulverizerID, pulverizingDurationSeconds: other.pulverizingDurationSeconds, divisionMethodID: other.divisionMethodID, rsdNumberOfSegments: other.rsdNumberOfSegments, incrementISOScoopUsed: other.incrementISOScoopUsed, incrementBackingPlateUsed: other.incrementBackingPlateUsed, incrementDividedToExtinction: other.incrementDividedToExtinction, riffleApertureMillimetres: other.riffleApertureMillimetres, numberOfSets: other.numberOfSets, transparencyID: other.transparencyID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
     }
 
     public enum CodingKeys: String, CodingKey {

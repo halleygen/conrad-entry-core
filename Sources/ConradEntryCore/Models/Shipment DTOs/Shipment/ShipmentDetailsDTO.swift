@@ -5,8 +5,8 @@
 
 import Foundation
 
-public struct ShipmentDetailsDTO: Codable, Hashable, Identifiable, VersionedDTO {
-    public let id: UUID?
+public struct ShipmentDetailsDTO: ShipmentProtocol, Identifiable, Codable, VersionedResource {
+    public let id: UUID
     public let clientReference: String
     public let shipmentDate: Date
     public let norTime: Date
@@ -24,10 +24,12 @@ public struct ShipmentDetailsDTO: Codable, Hashable, Identifiable, VersionedDTO 
     public let proceduralExceptions: [String]
     public let samplingProcedure: [String]
     public let comments: [String]
-    public let createdAt: Date?
-    public let updatedAt: Date?
+    public let createdAt: Date
+    public let updatedAt: Date
 
-    public init(id: UUID?, clientReference: String, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, agentID: Int?, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyReceiverID: Int?, inspectionCompanySellerID: Int?, inspectionCompanySecondAgentID: Int?, conradTeamSize: Int, proceduralExceptions: [String], samplingProcedure: [String], comments: [String], createdAt: Date?, updatedAt: Date?) {
+    public var version: Date { updatedAt }
+
+    public init(id: UUID, clientReference: String, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, agentID: Int?, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyReceiverID: Int?, inspectionCompanySellerID: Int?, inspectionCompanySecondAgentID: Int?, conradTeamSize: Int, proceduralExceptions: [String], samplingProcedure: [String], comments: [String], createdAt: Date, updatedAt: Date) {
         self.id = id
         self.clientReference = clientReference
         self.shipmentDate = shipmentDate
@@ -48,6 +50,10 @@ public struct ShipmentDetailsDTO: Codable, Hashable, Identifiable, VersionedDTO 
         self.comments = comments
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+    }
+
+    public init(_ other: ShipmentProtocol, id: UUID, createdAt: Date, updatedAt: Date) {
+        self.init(id: id, clientReference: other.clientReference, shipmentDate: other.shipmentDate, norTime: other.norTime, vesselName: other.vesselName, clientID: other.clientID, commodityID: other.commodityID, agentID: other.agentID, traderID: other.traderID, smelterID: other.smelterID, dischargePortID: other.dischargePortID, inspectionCompanyReceiverID: other.inspectionCompanyReceiverID, inspectionCompanySellerID: other.inspectionCompanySellerID, inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID, conradTeamSize: other.conradTeamSize, proceduralExceptions: other.proceduralExceptions, samplingProcedure: other.samplingProcedure, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
     }
 
     public enum CodingKeys: String, CodingKey {
