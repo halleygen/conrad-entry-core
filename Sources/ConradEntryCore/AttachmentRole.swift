@@ -5,15 +5,16 @@
 
 import Foundation
 
-public struct AttachmentRole: RawRepresentable, Hashable, ExpressibleByStringLiteral, CustomStringConvertible {
+public struct AttachmentRole: RawRepresentable, Hashable, CustomStringConvertible {
     public let rawValue: String
 
-    public init(rawValue: String) {
+    private init(_ rawValue: String) {
         self.rawValue = rawValue
     }
 
-    public init(stringLiteral value: String) {
-        self.init(rawValue: value)
+    public init?(rawValue: String) {
+        guard let match = Self.all.first(where: { $0.rawValue == rawValue }) else { return nil }
+        self = match
     }
 
     public var description: String {
@@ -24,23 +25,23 @@ public struct AttachmentRole: RawRepresentable, Hashable, ExpressibleByStringLit
 }
 
 public extension AttachmentRole {
-    static let discharge: AttachmentRole = "discharge"
-    static let settlementWeight: AttachmentRole = "settlement-weight"
-    static let referenceWeight: AttachmentRole = "reference-weight"
-    static let sampleCollection: AttachmentRole = "sample-collection"
-    static let sampleReduction: AttachmentRole = "sample-reduction"
-    static let moistureDetermination: AttachmentRole = "moisture-determination"
-    static let samplePreparation: AttachmentRole = "sample-preparation"
+    static let discharge = AttachmentRole("discharge")
+    static let settlementWeight = AttachmentRole("settlement-weight")
+    static let referenceWeight = AttachmentRole("reference-weight")
+    static let sampleCollection = AttachmentRole("sample-collection")
+    static let sampleReduction = AttachmentRole("sample-reduction")
+    static let moistureDetermination = AttachmentRole("moisture-determination")
+    static let samplePreparation = AttachmentRole("sample-preparation")
 
-    static let noticeOfReadiness: AttachmentRole = "doc-notice-of-readiness"
-    static let vesselPhoto: AttachmentRole = "doc-vessel-photo"
-    static let statementOfFacts: AttachmentRole = "doc-statement-of-facts"
-    static let moistureCertificate: AttachmentRole = "doc-moisture-certificate"
-    static let lotByLotMoistureProfile: AttachmentRole = "doc-lot-by-lot-moisture-profile"
-    static let stowagePlan: AttachmentRole = "doc-stowage-plan"
+    static let noticeOfReadiness = AttachmentRole("doc-notice-of-readiness")
+    static let vesselPhoto = AttachmentRole("doc-vessel-photo")
+    static let statementOfFacts = AttachmentRole("doc-statement-of-facts")
+    static let moistureCertificate = AttachmentRole("doc-moisture-certificate")
+    static let lotByLotMoistureProfile = AttachmentRole("doc-lot-by-lot-moisture-profile")
+    static let stowagePlan = AttachmentRole("doc-stowage-plan")
 
-    static var allDocuments: [AttachmentRole] { [.noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan] }
-    static var all: [AttachmentRole] { [.discharge, .settlementWeight, .referenceWeight, .sampleCollection, .sampleReduction, .moistureDetermination, .samplePreparation, .noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan] }
+    static let allDocuments: [AttachmentRole] = [.noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan]
+    static let all: [AttachmentRole] = [.discharge, .settlementWeight, .referenceWeight, .sampleCollection, .sampleReduction, .moistureDetermination, .samplePreparation, .noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan]
 }
 
 extension AttachmentRole: Codable {

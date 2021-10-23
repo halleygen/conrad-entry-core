@@ -26,15 +26,6 @@ extension UUID: LosslessETagConvertible {
     }
 }
 
-@available(*, deprecated)
-extension Optional: ETagConvertible where Wrapped: ETagConvertible {
-    @available(*, deprecated)
-    public var eTagValue: String {
-        guard let self = self else { return "" }
-        return self.eTagValue
-    }
-}
-
 extension Date: LosslessETagConvertible {
     public var eTagValue: String {
         String(timeIntervalSince1970)
