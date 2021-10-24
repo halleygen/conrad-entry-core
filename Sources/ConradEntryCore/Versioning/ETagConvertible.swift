@@ -13,9 +13,14 @@ public protocol LosslessETagConvertible: ETagConvertible {
     init?(eTagValue: String)
 }
 
-public extension LosslessStringConvertible where Self: LosslessETagConvertible {
-    var eTagValue: String { String(self) }
-    init?(eTagValue: String) { self.init(eTagValue) }
+extension Optional: ETagConvertible where Wrapped: ETagConvertible {
+    public var eTagValue: String {
+        if let self = self {
+            return self.eTagValue
+        } else {
+            return "*"
+        }
+    }
 }
 
 extension UUID: LosslessETagConvertible {
