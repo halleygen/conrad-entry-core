@@ -7,7 +7,7 @@ import Foundation
 
 public protocol SampleReductionProtocol {
     var samplingCompanyID: Int { get }
-    var locationDTO: LocationDTO { get }
+    var location: LocationDTO { get }
     var siteID: Int { get }
     var laboratoryID: Int? { get }
     var pointID: Int { get }

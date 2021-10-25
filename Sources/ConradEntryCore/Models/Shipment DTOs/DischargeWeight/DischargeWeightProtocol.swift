@@ -17,7 +17,7 @@ public protocol DischargeWeightProtocol {
     var dryMetricTonnes: Double { get }
     var equipmentName: String? { get }
     var equipmentModel: String? { get }
-    var equipmentLocationDTO: LocationDTO? { get }
+    var equipmentLocation: LocationDTO? { get }
     var equipmentCertificationDate: Date? { get }
     var calibrationCheck: CalibrationCheck? { get }
     var abcCheck: ABCCheck? { get }

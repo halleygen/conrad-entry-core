@@ -7,7 +7,7 @@ import Foundation
 
 public protocol DischargeProtocol {
     var berthName: String { get }
-    var berthLocationDTO: LocationDTO { get }
+    var berthLocation: LocationDTO { get }
     var gearID: Int { get }
     var methodID: Int { get }
     var cargoCondition: CargoConditionDTO { get }
