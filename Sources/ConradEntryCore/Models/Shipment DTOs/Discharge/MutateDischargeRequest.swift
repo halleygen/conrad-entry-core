@@ -10,7 +10,7 @@ public struct MutateDischargeRequest: DischargeProtocol, Codable {
 
     public let id: ID
     public let berthName: String
-    public let berthLocation: LocationDTO
+    public let berthLocationDTO: LocationDTO
     public let gearID: Int
     public let methodID: Int
     public let cargoCondition: CargoConditionDTO
@@ -24,10 +24,10 @@ public struct MutateDischargeRequest: DischargeProtocol, Codable {
     public let wharfCleaned: Bool
     public let comments: [String]
 
-    public init(id: ID = nil, berthName: String, berthLocation: LocationDTO, gearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, dischargeRateTonnesPerHour: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
+    public init(id: ID = nil, berthName: String, berthLocationDTO: LocationDTO, gearID: Int, methodID: Int, cargoCondition: CargoConditionDTO, weatherConditionsID: Int, startTime: Date, finishTimeLastGrab: Date, finishTimeCleanup: Date, dischargeRateTonnesPerHour: Double, saveAllTarpaulinsUsed: Bool, holdsCleaned: Bool, wharfCleaned: Bool, comments: [String]) {
         self.id = id
         self.berthName = berthName
-        self.berthLocation = berthLocation
+        self.berthLocationDTO = berthLocationDTO
         self.gearID = gearID
         self.methodID = methodID
         self.cargoCondition = cargoCondition
@@ -43,13 +43,13 @@ public struct MutateDischargeRequest: DischargeProtocol, Codable {
     }
 
     public init(_ other: DischargeProtocol, id: ID = nil) {
-        self.init(id: id, berthName: other.berthName, berthLocation: other.berthLocation, gearID: other.gearID, methodID: other.methodID, cargoCondition: other.cargoCondition, weatherConditionsID: other.weatherConditionsID, startTime: other.startTime, finishTimeLastGrab: other.finishTimeLastGrab, finishTimeCleanup: other.finishTimeCleanup, dischargeRateTonnesPerHour: other.dischargeRateTonnesPerHour, saveAllTarpaulinsUsed: other.saveAllTarpaulinsUsed, holdsCleaned: other.holdsCleaned, wharfCleaned: other.wharfCleaned, comments: other.comments)
+        self.init(id: id, berthName: other.berthName, berthLocationDTO: other.berthLocationDTO, gearID: other.gearID, methodID: other.methodID, cargoCondition: other.cargoCondition, weatherConditionsID: other.weatherConditionsID, startTime: other.startTime, finishTimeLastGrab: other.finishTimeLastGrab, finishTimeCleanup: other.finishTimeCleanup, dischargeRateTonnesPerHour: other.dischargeRateTonnesPerHour, saveAllTarpaulinsUsed: other.saveAllTarpaulinsUsed, holdsCleaned: other.holdsCleaned, wharfCleaned: other.wharfCleaned, comments: other.comments)
     }
 
     public enum CodingKeys: String, CodingKey {
         case id
         case berthName
-        case berthLocation
+        case berthLocationDTO = "berthLocation"
         case gearID
         case methodID
         case cargoCondition

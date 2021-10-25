@@ -18,7 +18,7 @@ public struct DischargeWeightDTO: DischargeWeightProtocol, Codable, Identifiable
     public let dryMetricTonnes: Double
     public let equipmentName: String?
     public let equipmentModel: String?
-    public let equipmentLocation: LocationDTO?
+    public let equipmentLocationDTO: LocationDTO?
     public let equipmentCertificationDate: Date?
     public let calibrationCheck: CalibrationCheck?
     public let abcCheck: ABCCheck?
@@ -30,7 +30,7 @@ public struct DischargeWeightDTO: DischargeWeightProtocol, Codable, Identifiable
 
     public var version: Date { updatedAt }
 
-    public init(id: ID, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocation: LocationDTO?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String], createdAt: Date, updatedAt: Date) {
+    public init(id: ID, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocationDTO: LocationDTO?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String], createdAt: Date, updatedAt: Date) {
         self.id = id
         self.kind = kind
         self.methodID = methodID
@@ -43,7 +43,7 @@ public struct DischargeWeightDTO: DischargeWeightProtocol, Codable, Identifiable
         self.dryMetricTonnes = dryMetricTonnes
         self.equipmentName = equipmentName
         self.equipmentModel = equipmentModel
-        self.equipmentLocation = equipmentLocation
+        self.equipmentLocationDTO = equipmentLocationDTO
         self.equipmentCertificationDate = equipmentCertificationDate
         self.calibrationCheck = calibrationCheck
         self.abcCheck = abcCheck
@@ -55,7 +55,7 @@ public struct DischargeWeightDTO: DischargeWeightProtocol, Codable, Identifiable
     }
 
     public init(_ other: DischargeWeightProtocol, id: ID, createdAt: Date, updatedAt: Date) {
-        self.init(id: id, kind: other.kind, methodID: other.methodID, weighingPointID: other.weighingPointID, weighingCompany: other.weighingCompany, startTime: other.startTime, finishTime: other.finishTime, wetMetricTonnes: other.wetMetricTonnes, moisturePercentage: other.moisturePercentage, dryMetricTonnes: other.dryMetricTonnes, equipmentName: other.equipmentName, equipmentModel: other.equipmentModel, equipmentLocation: other.equipmentLocation, equipmentCertificationDate: other.equipmentCertificationDate, calibrationCheck: other.calibrationCheck, abcCheck: other.abcCheck, tallymen: other.tallymen, transparencyID: other.transparencyID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+        self.init(id: id, kind: other.kind, methodID: other.methodID, weighingPointID: other.weighingPointID, weighingCompany: other.weighingCompany, startTime: other.startTime, finishTime: other.finishTime, wetMetricTonnes: other.wetMetricTonnes, moisturePercentage: other.moisturePercentage, dryMetricTonnes: other.dryMetricTonnes, equipmentName: other.equipmentName, equipmentModel: other.equipmentModel, equipmentLocationDTO: other.equipmentLocationDTO, equipmentCertificationDate: other.equipmentCertificationDate, calibrationCheck: other.calibrationCheck, abcCheck: other.abcCheck, tallymen: other.tallymen, transparencyID: other.transparencyID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -71,7 +71,7 @@ public struct DischargeWeightDTO: DischargeWeightProtocol, Codable, Identifiable
         case dryMetricTonnes
         case equipmentName
         case equipmentModel
-        case equipmentLocation
+        case equipmentLocationDTO = "equipmentLocation"
         case equipmentCertificationDate
         case calibrationCheck
         case abcCheck

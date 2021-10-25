@@ -20,7 +20,7 @@ public struct MutateDischargeWeightRequest: DischargeWeightProtocol, Codable {
     public let dryMetricTonnes: Double
     public let equipmentName: String?
     public let equipmentModel: String?
-    public let equipmentLocation: LocationDTO?
+    public let equipmentLocationDTO: LocationDTO?
     public let equipmentCertificationDate: Date?
     public let calibrationCheck: CalibrationCheck?
     public let abcCheck: ABCCheck?
@@ -28,7 +28,7 @@ public struct MutateDischargeWeightRequest: DischargeWeightProtocol, Codable {
     public let transparencyID: Int
     public let comments: [String]
 
-    public init(id: ID = nil, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocation: LocationDTO?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String]) {
+    public init(id: ID = nil, kind: DischargeWeightKind, methodID: Int, weighingPointID: Int, weighingCompany: String, startTime: Date, finishTime: Date, wetMetricTonnes: Double, moisturePercentage: Double, dryMetricTonnes: Double, equipmentName: String?, equipmentModel: String?, equipmentLocationDTO: LocationDTO?, equipmentCertificationDate: Date?, calibrationCheck: CalibrationCheck?, abcCheck: ABCCheck?, tallymen: Tallymen?, transparencyID: Int, comments: [String]) {
         self.id = id
         self.kind = kind
         self.methodID = methodID
@@ -41,7 +41,7 @@ public struct MutateDischargeWeightRequest: DischargeWeightProtocol, Codable {
         self.dryMetricTonnes = dryMetricTonnes
         self.equipmentName = equipmentName
         self.equipmentModel = equipmentModel
-        self.equipmentLocation = equipmentLocation
+        self.equipmentLocationDTO = equipmentLocationDTO
         self.equipmentCertificationDate = equipmentCertificationDate
         self.calibrationCheck = calibrationCheck
         self.abcCheck = abcCheck
@@ -51,7 +51,7 @@ public struct MutateDischargeWeightRequest: DischargeWeightProtocol, Codable {
     }
 
     public init(_ other: DischargeWeightProtocol, id: ID = nil) {
-        self.init(id: id, kind: other.kind, methodID: other.methodID, weighingPointID: other.weighingPointID, weighingCompany: other.weighingCompany, startTime: other.startTime, finishTime: other.finishTime, wetMetricTonnes: other.wetMetricTonnes, moisturePercentage: other.moisturePercentage, dryMetricTonnes: other.dryMetricTonnes, equipmentName: other.equipmentName, equipmentModel: other.equipmentModel, equipmentLocation: other.equipmentLocation, equipmentCertificationDate: other.equipmentCertificationDate, calibrationCheck: other.calibrationCheck, abcCheck: other.abcCheck, tallymen: other.tallymen, transparencyID: other.transparencyID, comments: other.comments)
+        self.init(id: id, kind: other.kind, methodID: other.methodID, weighingPointID: other.weighingPointID, weighingCompany: other.weighingCompany, startTime: other.startTime, finishTime: other.finishTime, wetMetricTonnes: other.wetMetricTonnes, moisturePercentage: other.moisturePercentage, dryMetricTonnes: other.dryMetricTonnes, equipmentName: other.equipmentName, equipmentModel: other.equipmentModel, equipmentLocationDTO: other.equipmentLocationDTO, equipmentCertificationDate: other.equipmentCertificationDate, calibrationCheck: other.calibrationCheck, abcCheck: other.abcCheck, tallymen: other.tallymen, transparencyID: other.transparencyID, comments: other.comments)
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -67,7 +67,7 @@ public struct MutateDischargeWeightRequest: DischargeWeightProtocol, Codable {
         case dryMetricTonnes
         case equipmentName
         case equipmentModel
-        case equipmentLocation
+        case equipmentLocationDTO = "equipmentLocation"
         case equipmentCertificationDate
         case calibrationCheck
         case abcCheck

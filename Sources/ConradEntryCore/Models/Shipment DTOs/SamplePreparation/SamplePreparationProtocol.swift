@@ -8,7 +8,7 @@ import Foundation
 public protocol SamplePreparationProtocol {
     var preparationCompanyID: Int { get }
     var siteID: Int { get }
-    var location: LocationDTO { get }
+    var locationDTO: LocationDTO { get }
     var startTime: Date { get }
     var finishTime: Date { get }
     var standardsID: Int { get }

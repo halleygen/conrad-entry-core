@@ -8,7 +8,7 @@ import Foundation
 public protocol SampleCollectionProtocol {
     var samplingCompanyID: Int { get }
     var siteID: Int { get }
-    var location: LocationDTO { get }
+    var locationDTO: LocationDTO { get }
     var samplingPointID: Int { get }
     var startTime: Date { get }
     var finishTime: Date { get }

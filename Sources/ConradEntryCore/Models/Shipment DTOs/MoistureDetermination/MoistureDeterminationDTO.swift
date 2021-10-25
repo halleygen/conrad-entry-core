@@ -9,7 +9,7 @@ public struct MoistureDeterminationDTO: MoistureDeterminationProtocol, Codable, 
     public let id: UUID
     public let moistureDeterminationCompanyID: Int
     public let siteID: Int
-    public let location: LocationDTO
+    public let locationDTO: LocationDTO
     public let lotSampleTrayWeightKilograms: Double
     public let ovenOnTime: Date
     public let ovenOffTime: Date
@@ -25,11 +25,11 @@ public struct MoistureDeterminationDTO: MoistureDeterminationProtocol, Codable, 
 
     public var version: Date { updatedAt }
 
-    public init(id: ID, moistureDeterminationCompanyID: Int, siteID: Int, location: LocationDTO, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String], createdAt: Date, updatedAt: Date) {
+    public init(id: ID, moistureDeterminationCompanyID: Int, siteID: Int, locationDTO: LocationDTO, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String], createdAt: Date, updatedAt: Date) {
         self.id = id
         self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
         self.siteID = siteID
-        self.location = location
+        self.locationDTO = locationDTO
         self.lotSampleTrayWeightKilograms = lotSampleTrayWeightKilograms
         self.ovenOnTime = ovenOnTime
         self.ovenOffTime = ovenOffTime
@@ -45,14 +45,14 @@ public struct MoistureDeterminationDTO: MoistureDeterminationProtocol, Codable, 
     }
 
     public init(_ other: MoistureDeterminationProtocol, id: ID, createdAt: Date, updatedAt: Date) {
-        self.init(id: id, moistureDeterminationCompanyID: other.moistureDeterminationCompanyID, siteID: other.siteID, location: other.location, lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms, ovenOnTime: other.ovenOnTime, ovenOffTime: other.ovenOffTime, ovenTemperatureCelsius: other.ovenTemperatureCelsius, checkedForConstantWeight: other.checkedForConstantWeight, constantWeightDuration: other.constantWeightDuration, numberOfWeighBacks: other.numberOfWeighBacks, resultsWaitTimeDays: other.resultsWaitTimeDays, transparencyID: other.transparencyID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+        self.init(id: id, moistureDeterminationCompanyID: other.moistureDeterminationCompanyID, siteID: other.siteID, locationDTO: other.locationDTO, lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms, ovenOnTime: other.ovenOnTime, ovenOffTime: other.ovenOffTime, ovenTemperatureCelsius: other.ovenTemperatureCelsius, checkedForConstantWeight: other.checkedForConstantWeight, constantWeightDuration: other.constantWeightDuration, numberOfWeighBacks: other.numberOfWeighBacks, resultsWaitTimeDays: other.resultsWaitTimeDays, transparencyID: other.transparencyID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
     }
 
     public enum CodingKeys: String, CodingKey {
         case id
         case moistureDeterminationCompanyID
         case siteID
-        case location
+        case locationDTO = "location"
         case lotSampleTrayWeightKilograms
         case ovenOnTime
         case ovenOffTime

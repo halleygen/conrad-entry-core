@@ -8,7 +8,7 @@ import Foundation
 public protocol MoistureDeterminationProtocol {
     var moistureDeterminationCompanyID: Int { get }
     var siteID: Int { get }
-    var location: LocationDTO { get }
+    var locationDTO: LocationDTO { get }
     var lotSampleTrayWeightKilograms: Double { get }
     var ovenOnTime: Date { get }
     var ovenOffTime: Date { get }
