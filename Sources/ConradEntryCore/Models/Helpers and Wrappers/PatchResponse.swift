@@ -5,10 +5,12 @@
 
 import Foundation
 
-public enum PatchResponse<Item: Codable>: Codable {
-    case success(lastModified: Date)
-    case conflict(Item)
+public enum PatchResponse<Item: VersionedResource> {
+    case success(version: Item.Version)
+    case conflict(item: Item)
 }
 
-extension PatchResponse: Equatable where Item: Equatable {}
-extension PatchResponse: Hashable where Item: Hashable {}
+extension PatchResponse: Equatable where Item: Equatable, Item.Version: Equatable {}
+extension PatchResponse: Hashable where Item: Hashable, Item.Version: Hashable {}
+extension PatchResponse: Encodable where Item: Encodable, Item.Version: Encodable {}
+extension PatchResponse: Decodable where Item: Decodable, Item.Version: Decodable {}
