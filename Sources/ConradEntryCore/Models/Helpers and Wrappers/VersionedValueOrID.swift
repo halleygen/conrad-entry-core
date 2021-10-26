@@ -31,6 +31,13 @@ public enum VersionedValueOrID<Value: Identifiable & VersionedResource>: Identif
         case let .value(value): return value.version
         }
     }
+
+    public var value: Value? {
+        switch self {
+        case .id: return nil
+        case .value(let value): return value
+        }
+    }
 }
 
 extension VersionedValueOrID: Equatable where Value: Equatable {}

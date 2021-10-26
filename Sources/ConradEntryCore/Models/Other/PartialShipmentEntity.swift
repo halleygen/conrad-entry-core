@@ -16,7 +16,7 @@ public enum AnyShipmentChildMutationRequest: Codable {
     case samplePreparation(request: MutateSamplePreparationRequest)
 }
 
-public enum PartialShipmentEntity: Codable, VersionedResource {
+public enum PartialShipmentEntity: Codable, Identifiable, VersionedResource {
     public typealias CodingKeys = Key
 
     case details(ShipmentDetailsDTO)
@@ -28,6 +28,29 @@ public enum PartialShipmentEntity: Codable, VersionedResource {
     case sampleReduction(SampleReductionDTO)
     case moistureDetermination(MoistureDeterminationDTO)
     case samplePreparation(SamplePreparationDTO)
+    
+    public var id: UUID {
+        switch self {
+        case .details(let shipmentDetailsDTO):
+            return shipmentDetailsDTO.id
+        case .billOfLading(let billOfLadingDTO):
+            return billOfLadingDTO.id
+        case .discharge(let dischargeDTO):
+            return dischargeDTO.id
+        case .settlementWeight(let dischargeWeightDTO):
+            return dischargeWeightDTO.id
+        case .referenceWeight(let dischargeWeightDTO):
+            return dischargeWeightDTO.id
+        case .sampleCollection(let sampleCollectionDTO):
+            return sampleCollectionDTO.id
+        case .sampleReduction(let sampleReductionDTO):
+            return sampleReductionDTO.id
+        case .moistureDetermination(let moistureDeterminationDTO):
+            return moistureDeterminationDTO.id
+        case .samplePreparation(let samplePreparationDTO):
+            return samplePreparationDTO.id
+        }
+    }
 
     public var key: Key {
         switch self {
