@@ -15,6 +15,13 @@ public enum ValueOrID<Value: Identifiable>: Identifiable {
         case let .value(value): return value.id
         }
     }
+
+    public var value: Value? {
+        switch self {
+        case .id: return nil
+        case let .value(value): return value
+        }
+    }
 }
 
 extension ValueOrID: Equatable where Value: Equatable {}
