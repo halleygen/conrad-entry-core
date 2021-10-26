@@ -11,7 +11,7 @@ public struct SampleReductionDTO: SampleReductionProtocol, Codable, Identifiable
     public let location: LocationDTO
     public let siteID: Int
     public let laboratoryID: Int?
-    public let pointID: Int
+    public let reductionPointID: Int
     public let startTime: Date
     public let finishTime: Date
     public let wasScreened: Bool
@@ -25,13 +25,13 @@ public struct SampleReductionDTO: SampleReductionProtocol, Codable, Identifiable
 
     public var version: Date { updatedAt }
 
-    public init(id: ID, samplingCompanyID: Int, siteID: Int, laboratoryID: Int?, location: LocationDTO, pointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String], createdAt: Date, updatedAt: Date) {
+    public init(id: ID, samplingCompanyID: Int, siteID: Int, laboratoryID: Int?, location: LocationDTO, reductionPointID: Int, startTime: Date, finishTime: Date, wasScreened: Bool, screenApertureMillimetres: Double?, wasConedAndQuartered: Bool, methodID: Int, gridSizeID: Int?, comments: [String], createdAt: Date, updatedAt: Date) {
         self.id = id
         self.samplingCompanyID = samplingCompanyID
         self.siteID = siteID
         self.laboratoryID = laboratoryID
         self.location = location
-        self.pointID = pointID
+        self.reductionPointID = reductionPointID
         self.startTime = startTime
         self.finishTime = finishTime
         self.wasScreened = wasScreened
@@ -45,7 +45,7 @@ public struct SampleReductionDTO: SampleReductionProtocol, Codable, Identifiable
     }
 
     public init(_ other: SampleReductionProtocol, id: ID, createdAt: Date, updatedAt: Date) {
-        self.init(id: id, samplingCompanyID: other.samplingCompanyID, siteID: other.siteID, laboratoryID: other.laboratoryID, location: other.location, pointID: other.pointID, startTime: other.startTime, finishTime: other.finishTime, wasScreened: other.wasScreened, screenApertureMillimetres: other.screenApertureMillimetres, wasConedAndQuartered: other.wasConedAndQuartered, methodID: other.methodID, gridSizeID: other.gridSizeID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+        self.init(id: id, samplingCompanyID: other.samplingCompanyID, siteID: other.siteID, laboratoryID: other.laboratoryID, location: other.location, reductionPointID: other.reductionPointID, startTime: other.startTime, finishTime: other.finishTime, wasScreened: other.wasScreened, screenApertureMillimetres: other.screenApertureMillimetres, wasConedAndQuartered: other.wasConedAndQuartered, methodID: other.methodID, gridSizeID: other.gridSizeID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -54,7 +54,7 @@ public struct SampleReductionDTO: SampleReductionProtocol, Codable, Identifiable
         case siteID
         case laboratoryID
         case location
-        case pointID
+        case reductionPointID
         case startTime
         case finishTime
         case wasScreened

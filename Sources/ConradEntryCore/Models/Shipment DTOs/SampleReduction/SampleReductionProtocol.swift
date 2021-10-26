@@ -10,7 +10,7 @@ public protocol SampleReductionProtocol {
     var location: LocationDTO { get }
     var siteID: Int { get }
     var laboratoryID: Int? { get }
-    var pointID: Int { get }
+    var reductionPointID: Int { get }
     var startTime: Date { get }
     var finishTime: Date { get }
     var wasScreened: Bool { get }
