@@ -9,10 +9,6 @@ public enum DischargeWeightKind: String, CustomStringConvertible, Codable, CaseI
     case settlement, reference
 
     public var description: String {
-        if #available(iOS 15, macOS 12, *) {
-            return String(localized: "discharge-weight.kind.\(rawValue)", bundle: .module)
-        } else {
-            return NSLocalizedString("discharge-weight.kind.\(rawValue)", bundle: .module, comment: "")
-        }
+        return NSLocalizedString("discharge-weight.kind.\(rawValue)", bundle: .module, comment: "")
     }
 }
