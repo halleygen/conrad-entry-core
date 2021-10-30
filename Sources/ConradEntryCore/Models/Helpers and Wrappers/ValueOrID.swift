@@ -9,6 +9,10 @@ public enum ValueOrID<Value: Identifiable>: Identifiable {
     case id(Value.ID)
     case value(Value)
 
+    public init(_ value: Value) {
+        self = .value(value)
+    }
+
     public var id: Value.ID {
         switch self {
         case let .id(id): return id
