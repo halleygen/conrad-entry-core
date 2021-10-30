@@ -3,24 +3,26 @@
 // Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
-import Foundation
-
-public typealias CreateResponseFor<Item: Identifiable> = CreateResponse<Item.ID, Item>
-
-public enum CreateResponse<ID, Item> {
-    case success(id: ID, updatedAt: Date)
+public enum CreateResponse<Item: VersionedResource & Identifiable>: VersionedResource, Identifiable {
+    case success(id: Item.ID, version: Item.Version)
     case alreadyExists(existing: Item)
-}
-
-extension CreateResponse: Encodable where Item: Encodable, ID: Encodable {}
-extension CreateResponse: Decodable where Item: Decodable, ID: Decodable {}
-extension CreateResponse: Equatable where Item: Equatable, ID: Equatable {}
-extension CreateResponse: Hashable where Item: Hashable, ID: Hashable {}
-extension CreateResponse: Identifiable where Item: Identifiable, Item.ID == ID {
-    public var id: ID {
+    
+    public var version: Item.Version {
         switch self {
-        case let .success(id, _): return id
-        case let .alreadyExists(existing): return existing.id
+        case .success(_, let version): return version
+        case .alreadyExists(let existing): return existing.version
+        }
+    }
+    
+    public var id: Item.ID {
+        switch self {
+        case .success(let id, _): return id
+        case .alreadyExists(let existing): return existing.id
         }
     }
 }
+
+extension CreateResponse: Encodable where Item: Encodable, ID: Encodable, Version: Encodable {}
+extension CreateResponse: Decodable where Item: Decodable, ID: Decodable, Version: Decodable {}
+extension CreateResponse: Equatable where Item: Equatable, ID: Equatable, Version: Equatable {}
+extension CreateResponse: Hashable where Item: Hashable, ID: Hashable, Version: Hashable {}
