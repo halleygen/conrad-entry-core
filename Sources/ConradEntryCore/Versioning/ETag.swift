@@ -12,8 +12,12 @@ public enum ETag: Hashable {
 }
 
 public extension ETag {
-    init<T: ETagConvertible>(_ value: T) {
-        self = .strongValidator(value.eTagValue)
+    static func fromValue<T: ETagConvertible>(_ value: T) -> Self {
+        .strongValidator(value.eTagValue)
+    }
+
+    static func fromResource<T: VersionedResource>(_ resource: T) -> Self {
+        .strongValidator(resource.version.eTagValue)
     }
 }
 
