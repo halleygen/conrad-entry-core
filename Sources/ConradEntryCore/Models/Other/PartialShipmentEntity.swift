@@ -28,26 +28,26 @@ public enum PartialShipmentEntity: Codable, Identifiable, VersionedResource {
     case sampleReduction(SampleReductionDTO)
     case moistureDetermination(MoistureDeterminationDTO)
     case samplePreparation(SamplePreparationDTO)
-    
+
     public var id: UUID {
         switch self {
-        case .details(let shipmentDetailsDTO):
+        case let .details(shipmentDetailsDTO):
             return shipmentDetailsDTO.id
-        case .billOfLading(let billOfLadingDTO):
+        case let .billOfLading(billOfLadingDTO):
             return billOfLadingDTO.id
-        case .discharge(let dischargeDTO):
+        case let .discharge(dischargeDTO):
             return dischargeDTO.id
-        case .settlementWeight(let dischargeWeightDTO):
+        case let .settlementWeight(dischargeWeightDTO):
             return dischargeWeightDTO.id
-        case .referenceWeight(let dischargeWeightDTO):
+        case let .referenceWeight(dischargeWeightDTO):
             return dischargeWeightDTO.id
-        case .sampleCollection(let sampleCollectionDTO):
+        case let .sampleCollection(sampleCollectionDTO):
             return sampleCollectionDTO.id
-        case .sampleReduction(let sampleReductionDTO):
+        case let .sampleReduction(sampleReductionDTO):
             return sampleReductionDTO.id
-        case .moistureDetermination(let moistureDeterminationDTO):
+        case let .moistureDetermination(moistureDeterminationDTO):
             return moistureDeterminationDTO.id
-        case .samplePreparation(let samplePreparationDTO):
+        case let .samplePreparation(samplePreparationDTO):
             return samplePreparationDTO.id
         }
     }

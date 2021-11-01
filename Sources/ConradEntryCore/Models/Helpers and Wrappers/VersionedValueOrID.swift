@@ -35,7 +35,7 @@ public enum VersionedValueOrID<Value: Identifiable & VersionedResource>: Identif
     public var value: Value? {
         switch self {
         case .id: return nil
-        case .value(let value): return value
+        case let .value(value): return value
         }
     }
 }

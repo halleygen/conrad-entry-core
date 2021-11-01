@@ -6,18 +6,18 @@
 public enum CreateResponse<Item: VersionedResource & Identifiable>: VersionedResource, Identifiable {
     case success(id: Item.ID, version: Item.Version)
     case alreadyExists(existing: Item)
-    
+
     public var version: Item.Version {
         switch self {
-        case .success(_, let version): return version
-        case .alreadyExists(let existing): return existing.version
+        case let .success(_, version): return version
+        case let .alreadyExists(existing): return existing.version
         }
     }
-    
+
     public var id: Item.ID {
         switch self {
-        case .success(let id, _): return id
-        case .alreadyExists(let existing): return existing.id
+        case let .success(id, _): return id
+        case let .alreadyExists(existing): return existing.id
         }
     }
 }

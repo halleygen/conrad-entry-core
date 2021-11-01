@@ -1,8 +1,6 @@
 //
-//  File.swift
-//  
-//
-//  Created by Jesse Halley on 1/11/21.
+// ConradEntryCore
+// Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
 import Foundation
@@ -26,7 +24,7 @@ extension ETag: LosslessStringConvertible {
                 self = .catchAll
                 return
             }
-            
+
             return nil
         }
 
@@ -34,24 +32,24 @@ extension ETag: LosslessStringConvertible {
 
         if description.hasPrefix("W/") {
             guard let valueStartIndex = description.index(description.startIndex, offsetBy: 3, limitedBy: valueEndIndex) else { return nil }
-            let value = String(description[valueStartIndex..<valueEndIndex])
+            let value = String(description[valueStartIndex ..< valueEndIndex])
             guard !value.isEmpty else { return nil }
             self = .weakValidator(value)
         } else if description.hasPrefix("\"") {
             guard let valueStartIndex = description.index(description.startIndex, offsetBy: 1, limitedBy: valueEndIndex) else { return nil }
-            let value = String(description[valueStartIndex..<valueEndIndex])
+            let value = String(description[valueStartIndex ..< valueEndIndex])
             guard !value.isEmpty else { return nil }
             self = .strongValidator(value)
         } else {
             return nil
         }
     }
-    
+
     public var description: String {
         switch self {
-        case .strongValidator(let value):
+        case let .strongValidator(value):
             return #""\#(value)""#
-        case .weakValidator(let value):
+        case let .weakValidator(value):
             return #"W/"\#(value)""#
         case .catchAll:
             return "*"
