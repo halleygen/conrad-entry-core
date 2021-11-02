@@ -12,7 +12,7 @@
 public protocol PartialShipmentKey {
     static var id: String { get }
     associatedtype MutationRequest: Codable
-    associatedtype ResponseDTO: Codable
+    associatedtype ResponseDTO: Codable, Identifiable, VersionedResource where ResponseDTO.ID: Codable, ResponseDTO.Version: Codable
 }
 
 public extension PartialShipmentKey {
