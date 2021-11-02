@@ -15,12 +15,6 @@ public protocol PartialShipmentKey {
     associatedtype ResponseDTO: Codable, Identifiable, VersionedResource where ResponseDTO.ID: Codable, ResponseDTO.Version: Codable
 }
 
-public extension PartialShipmentKey {
-    static func ~= (pattern: Self.Type, value: String) -> Bool {
-        pattern.id == value
-    }
-}
-
 // MARK: - Keys
 
 public enum ShipmentDetailsKey: PartialShipmentKey {
