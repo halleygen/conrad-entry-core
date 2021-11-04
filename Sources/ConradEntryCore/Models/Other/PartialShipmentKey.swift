@@ -5,14 +5,11 @@
 
 // MARK: - PartialShipmentKey
 
-// public protocol _PartialShipmentKey {
-//    static var id: String { get }
-// }
-
 public protocol PartialShipmentKey {
-    static var id: String { get }
     associatedtype MutationRequest: Codable
     associatedtype ResponseDTO: Codable, Identifiable, VersionedResource where ResponseDTO.ID: Codable, ResponseDTO.Version: Codable
+    static var id: String { get }
+    init()
 }
 
 public extension PartialShipmentKey {
@@ -22,54 +19,63 @@ public extension PartialShipmentKey {
 // MARK: - Keys
 
 public struct ShipmentDetailsKey: PartialShipmentKey {
+    public init() {}
     public static let id = "details"
     public typealias MutationRequest = MutateShipmentDetailsRequest
     public typealias ResponseDTO = ShipmentDetailsDTO
 }
 
 public struct BillOfLadingKey: PartialShipmentKey {
+    public init() {}
     public static let id = "bill-of-lading"
     public typealias MutationRequest = MutateBillOfLadingRequest
     public typealias ResponseDTO = BillOfLadingDTO
 }
 
 public struct DischargeKey: PartialShipmentKey {
+    public init() {}
     public static let id = "discharge"
     public typealias MutationRequest = MutateDischargeRequest
     public typealias ResponseDTO = DischargeDTO
 }
 
 public struct SettlementWeightKey: PartialShipmentKey {
+    public init() {}
     public static let id = "settlement-weight"
     public typealias MutationRequest = MutateDischargeWeightRequest
     public typealias ResponseDTO = DischargeWeightDTO
 }
 
 public struct ReferenceWeightKey: PartialShipmentKey {
+    public init() {}
     public static let id = "reference-weight"
     public typealias MutationRequest = MutateDischargeWeightRequest
     public typealias ResponseDTO = DischargeWeightDTO
 }
 
 public struct SampleCollectionKey: PartialShipmentKey {
+    public init() {}
     public static let id = "sample-collection"
     public typealias MutationRequest = MutateSampleCollectionRequest
     public typealias ResponseDTO = SampleCollectionDTO
 }
 
 public struct SampleReductionKey: PartialShipmentKey {
+    public init() {}
     public static let id = "sample-reduction"
     public typealias MutationRequest = MutateSampleReductionRequest
     public typealias ResponseDTO = SampleReductionDTO
 }
 
 public struct MoistureDeterminationKey: PartialShipmentKey {
+    public init() {}
     public static let id = "moisture-determination"
     public typealias MutationRequest = MutateMoistureDeterminationRequest
     public typealias ResponseDTO = MoistureDeterminationDTO
 }
 
 public struct SamplePreparationKey: PartialShipmentKey {
+    public init() {}
     public static let id = "sample-preparation"
     public typealias MutationRequest = MutateSamplePreparationRequest
     public typealias ResponseDTO = SamplePreparationDTO
