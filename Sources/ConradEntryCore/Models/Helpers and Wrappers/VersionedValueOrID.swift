@@ -3,44 +3,37 @@
 // Copyright © 2021 Jesse Halley. All rights reserved.
 //
 
-public enum VersionedValueOrID<Value: Identifiable & VersionedResource>: Identifiable, VersionedResource {
-    public typealias ID = Value.ID
-    public typealias Version = Value.Version
+public enum VersionedValueOrID<Item: Identifiable & VersionedResource>: Identifiable, VersionedResource {
+    public typealias ID = Item.ID
+    public typealias Version = Item.Version
 
     case id(id: ID, version: Version)
-    case value(value: Value)
-
-    public init(_ value: Value) {
-        self = .value(value: value)
-    }
-
-    public init(_ id: ID, version: Version) {
-        self = .id(id: id, version: version)
-    }
+    case item(item: Item)
 
     public var id: ID {
         switch self {
         case let .id(id, _): return id
-        case let .value(value): return value.id
+        case let .item(item): return item.id
         }
     }
 
     public var version: Version {
         switch self {
         case let .id(_, version): return version
-        case let .value(value): return value.version
+        case let .item(item): return item.version
         }
     }
 
-    public var value: Value? {
+    public var item: Item? {
         switch self {
         case .id: return nil
-        case let .value(value): return value
+        case let .item(item): return item
         }
     }
 }
 
-extension VersionedValueOrID: Equatable where Value: Equatable {}
-extension VersionedValueOrID: Hashable where Value: Hashable {}
-extension VersionedValueOrID: Encodable where Value: Encodable, Value.ID: Encodable, Value.Version: Encodable {}
-extension VersionedValueOrID: Decodable where Value: Decodable, Value.ID: Decodable, Value.Version: Decodable {}
+extension VersionedValueOrID: Equatable where Item: Equatable {}
+extension VersionedValueOrID: Hashable where Item: Hashable {}
+extension VersionedValueOrID: Encodable where Item: Encodable, Item.ID: Encodable, Item.Version: Encodable {}
+extension VersionedValueOrID: Decodable where Item: Decodable, Item.ID: Decodable, Item.Version: Decodable {}
+extension VersionedValueOrID: APIResponse where Item: APIResponseItem {}
