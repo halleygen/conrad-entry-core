@@ -5,6 +5,7 @@
 
 import Foundation
 
+@available(*, deprecated)
 public enum AnyShipmentChildMutationRequest: Codable {
     case billOfLading(request: MutateBillOfLadingRequest)
     case discharge(request: MutateDischargeRequest)
@@ -16,6 +17,7 @@ public enum AnyShipmentChildMutationRequest: Codable {
     case samplePreparation(request: MutateSamplePreparationRequest)
 }
 
+@available(*, deprecated)
 public enum PartialShipmentEntity: Codable, Identifiable, VersionedResource {
     public typealias CodingKeys = Key
 
