@@ -22,12 +22,6 @@ public enum CreateResponse<Item: VersionedResource & Identifiable>: VersionedRes
     }
 }
 
-extension CreateResponse: Encodable where Item: Encodable, ID: Encodable, Version: Encodable {}
-extension CreateResponse: Decodable where Item: Decodable, ID: Decodable, Version: Decodable {}
 extension CreateResponse: Equatable where Item: Equatable, ID: Equatable, Version: Equatable {}
 extension CreateResponse: Hashable where Item: Hashable, ID: Hashable, Version: Hashable {}
-
-extension CreateResponse: APIResponse where Item: APIResponseItem {
-    public static func id(id: Item.ID, version: Item.Version) -> CreateResponse<Item> { .created(id: id, version: version) }
-    public static func item(item: Item) -> CreateResponse<Item> { .alreadyExists(existing: item) }
-}
+extension CreateResponse: APIResponse where Item: APIResponseItem {}

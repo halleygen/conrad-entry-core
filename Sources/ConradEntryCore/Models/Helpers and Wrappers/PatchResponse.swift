@@ -24,10 +24,4 @@ public enum PatchResponse<Item: VersionedResource & Identifiable>: Identifiable,
 
 extension PatchResponse: Equatable where Item: Equatable, Item.Version: Equatable {}
 extension PatchResponse: Hashable where Item: Hashable, Item.Version: Hashable {}
-extension PatchResponse: Encodable where Item: Encodable, Item.ID: Encodable, Item.Version: Encodable {}
-extension PatchResponse: Decodable where Item: Decodable, Item.ID: Decodable, Item.Version: Decodable {}
-
-extension PatchResponse: APIResponse where Item: APIResponseItem {
-    public static func id(id: Item.ID, version: Item.Version) -> PatchResponse<Item> { .patched(id: id, version: version) }
-    public static func item(item: Item) -> PatchResponse<Item> { .conflict(item: item) }
-}
+extension PatchResponse: APIResponse where Item: APIResponseItem {}
