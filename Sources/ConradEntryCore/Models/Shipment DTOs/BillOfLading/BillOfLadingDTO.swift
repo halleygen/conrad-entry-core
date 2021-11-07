@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct BillOfLadingDTO: BillOfLadingProtocol, Codable, Identifiable, VersionedResource {
+public struct BillOfLadingDTO: BillOfLadingProtocol, APIResponseItem {
     public let id: UUID
     public let loadPortID: Int
     public let vesselHolds: Set<Int>

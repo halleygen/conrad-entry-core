@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MoistureDeterminationDTO: MoistureDeterminationProtocol, Codable, Identifiable, VersionedResource {
+public struct MoistureDeterminationDTO: MoistureDeterminationProtocol, APIResponseItem {
     public let id: UUID
     public let moistureDeterminationCompanyID: Int
     public let siteID: Int

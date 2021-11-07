@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct DischargeDTO: DischargeProtocol, Codable, Identifiable, VersionedResource {
+public struct DischargeDTO: DischargeProtocol, APIResponseItem {
     public let id: UUID
     public let berthName: String
     public let berthLocation: LocationDTO

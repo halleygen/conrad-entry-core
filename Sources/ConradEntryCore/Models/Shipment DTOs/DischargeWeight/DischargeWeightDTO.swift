@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct DischargeWeightDTO: DischargeWeightProtocol, Codable, Identifiable, VersionedResource {
+public struct DischargeWeightDTO: DischargeWeightProtocol, APIResponseItem {
     public let id: UUID
     public let kind: DischargeWeightKind
     public let methodID: Int

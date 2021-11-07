@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ShipmentDTO: ShipmentProtocol, Codable, Identifiable, VersionedResource {
+public struct ShipmentDTO: ShipmentProtocol, APIResponseItem {
     public let id: UUID
     public let clientReference: String
     public let shipmentDate: Date

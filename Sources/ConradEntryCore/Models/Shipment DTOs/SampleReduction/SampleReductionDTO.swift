@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SampleReductionDTO: SampleReductionProtocol, Codable, Identifiable, VersionedResource {
+public struct SampleReductionDTO: SampleReductionProtocol, APIResponseItem {
     public let id: UUID
     public let samplingCompanyID: Int
     public let location: LocationDTO

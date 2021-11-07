@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SamplePreparationDTO: SamplePreparationProtocol, Codable, Identifiable, VersionedResource {
+public struct SamplePreparationDTO: SamplePreparationProtocol, APIResponseItem {
     public let id: UUID
     public let preparationCompanyID: Int
     public let siteID: Int
