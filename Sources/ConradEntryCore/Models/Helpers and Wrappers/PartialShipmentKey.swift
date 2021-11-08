@@ -7,7 +7,7 @@
 
 public protocol PartialShipmentKey {
     associatedtype MutationRequest: Codable
-    associatedtype ResponseDTO: Codable, Identifiable, VersionedResource where ResponseDTO.ID: Codable, ResponseDTO.Version: Codable
+    associatedtype ResponseDTO: APIResponseItem
     static var id: String { get }
     init()
 }
