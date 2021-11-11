@@ -8,7 +8,7 @@ import Foundation
 public struct ShipmentDetailsDTO: ShipmentProtocol, APIResponseItem {
     public let id: UUID
     public let clientReference: String
-    public let shipmentDate: Date
+    public let logDate: Date
     public let norTime: Date
     public let vesselName: String
     public let clientID: Int
@@ -29,10 +29,10 @@ public struct ShipmentDetailsDTO: ShipmentProtocol, APIResponseItem {
 
     public var version: Date { updatedAt }
 
-    public init(id: UUID, clientReference: String, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, agentID: Int?, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyReceiverID: Int?, inspectionCompanySellerID: Int?, inspectionCompanySecondAgentID: Int?, conradTeamSize: Int, proceduralExceptions: [String], samplingProcedure: [String], comments: [String], createdAt: Date, updatedAt: Date) {
+    public init(id: UUID, clientReference: String, logDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, agentID: Int?, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyReceiverID: Int?, inspectionCompanySellerID: Int?, inspectionCompanySecondAgentID: Int?, conradTeamSize: Int, proceduralExceptions: [String], samplingProcedure: [String], comments: [String], createdAt: Date, updatedAt: Date) {
         self.id = id
         self.clientReference = clientReference
-        self.shipmentDate = shipmentDate
+        self.logDate = logDate
         self.norTime = norTime
         self.vesselName = vesselName
         self.clientID = clientID
@@ -53,13 +53,13 @@ public struct ShipmentDetailsDTO: ShipmentProtocol, APIResponseItem {
     }
 
     public init(_ other: ShipmentProtocol, id: UUID, createdAt: Date, updatedAt: Date) {
-        self.init(id: id, clientReference: other.clientReference, shipmentDate: other.shipmentDate, norTime: other.norTime, vesselName: other.vesselName, clientID: other.clientID, commodityID: other.commodityID, agentID: other.agentID, traderID: other.traderID, smelterID: other.smelterID, dischargePortID: other.dischargePortID, inspectionCompanyReceiverID: other.inspectionCompanyReceiverID, inspectionCompanySellerID: other.inspectionCompanySellerID, inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID, conradTeamSize: other.conradTeamSize, proceduralExceptions: other.proceduralExceptions, samplingProcedure: other.samplingProcedure, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+        self.init(id: id, clientReference: other.clientReference, logDate: other.logDate, norTime: other.norTime, vesselName: other.vesselName, clientID: other.clientID, commodityID: other.commodityID, agentID: other.agentID, traderID: other.traderID, smelterID: other.smelterID, dischargePortID: other.dischargePortID, inspectionCompanyReceiverID: other.inspectionCompanyReceiverID, inspectionCompanySellerID: other.inspectionCompanySellerID, inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID, conradTeamSize: other.conradTeamSize, proceduralExceptions: other.proceduralExceptions, samplingProcedure: other.samplingProcedure, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
     }
 
     public enum CodingKeys: String, CodingKey {
         case id
         case clientReference
-        case shipmentDate
+        case logDate
         case norTime
         case vesselName
         case clientID

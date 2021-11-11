@@ -7,7 +7,7 @@ import Foundation
 
 public protocol ShipmentProtocol {
     var clientReference: String { get }
-    var shipmentDate: Date { get }
+    var logDate: Date { get }
     var norTime: Date { get }
     var vesselName: String { get }
     var clientID: Int { get }

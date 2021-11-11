@@ -8,7 +8,7 @@ import Foundation
 public struct MutateShipmentDetailsRequest: ShipmentProtocol, Codable, Identifiable {
     public var id: UUID
     public var clientReference: String
-    public var shipmentDate: Date
+    public var logDate: Date
     public var norTime: Date
     public var vesselName: String
     public var clientID: Int
@@ -25,10 +25,10 @@ public struct MutateShipmentDetailsRequest: ShipmentProtocol, Codable, Identifia
     public var samplingProcedure: [String]
     public var comments: [String]
 
-    public init(id: ID, clientReference: String, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, agentID: Int?, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyReceiverID: Int?, inspectionCompanySellerID: Int?, inspectionCompanySecondAgentID: Int?, conradTeamSize: Int, proceduralExceptions: [String], samplingProcedure: [String], comments: [String]) {
+    public init(id: ID, clientReference: String, logDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, agentID: Int?, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyReceiverID: Int?, inspectionCompanySellerID: Int?, inspectionCompanySecondAgentID: Int?, conradTeamSize: Int, proceduralExceptions: [String], samplingProcedure: [String], comments: [String]) {
         self.id = id
         self.clientReference = clientReference
-        self.shipmentDate = shipmentDate
+        self.logDate = logDate
         self.norTime = norTime
         self.vesselName = vesselName
         self.clientID = clientID
@@ -47,6 +47,6 @@ public struct MutateShipmentDetailsRequest: ShipmentProtocol, Codable, Identifia
     }
 
     public init(_ other: ShipmentProtocol, id: ID) {
-        self.init(id: id, clientReference: other.clientReference, shipmentDate: other.shipmentDate, norTime: other.norTime, vesselName: other.vesselName, clientID: other.clientID, commodityID: other.commodityID, agentID: other.agentID, traderID: other.traderID, smelterID: other.smelterID, dischargePortID: other.dischargePortID, inspectionCompanyReceiverID: other.inspectionCompanyReceiverID, inspectionCompanySellerID: other.inspectionCompanySellerID, inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID, conradTeamSize: other.conradTeamSize, proceduralExceptions: other.proceduralExceptions, samplingProcedure: other.samplingProcedure, comments: other.comments)
+        self.init(id: id, clientReference: other.clientReference, logDate: other.logDate, norTime: other.norTime, vesselName: other.vesselName, clientID: other.clientID, commodityID: other.commodityID, agentID: other.agentID, traderID: other.traderID, smelterID: other.smelterID, dischargePortID: other.dischargePortID, inspectionCompanyReceiverID: other.inspectionCompanyReceiverID, inspectionCompanySellerID: other.inspectionCompanySellerID, inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID, conradTeamSize: other.conradTeamSize, proceduralExceptions: other.proceduralExceptions, samplingProcedure: other.samplingProcedure, comments: other.comments)
     }
 }

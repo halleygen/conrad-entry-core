@@ -8,7 +8,7 @@ import Foundation
 public struct ShipmentDTO: ShipmentProtocol, APIResponseItem {
     public let id: UUID
     public let clientReference: String
-    public let shipmentDate: Date
+    public let logDate: Date
     public let norTime: Date
     public let vesselName: String
     public let clientID: Int
@@ -38,10 +38,10 @@ public struct ShipmentDTO: ShipmentProtocol, APIResponseItem {
     public let moistureDetermination: ValueOrID<MoistureDeterminationDTO>?
     public let samplePreparation: ValueOrID<SamplePreparationDTO>?
 
-    public init(id: UUID, clientReference: String, shipmentDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, agentID: Int?, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyReceiverID: Int?, inspectionCompanySellerID: Int?, inspectionCompanySecondAgentID: Int?, conradTeamSize: Int, proceduralExceptions: [String], samplingProcedure: [String], comments: [String], createdAt: Date, updatedAt: Date, billOfLading: ValueOrID<BillOfLadingDTO>?, settlementWeight: ValueOrID<DischargeWeightDTO>?, referenceWeight: ValueOrID<DischargeWeightDTO>?, discharge: ValueOrID<DischargeDTO>?, sampleCollection: ValueOrID<SampleCollectionDTO>?, sampleReduction: ValueOrID<SampleReductionDTO>?, moistureDetermination: ValueOrID<MoistureDeterminationDTO>?, samplePreparation: ValueOrID<SamplePreparationDTO>?) {
+    public init(id: UUID, clientReference: String, logDate: Date, norTime: Date, vesselName: String, clientID: Int, commodityID: Int, agentID: Int?, traderID: Int?, smelterID: Int, dischargePortID: Int, inspectionCompanyReceiverID: Int?, inspectionCompanySellerID: Int?, inspectionCompanySecondAgentID: Int?, conradTeamSize: Int, proceduralExceptions: [String], samplingProcedure: [String], comments: [String], createdAt: Date, updatedAt: Date, billOfLading: ValueOrID<BillOfLadingDTO>?, settlementWeight: ValueOrID<DischargeWeightDTO>?, referenceWeight: ValueOrID<DischargeWeightDTO>?, discharge: ValueOrID<DischargeDTO>?, sampleCollection: ValueOrID<SampleCollectionDTO>?, sampleReduction: ValueOrID<SampleReductionDTO>?, moistureDetermination: ValueOrID<MoistureDeterminationDTO>?, samplePreparation: ValueOrID<SamplePreparationDTO>?) {
         self.id = id
         self.clientReference = clientReference
-        self.shipmentDate = shipmentDate
+        self.logDate = logDate
         self.norTime = norTime
         self.vesselName = vesselName
         self.clientID = clientID
@@ -70,6 +70,6 @@ public struct ShipmentDTO: ShipmentProtocol, APIResponseItem {
     }
 
     public init(_ other: ShipmentProtocol, id: UUID, createdAt: Date, updatedAt: Date, billOfLading: ValueOrID<BillOfLadingDTO>?, settlementWeight: ValueOrID<DischargeWeightDTO>?, referenceWeight: ValueOrID<DischargeWeightDTO>?, discharge: ValueOrID<DischargeDTO>?, sampleCollection: ValueOrID<SampleCollectionDTO>?, sampleReduction: ValueOrID<SampleReductionDTO>?, moistureDetermination: ValueOrID<MoistureDeterminationDTO>?, samplePreparation: ValueOrID<SamplePreparationDTO>?) {
-        self.init(id: id, clientReference: other.clientReference, shipmentDate: other.shipmentDate, norTime: other.norTime, vesselName: other.vesselName, clientID: other.clientID, commodityID: other.commodityID, agentID: other.agentID, traderID: other.traderID, smelterID: other.smelterID, dischargePortID: other.dischargePortID, inspectionCompanyReceiverID: other.inspectionCompanyReceiverID, inspectionCompanySellerID: other.inspectionCompanySellerID, inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID, conradTeamSize: other.conradTeamSize, proceduralExceptions: other.proceduralExceptions, samplingProcedure: other.samplingProcedure, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt, billOfLading: billOfLading, settlementWeight: settlementWeight, referenceWeight: referenceWeight, discharge: discharge, sampleCollection: sampleCollection, sampleReduction: sampleReduction, moistureDetermination: moistureDetermination, samplePreparation: samplePreparation)
+        self.init(id: id, clientReference: other.clientReference, logDate: other.logDate, norTime: other.norTime, vesselName: other.vesselName, clientID: other.clientID, commodityID: other.commodityID, agentID: other.agentID, traderID: other.traderID, smelterID: other.smelterID, dischargePortID: other.dischargePortID, inspectionCompanyReceiverID: other.inspectionCompanyReceiverID, inspectionCompanySellerID: other.inspectionCompanySellerID, inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID, conradTeamSize: other.conradTeamSize, proceduralExceptions: other.proceduralExceptions, samplingProcedure: other.samplingProcedure, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt, billOfLading: billOfLading, settlementWeight: settlementWeight, referenceWeight: referenceWeight, discharge: discharge, sampleCollection: sampleCollection, sampleReduction: sampleReduction, moistureDetermination: moistureDetermination, samplePreparation: samplePreparation)
     }
 }
