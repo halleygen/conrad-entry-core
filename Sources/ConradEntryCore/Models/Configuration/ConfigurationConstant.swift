@@ -1,6 +1,6 @@
 //
 // ConradEntryCore
-// Copyright © 2021 Jesse Halley. All rights reserved.
+// Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
 public protocol ConfigurationConstant: Identifiable, Hashable, DictionaryCodable where ID == Int {
