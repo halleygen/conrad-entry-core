@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct AttachmentUploadResponse: Decodable {
+public struct AttachmentUploadResponse: Codable {
     public let id: UUID
     public let temporaryUploadURL: URL
 
