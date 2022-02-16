@@ -12,7 +12,7 @@ public struct PasswordChangeRequest {
         self.password = password
         self.confirmPassword = confirmPassword
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case password, confirmPassword
     }
