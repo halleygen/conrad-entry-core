@@ -71,7 +71,7 @@ public struct RemoteConfiguration: Codable {
     public var weighingMethods: [WeighingMethod]
     public var maritimePorts: [MaritimePort]
 
-    public enum CodingKeys: String, CodingKey, Codable, CaseIterable {
+    public enum CodingKeys: String, CodingKey, Codable, CaseIterable, LosslessStringConvertible {
         case agents, commodities, smelters, clients, traders
         case dischargeGear = "discharge_gear"
         case dischargeWeatherConditions = "discharge_weather_conditions"
@@ -94,5 +94,9 @@ public struct RemoteConfiguration: Codable {
         case samplingSites = "sampling_sites"
         case sampleCollectionMethods = "sample_collection_methods"
         case samplePreparationStandards = "sample_preparation_standards"
+
+        public init?(_ description: String) {
+            self.init(rawValue: description)
+        }
     }
 }
