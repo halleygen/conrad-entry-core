@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct Signup: Codable, Hashable {
+public struct SignupRequest: Codable, Hashable {
     public var givenName: String
     public var familyName: String
     public var email: String
@@ -26,15 +26,15 @@ public struct Signup: Codable, Hashable {
         self.device = device
     }
 
-    public init(device: Device) {
-        self.init(givenName: "", familyName: "", email: "", password: "", confirmPassword: "", device: device)
-    }
-
     public var isValid: Bool {
         !givenName.isEmpty && !familyName.isEmpty && !email.isEmpty && password.count >= 8 && password == confirmPassword
     }
 
     public var passwordsDoNotMatch: Bool {
         (!password.isEmpty && !confirmPassword.isEmpty) && password != confirmPassword
+    }
+
+    public static func blank(for device: Device) -> Self {
+        Self(givenName: "", familyName: "", email: "", password: "", confirmPassword: "", device: device)
     }
 }
