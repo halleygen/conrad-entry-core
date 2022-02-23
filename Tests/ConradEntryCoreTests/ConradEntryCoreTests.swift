@@ -1,14 +1,14 @@
 //
 // ConradEntryCore
-// Copyright © 2021 Jesse Halley. All rights reserved.
+// Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-@testable import ConradEntryCore
+import ConradEntryCore
 import XCTest
 
 final class ConradEntryCoreTests: XCTestCase {
     func testExample() {
-        print(User.Privilege.allCases.map(String.init(describing:)))
+        print(UserPrivilege.allCases.map(String.init(describing:)))
         print(AttachmentRole.all.map(String.init(describing:)))
     }
 
@@ -29,7 +29,6 @@ final class ConradEntryCoreTests: XCTestCase {
         ]
 
         for (string, expectedResult) in values {
-            print(expectedResult)
             XCTAssertEqual(ETag(string), expectedResult)
 
             if let expectedResult = expectedResult {

@@ -5,17 +5,57 @@
 
 import Foundation
 
-public struct User: Codable, Hashable, Identifiable {
+// MARK: - User
+
+public protocol User: Hashable, Codable, Identifiable where ID == UUID {
+    var id: ID { get }
+    var givenName: String { get }
+    var familyName: String { get }
+    var email: String { get }
+    var privileges: Set<UserPrivilege> { get set }
+    var isLocked: Bool { get set }
+    var creationDate: Date { get }
+    var devices: [Device] { get set }
+}
+
+public extension User {
+    #if os(Linux)
+
+        func fullName() -> String { "\(givenName) \(familyName)" }
+
+    #else
+
+        var nameComponents: PersonNameComponents {
+            var components = PersonNameComponents()
+            components.givenName = givenName
+            components.familyName = familyName
+            return components
+        }
+
+        func fullName() -> String {
+            if #available(iOS 15, macOS 12, *) {
+                return nameComponents.formatted()
+            } else {
+                return PersonNameComponentsFormatter.localizedString(from: nameComponents, style: .default)
+            }
+        }
+
+    #endif
+}
+
+// MARK: - PublicUser
+
+public struct PublicUser: User {
     public let id: UUID
     public let givenName: String
     public let familyName: String
     public let email: String
-    public var privileges: Set<Privilege>
+    public var privileges: Set<UserPrivilege>
     public var isLocked: Bool
     public let creationDate: Date
     public var devices: [Device]
 
-    public init(id: UUID, givenName: String, familyName: String, email: String, privileges: Set<Privilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
+    public init(id: UUID, givenName: String, familyName: String, email: String, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
         self.id = id
         self.givenName = givenName
         self.familyName = familyName
@@ -26,28 +66,64 @@ public struct User: Codable, Hashable, Identifiable {
         self.devices = devices
     }
 
-    public enum CodingKeys: String, CodingKey {
-        case id, givenName, familyName, email, privileges, isLocked, creationDate, devices
+    func authenticate(with token: SessionToken) -> AuthenticatedUser {
+        precondition(id == token.userID)
+        return AuthenticatedUser(id: id, givenName: givenName, familyName: familyName, email: email, sessionToken: token.value, privileges: privileges, isLocked: isLocked, creationDate: creationDate, devices: devices)
+    }
+}
+
+// MARK: - AuthenticatedUser
+
+public struct AuthenticatedUser: User {
+    public let id: UUID
+    public let givenName: String
+    public let familyName: String
+    public let email: String
+    public var sessionToken: String
+    public var privileges: Set<UserPrivilege>
+    public var isLocked: Bool
+    public let creationDate: Date
+    public var devices: [Device]
+
+    public init(id: UUID, givenName: String, familyName: String, email: String, sessionToken: String, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
+        self.id = id
+        self.givenName = givenName
+        self.familyName = familyName
+        self.email = email
+        self.sessionToken = sessionToken
+        self.privileges = privileges
+        self.isLocked = isLocked
+        self.creationDate = creationDate
+        self.devices = devices
     }
 
-    public var nameComponents: PersonNameComponents {
-        var components = PersonNameComponents()
-        components.givenName = givenName
-        components.familyName = familyName
-        return components
+    public init(_ userWithSession: UserWithSessionToken) {
+        self.init(id: userWithSession.id, givenName: userWithSession.givenName, familyName: userWithSession.familyName, email: userWithSession.email, sessionToken: userWithSession.token.value, privileges: userWithSession.privileges, isLocked: userWithSession.isLocked, creationDate: userWithSession.creationDate, devices: userWithSession.devices)
     }
+}
 
-    public func authenticating(with token: SessionToken) -> AuthenticatedUser {
-        AuthenticatedUser(user: self, token: token)
+// MARK: - UserWithSessionToken
+
+public struct UserWithSessionToken: User {
+    public let id: UUID
+    public let givenName: String
+    public let familyName: String
+    public let email: String
+    public var token: SessionToken
+    public var privileges: Set<UserPrivilege>
+    public var isLocked: Bool
+    public let creationDate: Date
+    public var devices: [Device]
+
+    public init(id: UUID, givenName: String, familyName: String, email: String, token: SessionToken, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
+        self.id = id
+        self.givenName = givenName
+        self.familyName = familyName
+        self.email = email
+        self.token = token
+        self.privileges = privileges
+        self.isLocked = isLocked
+        self.creationDate = creationDate
+        self.devices = devices
     }
-
-    #if os(Linux)
-        public func fullName(style: Any = false) -> String {
-            "\(givenName) \(familyName)"
-        }
-    #else
-        public func fullName(style: PersonNameComponentsFormatter.Style = .default) -> String {
-            PersonNameComponentsFormatter.localizedString(from: nameComponents, style: style)
-        }
-    #endif
 }

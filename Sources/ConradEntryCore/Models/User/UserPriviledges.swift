@@ -5,24 +5,15 @@
 
 import Foundation
 
-public extension User {
-    #if os(Linux)
-        enum Privilege: Int, CaseIterable, Codable {
-            case readAllShipments, writeAllShipments, editConfigurationValues, manageUsers, exportData
-        }
-    #else
-        @objc
-        enum Privilege: Int, CaseIterable, Codable {
-            case readAllShipments, writeAllShipments, editConfigurationValues, manageUsers, exportData
-        }
-    #endif
+public enum UserPrivilege: Int, CaseIterable, Codable {
+    case readAllShipments, writeAllShipments, editConfigurationValues, manageUsers, exportData
 }
 
-extension User.Privilege: Identifiable {
-    public var id: User.Privilege { self }
+extension UserPrivilege: Identifiable {
+    public var id: Self { self }
 }
 
-extension User.Privilege: CustomStringConvertible {
+extension UserPrivilege: CustomStringConvertible {
     public var description: String {
         switch self {
         case .readAllShipments: return NSLocalizedString("user.privileges.read-all-shipments", bundle: .module, comment: "")
@@ -34,7 +25,7 @@ extension User.Privilege: CustomStringConvertible {
     }
 }
 
-public extension Set where Element == User.Privilege {
+public extension Set where Element == UserPrivilege {
     static var all: Set<Element> { Set(Element.allCases) }
     static var none: Set<Element> { Set() }
 }
