@@ -66,7 +66,11 @@ public struct PublicUser: User {
         self.devices = devices
     }
 
-    func authenticate(with token: SessionToken) -> AuthenticatedUser {
+    public init<T: User>(_ other: T) {
+        self.init(id: other.id, givenName: other.givenName, familyName: other.familyName, email: other.email, privileges: other.privileges, isLocked: other.isLocked, creationDate: other.creationDate, devices: other.devices)
+    }
+
+    public func authenticate(with token: SessionToken) -> AuthenticatedUser {
         precondition(id == token.userID)
         return AuthenticatedUser(id: id, givenName: givenName, familyName: familyName, email: email, sessionToken: token.value, privileges: privileges, isLocked: isLocked, creationDate: creationDate, devices: devices)
     }
