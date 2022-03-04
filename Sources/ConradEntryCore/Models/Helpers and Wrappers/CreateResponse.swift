@@ -13,6 +13,14 @@ public struct CreateResponse<Item: VersionedResource & Identifiable>: VersionedR
         self.version = version
         self.wasCreated = wasCreated
     }
+
+    public static func alreadyExists(id: Item.ID, version: Item.Version) -> Self {
+        Self(id: id, version: version, wasCreated: false)
+    }
+
+    public static func created(id: Item.ID, version: Item.Version) -> Self {
+        Self(id: id, version: version, wasCreated: true)
+    }
 }
 
 extension CreateResponse: Equatable where ID: Equatable, Version: Equatable {}
