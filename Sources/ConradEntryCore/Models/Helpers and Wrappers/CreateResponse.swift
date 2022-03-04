@@ -23,6 +23,8 @@ public struct CreateResponse<Item: VersionedResource & Identifiable>: VersionedR
     }
 }
 
+extension CreateResponse: Encodable where ID: Encodable, Version: Encodable {}
+extension CreateResponse: Decodable where ID: Decodable, Version: Decodable {}
 extension CreateResponse: Equatable where ID: Equatable, Version: Equatable {}
 extension CreateResponse: Hashable where ID: Hashable, Version: Hashable {}
 extension CreateResponse: APIResponse where Item: APIResponseItem {}
