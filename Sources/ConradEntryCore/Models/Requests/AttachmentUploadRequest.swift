@@ -14,7 +14,6 @@ public struct AttachmentUploadRequest: Codable {
     public let comment: String
 
     public init(role: AttachmentRole, date: Date, ext: String, shipmentID: UUID, md5: String, comment: String) {
-        assert(md5.count == 24 && md5.hasSuffix("=="), "Invalid base64 MD5 hash: \(md5)")
         self.role = role
         self.date = date
         self.ext = ext
