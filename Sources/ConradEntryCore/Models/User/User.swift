@@ -3,6 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
+@preconcurrency
 import Foundation
 
 // MARK: - User
