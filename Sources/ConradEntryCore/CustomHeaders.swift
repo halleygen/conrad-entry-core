@@ -4,6 +4,6 @@
 //
 
 public enum CustomHeader {
-    static let oneTimePassword = "X-ConradPartners-OTP"
-    static let uploadMetadata = "X-ConradPartners-UploadMetadata"
+    public static let oneTimePassword = "X-ConradPartners-OTP"
+    public static let uploadMetadata = "X-ConradPartners-UploadMetadata"
 }
