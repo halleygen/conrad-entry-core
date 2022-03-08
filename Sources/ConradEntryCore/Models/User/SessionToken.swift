@@ -16,4 +16,6 @@ public struct SessionToken: Codable, Hashable {
         self.value = value
         self.expiryDate = expiryDate
     }
+
+    public var isValid: Bool { Date() < expiryDate }
 }
