@@ -23,7 +23,7 @@
             }
         }
 
-        func formatted(style: CNPostalAddressFormatterStyle) -> String { _FormatStyle(style: style).format(self) }
+        func formatted(style: CNPostalAddressFormatterStyle = .mailingAddress) -> String { _FormatStyle(style: style).format(self) }
     }
 
     extension CNPostalAddressFormatterStyle: Codable {}
