@@ -36,17 +36,9 @@ public enum NotificationUserInfoKey {
     public extension NotificationCategory {
         static var allCategories: Set<UNNotificationCategory> {
             let categories = allCases.map { category -> UNNotificationCategory in
-                UNNotificationCategory(identifier: category.rawValue, actions: category.actions, intentIdentifiers: [], options: category.options)
+                UNNotificationCategory(identifier: category.rawValue, actions: category.actions, intentIdentifiers: [], options: [])
             }
             return Set(categories)
-        }
-
-        private var options: UNNotificationCategoryOptions {
-            #if os(iOS)
-                return [.allowAnnouncement]
-            #else
-                return []
-            #endif
         }
 
         private var actions: [UNNotificationAction] {

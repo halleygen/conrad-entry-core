@@ -5,20 +5,17 @@
 
 import Foundation
 
-public struct AttachmentRole: RawRepresentable, Hashable, CustomStringConvertible {
+public struct AttachmentRole: Hashable, CustomStringConvertible {
     public let rawValue: String
 
     private init(_ rawValue: String) {
         self.rawValue = rawValue
     }
 
-    public init?(rawValue: String) {
-        guard let match = Self.all.first(where: { $0.rawValue == rawValue }) else { return nil }
-        self = match
-    }
+    public var description: String { rawValue }
 
-    public var description: String {
-        NSLocalizedString("attachment-role.\(rawValue)", bundle: .module, comment: "")
+    public var localizedDescription: String {
+        String(localized: String.LocalizationValue("attachment-role.\(rawValue)"), bundle: .module, locale: .current)
     }
 
     public var isDocument: Bool { rawValue.hasPrefix("doc-") }
@@ -40,16 +37,16 @@ public extension AttachmentRole {
     static let lotByLotMoistureProfile = AttachmentRole("doc-lot-by-lot-moisture-profile")
     static let stowagePlan = AttachmentRole("doc-stowage-plan")
 
-    static let allDocuments: [AttachmentRole] = [.noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan]
+    static let allDocuments: [AttachmentRole] = all.filter(\.isDocument)
     static let all: [AttachmentRole] = [.discharge, .settlementWeight, .referenceWeight, .sampleCollection, .sampleReduction, .moistureDetermination, .samplePreparation, .noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan]
 }
 
 extension AttachmentRole: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(RawValue.self)
+        let rawValue = try container.decode(String.self)
         guard let match = Self.all.first(where: { $0.rawValue == rawValue }) else {
-            throw DecodingError.valueNotFound(Self.self, .init(codingPath: [], debugDescription: "No AttachmentRole with a raw value of `\(rawValue)` exists."))
+            throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "No AttachmentRole with a raw value of `\(rawValue)` exists."))
         }
         self = match
     }
