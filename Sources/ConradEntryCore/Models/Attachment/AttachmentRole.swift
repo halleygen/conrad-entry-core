@@ -15,7 +15,7 @@ public struct AttachmentRole: Hashable, CustomStringConvertible {
     public var description: String { rawValue }
 
     public var localizedDescription: String {
-        String(localized: String.LocalizationValue("attachment-role.\(rawValue)"), bundle: .module, locale: .current)
+        NSLocalizedString("attachment-role.\(rawValue)", bundle: .module, comment: "")
     }
 
     public var isDocument: Bool { rawValue.hasPrefix("doc-") }
