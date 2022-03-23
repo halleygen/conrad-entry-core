@@ -27,6 +27,10 @@ public struct AttachmentRole: Hashable {
         self.section = section
         self.subsection = subsection
     }
+
+    static func matching(class: Class, section: Section, subsection: Subsection? = nil) -> Self? {
+        allCases.first(where: { $0.class == `class` && $0.section == section && $0.subsection == subsection })
+    }
 }
 
 extension AttachmentRole: Codable {
@@ -52,17 +56,19 @@ extension AttachmentRole: LosslessStringConvertible {
         case 2:
             guard
                 let `class` = Class(rawValue: String(splat[0])),
-                let section = Section(rawValue: String(splat[1]))
+                let section = Section(rawValue: String(splat[1])),
+                let role = AttachmentRole.matching(class: `class`, section: section)
             else { return nil }
-            self.init(class: `class`, section: section)
+            self = role
 
         case 3:
             guard
                 let `class` = Class(rawValue: String(splat[0])),
                 let section = Section(rawValue: String(splat[1])),
-                let subsection = Subsection(rawValue: String(splat[2]))
+                let subsection = Subsection(rawValue: String(splat[2])),
+                let role = AttachmentRole.matching(class: `class`, section: section, subsection: subsection)
             else { return nil }
-            self.init(class: `class`, section: section, subsection: subsection)
+            self = role
 
         default:
             return nil
