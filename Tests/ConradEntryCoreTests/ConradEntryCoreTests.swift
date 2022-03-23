@@ -9,7 +9,7 @@ import XCTest
 final class ConradEntryCoreTests: XCTestCase {
     func testExample() {
         print(UserPrivilege.allCases.map(String.init(describing:)))
-        print(AttachmentRole.all.map(String.init(describing:)))
+        print(AttachmentRole.allCases.map(String.init(_:)))
     }
 
     func testETag() throws {

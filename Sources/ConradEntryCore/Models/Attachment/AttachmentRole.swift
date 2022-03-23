@@ -86,12 +86,12 @@ extension AttachmentRole: LosslessStringConvertible {
 
 public extension AttachmentRole {
     static let dischargePhotos = Self(class: .photo, section: .discharge)
-    static let settlementWeight = Self(class: .photo, section: .settlementWeight)
-    static let referenceWeight = Self(class: .photo, section: .referenceWeight)
-    static let sampleCollection = Self(class: .photo, section: .sampleCollection)
-    static let sampleReduction = Self(class: .photo, section: .sampleReduction)
-    static let moistureDetermination = Self(class: .photo, section: .moistureDetermination)
-    static let samplePreparation = Self(class: .photo, section: .samplePreparation)
+    static let settlementWeightPhotos = Self(class: .photo, section: .settlementWeight)
+    static let referenceWeightPhotos = Self(class: .photo, section: .referenceWeight)
+    static let sampleCollectionPhotos = Self(class: .photo, section: .sampleCollection)
+    static let sampleReductionPhotos = Self(class: .photo, section: .sampleReduction)
+    static let moistureDeterminationPhotos = Self(class: .photo, section: .moistureDetermination)
+    static let samplePreparationPhotos = Self(class: .photo, section: .samplePreparation)
 
     static let noticeOfReadiness = Self(class: .document, section: .details, subsection: .noticeOfReadiness)
     static let vesselPhoto = Self(class: .photo, section: .details, subsection: .vesselPhoto)
@@ -103,6 +103,6 @@ public extension AttachmentRole {
 
 extension AttachmentRole: CaseIterable {
     public static var allCases: [AttachmentRole] {
-        [.discharge, .settlementWeight, .referenceWeight, .sampleCollection, .sampleReduction, .moistureDetermination, .samplePreparation, .noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan]
+        [.dischargePhotos, .settlementWeightPhotos, .referenceWeightPhotos, .sampleCollectionPhotos, .sampleReductionPhotos, .moistureDeterminationPhotos, .samplePreparationPhotos, .noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan]
     }
 }
