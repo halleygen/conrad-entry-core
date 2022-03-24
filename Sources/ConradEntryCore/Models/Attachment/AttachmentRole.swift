@@ -35,6 +35,10 @@ public struct AttachmentRole: Hashable {
         self.requirement = requirement
     }
 
+    public var localizedDescription: String {
+        NSLocalizedString("attachment-role.\(description)", bundle: .module, comment: "")
+    }
+
     static func matching(class: Class, section: Section, subsection: Subsection? = nil, requirement: CountRequirement) -> Self? {
         allCases.first(where: { $0.class == `class` && $0.section == section && $0.subsection == subsection && $0.requirement == requirement })
     }

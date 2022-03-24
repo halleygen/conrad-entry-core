@@ -6,19 +6,19 @@
 "discharge-weight.kind.settlement" = "Settlement Weight";
 "discharge-weight.kind.reference" = "Reference Weight";
 
-"attachment-role.discharge" = "Discharge";
-"attachment-role.settlement-weight" = "Settlement Weight";
-"attachment-role.reference-weight" = "Reference Weight";
-"attachment-role.sample-collection" = "Sampling";
-"attachment-role.sample-reduction" = "Sample Reduction";
-"attachment-role.moisture-determination" = "Moisture Determination";
-"attachment-role.sample-preparation" = "Sample Preparation";
-"attachment-role.doc-notice-of-readiness" = "Notice of Readiness";
-"attachment-role.doc-vessel-photo" = "Vessel";
-"attachment-role.doc-statement-of-facts" = "Statement of Facts";
-"attachment-role.doc-moisture-certificate" = "Moisture Certificate";
-"attachment-role.doc-lot-by-lot-moisture-profile" = "Lot By Lot Moisture Profile";
-"attachment-role.doc-stowage-plan" = "Stowage Plan";
+"attachment-role.photo.discharge.*" = "Discharge Photos";
+"attachment-role.photo.settlementWeight.*" = "Settlement Weight Photos";
+"attachment-role.photo.referenceWeight.*" = "Reference Weight Photos";
+"attachment-role.photo.sampleCollection.*" = "Sample Collection Photos";
+"attachment-role.photo.sampleReduction.*" = "Sample Reduction Photos";
+"attachment-role.photo.moistureDetermination.*" = "Moisture Determination Photos";
+"attachment-role.photo.samplePreparation.*" = "Sample Preparation Photos";
+"attachment-role.photo.details.vesselPhoto.1" = "Vessel Photos";
+"attachment-role.doc.details.noticeOfReadiness.1" = "Notice of Readiness";
+"attachment-role.doc.details.statementOfFacts.1" = "Statement of Facts";
+"attachment-role.doc.moistureDetermination.moistureCertificate.1" = "Moisture Certificate";
+"attachment-role.doc.moistureDetermination.lotByLotMoistureProfile.1" = "Lot By Lot Moisture Profile";
+"attachment-role.doc.details.stowagePlan.1" = "Stowage Plan";
 
 "notification-action.APPROVE_SIGNUP_ACTION" = "Approve";
 "notification-action.DENY_SIGNUP_ACTION" = "Deny";
