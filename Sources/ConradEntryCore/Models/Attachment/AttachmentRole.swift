@@ -97,6 +97,20 @@ extension AttachmentRole: LosslessStringConvertible {
     }
 }
 
+extension AttachmentRole: Comparable {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        if lhs.class == rhs.class {
+            if lhs.section == rhs.section {
+                return lhs.localizedDescription < rhs.localizedDescription
+            } else {
+                return lhs.section.rawValue < lhs.section.rawValue
+            }
+        } else {
+            return lhs.class.rawValue < rhs.class.rawValue
+        }
+    }
+}
+
 public extension AttachmentRole {
     static let dischargePhotos = Self(class: .photo, section: .discharge, requirement: .zeroOrMore)
     static let settlementWeightPhotos = Self(class: .photo, section: .settlementWeight, requirement: .zeroOrMore)
