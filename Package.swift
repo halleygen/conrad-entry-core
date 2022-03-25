@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "ConradEntryCore",
+    name: "conradentry-core",
     defaultLocalization: "en",
     platforms: [.iOS(.v15), .macOS(.v12)],
     products: [
