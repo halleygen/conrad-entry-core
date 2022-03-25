@@ -3,7 +3,6 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-@preconcurrency
 import Foundation
 
 // MARK: - User
@@ -13,6 +12,7 @@ public protocol User: Hashable, Codable, Identifiable where ID == UUID {
     var givenName: String { get }
     var familyName: String { get }
     var email: String { get }
+    var dateOfLastPasswordChange: Date? { get }
     var privileges: Set<UserPrivilege> { get set }
     var isLocked: Bool { get set }
     var creationDate: Date { get }
@@ -51,16 +51,18 @@ public struct PublicUser: User {
     public let givenName: String
     public let familyName: String
     public let email: String
+    public let dateOfLastPasswordChange: Date?
     public var privileges: Set<UserPrivilege>
     public var isLocked: Bool
     public let creationDate: Date
     public var devices: [Device]
 
-    public init(id: UUID, givenName: String, familyName: String, email: String, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
+    public init(id: UUID, givenName: String, familyName: String, email: String, dateOfLastPasswordChange: Date?, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
         self.id = id
         self.givenName = givenName
         self.familyName = familyName
         self.email = email
+        self.dateOfLastPasswordChange = dateOfLastPasswordChange
         self.privileges = privileges
         self.isLocked = isLocked
         self.creationDate = creationDate
@@ -68,12 +70,12 @@ public struct PublicUser: User {
     }
 
     public init<T: User>(_ other: T) {
-        self.init(id: other.id, givenName: other.givenName, familyName: other.familyName, email: other.email, privileges: other.privileges, isLocked: other.isLocked, creationDate: other.creationDate, devices: other.devices)
+        self.init(id: other.id, givenName: other.givenName, familyName: other.familyName, email: other.email, dateOfLastPasswordChange: other.dateOfLastPasswordChange, privileges: other.privileges, isLocked: other.isLocked, creationDate: other.creationDate, devices: other.devices)
     }
 
     public func authenticate(with token: SessionToken) -> AuthenticatedUser {
         precondition(id == token.userID)
-        return AuthenticatedUser(id: id, givenName: givenName, familyName: familyName, email: email, sessionToken: token.value, privileges: privileges, isLocked: isLocked, creationDate: creationDate, devices: devices)
+        return AuthenticatedUser(id: id, givenName: givenName, familyName: familyName, email: email, dateOfLastPasswordChange: dateOfLastPasswordChange, sessionToken: token.value, privileges: privileges, isLocked: isLocked, creationDate: creationDate, devices: devices)
     }
 }
 
@@ -84,17 +86,19 @@ public struct AuthenticatedUser: User {
     public let givenName: String
     public let familyName: String
     public let email: String
+    public let dateOfLastPasswordChange: Date?
     public var sessionToken: String
     public var privileges: Set<UserPrivilege>
     public var isLocked: Bool
     public let creationDate: Date
     public var devices: [Device]
 
-    public init(id: UUID, givenName: String, familyName: String, email: String, sessionToken: String, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
+    public init(id: UUID, givenName: String, familyName: String, email: String, dateOfLastPasswordChange: Date?, sessionToken: String, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
         self.id = id
         self.givenName = givenName
         self.familyName = familyName
         self.email = email
+        self.dateOfLastPasswordChange = dateOfLastPasswordChange
         self.sessionToken = sessionToken
         self.privileges = privileges
         self.isLocked = isLocked
@@ -103,7 +107,7 @@ public struct AuthenticatedUser: User {
     }
 
     public init(_ userWithSession: UserWithSessionToken) {
-        self.init(id: userWithSession.id, givenName: userWithSession.givenName, familyName: userWithSession.familyName, email: userWithSession.email, sessionToken: userWithSession.token.value, privileges: userWithSession.privileges, isLocked: userWithSession.isLocked, creationDate: userWithSession.creationDate, devices: userWithSession.devices)
+        self.init(id: userWithSession.id, givenName: userWithSession.givenName, familyName: userWithSession.familyName, email: userWithSession.email, dateOfLastPasswordChange: userWithSession.dateOfLastPasswordChange, sessionToken: userWithSession.token.value, privileges: userWithSession.privileges, isLocked: userWithSession.isLocked, creationDate: userWithSession.creationDate, devices: userWithSession.devices)
     }
 }
 
@@ -114,17 +118,19 @@ public struct UserWithSessionToken: User {
     public let givenName: String
     public let familyName: String
     public let email: String
+    public let dateOfLastPasswordChange: Date?
     public var token: SessionToken
     public var privileges: Set<UserPrivilege>
     public var isLocked: Bool
     public let creationDate: Date
     public var devices: [Device]
 
-    public init(id: UUID, givenName: String, familyName: String, email: String, token: SessionToken, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
+    public init(id: UUID, givenName: String, familyName: String, email: String, dateOfLastPasswordChange: Date?, token: SessionToken, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
         self.id = id
         self.givenName = givenName
         self.familyName = familyName
         self.email = email
+        self.dateOfLastPasswordChange = dateOfLastPasswordChange
         self.token = token
         self.privileges = privileges
         self.isLocked = isLocked
