@@ -31,18 +31,18 @@ public struct Device: Hashable, Identifiable, Codable {
     /// e.g. `14.4`
     public let systemVersion: String
 
-    /// The token to use when sending this device push notifications.
-    public let notificationToken: String?
+    /// Whether the device has been registered for push notifications with the server.
+    public let isRegisteredForPushNotifications: Bool
 
     public let creationDate: Date?
 
-    public init(id: UUID, name: String, model: String, systemName: String, systemVersion: String, notificationToken: String?, creationDate: Date?) {
+    public init(id: UUID, name: String, model: String, systemName: String, systemVersion: String, isRegisteredForPushNotifications: Bool, creationDate: Date?) {
         self.id = id
         self.name = name
         self.model = model
         self.systemName = systemName
         self.systemVersion = systemVersion
-        self.notificationToken = notificationToken
+        self.isRegisteredForPushNotifications = isRegisteredForPushNotifications
         self.creationDate = creationDate
     }
 
@@ -52,16 +52,6 @@ public struct Device: Hashable, Identifiable, Codable {
         case model
         case systemName
         case systemVersion
-        case notificationToken
         case creationDate
-    }
-
-    public static func == (lhs: Device, rhs: Device) -> Bool {
-        lhs.id == rhs.id && lhs.notificationToken == rhs.notificationToken
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-        hasher.combine(notificationToken)
     }
 }
