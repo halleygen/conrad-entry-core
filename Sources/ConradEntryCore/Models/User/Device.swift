@@ -31,27 +31,14 @@ public struct Device: Hashable, Identifiable, Codable {
     /// e.g. `14.4`
     public let systemVersion: String
 
-    /// Whether the device has been registered for push notifications with the server.
-    public let isRegisteredForPushNotifications: Bool
+    public let createdAt: Date?
 
-    public let creationDate: Date?
-
-    public init(id: UUID, name: String, model: String, systemName: String, systemVersion: String, isRegisteredForPushNotifications: Bool, creationDate: Date?) {
+    public init(id: UUID, name: String, model: String, systemName: String, systemVersion: String, createdAt: Date?) {
         self.id = id
         self.name = name
         self.model = model
         self.systemName = systemName
         self.systemVersion = systemVersion
-        self.isRegisteredForPushNotifications = isRegisteredForPushNotifications
-        self.creationDate = creationDate
-    }
-
-    public enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case model
-        case systemName
-        case systemVersion
-        case creationDate
+        self.createdAt = createdAt
     }
 }
