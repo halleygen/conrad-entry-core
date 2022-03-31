@@ -6,6 +6,7 @@
 public enum NotificationCategory: String, CaseIterable {
     case accountLockStateChanged = "ACCOUNT_LOCK_STATUS_CHANGED"
     case newUserSignup = "NEW_USER_SIGNUP"
+    case deviceSignout = "DEVICE_SIGNOUT"
 }
 
 public enum NotificationUserInfoKey {
@@ -43,7 +44,7 @@ public enum NotificationUserInfoKey {
 
         private var actions: [UNNotificationAction] {
             switch self {
-            case .accountLockStateChanged:
+            case .accountLockStateChanged, .deviceSignout:
                 return []
 
             case .newUserSignup:
