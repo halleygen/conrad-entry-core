@@ -73,7 +73,7 @@ public struct PublicUser: User {
         self.init(id: other.id, givenName: other.givenName, familyName: other.familyName, email: other.email, dateOfLastPasswordChange: other.dateOfLastPasswordChange, privileges: other.privileges, isLocked: other.isLocked, creationDate: other.creationDate, devices: other.devices)
     }
 
-    public func authenticate(with token: SessionToken) -> AuthenticatedUser {
+    public func authenticating(with token: SessionToken) -> AuthenticatedUser {
         precondition(id == token.userID)
         return AuthenticatedUser(id: id, givenName: givenName, familyName: familyName, email: email, dateOfLastPasswordChange: dateOfLastPasswordChange, sessionToken: token, privileges: privileges, isLocked: isLocked, creationDate: creationDate, devices: devices)
     }
@@ -100,38 +100,6 @@ public struct AuthenticatedUser: User {
         self.email = email
         self.dateOfLastPasswordChange = dateOfLastPasswordChange
         self.sessionToken = sessionToken
-        self.privileges = privileges
-        self.isLocked = isLocked
-        self.creationDate = creationDate
-        self.devices = devices
-    }
-
-    public init(_ userWithSession: UserWithSessionToken) {
-        self.init(id: userWithSession.id, givenName: userWithSession.givenName, familyName: userWithSession.familyName, email: userWithSession.email, dateOfLastPasswordChange: userWithSession.dateOfLastPasswordChange, sessionToken: userWithSession.token, privileges: userWithSession.privileges, isLocked: userWithSession.isLocked, creationDate: userWithSession.creationDate, devices: userWithSession.devices)
-    }
-}
-
-// MARK: - UserWithSessionToken
-
-public struct UserWithSessionToken: User {
-    public let id: UUID
-    public let givenName: String
-    public let familyName: String
-    public let email: String
-    public let dateOfLastPasswordChange: Date?
-    public var token: SessionToken
-    public var privileges: Set<UserPrivilege>
-    public var isLocked: Bool
-    public let creationDate: Date
-    public var devices: [Device]
-
-    public init(id: UUID, givenName: String, familyName: String, email: String, dateOfLastPasswordChange: Date?, token: SessionToken, privileges: Set<UserPrivilege>, isLocked: Bool, creationDate: Date, devices: [Device]) {
-        self.id = id
-        self.givenName = givenName
-        self.familyName = familyName
-        self.email = email
-        self.dateOfLastPasswordChange = dateOfLastPasswordChange
-        self.token = token
         self.privileges = privileges
         self.isLocked = isLocked
         self.creationDate = creationDate

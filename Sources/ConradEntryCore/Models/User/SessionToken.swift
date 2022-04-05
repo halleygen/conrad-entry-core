@@ -3,7 +3,6 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-@preconcurrency
 import Foundation
 
 public struct SessionToken: Codable, Hashable {
