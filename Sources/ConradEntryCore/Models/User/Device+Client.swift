@@ -13,7 +13,7 @@
         import IOKit
     #endif
 
-    extension Device {
+    public extension Device {
         static func current() -> Device {
             #if canImport(UIKit)
                 let uiDevice = UIDevice.current
@@ -51,7 +51,7 @@
     }
 
     #if os(macOS)
-        func currentDeviceIdentifierForVendor(service: io_service_t? = nil) -> UUID {
+        private func currentDeviceIdentifierForVendor(service: io_service_t? = nil) -> UUID {
             let uuidString: String
             if let service = service {
                 uuidString = IORegistryEntryCreateCFProperty(service, kIOPlatformUUIDKey as CFString, nil, 0).takeRetainedValue() as! String
@@ -63,7 +63,7 @@
             return UUID(uuidString: uuidString)!
         }
 
-        func currentDeviceModel(service: io_service_t? = nil) -> String? {
+        private func currentDeviceModel(service: io_service_t? = nil) -> String? {
             let modelData: Data
             if let service = service {
                 modelData = IORegistryEntryCreateCFProperty(service, "model" as CFString, nil, 0).takeRetainedValue() as! Data
