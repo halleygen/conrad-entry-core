@@ -61,7 +61,7 @@ public struct SessionToken: Codable, Hashable {
                 coder.encode(expiryDate, forKey: #keyPath(expiryDate))
             }
 
-            override public func isEqual(to object: Any?) -> Bool {
+            override public func isEqual(_ object: Any?) -> Bool {
                 switch object {
                 case let swiftType as SessionToken:
                     return (userID as UUID == swiftType.userID) && (value as String == swiftType.value) && (expiryDate as Date == swiftType.expiryDate)
