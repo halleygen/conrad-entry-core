@@ -48,36 +48,35 @@
                 )
             #endif
         }
+
+        #if os(macOS)
+            static func currentDeviceIdentifierForVendor(service: io_service_t? = nil) -> UUID {
+                let uuidString: String
+                if let service = service {
+                    uuidString = IORegistryEntryCreateCFProperty(service, kIOPlatformUUIDKey as CFString, nil, 0).takeRetainedValue() as! String
+                } else {
+                    let service = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
+                    defer { IOObjectRelease(service) }
+                    uuidString = IORegistryEntryCreateCFProperty(service, kIOPlatformUUIDKey as CFString, nil, 0).takeRetainedValue() as! String
+                }
+                return UUID(uuidString: uuidString)!
+            }
+
+            private static func currentDeviceModel(service: io_service_t? = nil) -> String? {
+                let modelData: Data
+                if let service = service {
+                    modelData = IORegistryEntryCreateCFProperty(service, "model" as CFString, nil, 0).takeRetainedValue() as! Data
+                } else {
+                    let service = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
+                    defer { IOObjectRelease(service) }
+                    modelData = IORegistryEntryCreateCFProperty(service, "model" as CFString, nil, 0).takeRetainedValue() as! Data
+                }
+
+                return modelData.withUnsafeBytes { buffer -> String? in
+                    guard let pointer = buffer.baseAddress?.assumingMemoryBound(to: UInt8.self) else { return nil }
+                    return String(cString: pointer)
+                }
+            }
+        #endif
     }
-
-    #if os(macOS)
-        private func currentDeviceIdentifierForVendor(service: io_service_t? = nil) -> UUID {
-            let uuidString: String
-            if let service = service {
-                uuidString = IORegistryEntryCreateCFProperty(service, kIOPlatformUUIDKey as CFString, nil, 0).takeRetainedValue() as! String
-            } else {
-                let service = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
-                defer { IOObjectRelease(service) }
-                uuidString = IORegistryEntryCreateCFProperty(service, kIOPlatformUUIDKey as CFString, nil, 0).takeRetainedValue() as! String
-            }
-            return UUID(uuidString: uuidString)!
-        }
-
-        private func currentDeviceModel(service: io_service_t? = nil) -> String? {
-            let modelData: Data
-            if let service = service {
-                modelData = IORegistryEntryCreateCFProperty(service, "model" as CFString, nil, 0).takeRetainedValue() as! Data
-            } else {
-                let service = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
-                defer { IOObjectRelease(service) }
-                modelData = IORegistryEntryCreateCFProperty(service, "model" as CFString, nil, 0).takeRetainedValue() as! Data
-            }
-
-            return modelData.withUnsafeBytes { buffer -> String? in
-                guard let pointer = buffer.baseAddress?.assumingMemoryBound(to: UInt8.self) else { return nil }
-                return String(cString: pointer)
-            }
-        }
-    #endif
-
 #endif
