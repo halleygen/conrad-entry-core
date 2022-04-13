@@ -4,15 +4,21 @@
 //
 
 public struct PushNotificationRegistrationRequest: Codable {
-    public var token: String
     public var service: Service
+    public var token: String
 
-    public init(token: String, service: Service) {
-        self.token = token
+    public init(service: Service, token: String) {
         self.service = service
+        self.token = token
     }
 
     public enum Service: Codable {
         case apns
+    }
+}
+
+public extension PushNotificationRegistrationRequest {
+    static func apns(token: String) -> Self {
+        Self(service: .apns, token: token)
     }
 }
