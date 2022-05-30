@@ -6,11 +6,11 @@
 import Foundation
 
 public struct BackgroundRefreshRequest: Codable {
-    public let shipments: [UUID: String]
-    public let localAccountVersion: Date?
+    public let shipments: [UUID: Date]
+    public let account: Bool
 
-    public init(shipments: [UUID: String], localAccountVersion: Date?) {
+    public init(shipments: [UUID: Date], account: Bool = true) {
         self.shipments = shipments
-        self.localAccountVersion = localAccountVersion
+        self.account = account
     }
 }
