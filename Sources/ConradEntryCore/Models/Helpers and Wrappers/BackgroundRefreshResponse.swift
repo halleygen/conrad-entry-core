@@ -4,10 +4,10 @@
 //
 
 public struct BackgroundRefreshResponse: Codable {
-    public let shipments: [VersionedValueOrID<ShipmentDTO>]
+    public let shipments: [ShipmentDTO]
     public let account: PublicUser
 
-    public init(shipments: [VersionedValueOrID<ShipmentDTO>], account: PublicUser) {
+    public init(shipments: [ShipmentDTO], account: PublicUser) {
         self.shipments = shipments
         self.account = account
     }
