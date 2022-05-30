@@ -7,10 +7,8 @@ import Foundation
 
 public struct BackgroundRefreshRequest: Codable {
     public let shipments: [UUID: Date]
-    public let account: Bool
 
-    public init(shipments: [UUID: Date], account: Bool = true) {
+    public init(shipments: [UUID: Date]) {
         self.shipments = shipments
-        self.account = account
     }
 }
