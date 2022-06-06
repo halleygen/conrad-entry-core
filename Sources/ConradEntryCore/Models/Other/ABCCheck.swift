@@ -4,8 +4,8 @@
 //
 
 public struct ABCCheck: Hashable, Codable {
-    public let tareWeightVarianceKilograms: Double
-    public let ladenWeightVarianceKilograms: Double
+    public var tareWeightVarianceKilograms: Double
+    public var ladenWeightVarianceKilograms: Double
 
     public init(tareWeightVarianceKilograms: Double, ladenWeightVarianceKilograms: Double) {
         self.tareWeightVarianceKilograms = tareWeightVarianceKilograms
