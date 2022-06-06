@@ -16,14 +16,12 @@ public struct MutateMoistureDeterminationRequest: MoistureDeterminationProtocol,
     public let ovenOnTime: Date
     public let ovenOffTime: Date
     public let ovenTemperatureCelsius: Int
-    public let checkedForConstantWeight: Bool
-    public let constantWeightDuration: TimeInterval?
-    public let numberOfWeighBacks: Int?
+    public let constantWeightCheck: ConstantWeightCheck?
     public let resultsWaitTimeDays: Int
     public let transparencyID: Int
     public let comments: [String]
 
-    public init(id: ID = nil, moistureDeterminationCompanyID: Int, siteID: Int, location: LocationDTO, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, checkedForConstantWeight: Bool, constantWeightDuration: TimeInterval?, numberOfWeighBacks: Int?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String]) {
+    public init(id: ID = nil, moistureDeterminationCompanyID: Int, siteID: Int, location: LocationDTO, lotSampleTrayWeightKilograms: Double, ovenOnTime: Date, ovenOffTime: Date, ovenTemperatureCelsius: Int, constantWeightCheck: ConstantWeightCheck?, resultsWaitTimeDays: Int, transparencyID: Int, comments: [String]) {
         self.id = id
         self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
         self.siteID = siteID
@@ -32,16 +30,14 @@ public struct MutateMoistureDeterminationRequest: MoistureDeterminationProtocol,
         self.ovenOnTime = ovenOnTime
         self.ovenOffTime = ovenOffTime
         self.ovenTemperatureCelsius = ovenTemperatureCelsius
-        self.checkedForConstantWeight = checkedForConstantWeight
-        self.constantWeightDuration = constantWeightDuration
-        self.numberOfWeighBacks = numberOfWeighBacks
+        self.constantWeightCheck = constantWeightCheck
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
         self.comments = comments
     }
 
     public init(_ other: MoistureDeterminationProtocol, id: ID = nil) {
-        self.init(id: id, moistureDeterminationCompanyID: other.moistureDeterminationCompanyID, siteID: other.siteID, location: other.location, lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms, ovenOnTime: other.ovenOnTime, ovenOffTime: other.ovenOffTime, ovenTemperatureCelsius: other.ovenTemperatureCelsius, checkedForConstantWeight: other.checkedForConstantWeight, constantWeightDuration: other.constantWeightDuration, numberOfWeighBacks: other.numberOfWeighBacks, resultsWaitTimeDays: other.resultsWaitTimeDays, transparencyID: other.transparencyID, comments: other.comments)
+        self.init(id: id, moistureDeterminationCompanyID: other.moistureDeterminationCompanyID, siteID: other.siteID, location: other.location, lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms, ovenOnTime: other.ovenOnTime, ovenOffTime: other.ovenOffTime, ovenTemperatureCelsius: other.ovenTemperatureCelsius, constantWeightCheck: other.constantWeightCheck, resultsWaitTimeDays: other.resultsWaitTimeDays, transparencyID: other.transparencyID, comments: other.comments)
     }
 
     public enum CodingKeys: String, CodingKey {
@@ -53,9 +49,7 @@ public struct MutateMoistureDeterminationRequest: MoistureDeterminationProtocol,
         case ovenOnTime
         case ovenOffTime
         case ovenTemperatureCelsius
-        case checkedForConstantWeight
-        case constantWeightDuration
-        case numberOfWeighBacks
+        case constantWeightCheck
         case resultsWaitTimeDays
         case transparencyID
         case comments

@@ -7,10 +7,10 @@ import Foundation
 
 public struct ConstantWeightCheck: Hashable, Codable {
     public var duration: TimeInterval
-    public var numberOfWeighbacks: Int
+    public var numberOfWeighBacks: Int
 
-    public init(duration: TimeInterval, numberOfWeighbacks: Int) {
+    public init(duration: TimeInterval, numberOfWeighBacks: Int) {
         self.duration = duration
-        self.numberOfWeighbacks = numberOfWeighbacks
+        self.numberOfWeighBacks = numberOfWeighBacks
     }
 }

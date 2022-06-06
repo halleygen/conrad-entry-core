@@ -13,9 +13,7 @@ public protocol MoistureDeterminationProtocol {
     var ovenOnTime: Date { get }
     var ovenOffTime: Date { get }
     var ovenTemperatureCelsius: Int { get }
-    var checkedForConstantWeight: Bool { get }
-    var constantWeightDuration: TimeInterval? { get }
-    var numberOfWeighBacks: Int? { get }
+    var constantWeightCheck: ConstantWeightCheck? { get }
     var resultsWaitTimeDays: Int { get }
     var transparencyID: Int { get }
     var comments: [String] { get }
