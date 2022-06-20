@@ -13,7 +13,7 @@ public protocol ShipmentChildDTO: Codable, Identifiable, Hashable {
     func eraseToAnyDTO() -> AnyShipmentChildDTO
 }
 
-public enum ShipmentPart: String, CodingKey, Codable {
+public enum ShipmentPart: String, CodingKey, Codable, LosslessStringConvertible {
     case details
     case billOfLading = "bill-of-lading"
     case discharge
@@ -23,6 +23,10 @@ public enum ShipmentPart: String, CodingKey, Codable {
     case sampleReduction = "sample-reduction"
     case moistureDetermination = "moisture-determination"
     case samplePreparation = "sample-preparation"
+
+    public init?(_ description: String) {
+        self.init(rawValue: description)
+    }
 }
 
 public enum AnyShipmentChildMutationRequest: Codable {
