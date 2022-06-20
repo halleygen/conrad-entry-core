@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MutateDischargeWeightRequest: DischargeWeightProtocol, Codable {
+public struct MutateDischargeWeightRequest: DischargeWeightProtocol, ShipmentChildMutationRequest {
     public typealias ID = UUID?
 
     public let id: ID
@@ -52,6 +52,13 @@ public struct MutateDischargeWeightRequest: DischargeWeightProtocol, Codable {
 
     public init(_ other: DischargeWeightProtocol, id: ID = nil) {
         self.init(id: id, kind: other.kind, methodID: other.methodID, weighingPointID: other.weighingPointID, weighingCompany: other.weighingCompany, startTime: other.startTime, finishTime: other.finishTime, wetMetricTonnes: other.wetMetricTonnes, moisturePercentage: other.moisturePercentage, dryMetricTonnes: other.dryMetricTonnes, equipmentName: other.equipmentName, equipmentModel: other.equipmentModel, equipmentLocation: other.equipmentLocation, equipmentCertificationDate: other.equipmentCertificationDate, calibrationCheck: other.calibrationCheck, abcCheck: other.abcCheck, tallymen: other.tallymen, transparencyID: other.transparencyID, comments: other.comments)
+    }
+
+    public func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest {
+        switch kind {
+        case .settlement: return .settlementWeight(request: self)
+        case .reference: return .referenceWeight(request: self)
+        }
     }
 
     public enum CodingKeys: String, CodingKey {

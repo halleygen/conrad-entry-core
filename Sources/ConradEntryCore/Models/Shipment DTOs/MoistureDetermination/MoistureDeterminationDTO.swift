@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MoistureDeterminationDTO: MoistureDeterminationProtocol, APIResponseItem {
+public struct MoistureDeterminationDTO: MoistureDeterminationProtocol, APIResponseItem, ShipmentChildDTO {
     public let id: UUID
     public let moistureDeterminationCompanyID: Int
     public let siteID: Int
@@ -42,6 +42,10 @@ public struct MoistureDeterminationDTO: MoistureDeterminationProtocol, APIRespon
 
     public init(_ other: MoistureDeterminationProtocol, id: ID, createdAt: Date, updatedAt: Date) {
         self.init(id: id, moistureDeterminationCompanyID: other.moistureDeterminationCompanyID, siteID: other.siteID, location: other.location, lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms, ovenOnTime: other.ovenOnTime, ovenOffTime: other.ovenOffTime, ovenTemperatureCelsius: other.ovenTemperatureCelsius, constantWeightCheck: other.constantWeightCheck, resultsWaitTimeDays: other.resultsWaitTimeDays, transparencyID: other.transparencyID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+    }
+
+    public func eraseToAnyDTO() -> AnyShipmentChildDTO {
+        .moistureDetermination(moistureDetermination: self)
     }
 
     public enum CodingKeys: String, CodingKey {

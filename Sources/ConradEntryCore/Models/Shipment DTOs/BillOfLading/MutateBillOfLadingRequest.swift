@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MutateBillOfLadingRequest: BillOfLadingProtocol, Codable {
+public struct MutateBillOfLadingRequest: BillOfLadingProtocol, ShipmentChildMutationRequest {
     public typealias ID = UUID?
 
     public let id: ID
@@ -30,5 +30,9 @@ public struct MutateBillOfLadingRequest: BillOfLadingProtocol, Codable {
 
     public init(_ other: BillOfLadingProtocol, id: ID = nil) {
         self.init(id: id, loadPortID: other.loadPortID, vesselHolds: other.vesselHolds, weighingMethodID: other.weighingMethodID, wetMetricTonnes: other.wetMetricTonnes, moisturePercentage: other.moisturePercentage, dryMetricTonnes: other.dryMetricTonnes, comments: other.comments)
+    }
+
+    public func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest {
+        .billOfLading(request: self)
     }
 }

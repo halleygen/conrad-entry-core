@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MutateDischargeRequest: DischargeProtocol, Codable {
+public struct MutateDischargeRequest: DischargeProtocol, ShipmentChildMutationRequest {
     public typealias ID = UUID?
 
     public let id: ID
@@ -44,6 +44,10 @@ public struct MutateDischargeRequest: DischargeProtocol, Codable {
 
     public init(_ other: DischargeProtocol, id: ID = nil) {
         self.init(id: id, berthName: other.berthName, berthLocation: other.berthLocation, gearID: other.gearID, methodID: other.methodID, cargoCondition: other.cargoCondition, weatherConditionsID: other.weatherConditionsID, startTime: other.startTime, finishTimeLastGrab: other.finishTimeLastGrab, finishTimeCleanup: other.finishTimeCleanup, dischargeRateTonnesPerHour: other.dischargeRateTonnesPerHour, saveAllTarpaulinsUsed: other.saveAllTarpaulinsUsed, holdsCleaned: other.holdsCleaned, wharfCleaned: other.wharfCleaned, comments: other.comments)
+    }
+
+    public func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest {
+        .discharge(request: self)
     }
 
     public enum CodingKeys: String, CodingKey {

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct DischargeWeightDTO: DischargeWeightProtocol, APIResponseItem {
+public struct DischargeWeightDTO: DischargeWeightProtocol, APIResponseItem, ShipmentChildDTO {
     public let id: UUID
     public let kind: DischargeWeightKind
     public let methodID: Int
@@ -56,6 +56,13 @@ public struct DischargeWeightDTO: DischargeWeightProtocol, APIResponseItem {
 
     public init(_ other: DischargeWeightProtocol, id: ID, createdAt: Date, updatedAt: Date) {
         self.init(id: id, kind: other.kind, methodID: other.methodID, weighingPointID: other.weighingPointID, weighingCompany: other.weighingCompany, startTime: other.startTime, finishTime: other.finishTime, wetMetricTonnes: other.wetMetricTonnes, moisturePercentage: other.moisturePercentage, dryMetricTonnes: other.dryMetricTonnes, equipmentName: other.equipmentName, equipmentModel: other.equipmentModel, equipmentLocation: other.equipmentLocation, equipmentCertificationDate: other.equipmentCertificationDate, calibrationCheck: other.calibrationCheck, abcCheck: other.abcCheck, tallymen: other.tallymen, transparencyID: other.transparencyID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+    }
+
+    public func eraseToAnyDTO() -> AnyShipmentChildDTO {
+        switch kind {
+        case .settlement: return .settlementWeight(settlementWeight: self)
+        case .reference: return .referenceWeight(referenceWeight: self)
+        }
     }
 
     public enum CodingKeys: String, CodingKey {

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SampleReductionDTO: SampleReductionProtocol, APIResponseItem {
+public struct SampleReductionDTO: SampleReductionProtocol, APIResponseItem, ShipmentChildDTO {
     public let id: UUID
     public let samplingCompanyID: Int
     public let location: LocationDTO
@@ -44,6 +44,10 @@ public struct SampleReductionDTO: SampleReductionProtocol, APIResponseItem {
 
     public init(_ other: SampleReductionProtocol, id: ID, createdAt: Date, updatedAt: Date) {
         self.init(id: id, samplingCompanyID: other.samplingCompanyID, siteID: other.siteID, laboratoryID: other.laboratoryID, location: other.location, reductionPointID: other.reductionPointID, startTime: other.startTime, finishTime: other.finishTime, screenApertureMillimetres: other.screenApertureMillimetres, wasConedAndQuartered: other.wasConedAndQuartered, methodID: other.methodID, gridSizeID: other.gridSizeID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+    }
+
+    public func eraseToAnyDTO() -> AnyShipmentChildDTO {
+        .sampleReduction(sampleReduction: self)
     }
 
     public enum CodingKeys: String, CodingKey {

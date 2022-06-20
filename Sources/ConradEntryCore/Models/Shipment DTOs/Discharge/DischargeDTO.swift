@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct DischargeDTO: DischargeProtocol, APIResponseItem {
+public struct DischargeDTO: DischargeProtocol, APIResponseItem, ShipmentChildDTO {
     public let id: UUID
     public let berthName: String
     public let berthLocation: LocationDTO
@@ -48,6 +48,10 @@ public struct DischargeDTO: DischargeProtocol, APIResponseItem {
 
     public init(_ other: DischargeProtocol, id: ID, createdAt: Date, updatedAt: Date) {
         self.init(id: id, berthName: other.berthName, berthLocation: other.berthLocation, gearID: other.gearID, methodID: other.methodID, cargoCondition: other.cargoCondition, weatherConditionsID: other.weatherConditionsID, startTime: other.startTime, finishTimeLastGrab: other.finishTimeLastGrab, finishTimeCleanup: other.finishTimeCleanup, dischargeRateTonnesPerHour: other.dischargeRateTonnesPerHour, saveAllTarpaulinsUsed: other.saveAllTarpaulinsUsed, holdsCleaned: other.holdsCleaned, wharfCleaned: other.wharfCleaned, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+    }
+
+    public func eraseToAnyDTO() -> AnyShipmentChildDTO {
+        .discharge(discharge: self)
     }
 
     public enum CodingKeys: String, CodingKey {

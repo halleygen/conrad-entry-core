@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SampleCollectionDTO: SampleCollectionProtocol, APIResponseItem {
+public struct SampleCollectionDTO: SampleCollectionProtocol, APIResponseItem, ShipmentChildDTO {
     public let id: UUID
     public let samplingCompanyID: Int
     public let siteID: Int
@@ -48,6 +48,10 @@ public struct SampleCollectionDTO: SampleCollectionProtocol, APIResponseItem {
 
     public init(_ other: SampleCollectionProtocol, id: ID, createdAt: Date, updatedAt: Date) {
         self.init(id: id, samplingCompanyID: other.samplingCompanyID, siteID: other.siteID, location: other.location, samplingPointID: other.samplingPointID, startTime: other.startTime, finishTime: other.finishTime, methodID: other.methodID, sampleIncrementsWetTonnes: other.sampleIncrementsWetTonnes, typicalSampleWeightKilograms: other.typicalSampleWeightKilograms, numberOfTrucksPerBag: other.numberOfTrucksPerBag, lotSizeWetTonnes: other.lotSizeWetTonnes, sublotSizeWetTonnes: other.sublotSizeWetTonnes, numberOfLots: other.numberOfLots, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+    }
+
+    public func eraseToAnyDTO() -> AnyShipmentChildDTO {
+        .sampleCollection(sampleCollection: self)
     }
 
     public enum CodingKeys: String, CodingKey {

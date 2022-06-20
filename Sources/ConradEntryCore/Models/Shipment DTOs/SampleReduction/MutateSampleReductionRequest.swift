@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MutateSampleReductionRequest: SampleReductionProtocol, Codable {
+public struct MutateSampleReductionRequest: SampleReductionProtocol, ShipmentChildMutationRequest {
     public typealias ID = UUID?
 
     public let id: ID
@@ -40,6 +40,10 @@ public struct MutateSampleReductionRequest: SampleReductionProtocol, Codable {
 
     public init(_ other: SampleReductionProtocol, id: ID = nil) {
         self.init(id: id, samplingCompanyID: other.samplingCompanyID, siteID: other.siteID, laboratoryID: other.laboratoryID, location: other.location, reductionPointID: other.reductionPointID, startTime: other.startTime, finishTime: other.finishTime, screenApertureMillimetres: other.screenApertureMillimetres, wasConedAndQuartered: other.wasConedAndQuartered, methodID: other.methodID, gridSizeID: other.gridSizeID, comments: other.comments)
+    }
+
+    public func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest {
+        .sampleReduction(request: self)
     }
 
     public enum CodingKeys: String, CodingKey {

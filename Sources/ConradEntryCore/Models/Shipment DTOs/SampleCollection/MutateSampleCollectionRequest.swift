@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MutateSampleCollectionRequest: SampleCollectionProtocol, Codable {
+public struct MutateSampleCollectionRequest: SampleCollectionProtocol, ShipmentChildMutationRequest {
     public typealias ID = UUID?
 
     public let id: ID
@@ -44,6 +44,10 @@ public struct MutateSampleCollectionRequest: SampleCollectionProtocol, Codable {
 
     public init(_ other: SampleCollectionProtocol, id: ID = nil) {
         self.init(id: id, samplingCompanyID: other.samplingCompanyID, siteID: other.siteID, location: other.location, samplingPointID: other.samplingPointID, startTime: other.startTime, finishTime: other.finishTime, methodID: other.methodID, sampleIncrementsWetTonnes: other.sampleIncrementsWetTonnes, typicalSampleWeightKilograms: other.typicalSampleWeightKilograms, numberOfTrucksPerBag: other.numberOfTrucksPerBag, lotSizeWetTonnes: other.lotSizeWetTonnes, sublotSizeWetTonnes: other.sublotSizeWetTonnes, numberOfLots: other.numberOfLots, comments: other.comments)
+    }
+
+    public func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest {
+        .sampleCollection(request: self)
     }
 
     public enum CodingKeys: String, CodingKey {

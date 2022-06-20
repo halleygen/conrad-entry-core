@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ShipmentDetailsDTO: ShipmentProtocol, APIResponseItem {
+public struct ShipmentDetailsDTO: ShipmentProtocol, APIResponseItem, ShipmentChildDTO {
     public let id: UUID
     public let clientReference: String
     public let logDate: Date
@@ -54,6 +54,10 @@ public struct ShipmentDetailsDTO: ShipmentProtocol, APIResponseItem {
 
     public init(_ other: ShipmentProtocol, id: UUID, createdAt: Date, updatedAt: Date) {
         self.init(id: id, clientReference: other.clientReference, logDate: other.logDate, norTime: other.norTime, vesselName: other.vesselName, clientID: other.clientID, commodityID: other.commodityID, agentID: other.agentID, traderID: other.traderID, smelterID: other.smelterID, dischargePortID: other.dischargePortID, inspectionCompanyReceiverID: other.inspectionCompanyReceiverID, inspectionCompanySellerID: other.inspectionCompanySellerID, inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID, conradTeamSize: other.conradTeamSize, proceduralExceptions: other.proceduralExceptions, samplingProcedure: other.samplingProcedure, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+    }
+
+    public func eraseToAnyDTO() -> AnyShipmentChildDTO {
+        .details(details: self)
     }
 
     public enum CodingKeys: String, CodingKey {

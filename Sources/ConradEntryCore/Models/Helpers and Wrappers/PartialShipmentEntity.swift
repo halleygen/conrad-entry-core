@@ -5,8 +5,28 @@
 
 import Foundation
 
-@available(*, deprecated)
+public protocol ShipmentChildMutationRequest: Codable, Identifiable, Hashable {
+    func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest
+}
+
+public protocol ShipmentChildDTO: Codable, Identifiable, Hashable {
+    func eraseToAnyDTO() -> AnyShipmentChildDTO
+}
+
+public enum ShipmentPart: String, CodingKey, Codable {
+    case details
+    case billOfLading = "bill-of-lading"
+    case discharge
+    case settlementWeight = "settlement-weight"
+    case referenceWeight = "reference-weight"
+    case sampleCollection = "sample-collection"
+    case sampleReduction = "sample-reduction"
+    case moistureDetermination = "moisture-determination"
+    case samplePreparation = "sample-preparation"
+}
+
 public enum AnyShipmentChildMutationRequest: Codable {
+    case details(request: MutateShipmentDetailsRequest)
     case billOfLading(request: MutateBillOfLadingRequest)
     case discharge(request: MutateDischargeRequest)
     case settlementWeight(request: MutateDischargeWeightRequest)
@@ -15,46 +35,8 @@ public enum AnyShipmentChildMutationRequest: Codable {
     case sampleReduction(request: MutateSampleReductionRequest)
     case moistureDetermination(request: MutateMoistureDeterminationRequest)
     case samplePreparation(request: MutateSamplePreparationRequest)
-}
 
-@available(*, deprecated)
-public enum PartialShipmentEntity: Codable, Identifiable, VersionedResource {
-    public typealias CodingKeys = Key
-
-    case details(ShipmentDetailsDTO)
-    case billOfLading(BillOfLadingDTO)
-    case discharge(DischargeDTO)
-    case settlementWeight(DischargeWeightDTO)
-    case referenceWeight(DischargeWeightDTO)
-    case sampleCollection(SampleCollectionDTO)
-    case sampleReduction(SampleReductionDTO)
-    case moistureDetermination(MoistureDeterminationDTO)
-    case samplePreparation(SamplePreparationDTO)
-
-    public var id: UUID {
-        switch self {
-        case let .details(shipmentDetailsDTO):
-            return shipmentDetailsDTO.id
-        case let .billOfLading(billOfLadingDTO):
-            return billOfLadingDTO.id
-        case let .discharge(dischargeDTO):
-            return dischargeDTO.id
-        case let .settlementWeight(dischargeWeightDTO):
-            return dischargeWeightDTO.id
-        case let .referenceWeight(dischargeWeightDTO):
-            return dischargeWeightDTO.id
-        case let .sampleCollection(sampleCollectionDTO):
-            return sampleCollectionDTO.id
-        case let .sampleReduction(sampleReductionDTO):
-            return sampleReductionDTO.id
-        case let .moistureDetermination(moistureDeterminationDTO):
-            return moistureDeterminationDTO.id
-        case let .samplePreparation(samplePreparationDTO):
-            return samplePreparationDTO.id
-        }
-    }
-
-    public var key: Key {
+    var part: ShipmentPart {
         switch self {
         case .details: return .details
         case .billOfLading: return .billOfLading
@@ -68,52 +50,65 @@ public enum PartialShipmentEntity: Codable, Identifiable, VersionedResource {
         }
     }
 
-    public var version: Date {
-        switch self {
-        case let .details(shipmentDetailsDTO):
-            return shipmentDetailsDTO.version
-        case let .billOfLading(billOfLadingDTO):
-            return billOfLadingDTO.version
-        case let .discharge(dischargeDTO):
-            return dischargeDTO.version
-        case let .settlementWeight(dischargeWeightDTO):
-            return dischargeWeightDTO.version
-        case let .referenceWeight(dischargeWeightDTO):
-            return dischargeWeightDTO.version
-        case let .sampleCollection(sampleCollectionDTO):
-            return sampleCollectionDTO.version
-        case let .sampleReduction(sampleReductionDTO):
-            return sampleReductionDTO.version
-        case let .moistureDetermination(moistureDeterminationDTO):
-            return moistureDeterminationDTO.version
-        case let .samplePreparation(samplePreparationDTO):
-            return samplePreparationDTO.version
+    static func == (lhs: Self, rhs: ShipmentPart) -> Bool {
+        switch (lhs, rhs) {
+        case (.details, .details),
+             (.billOfLading, .billOfLading),
+             (.discharge, .discharge),
+             (.settlementWeight, .settlementWeight),
+             (.referenceWeight, .referenceWeight),
+             (.sampleCollection, .sampleCollection),
+             (.sampleReduction, .sampleReduction),
+             (.moistureDetermination, .moistureDetermination),
+             (.samplePreparation, .samplePreparation):
+            return true
+
+        default:
+            return false
         }
     }
 }
 
-public extension PartialShipmentEntity {
-    enum Key: String, Codable {
-        case details
-        case billOfLading = "bill-of-lading"
-        case discharge
-        case settlementWeight = "settlement-weight"
-        case referenceWeight = "reference-weight"
-        case sampleCollection = "sample-collection"
-        case sampleReduction = "sample-reduction"
-        case moistureDetermination = "moisture-determination"
-        case samplePreparation = "sample-preparation"
+public enum AnyShipmentChildDTO: Codable {
+    case details(details: ShipmentDetailsDTO)
+    case billOfLading(billOfLading: BillOfLadingDTO)
+    case discharge(discharge: DischargeDTO)
+    case settlementWeight(settlementWeight: DischargeWeightDTO)
+    case referenceWeight(referenceWeight: DischargeWeightDTO)
+    case sampleCollection(sampleCollection: SampleCollectionDTO)
+    case sampleReduction(sampleReduction: SampleReductionDTO)
+    case moistureDetermination(moistureDetermination: MoistureDeterminationDTO)
+    case samplePreparation(samplePreparation: SamplePreparationDTO)
+
+    var part: ShipmentPart {
+        switch self {
+        case .details: return .details
+        case .billOfLading: return .billOfLading
+        case .discharge: return .discharge
+        case .settlementWeight: return .settlementWeight
+        case .referenceWeight: return .referenceWeight
+        case .sampleCollection: return .sampleCollection
+        case .sampleReduction: return .sampleReduction
+        case .moistureDetermination: return .moistureDetermination
+        case .samplePreparation: return .samplePreparation
+        }
     }
-}
 
-extension PartialShipmentEntity.Key: LosslessStringConvertible {
-    public var description: String { rawValue }
+    static func == (lhs: Self, rhs: ShipmentPart) -> Bool {
+        switch (lhs, rhs) {
+        case (.details, .details),
+             (.billOfLading, .billOfLading),
+             (.discharge, .discharge),
+             (.settlementWeight, .settlementWeight),
+             (.referenceWeight, .referenceWeight),
+             (.sampleCollection, .sampleCollection),
+             (.sampleReduction, .sampleReduction),
+             (.moistureDetermination, .moistureDetermination),
+             (.samplePreparation, .samplePreparation):
+            return true
 
-    public init?(_ description: String) {
-        self.init(rawValue: description)
+        default:
+            return false
+        }
     }
-}
-
-extension PartialShipmentEntity.Key: CodingKey {
-    public var stringValue: String { rawValue }
 }

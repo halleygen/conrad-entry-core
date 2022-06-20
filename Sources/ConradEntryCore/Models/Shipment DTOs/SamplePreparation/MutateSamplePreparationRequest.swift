@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MutateSamplePreparationRequest: SamplePreparationProtocol, Codable {
+public struct MutateSamplePreparationRequest: SamplePreparationProtocol, ShipmentChildMutationRequest {
     public typealias ID = UUID?
 
     public let id: ID
@@ -58,6 +58,10 @@ public struct MutateSamplePreparationRequest: SamplePreparationProtocol, Codable
 
     public init(_ other: SamplePreparationProtocol, id: ID = nil) {
         self.init(id: id, preparationCompanyID: other.preparationCompanyID, siteID: other.siteID, location: other.location, startTime: other.startTime, finishTime: other.finishTime, standardsID: other.standardsID, wasScreened: other.wasScreened, screenApertureID: other.screenApertureID, oversizePulverizedSeparately: other.oversizePulverizedSeparately, sampleChargeWeightGrams: other.sampleChargeWeightGrams, pulverizerID: other.pulverizerID, pulverizingDurationSeconds: other.pulverizingDurationSeconds, divisionMethodID: other.divisionMethodID, rsdNumberOfSegments: other.rsdNumberOfSegments, incrementISOScoopUsed: other.incrementISOScoopUsed, incrementBackingPlateUsed: other.incrementBackingPlateUsed, incrementDividedToExtinction: other.incrementDividedToExtinction, riffleApertureMillimetres: other.riffleApertureMillimetres, numberOfSets: other.numberOfSets, transparencyID: other.transparencyID, comments: other.comments)
+    }
+
+    public func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest {
+        .samplePreparation(request: self)
     }
 
     public enum CodingKeys: String, CodingKey {

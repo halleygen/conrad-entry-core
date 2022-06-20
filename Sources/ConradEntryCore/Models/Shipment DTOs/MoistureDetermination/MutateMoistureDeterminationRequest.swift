@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MutateMoistureDeterminationRequest: MoistureDeterminationProtocol, Codable {
+public struct MutateMoistureDeterminationRequest: MoistureDeterminationProtocol, ShipmentChildMutationRequest {
     public typealias ID = UUID?
 
     public let id: ID
@@ -38,6 +38,10 @@ public struct MutateMoistureDeterminationRequest: MoistureDeterminationProtocol,
 
     public init(_ other: MoistureDeterminationProtocol, id: ID = nil) {
         self.init(id: id, moistureDeterminationCompanyID: other.moistureDeterminationCompanyID, siteID: other.siteID, location: other.location, lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms, ovenOnTime: other.ovenOnTime, ovenOffTime: other.ovenOffTime, ovenTemperatureCelsius: other.ovenTemperatureCelsius, constantWeightCheck: other.constantWeightCheck, resultsWaitTimeDays: other.resultsWaitTimeDays, transparencyID: other.transparencyID, comments: other.comments)
+    }
+
+    public func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest {
+        .moistureDetermination(request: self)
     }
 
     public enum CodingKeys: String, CodingKey {

@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct BillOfLadingDTO: BillOfLadingProtocol, APIResponseItem {
+public struct BillOfLadingDTO: BillOfLadingProtocol, APIResponseItem, ShipmentChildDTO {
     public let id: UUID
     public let loadPortID: Int
     public let vesselHolds: Set<Int>
@@ -34,6 +34,10 @@ public struct BillOfLadingDTO: BillOfLadingProtocol, APIResponseItem {
 
     public init(_ other: BillOfLadingProtocol, id: ID, createdAt: Date, updatedAt: Date) {
         self.init(id: id, loadPortID: other.loadPortID, vesselHolds: other.vesselHolds, weighingMethodID: other.weighingMethodID, wetMetricTonnes: other.wetMetricTonnes, moisturePercentage: other.moisturePercentage, dryMetricTonnes: other.dryMetricTonnes, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+    }
+
+    public func eraseToAnyDTO() -> AnyShipmentChildDTO {
+        .billOfLading(billOfLading: self)
     }
 
     public enum CodingKeys: String, CodingKey {

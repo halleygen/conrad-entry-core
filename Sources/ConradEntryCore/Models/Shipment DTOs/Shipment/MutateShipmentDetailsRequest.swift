@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct MutateShipmentDetailsRequest: ShipmentProtocol, Codable, Identifiable {
+public struct MutateShipmentDetailsRequest: ShipmentProtocol, ShipmentChildMutationRequest {
     public var id: UUID
     public var clientReference: String
     public var logDate: Date
@@ -48,5 +48,9 @@ public struct MutateShipmentDetailsRequest: ShipmentProtocol, Codable, Identifia
 
     public init(_ other: ShipmentProtocol, id: ID) {
         self.init(id: id, clientReference: other.clientReference, logDate: other.logDate, norTime: other.norTime, vesselName: other.vesselName, clientID: other.clientID, commodityID: other.commodityID, agentID: other.agentID, traderID: other.traderID, smelterID: other.smelterID, dischargePortID: other.dischargePortID, inspectionCompanyReceiverID: other.inspectionCompanyReceiverID, inspectionCompanySellerID: other.inspectionCompanySellerID, inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID, conradTeamSize: other.conradTeamSize, proceduralExceptions: other.proceduralExceptions, samplingProcedure: other.samplingProcedure, comments: other.comments)
+    }
+
+    public func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest {
+        .details(request: self)
     }
 }

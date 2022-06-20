@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SamplePreparationDTO: SamplePreparationProtocol, APIResponseItem {
+public struct SamplePreparationDTO: SamplePreparationProtocol, APIResponseItem, ShipmentChildDTO {
     public let id: UUID
     public let preparationCompanyID: Int
     public let siteID: Int
@@ -62,6 +62,10 @@ public struct SamplePreparationDTO: SamplePreparationProtocol, APIResponseItem {
 
     public init(_ other: SamplePreparationProtocol, id: ID, createdAt: Date, updatedAt: Date) {
         self.init(id: id, preparationCompanyID: other.preparationCompanyID, siteID: other.siteID, location: other.location, startTime: other.startTime, finishTime: other.finishTime, standardsID: other.standardsID, wasScreened: other.wasScreened, screenApertureID: other.screenApertureID, oversizePulverizedSeparately: other.oversizePulverizedSeparately, sampleChargeWeightGrams: other.sampleChargeWeightGrams, pulverizerID: other.pulverizerID, pulverizingDurationSeconds: other.pulverizingDurationSeconds, divisionMethodID: other.divisionMethodID, rsdNumberOfSegments: other.rsdNumberOfSegments, incrementISOScoopUsed: other.incrementISOScoopUsed, incrementBackingPlateUsed: other.incrementBackingPlateUsed, incrementDividedToExtinction: other.incrementDividedToExtinction, riffleApertureMillimetres: other.riffleApertureMillimetres, numberOfSets: other.numberOfSets, transparencyID: other.transparencyID, comments: other.comments, createdAt: createdAt, updatedAt: updatedAt)
+    }
+
+    public func eraseToAnyDTO() -> AnyShipmentChildDTO {
+        .samplePreparation(samplePreparation: self)
     }
 
     public enum CodingKeys: String, CodingKey {
