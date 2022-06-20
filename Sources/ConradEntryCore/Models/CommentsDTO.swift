@@ -25,7 +25,7 @@ public struct CommentsDTO: ExpressibleByDictionaryLiteral {
 
 // MARK: - Functions
 
-public extension Comments {
+public extension CommentsDTO {
     var count: Int { _base.count }
     var isEmpty: Bool { _base.isEmpty }
 
@@ -42,7 +42,7 @@ public extension Comments {
 
 // MARK: - Sequence
 
-extension Comments: Sequence {
+extension CommentsDTO: Sequence {
     public typealias Element = OrderedDictionary<UUID, String>.Element
     public typealias Iterator = OrderedDictionary<UUID, String>.Iterator
 
@@ -55,7 +55,7 @@ extension Comments: Sequence {
 
 // MARK: - Codable
 
-extension Comments: Codable {
+extension CommentsDTO: Codable {
     private struct CodableElement: Codable {
         let id: UUID
         let value: String
