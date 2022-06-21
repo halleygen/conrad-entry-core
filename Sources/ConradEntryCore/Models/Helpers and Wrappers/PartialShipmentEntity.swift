@@ -17,8 +17,7 @@ public enum ShipmentPart: String, CodingKey, Codable, LosslessStringConvertible 
     case details
     case billOfLading = "bill-of-lading"
     case discharge
-    case settlementWeight = "settlement-weight"
-    case referenceWeight = "reference-weight"
+    case dischargeWeight = "discharge-weight"
     case sampleCollection = "sample-collection"
     case sampleReduction = "sample-reduction"
     case moistureDetermination = "moisture-determination"
@@ -33,8 +32,7 @@ public enum AnyShipmentChildMutationRequest: Codable {
     case details(request: MutateShipmentDetailsRequest)
     case billOfLading(request: MutateBillOfLadingRequest)
     case discharge(request: MutateDischargeRequest)
-    case settlementWeight(request: MutateDischargeWeightRequest)
-    case referenceWeight(request: MutateDischargeWeightRequest)
+    case dischargeWeight(request: MutateDischargeWeightRequest)
     case sampleCollection(request: MutateSampleCollectionRequest)
     case sampleReduction(request: MutateSampleReductionRequest)
     case moistureDetermination(request: MutateMoistureDeterminationRequest)
@@ -45,8 +43,7 @@ public enum AnyShipmentChildMutationRequest: Codable {
         case .details: return .details
         case .billOfLading: return .billOfLading
         case .discharge: return .discharge
-        case .settlementWeight: return .settlementWeight
-        case .referenceWeight: return .referenceWeight
+        case .dischargeWeight: return .dischargeWeight
         case .sampleCollection: return .sampleCollection
         case .sampleReduction: return .sampleReduction
         case .moistureDetermination: return .moistureDetermination
@@ -59,8 +56,7 @@ public enum AnyShipmentChildMutationRequest: Codable {
         case (.details, .details),
              (.billOfLading, .billOfLading),
              (.discharge, .discharge),
-             (.settlementWeight, .settlementWeight),
-             (.referenceWeight, .referenceWeight),
+             (.dischargeWeight, .dischargeWeight),
              (.sampleCollection, .sampleCollection),
              (.sampleReduction, .sampleReduction),
              (.moistureDetermination, .moistureDetermination),
@@ -77,8 +73,7 @@ public enum AnyShipmentChildDTO: Codable {
     case details(details: ShipmentDetailsDTO)
     case billOfLading(billOfLading: BillOfLadingDTO)
     case discharge(discharge: DischargeDTO)
-    case settlementWeight(settlementWeight: DischargeWeightDTO)
-    case referenceWeight(referenceWeight: DischargeWeightDTO)
+    case dischargeWeight(dischargeWeight: DischargeWeightDTO)
     case sampleCollection(sampleCollection: SampleCollectionDTO)
     case sampleReduction(sampleReduction: SampleReductionDTO)
     case moistureDetermination(moistureDetermination: MoistureDeterminationDTO)
@@ -89,8 +84,7 @@ public enum AnyShipmentChildDTO: Codable {
         case .details: return .details
         case .billOfLading: return .billOfLading
         case .discharge: return .discharge
-        case .settlementWeight: return .settlementWeight
-        case .referenceWeight: return .referenceWeight
+        case .dischargeWeight: return .dischargeWeight
         case .sampleCollection: return .sampleCollection
         case .sampleReduction: return .sampleReduction
         case .moistureDetermination: return .moistureDetermination
@@ -103,8 +97,7 @@ public enum AnyShipmentChildDTO: Codable {
         case (.details, .details),
              (.billOfLading, .billOfLading),
              (.discharge, .discharge),
-             (.settlementWeight, .settlementWeight),
-             (.referenceWeight, .referenceWeight),
+             (.dischargeWeight, .dischargeWeight),
              (.sampleCollection, .sampleCollection),
              (.sampleReduction, .sampleReduction),
              (.moistureDetermination, .moistureDetermination),

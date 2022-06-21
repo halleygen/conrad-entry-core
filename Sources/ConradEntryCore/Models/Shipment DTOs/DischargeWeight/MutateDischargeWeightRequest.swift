@@ -55,10 +55,7 @@ public struct MutateDischargeWeightRequest: DischargeWeightProtocol, ShipmentChi
     }
 
     public func eraseToAnyMutationRequest() -> AnyShipmentChildMutationRequest {
-        switch kind {
-        case .settlement: return .settlementWeight(request: self)
-        case .reference: return .referenceWeight(request: self)
-        }
+        .dischargeWeight(request: self)
     }
 
     public enum CodingKeys: String, CodingKey {

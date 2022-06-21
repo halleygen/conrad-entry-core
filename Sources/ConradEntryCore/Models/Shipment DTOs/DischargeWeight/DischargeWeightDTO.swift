@@ -59,10 +59,7 @@ public struct DischargeWeightDTO: DischargeWeightProtocol, APIResponseItem, Ship
     }
 
     public func eraseToAnyDTO() -> AnyShipmentChildDTO {
-        switch kind {
-        case .settlement: return .settlementWeight(settlementWeight: self)
-        case .reference: return .referenceWeight(referenceWeight: self)
-        }
+        .dischargeWeight(dischargeWeight: self)
     }
 
     public enum CodingKeys: String, CodingKey {
