@@ -10,17 +10,19 @@ public struct SamplePreparationDivisionMethod: ConfigurationConstant {
     public let usesRiffle: Bool
     public let usesIncrementDivision: Bool
     public let representsOtherValue: Bool
+    public let isDeleted: Bool
 
-    public init(id: Int, value: String, usesRotarySampleDivider: Bool, usesRiffle: Bool, usesIncrementDivision: Bool, representsOtherValue: Bool) {
+    public init(id: Int, value: String, usesRotarySampleDivider: Bool, usesRiffle: Bool, usesIncrementDivision: Bool, representsOtherValue: Bool, isDeleted: Bool = false) {
         self.id = id
         self.value = value
         self.usesRotarySampleDivider = usesRotarySampleDivider
         self.usesRiffle = usesRiffle
         self.usesIncrementDivision = usesIncrementDivision
         self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
     }
 
     public enum CodingKeys: String, CodingKey {
-        case id, value, usesRotarySampleDivider, usesRiffle, usesIncrementDivision, representsOtherValue
+        case id, value, usesRotarySampleDivider, usesRiffle, usesIncrementDivision, representsOtherValue, isDeleted
     }
 }

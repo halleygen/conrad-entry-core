@@ -10,6 +10,7 @@ public struct MaritimePort: ConfigurationConstant {
     public let value: String
     public let countryCode: String
     public let timeZoneIdentifier: String
+    public let isDeleted: Bool
 
     public var representsOtherValue: Bool { false }
 
@@ -21,18 +22,19 @@ public struct MaritimePort: ConfigurationConstant {
 
     public var timeZone: TimeZone { TimeZone(identifier: timeZoneIdentifier)! }
 
-    public init(id: Int, name: String, countryCode: String, timeZoneIdentifier: String) {
+    public init(id: Int, name: String, countryCode: String, timeZoneIdentifier: String, isDeleted: Bool = false) {
         precondition(TimeZone(identifier: timeZoneIdentifier) != nil, "Port initialized with invalid time zone identifier.")
         self.id = id
         self.value = name
         self.countryCode = countryCode
         self.timeZoneIdentifier = timeZoneIdentifier
+        self.isDeleted = isDeleted
     }
 }
 
 public extension MaritimePort {
     enum CodingKeys: String, CodingKey, CaseIterable {
-        case id, value, countryCode, timeZoneIdentifier
+        case id, value, countryCode, timeZoneIdentifier, isDeleted
     }
 }
 
