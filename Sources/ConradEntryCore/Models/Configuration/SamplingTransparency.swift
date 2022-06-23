@@ -13,7 +13,7 @@ public struct SamplingTransparency: ConfigurationConstant {
 
     public var representsOtherValue: Bool { false }
 
-    public init(id: Int, value: String, ranking: Int, isDeleted: Bool = false) {
+    public init(id: Int, value: String, ranking: Int, isDeleted: Bool) {
         self.id = id
         self.value = value
         self.ranking = ranking

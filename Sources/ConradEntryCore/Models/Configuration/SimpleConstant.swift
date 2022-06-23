@@ -9,7 +9,7 @@ public struct SimpleConstant: ConfigurationConstant {
     public var representsOtherValue: Bool
     public var isDeleted: Bool
 
-    public init(id: Int, value: String, representsOtherValue: Bool, isDeleted: Bool = false) {
+    public init(id: Int, value: String, representsOtherValue: Bool, isDeleted: Bool) {
         self.id = id
         self.value = value
         self.representsOtherValue = representsOtherValue

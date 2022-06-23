@@ -10,7 +10,7 @@ public struct SampleReductionMethod: ConfigurationConstant {
     public let representsOtherValue: Bool
     public let isDeleted: Bool
 
-    public init(id: Int, value: String, usesGrid: Bool, representsOtherValue: Bool = false, isDeleted: Bool = false) {
+    public init(id: Int, value: String, usesGrid: Bool, representsOtherValue: Bool = false, isDeleted: Bool) {
         self.id = id
         self.value = value
         self.usesGrid = usesGrid

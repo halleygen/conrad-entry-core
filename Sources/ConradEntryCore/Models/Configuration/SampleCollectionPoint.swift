@@ -11,7 +11,7 @@ public struct SampleCollectionPoint: ConfigurationConstant {
 
     public var representsOtherValue: Bool { false }
 
-    public init(id: Int, value: String, isFromTruck: Bool, isDeleted: Bool = false) {
+    public init(id: Int, value: String, isFromTruck: Bool, isDeleted: Bool) {
         self.id = id
         self.value = value
         self.isFromTruck = isFromTruck

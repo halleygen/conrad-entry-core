@@ -12,7 +12,7 @@ public struct SamplePreparationDivisionMethod: ConfigurationConstant {
     public let representsOtherValue: Bool
     public let isDeleted: Bool
 
-    public init(id: Int, value: String, usesRotarySampleDivider: Bool, usesRiffle: Bool, usesIncrementDivision: Bool, representsOtherValue: Bool, isDeleted: Bool = false) {
+    public init(id: Int, value: String, usesRotarySampleDivider: Bool, usesRiffle: Bool, usesIncrementDivision: Bool, representsOtherValue: Bool, isDeleted: Bool) {
         self.id = id
         self.value = value
         self.usesRotarySampleDivider = usesRotarySampleDivider

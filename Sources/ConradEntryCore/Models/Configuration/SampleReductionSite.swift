@@ -11,7 +11,7 @@ public struct SampleReductionSite: ConfigurationConstant {
 
     public var representsOtherValue: Bool { false }
 
-    public init(id: Int, value: String, isLabFacility: Bool, isDeleted: Bool = false) {
+    public init(id: Int, value: String, isLabFacility: Bool, isDeleted: Bool) {
         self.id = id
         self.value = value
         self.isLabFacility = isLabFacility

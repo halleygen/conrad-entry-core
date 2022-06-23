@@ -13,7 +13,7 @@ public struct WeighingMethod: ConfigurationConstant {
 
     public var representsOtherValue: Bool { false }
 
-    public init(id: Int, value: String, usesEquipment: Bool, usesTallymen: Bool, supportsABCChecks: Bool, isDeleted: Bool = false) {
+    public init(id: Int, value: String, usesEquipment: Bool, usesTallymen: Bool, supportsABCChecks: Bool, isDeleted: Bool) {
         self.id = id
         self.value = value
         self.usesEquipment = usesEquipment

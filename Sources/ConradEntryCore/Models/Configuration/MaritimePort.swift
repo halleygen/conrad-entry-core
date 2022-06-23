@@ -22,7 +22,7 @@ public struct MaritimePort: ConfigurationConstant {
 
     public var timeZone: TimeZone { TimeZone(identifier: timeZoneIdentifier)! }
 
-    public init(id: Int, name: String, countryCode: String, timeZoneIdentifier: String, isDeleted: Bool = false) {
+    public init(id: Int, name: String, countryCode: String, timeZoneIdentifier: String, isDeleted: Bool) {
         precondition(TimeZone(identifier: timeZoneIdentifier) != nil, "Port initialized with invalid time zone identifier.")
         self.id = id
         self.value = name
