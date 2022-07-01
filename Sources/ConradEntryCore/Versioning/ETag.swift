@@ -10,6 +10,10 @@ public enum ETag: Hashable {
     case weakValidator(String)
     case catchAll
 
+    public init<Value: ETagConvertible>(_ value: Value) {
+        self = value.eTag
+    }
+
     public var value: String {
         switch self {
         case let .strongValidator(string): return string
