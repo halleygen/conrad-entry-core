@@ -9,15 +9,19 @@ public enum ETag: Hashable {
     case strongValidator(String)
     case weakValidator(String)
     case catchAll
+
+    public var value: String {
+        switch self {
+        case let .strongValidator(string): return string
+        case let .weakValidator(string): return string
+        case .catchAll: return "*"
+        }
+    }
 }
 
 public extension ETag {
-    static func fromValue<T: ETagConvertible>(_ value: T) -> Self {
-        .strongValidator(value.eTagValue)
-    }
-
     static func fromResource<T: VersionedResource>(_ resource: T) -> Self {
-        .strongValidator(resource.version.eTagValue)
+        resource.version.eTag
     }
 }
 

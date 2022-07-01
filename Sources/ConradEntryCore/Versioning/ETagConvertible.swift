@@ -6,38 +6,36 @@
 import Foundation
 
 public protocol ETagConvertible: Hashable {
-    var eTagValue: String { get }
+    var eTag: ETag { get }
 }
 
 public protocol LosslessETagConvertible: ETagConvertible {
-    init?(eTagValue: String)
+    init?(eTag: ETag)
 }
 
 extension Optional: ETagConvertible where Wrapped: ETagConvertible {
-    public var eTagValue: String {
+    public var eTag: ETag {
         if let self = self {
-            return self.eTagValue
+            return self.eTag
         } else {
-            return "*"
+            return .catchAll
         }
     }
 }
 
 extension UUID: LosslessETagConvertible {
-    public var eTagValue: String { uuidString }
+    public var eTag: ETag { .strongValidator(uuidString) }
 
-    public init?(eTagValue: String) {
-        self.init(uuidString: eTagValue)
+    public init?(eTag: ETag) {
+        self.init(uuidString: eTag.value)
     }
 }
 
 extension Date: LosslessETagConvertible {
-    public var eTagValue: String {
-        String(timeIntervalSince1970)
-    }
+    public var eTag: ETag { .strongValidator(String(timeIntervalSince1970)) }
 
-    public init?(eTagValue: String) {
-        guard let timeIntervalSince1970 = TimeInterval(eTagValue) else { return nil }
+    public init?(eTag: ETag) {
+        guard let timeIntervalSince1970 = TimeInterval(eTag.value) else { return nil }
         self.init(timeIntervalSince1970: timeIntervalSince1970)
     }
 }
