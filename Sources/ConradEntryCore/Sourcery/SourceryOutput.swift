@@ -134,6 +134,21 @@ public struct BillOfLadingDTO: Codable, Hashable, APIResponseItem {
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
     }
+
+    public init(
+        _ creationRequest: BillOfLadingCreationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.loadPortID = creationRequest.loadPortID
+        self.vesselHolds = creationRequest.vesselHolds
+        self.weighingMethodID = creationRequest.weighingMethodID
+        self.wetMetricTonnes = creationRequest.wetMetricTonnes
+        self.moisturePercentage = creationRequest.moisturePercentage
+        self.dryMetricTonnes = creationRequest.dryMetricTonnes
+    }
 }
 
 // MARK: PartialDTO
@@ -388,6 +403,28 @@ public struct DischargeDTO: Codable, Hashable, APIResponseItem {
         self.saveAllTarpaulinsUsed = saveAllTarpaulinsUsed
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
+    }
+
+    public init(
+        _ creationRequest: DischargeCreationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.berthName = creationRequest.berthName
+        self.berthLocation = creationRequest.berthLocation
+        self.gearID = creationRequest.gearID
+        self.methodID = creationRequest.methodID
+        self.cargoCondition = creationRequest.cargoCondition
+        self.weatherConditionsID = creationRequest.weatherConditionsID
+        self.startTime = creationRequest.startTime
+        self.finishTimeLastGrab = creationRequest.finishTimeLastGrab
+        self.finishTimeCleanup = creationRequest.finishTimeCleanup
+        self.dischargeRateTonnesPerHour = creationRequest.dischargeRateTonnesPerHour
+        self.saveAllTarpaulinsUsed = creationRequest.saveAllTarpaulinsUsed
+        self.holdsCleaned = creationRequest.holdsCleaned
+        self.wharfCleaned = creationRequest.wharfCleaned
     }
 }
 
@@ -717,6 +754,32 @@ public struct DischargeWeightDTO: Codable, Hashable, APIResponseItem {
         self.tallymen = tallymen
         self.transparencyID = transparencyID
     }
+
+    public init(
+        _ creationRequest: DischargeWeightCreationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.kind = creationRequest.kind
+        self.methodID = creationRequest.methodID
+        self.weighingPointID = creationRequest.weighingPointID
+        self.weighingCompany = creationRequest.weighingCompany
+        self.startTime = creationRequest.startTime
+        self.finishTime = creationRequest.finishTime
+        self.wetMetricTonnes = creationRequest.wetMetricTonnes
+        self.moisturePercentage = creationRequest.moisturePercentage
+        self.dryMetricTonnes = creationRequest.dryMetricTonnes
+        self.equipmentName = creationRequest.equipmentName
+        self.equipmentModel = creationRequest.equipmentModel
+        self.equipmentLocation = creationRequest.equipmentLocation
+        self.equipmentCertificationDate = creationRequest.equipmentCertificationDate
+        self.calibrationCheck = creationRequest.calibrationCheck
+        self.abcCheck = creationRequest.abcCheck
+        self.tallymen = creationRequest.tallymen
+        self.transparencyID = creationRequest.transparencyID
+    }
 }
 
 // MARK: PartialDTO
@@ -965,6 +1028,25 @@ public struct MoistureDeterminationDTO: Codable, Hashable, APIResponseItem {
         self.constantWeightCheck = constantWeightCheck
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
+    }
+
+    public init(
+        _ creationRequest: MoistureDeterminationCreationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.moistureDeterminationCompanyID = creationRequest.moistureDeterminationCompanyID
+        self.siteID = creationRequest.siteID
+        self.location = creationRequest.location
+        self.lotSampleTrayWeightKilograms = creationRequest.lotSampleTrayWeightKilograms
+        self.ovenOnTime = creationRequest.ovenOnTime
+        self.ovenOffTime = creationRequest.ovenOffTime
+        self.ovenTemperatureCelsius = creationRequest.ovenTemperatureCelsius
+        self.constantWeightCheck = creationRequest.constantWeightCheck
+        self.resultsWaitTimeDays = creationRequest.resultsWaitTimeDays
+        self.transparencyID = creationRequest.transparencyID
     }
 }
 
@@ -1232,6 +1314,28 @@ public struct SampleCollectionDTO: Codable, Hashable, APIResponseItem {
         self.lotSizeWetTonnes = lotSizeWetTonnes
         self.sublotSizeWetTonnes = sublotSizeWetTonnes
         self.numberOfLots = numberOfLots
+    }
+
+    public init(
+        _ creationRequest: SampleCollectionCreationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.samplingCompanyID = creationRequest.samplingCompanyID
+        self.siteID = creationRequest.siteID
+        self.location = creationRequest.location
+        self.samplingPointID = creationRequest.samplingPointID
+        self.startTime = creationRequest.startTime
+        self.finishTime = creationRequest.finishTime
+        self.methodID = creationRequest.methodID
+        self.sampleIncrementsWetTonnes = creationRequest.sampleIncrementsWetTonnes
+        self.typicalSampleWeightKilograms = creationRequest.typicalSampleWeightKilograms
+        self.numberOfTrucksPerBag = creationRequest.numberOfTrucksPerBag
+        self.lotSizeWetTonnes = creationRequest.lotSizeWetTonnes
+        self.sublotSizeWetTonnes = creationRequest.sublotSizeWetTonnes
+        self.numberOfLots = creationRequest.numberOfLots
     }
 }
 
@@ -1600,6 +1704,35 @@ public struct SamplePreparationDTO: Codable, Hashable, APIResponseItem {
         self.numberOfSets = numberOfSets
         self.transparencyID = transparencyID
     }
+
+    public init(
+        _ creationRequest: SamplePreparationCreationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.preparationCompanyID = creationRequest.preparationCompanyID
+        self.siteID = creationRequest.siteID
+        self.location = creationRequest.location
+        self.startTime = creationRequest.startTime
+        self.finishTime = creationRequest.finishTime
+        self.standardsID = creationRequest.standardsID
+        self.wasScreened = creationRequest.wasScreened
+        self.screenApertureID = creationRequest.screenApertureID
+        self.oversizePulverizedSeparately = creationRequest.oversizePulverizedSeparately
+        self.sampleChargeWeightGrams = creationRequest.sampleChargeWeightGrams
+        self.pulverizerID = creationRequest.pulverizerID
+        self.pulverizingDurationSeconds = creationRequest.pulverizingDurationSeconds
+        self.divisionMethodID = creationRequest.divisionMethodID
+        self.rsdNumberOfSegments = creationRequest.rsdNumberOfSegments
+        self.incrementISOScoopUsed = creationRequest.incrementISOScoopUsed
+        self.incrementBackingPlateUsed = creationRequest.incrementBackingPlateUsed
+        self.incrementDividedToExtinction = creationRequest.incrementDividedToExtinction
+        self.riffleApertureMillimetres = creationRequest.riffleApertureMillimetres
+        self.numberOfSets = creationRequest.numberOfSets
+        self.transparencyID = creationRequest.transparencyID
+    }
 }
 
 // MARK: PartialDTO
@@ -1870,6 +2003,26 @@ public struct SampleReductionDTO: Codable, Hashable, APIResponseItem {
         self.wasConedAndQuartered = wasConedAndQuartered
         self.methodID = methodID
         self.gridSizeID = gridSizeID
+    }
+
+    public init(
+        _ creationRequest: SampleReductionCreationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.samplingCompanyID = creationRequest.samplingCompanyID
+        self.location = creationRequest.location
+        self.siteID = creationRequest.siteID
+        self.laboratoryID = creationRequest.laboratoryID
+        self.reductionPointID = creationRequest.reductionPointID
+        self.startTime = creationRequest.startTime
+        self.finishTime = creationRequest.finishTime
+        self.screenApertureMillimetres = creationRequest.screenApertureMillimetres
+        self.wasConedAndQuartered = creationRequest.wasConedAndQuartered
+        self.methodID = creationRequest.methodID
+        self.gridSizeID = creationRequest.gridSizeID
     }
 }
 
@@ -2153,6 +2306,29 @@ public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
         self.inspectionCompanySellerID = inspectionCompanySellerID
         self.inspectionCompanySecondAgentID = inspectionCompanySecondAgentID
         self.conradTeamSize = conradTeamSize
+    }
+
+    public init(
+        _ creationRequest: ShipmentDetailsCreationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.clientReference = creationRequest.clientReference
+        self.logDate = creationRequest.logDate
+        self.norTime = creationRequest.norTime
+        self.vesselName = creationRequest.vesselName
+        self.clientID = creationRequest.clientID
+        self.commodityID = creationRequest.commodityID
+        self.agentID = creationRequest.agentID
+        self.traderID = creationRequest.traderID
+        self.smelterID = creationRequest.smelterID
+        self.dischargePortID = creationRequest.dischargePortID
+        self.inspectionCompanyReceiverID = creationRequest.inspectionCompanyReceiverID
+        self.inspectionCompanySellerID = creationRequest.inspectionCompanySellerID
+        self.inspectionCompanySecondAgentID = creationRequest.inspectionCompanySecondAgentID
+        self.conradTeamSize = creationRequest.conradTeamSize
     }
 }
 

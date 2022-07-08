@@ -91,6 +91,21 @@ public struct {{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, API
         {% endif %}
     {% endfor %}
     }
+
+    public init(
+        _ creationRequest: {{ type.name|replace:"Properties","CreationRequest" }},
+        {% for variable in type.storedVariables|annotated:"skipCreationRequest" %}
+        {{ variable.name }}: {{ variable.typeName }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    ) {
+    {% for variable in type.storedVariables %}
+    {% if variable|annotated:"skipCreationRequest" %}
+        self.{{ variable.name }} = {{ variable.name }}
+    {% else %}
+        self.{{ variable.name }} = creationRequest.{{ variable.name }}
+    {% endif %}
+    {% endfor %}
+    }
 }
 
 // MARK: PartialDTO
