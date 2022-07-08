@@ -8,9 +8,8 @@ import Foundation
 private protocol ShipmentAutogen {}
 
 private protocol ShipmentDetailsProperties: ShipmentAutogen {
-    // sourcery:begin: skipMutationRequest, skipCreationRequest
+    // sourcery:begin: skipMutationRequest, skipCreationRequest, requiredInPartialDTO
     var id: UUID { get }
-    // sourcery: requiredInPartialDTO
     var version: Date { get }
     // sourcery:end
 
@@ -31,9 +30,8 @@ private protocol ShipmentDetailsProperties: ShipmentAutogen {
 }
 
 private protocol BillOfLadingProperties: ShipmentAutogen {
-    // sourcery:begin: skipMutationRequest, skipCreationRequest
+    // sourcery:begin: skipMutationRequest, skipCreationRequest, requiredInPartialDTO
     var id: UUID { get }
-    // sourcery: requiredInPartialDTO
     var version: Date { get }
     // sourcery:end
 
@@ -46,9 +44,8 @@ private protocol BillOfLadingProperties: ShipmentAutogen {
 }
 
 private protocol DischargeProperties: ShipmentAutogen {
-    // sourcery:begin: skipMutationRequest, skipCreationRequest
+    // sourcery:begin: skipMutationRequest, skipCreationRequest, requiredInPartialDTO
     var id: UUID { get }
-    // sourcery: requiredInPartialDTO
     var version: Date { get }
     // sourcery:end
 
@@ -68,9 +65,8 @@ private protocol DischargeProperties: ShipmentAutogen {
 }
 
 private protocol DischargeWeightProperties: ShipmentAutogen {
-    // sourcery:begin: skipMutationRequest, skipCreationRequest
+    // sourcery:begin: skipMutationRequest, skipCreationRequest, requiredInPartialDTO
     var id: UUID { get }
-    // sourcery: requiredInPartialDTO
     var version: Date { get }
     // sourcery:end
 
@@ -94,9 +90,8 @@ private protocol DischargeWeightProperties: ShipmentAutogen {
 }
 
 private protocol MoistureDeterminationProperties: ShipmentAutogen {
-    // sourcery:begin: skipMutationRequest, skipCreationRequest
+    // sourcery:begin: skipMutationRequest, skipCreationRequest, requiredInPartialDTO
     var id: UUID { get }
-    // sourcery: requiredInPartialDTO
     var version: Date { get }
     // sourcery:end
 
@@ -113,9 +108,8 @@ private protocol MoistureDeterminationProperties: ShipmentAutogen {
 }
 
 private protocol SampleCollectionProperties: ShipmentAutogen {
-    // sourcery:begin: skipMutationRequest, skipCreationRequest
+    // sourcery:begin: skipMutationRequest, skipCreationRequest, requiredInPartialDTO
     var id: UUID { get }
-    // sourcery: requiredInPartialDTO
     var version: Date { get }
     // sourcery:end
 
@@ -135,9 +129,8 @@ private protocol SampleCollectionProperties: ShipmentAutogen {
 }
 
 private protocol SamplePreparationProperties: ShipmentAutogen {
-    // sourcery:begin: skipMutationRequest, skipCreationRequest
+    // sourcery:begin: skipMutationRequest, skipCreationRequest, requiredInPartialDTO
     var id: UUID { get }
-    // sourcery: requiredInPartialDTO
     var version: Date { get }
     // sourcery:end
 
@@ -164,9 +157,8 @@ private protocol SamplePreparationProperties: ShipmentAutogen {
 }
 
 private protocol SampleReductionProperties: ShipmentAutogen {
-    // sourcery:begin: skipMutationRequest, skipCreationRequest
+    // sourcery:begin: skipMutationRequest, skipCreationRequest, requiredInPartialDTO
     var id: UUID { get }
-    // sourcery: requiredInPartialDTO
     var version: Date { get }
     // sourcery:end
 

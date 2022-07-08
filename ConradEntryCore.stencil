@@ -8,73 +8,106 @@ import Foundation
 // MARK: CreationRequest
 
 public struct {{ type.name|replace:"Properties","CreationRequest" }}: Codable, Hashable {
-    {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
-        public var {{ variable.name }}: {{ variable.typeName }} 
-    {% endfor %}
+{% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
+    public var {{ variable.name }}: {{ variable.typeName }} 
+{% endfor %}
 
     public init(
-        {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
-            {{ variable.name }}: {{ variable.typeName }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
+    {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
+        {{ variable.name }}: {{ variable.typeName }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
     ) {
+    {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
+        self.{{ variable.name }} = {{ variable.name }}
+    {% endfor %}
+    }
+
+    public init?(mutationRequest: {{ type.name|replace:"Properties","MutationRequest" }}) {
+        guard
         {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
-            self.{{ variable.name }} = {{ variable.name }}
+            let {{ variable.name }} = mutationRequest.{{ variable.name }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
+        else {
+            return nil 
+        }
+
+    {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
+        self.{{ variable.name }} = {{ variable.name }}
+    {% endfor %}
     }
 }
 
 // MARK: MutationRequest
 
 public struct {{ type.name|replace:"Properties","MutationRequest" }}: Codable, Hashable {
-    {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
-        public var {{ variable.name }}: {{ variable.typeName }}?
-    {% endfor %}
+{% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
+    public var {{ variable.name }}: {{ variable.typeName }}?
+{% endfor %}
 
     public init(
-        {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
-            {{ variable.name }}: {{ variable.typeName }}? = nil{% if not forloop.last %}, {% endif %}
-        {% endfor %}
+    {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
+        {{ variable.name }}: {{ variable.typeName }}? = nil{% if not forloop.last %}, {% endif %}
+    {% endfor %}
     ) {
-        {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
-            self.{{ variable.name }} = {{ variable.name }}
-        {% endfor %}
+    {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
+        self.{{ variable.name }} = {{ variable.name }}
+    {% endfor %}
     }
 }
 
 // MARK: DTO
 
 public struct {{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, APIResponseItem {
-    {% for variable in type.storedVariables %}
-        public let {{ variable.name }}: {{ variable.typeName }}   
-    {% endfor %}
+{% for variable in type.storedVariables %}
+    public let {{ variable.name }}: {{ variable.typeName }}   
+{% endfor %}
 
     public init(
-        {% for variable in type.storedVariables %}
-            {{ variable.name }}: {{ variable.typeName }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
+    {% for variable in type.storedVariables %}
+        {{ variable.name }}: {{ variable.typeName }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
     ) {
+    {% for variable in type.storedVariables %}
+        self.{{ variable.name }} = {{ variable.name }}
+    {% endfor %}
+    }
+
+    public init?(partial: Partial{{ type.name|replace:"Properties","DTO" }}) {
+        guard
         {% for variable in type.storedVariables %}
-            self.{{ variable.name }} = {{ variable.name }}
+        {% if variable|!annotated:"requiredInPartialDTO" %}
+            let {{ variable.name }} = partial.{{ variable.name }}{% if not forloop.last %}, {% endif %}
+        {% endif %}
         {% endfor %}
+        else {
+            return nil 
+        }
+
+    {% for variable in type.storedVariables %}
+        {% if variable|annotated:"requiredInPartialDTO" %}
+            self.{{ variable.name }} = partial.{{ variable.name }}
+        {% else %}
+            self.{{ variable.name }} = {{ variable.name }}
+        {% endif %}
+    {% endfor %}
     }
 }
 
 // MARK: PartialDTO
 
 public struct Partial{{ type.name|replace:"Properties","DTO" }}: Codable, Hashable {
-    {% for variable in type.storedVariables %}
-        public let {{ variable.name }}: {{ variable.typeName }}{% if variable|!annotated:"requiredInPartialDTO" %}?{% endif %}
-    {% endfor %}
+{% for variable in type.storedVariables %}
+    public let {{ variable.name }}: {{ variable.typeName }}{% if variable|!annotated:"requiredInPartialDTO" %}?{% endif %}
+{% endfor %}
 
     public init(
-        {% for variable in type.storedVariables %}
-            {{ variable.name }}: {{ variable.typeName }}{% if variable|!annotated:"requiredInPartialDTO" %}? = nil{% endif %}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
+    {% for variable in type.storedVariables %}
+        {{ variable.name }}: {{ variable.typeName }}{% if variable|!annotated:"requiredInPartialDTO" %}? = nil{% endif %}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
     ) {
-        {% for variable in type.storedVariables %}
-            self.{{ variable.name }} = {{ variable.name }}
-        {% endfor %}
+    {% for variable in type.storedVariables %}
+        self.{{ variable.name }} = {{ variable.name }}
+    {% endfor %}
     }
 }
-
 {% endfor %}
