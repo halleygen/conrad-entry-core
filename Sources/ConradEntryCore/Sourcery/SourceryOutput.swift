@@ -2219,6 +2219,7 @@ public struct ShipmentDetailsMutationRequest: Codable, Hashable {
 public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
     public let id: UUID
     public let version: Date
+    public let creationDate: Date
     public let clientReference: String
     public let logDate: Date
     public let norTime: Date
@@ -2237,6 +2238,7 @@ public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
     public init(
         id: UUID,
         version: Date,
+        creationDate: Date,
         clientReference: String,
         logDate: Date,
         norTime: Date,
@@ -2254,6 +2256,7 @@ public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
     ) {
         self.id = id
         self.version = version
+        self.creationDate = creationDate
         self.clientReference = clientReference
         self.logDate = logDate
         self.norTime = norTime
@@ -2272,6 +2275,7 @@ public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
 
     public init?(partial: PartialShipmentDetailsDTO) {
         guard
+            let creationDate = partial.creationDate,
             let clientReference = partial.clientReference,
             let logDate = partial.logDate,
             let norTime = partial.norTime,
@@ -2292,6 +2296,7 @@ public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
 
         self.id = partial.id
         self.version = partial.version
+        self.creationDate = creationDate
         self.clientReference = clientReference
         self.logDate = logDate
         self.norTime = norTime
@@ -2311,10 +2316,12 @@ public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
     public init(
         _ creationRequest: ShipmentDetailsCreationRequest,
         id: UUID,
-        version: Date
+        version: Date,
+        creationDate: Date
     ) {
         self.id = id
         self.version = version
+        self.creationDate = creationDate
         self.clientReference = creationRequest.clientReference
         self.logDate = creationRequest.logDate
         self.norTime = creationRequest.norTime
@@ -2337,6 +2344,7 @@ public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
 public struct PartialShipmentDetailsDTO: Codable, Hashable {
     public let id: UUID
     public let version: Date
+    public let creationDate: Date?
     public let clientReference: String?
     public let logDate: Date?
     public let norTime: Date?
@@ -2355,6 +2363,7 @@ public struct PartialShipmentDetailsDTO: Codable, Hashable {
     public init(
         id: UUID,
         version: Date,
+        creationDate: Date? = nil,
         clientReference: String? = nil,
         logDate: Date? = nil,
         norTime: Date? = nil,
@@ -2372,6 +2381,7 @@ public struct PartialShipmentDetailsDTO: Codable, Hashable {
     ) {
         self.id = id
         self.version = version
+        self.creationDate = creationDate
         self.clientReference = clientReference
         self.logDate = logDate
         self.norTime = norTime

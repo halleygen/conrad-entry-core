@@ -13,6 +13,9 @@ private protocol ShipmentDetailsProperties: ShipmentAutogen {
     var version: Date { get }
     // sourcery:end
 
+    // sourcery: skipMutationRequest, skipCreationRequest
+    var creationDate: Date { get }
+
     var clientReference: String { get }
     var logDate: Date { get }
     var norTime: Date { get }
