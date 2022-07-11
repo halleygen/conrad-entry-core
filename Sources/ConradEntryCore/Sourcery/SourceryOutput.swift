@@ -7,6 +7,17 @@ import Foundation
 
 // MARK: - BillOfLading
 
+// MARK: Protocol
+
+public protocol BillOfLadingPartialProperties {
+    var loadPortID: Int { get set }
+    var vesselHolds: Set<Int> { get set }
+    var weighingMethodID: Int { get set }
+    var wetMetricTonnes: Double { get set }
+    var moisturePercentage: Double { get set }
+    var dryMetricTonnes: Double { get set }
+}
+
 // MARK: CreationRequest
 
 public struct BillOfLadingCreationRequest: Codable, Hashable {
@@ -153,7 +164,7 @@ public struct BillOfLadingDTO: Codable, Hashable, APIResponseItem {
 
 // MARK: PartialDTO
 
-public struct PartialBillOfLadingDTO: Codable, Hashable {
+public struct PartialBillOfLadingDTO: Codable, Hashable, APIResponseItem {
     public let id: UUID
     public let version: Date
     public let loadPortID: Int?
@@ -185,6 +196,24 @@ public struct PartialBillOfLadingDTO: Codable, Hashable {
 }
 
 // MARK: - Discharge
+
+// MARK: Protocol
+
+public protocol DischargePartialProperties {
+    var berthName: String { get set }
+    var berthLocation: LocationDTO { get set }
+    var gearID: Int { get set }
+    var methodID: Int { get set }
+    var cargoCondition: CargoConditionDTO { get set }
+    var weatherConditionsID: Int { get set }
+    var startTime: Date { get set }
+    var finishTimeLastGrab: Date { get set }
+    var finishTimeCleanup: Date { get set }
+    var dischargeRateTonnesPerHour: Double { get set }
+    var saveAllTarpaulinsUsed: Bool { get set }
+    var holdsCleaned: Bool { get set }
+    var wharfCleaned: Bool { get set }
+}
 
 // MARK: CreationRequest
 
@@ -430,7 +459,7 @@ public struct DischargeDTO: Codable, Hashable, APIResponseItem {
 
 // MARK: PartialDTO
 
-public struct PartialDischargeDTO: Codable, Hashable {
+public struct PartialDischargeDTO: Codable, Hashable, APIResponseItem {
     public let id: UUID
     public let version: Date
     public let berthName: String?
@@ -483,6 +512,28 @@ public struct PartialDischargeDTO: Codable, Hashable {
 }
 
 // MARK: - DischargeWeight
+
+// MARK: Protocol
+
+public protocol DischargeWeightPartialProperties {
+    var kind: DischargeWeightKind { get set }
+    var methodID: Int { get set }
+    var weighingPointID: Int { get set }
+    var weighingCompany: String { get set }
+    var startTime: Date { get set }
+    var finishTime: Date { get set }
+    var wetMetricTonnes: Double { get set }
+    var moisturePercentage: Double { get set }
+    var dryMetricTonnes: Double { get set }
+    var equipmentName: String? { get set }
+    var equipmentModel: String? { get set }
+    var equipmentLocation: LocationDTO? { get set }
+    var equipmentCertificationDate: Date? { get set }
+    var calibrationCheck: CalibrationCheck? { get set }
+    var abcCheck: ABCCheck? { get set }
+    var tallymen: Tallymen? { get set }
+    var transparencyID: Int { get set }
+}
 
 // MARK: CreationRequest
 
@@ -784,7 +835,7 @@ public struct DischargeWeightDTO: Codable, Hashable, APIResponseItem {
 
 // MARK: PartialDTO
 
-public struct PartialDischargeWeightDTO: Codable, Hashable {
+public struct PartialDischargeWeightDTO: Codable, Hashable, APIResponseItem {
     public let id: UUID
     public let version: Date
     public let kind: DischargeWeightKind?
@@ -849,6 +900,21 @@ public struct PartialDischargeWeightDTO: Codable, Hashable {
 }
 
 // MARK: - MoistureDetermination
+
+// MARK: Protocol
+
+public protocol MoistureDeterminationPartialProperties {
+    var moistureDeterminationCompanyID: Int { get set }
+    var siteID: Int { get set }
+    var location: LocationDTO { get set }
+    var lotSampleTrayWeightKilograms: Double { get set }
+    var ovenOnTime: Date { get set }
+    var ovenOffTime: Date { get set }
+    var ovenTemperatureCelsius: Int { get set }
+    var constantWeightCheck: ConstantWeightCheck? { get set }
+    var resultsWaitTimeDays: Int { get set }
+    var transparencyID: Int { get set }
+}
 
 // MARK: CreationRequest
 
@@ -1052,7 +1118,7 @@ public struct MoistureDeterminationDTO: Codable, Hashable, APIResponseItem {
 
 // MARK: PartialDTO
 
-public struct PartialMoistureDeterminationDTO: Codable, Hashable {
+public struct PartialMoistureDeterminationDTO: Codable, Hashable, APIResponseItem {
     public let id: UUID
     public let version: Date
     public let moistureDeterminationCompanyID: Int?
@@ -1096,6 +1162,24 @@ public struct PartialMoistureDeterminationDTO: Codable, Hashable {
 }
 
 // MARK: - SampleCollection
+
+// MARK: Protocol
+
+public protocol SampleCollectionPartialProperties {
+    var samplingCompanyID: Int { get set }
+    var siteID: Int { get set }
+    var location: LocationDTO { get set }
+    var samplingPointID: Int { get set }
+    var startTime: Date { get set }
+    var finishTime: Date { get set }
+    var methodID: Int { get set }
+    var sampleIncrementsWetTonnes: Double { get set }
+    var typicalSampleWeightKilograms: Double { get set }
+    var numberOfTrucksPerBag: Int? { get set }
+    var lotSizeWetTonnes: Int { get set }
+    var sublotSizeWetTonnes: Int? { get set }
+    var numberOfLots: Int { get set }
+}
 
 // MARK: CreationRequest
 
@@ -1341,7 +1425,7 @@ public struct SampleCollectionDTO: Codable, Hashable, APIResponseItem {
 
 // MARK: PartialDTO
 
-public struct PartialSampleCollectionDTO: Codable, Hashable {
+public struct PartialSampleCollectionDTO: Codable, Hashable, APIResponseItem {
     public let id: UUID
     public let version: Date
     public let samplingCompanyID: Int?
@@ -1394,6 +1478,31 @@ public struct PartialSampleCollectionDTO: Codable, Hashable {
 }
 
 // MARK: - SamplePreparation
+
+// MARK: Protocol
+
+public protocol SamplePreparationPartialProperties {
+    var preparationCompanyID: Int { get set }
+    var siteID: Int { get set }
+    var location: LocationDTO { get set }
+    var startTime: Date { get set }
+    var finishTime: Date { get set }
+    var standardsID: Int { get set }
+    var wasScreened: Bool { get set }
+    var screenApertureID: Int? { get set }
+    var oversizePulverizedSeparately: Bool? { get set }
+    var sampleChargeWeightGrams: Int { get set }
+    var pulverizerID: Int { get set }
+    var pulverizingDurationSeconds: TimeInterval { get set }
+    var divisionMethodID: Int { get set }
+    var rsdNumberOfSegments: Int? { get set }
+    var incrementISOScoopUsed: Bool? { get set }
+    var incrementBackingPlateUsed: Bool? { get set }
+    var incrementDividedToExtinction: Bool? { get set }
+    var riffleApertureMillimetres: Int? { get set }
+    var numberOfSets: Int { get set }
+    var transparencyID: Int { get set }
+}
 
 // MARK: CreationRequest
 
@@ -1737,7 +1846,7 @@ public struct SamplePreparationDTO: Codable, Hashable, APIResponseItem {
 
 // MARK: PartialDTO
 
-public struct PartialSamplePreparationDTO: Codable, Hashable {
+public struct PartialSamplePreparationDTO: Codable, Hashable, APIResponseItem {
     public let id: UUID
     public let version: Date
     public let preparationCompanyID: Int?
@@ -1811,6 +1920,22 @@ public struct PartialSamplePreparationDTO: Codable, Hashable {
 }
 
 // MARK: - SampleReduction
+
+// MARK: Protocol
+
+public protocol SampleReductionPartialProperties {
+    var samplingCompanyID: Int { get set }
+    var location: LocationDTO { get set }
+    var siteID: Int { get set }
+    var laboratoryID: Int? { get set }
+    var reductionPointID: Int { get set }
+    var startTime: Date { get set }
+    var finishTime: Date { get set }
+    var screenApertureMillimetres: Double? { get set }
+    var wasConedAndQuartered: Bool { get set }
+    var methodID: Int { get set }
+    var gridSizeID: Int? { get set }
+}
 
 // MARK: CreationRequest
 
@@ -2028,7 +2153,7 @@ public struct SampleReductionDTO: Codable, Hashable, APIResponseItem {
 
 // MARK: PartialDTO
 
-public struct PartialSampleReductionDTO: Codable, Hashable {
+public struct PartialSampleReductionDTO: Codable, Hashable, APIResponseItem {
     public let id: UUID
     public let version: Date
     public let samplingCompanyID: Int?
@@ -2075,6 +2200,25 @@ public struct PartialSampleReductionDTO: Codable, Hashable {
 }
 
 // MARK: - ShipmentDetails
+
+// MARK: Protocol
+
+public protocol ShipmentDetailsPartialProperties {
+    var clientReference: String { get set }
+    var logDate: Date { get set }
+    var norTime: Date { get set }
+    var vesselName: String { get set }
+    var clientID: Int { get set }
+    var commodityID: Int { get set }
+    var agentID: Int? { get set }
+    var traderID: Int? { get set }
+    var smelterID: Int { get set }
+    var dischargePortID: Int { get set }
+    var inspectionCompanyReceiverID: Int? { get set }
+    var inspectionCompanySellerID: Int? { get set }
+    var inspectionCompanySecondAgentID: Int? { get set }
+    var conradTeamSize: Int { get set }
+}
 
 // MARK: CreationRequest
 
@@ -2341,7 +2485,7 @@ public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
 
 // MARK: PartialDTO
 
-public struct PartialShipmentDetailsDTO: Codable, Hashable {
+public struct PartialShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
     public let id: UUID
     public let version: Date
     public let creationDate: Date?

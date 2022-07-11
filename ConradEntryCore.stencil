@@ -5,6 +5,14 @@ import Foundation
 {% for type in types.implementing.ShipmentAutogen %}
 // MARK: - {{ type.name|replace:"Properties","" }}
 
+// MARK: Protocol
+
+public protocol {{ type.name|replace:"Properties","PartialProperties" }} {
+{% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
+    var {{ variable.name }}: {{ variable.typeName }} { get set }
+{% endfor %}
+}
+
 // MARK: CreationRequest
 
 public struct {{ type.name|replace:"Properties","CreationRequest"|replace:"Details","" }}: Codable, Hashable {
@@ -110,7 +118,7 @@ public struct {{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, API
 
 // MARK: PartialDTO
 
-public struct Partial{{ type.name|replace:"Properties","DTO" }}: Codable, Hashable {
+public struct Partial{{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, APIResponseItem {
 {% for variable in type.storedVariables %}
     public let {{ variable.name }}: {{ variable.typeName }}{% if variable|!annotated:"requiredInPartialDTO" %}?{% endif %}
 {% endfor %}
