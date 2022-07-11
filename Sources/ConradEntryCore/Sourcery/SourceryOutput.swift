@@ -2078,7 +2078,7 @@ public struct PartialSampleReductionDTO: Codable, Hashable {
 
 // MARK: CreationRequest
 
-public struct ShipmentDetailsCreationRequest: Codable, Hashable {
+public struct ShipmentCreationRequest: Codable, Hashable {
     public var clientReference: String
     public var logDate: Date
     public var norTime: Date
@@ -2314,7 +2314,7 @@ public struct ShipmentDetailsDTO: Codable, Hashable, APIResponseItem {
     }
 
     public init(
-        _ creationRequest: ShipmentDetailsCreationRequest,
+        _ creationRequest: ShipmentCreationRequest,
         id: UUID,
         version: Date,
         creationDate: Date

@@ -7,7 +7,7 @@ import Foundation
 
 // MARK: CreationRequest
 
-public struct {{ type.name|replace:"Properties","CreationRequest" }}: Codable, Hashable {
+public struct {{ type.name|replace:"Properties","CreationRequest"|replace:"Details","" }}: Codable, Hashable {
 {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
     public var {{ variable.name }}: {{ variable.typeName }} 
 {% endfor %}
@@ -93,7 +93,7 @@ public struct {{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, API
     }
 
     public init(
-        _ creationRequest: {{ type.name|replace:"Properties","CreationRequest" }},
+        _ creationRequest: {{ type.name|replace:"Properties","CreationRequest"|replace:"Details","" }},
         {% for variable in type.storedVariables|annotated:"skipCreationRequest" %}
         {{ variable.name }}: {{ variable.typeName }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
