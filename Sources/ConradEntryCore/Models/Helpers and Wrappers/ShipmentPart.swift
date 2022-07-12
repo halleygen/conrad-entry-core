@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public enum ShipmentPart: String, LosslessStringConvertible {
+public enum ShipmentPart: String, LosslessStringConvertible, Codable {
     case details
     case billOfLading = "bill-of-lading"
     case discharge
