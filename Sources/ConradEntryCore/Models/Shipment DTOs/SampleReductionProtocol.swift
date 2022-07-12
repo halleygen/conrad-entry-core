@@ -3,10 +3,13 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public extension SampleReductionDTO {
+public extension SampleReductionProperties {
     var wasScreened: Bool { screenApertureMillimetres != nil }
 }
 
-public extension SampleReductionCreationRequest {
-    var wasScreened: Bool { screenApertureMillimetres != nil }
+public extension SampleReductionPartialProperties {
+    var wasScreened: Bool? {
+        guard let screenApertureMillimetres = screenApertureMillimetres else { return nil }
+        return screenApertureMillimetres != nil
+    }
 }

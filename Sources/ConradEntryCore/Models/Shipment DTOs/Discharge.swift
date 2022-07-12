@@ -5,7 +5,7 @@
 
 import Foundation
 
-public extension DischargeDTO {
+public extension DischargeProperties {
     @inlinable var finishTimeForCalculations: Date { finishTimeCleanup }
 
     @inlinable var interval: DateInterval {
@@ -13,10 +13,11 @@ public extension DischargeDTO {
     }
 }
 
-public extension DischargeCreationRequest {
-    @inlinable var finishTimeForCalculations: Date { finishTimeCleanup }
+public extension DischargePartialProperties {
+    @inlinable var finishTimeForCalculations: Date? { finishTimeCleanup }
 
-    @inlinable var interval: DateInterval {
-        DateInterval(start: startTime, end: finishTimeCleanup)
+    @inlinable var interval: DateInterval? {
+        guard let startTime = startTime, let finishTimeCleanup = finishTimeCleanup else { return nil }
+        return DateInterval(start: startTime, end: finishTimeCleanup)
     }
 }

@@ -5,22 +5,12 @@
 
 import Foundation
 
-public extension DischargeWeightDTO {
+public extension DischargeWeightProperties {
     @inlinable var isSettlementWeight: Bool { kind == .settlement }
     @inlinable var isReferenceWeight: Bool { kind == .reference }
 }
 
-public extension DischargeWeightCreationRequest {
-    @inlinable var isSettlementWeight: Bool { kind == .settlement }
-    @inlinable var isReferenceWeight: Bool { kind == .reference }
-}
-
-public extension DischargeWeightMutationRequest {
-    @inlinable var isSettlementWeight: Bool { kind == .settlement }
-    @inlinable var isReferenceWeight: Bool { kind == .reference }
-}
-
-public extension PartialDischargeWeightDTO {
+public extension DischargeWeightPartialProperties {
     @inlinable var isSettlementWeight: Bool { kind == .settlement }
     @inlinable var isReferenceWeight: Bool { kind == .reference }
 }
