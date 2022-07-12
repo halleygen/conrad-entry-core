@@ -3,19 +3,25 @@
 import Foundation
 
 {% for type in types.implementing.ShipmentAutogen %}
-// MARK: - {{ type.name|replace:"Properties","" }}
+// MARK: - {{ type.name|replace:"Template","" }}
 
 // MARK: Protocol
 
-public protocol {{ type.name|replace:"Properties","PartialProperties" }} {
+public protocol {{ type.name|replace:"Template","Properties" }} {
+{% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
+    var {{ variable.name }}: {{ variable.typeName }} { get }
+{% endfor %}
+}
+
+public protocol {{ type.name|replace:"Template","PartialProperties" }} {
 {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
-    var {{ variable.name }}: {{ variable.typeName }} { get set }
+    var {{ variable.name }}: {{ variable.typeName }}? { get }
 {% endfor %}
 }
 
 // MARK: CreationRequest
 
-public struct {{ type.name|replace:"Properties","CreationRequest"|replace:"Details","" }}: Codable, Hashable {
+public struct {{ type.name|replace:"Template","CreationRequest"|replace:"Details","" }}: {{ type.name|replace:"Template","Properties" }}, Codable, Hashable {
 {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
     public var {{ variable.name }}: {{ variable.typeName }} 
 {% endfor %}
@@ -30,7 +36,7 @@ public struct {{ type.name|replace:"Properties","CreationRequest"|replace:"Detai
     {% endfor %}
     }
 
-    public init?(mutationRequest: {{ type.name|replace:"Properties","MutationRequest" }}) {
+    public init?(mutationRequest: {{ type.name|replace:"Template","MutationRequest" }}) {
         guard
         {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
             let {{ variable.name }} = mutationRequest.{{ variable.name }}{% if not forloop.last %}, {% endif %}
@@ -47,7 +53,7 @@ public struct {{ type.name|replace:"Properties","CreationRequest"|replace:"Detai
 
 // MARK: MutationRequest
 
-public struct {{ type.name|replace:"Properties","MutationRequest" }}: Codable, Hashable {
+public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name|replace:"Template","PartialProperties" }}, Codable, Hashable {
 {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
     public var {{ variable.name }}: {{ variable.typeName }}?
 {% endfor %}
@@ -65,7 +71,7 @@ public struct {{ type.name|replace:"Properties","MutationRequest" }}: Codable, H
 
 // MARK: DTO
 
-public struct {{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, APIResponseItem {
+public struct {{ type.name|replace:"Template","DTO" }}: {{ type.name|replace:"Template","Properties" }}, Codable, Hashable, APIResponseItem {
 {% for variable in type.storedVariables %}
     public let {{ variable.name }}: {{ variable.typeName }}   
 {% endfor %}
@@ -80,7 +86,7 @@ public struct {{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, API
     {% endfor %}
     }
 
-    public init?(partial: Partial{{ type.name|replace:"Properties","DTO" }}) {
+    public init?(partial: Partial{{ type.name|replace:"Template","DTO" }}) {
         guard
         {% for variable in type.storedVariables %}
         {% if variable|!annotated:"requiredInPartialDTO" %}
@@ -101,7 +107,7 @@ public struct {{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, API
     }
 
     public init(
-        _ creationRequest: {{ type.name|replace:"Properties","CreationRequest"|replace:"Details","" }},
+        _ creationRequest: {{ type.name|replace:"Template","CreationRequest"|replace:"Details","" }},
         {% for variable in type.storedVariables|annotated:"skipCreationRequest" %}
         {{ variable.name }}: {{ variable.typeName }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
@@ -118,7 +124,7 @@ public struct {{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, API
 
 // MARK: PartialDTO
 
-public struct Partial{{ type.name|replace:"Properties","DTO" }}: Codable, Hashable, APIResponseItem {
+public struct Partial{{ type.name|replace:"Template","DTO" }}: {{ type.name|replace:"Template","PartialProperties" }}, Codable, Hashable, APIResponseItem {
 {% for variable in type.storedVariables %}
     public let {{ variable.name }}: {{ variable.typeName }}{% if variable|!annotated:"requiredInPartialDTO" %}?{% endif %}
 {% endfor %}
