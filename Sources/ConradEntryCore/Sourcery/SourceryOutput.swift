@@ -25,6 +25,7 @@ public protocol BillOfLadingPartialProperties {
     var wetMetricTonnes: Double? { get }
     var moisturePercentage: Double? { get }
     var dryMetricTonnes: Double? { get }
+    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -223,6 +224,19 @@ public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Ha
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
     }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            loadPortID: other.loadPortID ?? loadPortID,
+            vesselHolds: other.vesselHolds ?? vesselHolds,
+            weighingMethodID: other.weighingMethodID ?? weighingMethodID,
+            wetMetricTonnes: other.wetMetricTonnes ?? wetMetricTonnes,
+            moisturePercentage: other.moisturePercentage ?? moisturePercentage,
+            dryMetricTonnes: other.dryMetricTonnes ?? dryMetricTonnes
+        )
+    }
 }
 
 // MARK: - Discharge
@@ -259,6 +273,7 @@ public protocol DischargePartialProperties {
     var saveAllTarpaulinsUsed: Bool? { get }
     var holdsCleaned: Bool? { get }
     var wharfCleaned: Bool? { get }
+    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -597,6 +612,26 @@ public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
     }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            berthName: other.berthName ?? berthName,
+            berthLocation: other.berthLocation ?? berthLocation,
+            gearID: other.gearID ?? gearID,
+            methodID: other.methodID ?? methodID,
+            cargoCondition: other.cargoCondition ?? cargoCondition,
+            weatherConditionsID: other.weatherConditionsID ?? weatherConditionsID,
+            startTime: other.startTime ?? startTime,
+            finishTimeLastGrab: other.finishTimeLastGrab ?? finishTimeLastGrab,
+            finishTimeCleanup: other.finishTimeCleanup ?? finishTimeCleanup,
+            dischargeRateTonnesPerHour: other.dischargeRateTonnesPerHour ?? dischargeRateTonnesPerHour,
+            saveAllTarpaulinsUsed: other.saveAllTarpaulinsUsed ?? saveAllTarpaulinsUsed,
+            holdsCleaned: other.holdsCleaned ?? holdsCleaned,
+            wharfCleaned: other.wharfCleaned ?? wharfCleaned
+        )
+    }
 }
 
 // MARK: - DischargeWeight
@@ -641,6 +676,7 @@ public protocol DischargeWeightPartialProperties {
     var abcCheck: ABCCheck?? { get }
     var tallymen: Tallymen?? { get }
     var transparencyID: Int? { get }
+    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -1059,6 +1095,30 @@ public struct PartialDischargeWeightDTO: DischargeWeightPartialProperties, Codab
         self.tallymen = tallymen
         self.transparencyID = transparencyID
     }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            kind: other.kind ?? kind,
+            methodID: other.methodID ?? methodID,
+            weighingPointID: other.weighingPointID ?? weighingPointID,
+            weighingCompany: other.weighingCompany ?? weighingCompany,
+            startTime: other.startTime ?? startTime,
+            finishTime: other.finishTime ?? finishTime,
+            wetMetricTonnes: other.wetMetricTonnes ?? wetMetricTonnes,
+            moisturePercentage: other.moisturePercentage ?? moisturePercentage,
+            dryMetricTonnes: other.dryMetricTonnes ?? dryMetricTonnes,
+            equipmentName: other.equipmentName ?? equipmentName,
+            equipmentModel: other.equipmentModel ?? equipmentModel,
+            equipmentLocation: other.equipmentLocation ?? equipmentLocation,
+            equipmentCertificationDate: other.equipmentCertificationDate ?? equipmentCertificationDate,
+            calibrationCheck: other.calibrationCheck ?? calibrationCheck,
+            abcCheck: other.abcCheck ?? abcCheck,
+            tallymen: other.tallymen ?? tallymen,
+            transparencyID: other.transparencyID ?? transparencyID
+        )
+    }
 }
 
 // MARK: - MoistureDetermination
@@ -1089,6 +1149,7 @@ public protocol MoistureDeterminationPartialProperties {
     var constantWeightCheck: ConstantWeightCheck?? { get }
     var resultsWaitTimeDays: Int? { get }
     var transparencyID: Int? { get }
+    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -1367,6 +1428,23 @@ public struct PartialMoistureDeterminationDTO: MoistureDeterminationPartialPrope
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
     }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            moistureDeterminationCompanyID: other.moistureDeterminationCompanyID ?? moistureDeterminationCompanyID,
+            siteID: other.siteID ?? siteID,
+            location: other.location ?? location,
+            lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms ?? lotSampleTrayWeightKilograms,
+            ovenOnTime: other.ovenOnTime ?? ovenOnTime,
+            ovenOffTime: other.ovenOffTime ?? ovenOffTime,
+            ovenTemperatureCelsius: other.ovenTemperatureCelsius ?? ovenTemperatureCelsius,
+            constantWeightCheck: other.constantWeightCheck ?? constantWeightCheck,
+            resultsWaitTimeDays: other.resultsWaitTimeDays ?? resultsWaitTimeDays,
+            transparencyID: other.transparencyID ?? transparencyID
+        )
+    }
 }
 
 // MARK: - SampleCollection
@@ -1403,6 +1481,7 @@ public protocol SampleCollectionPartialProperties {
     var lotSizeWetTonnes: Int? { get }
     var sublotSizeWetTonnes: Int?? { get }
     var numberOfLots: Int? { get }
+    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -1741,6 +1820,26 @@ public struct PartialSampleCollectionDTO: SampleCollectionPartialProperties, Cod
         self.sublotSizeWetTonnes = sublotSizeWetTonnes
         self.numberOfLots = numberOfLots
     }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            samplingCompanyID: other.samplingCompanyID ?? samplingCompanyID,
+            siteID: other.siteID ?? siteID,
+            location: other.location ?? location,
+            samplingPointID: other.samplingPointID ?? samplingPointID,
+            startTime: other.startTime ?? startTime,
+            finishTime: other.finishTime ?? finishTime,
+            methodID: other.methodID ?? methodID,
+            sampleIncrementsWetTonnes: other.sampleIncrementsWetTonnes ?? sampleIncrementsWetTonnes,
+            typicalSampleWeightKilograms: other.typicalSampleWeightKilograms ?? typicalSampleWeightKilograms,
+            numberOfTrucksPerBag: other.numberOfTrucksPerBag ?? numberOfTrucksPerBag,
+            lotSizeWetTonnes: other.lotSizeWetTonnes ?? lotSizeWetTonnes,
+            sublotSizeWetTonnes: other.sublotSizeWetTonnes ?? sublotSizeWetTonnes,
+            numberOfLots: other.numberOfLots ?? numberOfLots
+        )
+    }
 }
 
 // MARK: - SamplePreparation
@@ -1791,6 +1890,7 @@ public protocol SamplePreparationPartialProperties {
     var riffleApertureMillimetres: Int?? { get }
     var numberOfSets: Int? { get }
     var transparencyID: Int? { get }
+    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -2269,6 +2369,33 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
         self.numberOfSets = numberOfSets
         self.transparencyID = transparencyID
     }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            preparationCompanyID: other.preparationCompanyID ?? preparationCompanyID,
+            siteID: other.siteID ?? siteID,
+            location: other.location ?? location,
+            startTime: other.startTime ?? startTime,
+            finishTime: other.finishTime ?? finishTime,
+            standardsID: other.standardsID ?? standardsID,
+            wasScreened: other.wasScreened ?? wasScreened,
+            screenApertureID: other.screenApertureID ?? screenApertureID,
+            oversizePulverizedSeparately: other.oversizePulverizedSeparately ?? oversizePulverizedSeparately,
+            sampleChargeWeightGrams: other.sampleChargeWeightGrams ?? sampleChargeWeightGrams,
+            pulverizerID: other.pulverizerID ?? pulverizerID,
+            pulverizingDurationSeconds: other.pulverizingDurationSeconds ?? pulverizingDurationSeconds,
+            divisionMethodID: other.divisionMethodID ?? divisionMethodID,
+            rsdNumberOfSegments: other.rsdNumberOfSegments ?? rsdNumberOfSegments,
+            incrementISOScoopUsed: other.incrementISOScoopUsed ?? incrementISOScoopUsed,
+            incrementBackingPlateUsed: other.incrementBackingPlateUsed ?? incrementBackingPlateUsed,
+            incrementDividedToExtinction: other.incrementDividedToExtinction ?? incrementDividedToExtinction,
+            riffleApertureMillimetres: other.riffleApertureMillimetres ?? riffleApertureMillimetres,
+            numberOfSets: other.numberOfSets ?? numberOfSets,
+            transparencyID: other.transparencyID ?? transparencyID
+        )
+    }
 }
 
 // MARK: - SampleReduction
@@ -2301,6 +2428,7 @@ public protocol SampleReductionPartialProperties {
     var wasConedAndQuartered: Bool? { get }
     var methodID: Int? { get }
     var gridSizeID: Int?? { get }
+    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -2599,6 +2727,24 @@ public struct PartialSampleReductionDTO: SampleReductionPartialProperties, Codab
         self.methodID = methodID
         self.gridSizeID = gridSizeID
     }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            samplingCompanyID: other.samplingCompanyID ?? samplingCompanyID,
+            location: other.location ?? location,
+            siteID: other.siteID ?? siteID,
+            laboratoryID: other.laboratoryID ?? laboratoryID,
+            reductionPointID: other.reductionPointID ?? reductionPointID,
+            startTime: other.startTime ?? startTime,
+            finishTime: other.finishTime ?? finishTime,
+            screenApertureMillimetres: other.screenApertureMillimetres ?? screenApertureMillimetres,
+            wasConedAndQuartered: other.wasConedAndQuartered ?? wasConedAndQuartered,
+            methodID: other.methodID ?? methodID,
+            gridSizeID: other.gridSizeID ?? gridSizeID
+        )
+    }
 }
 
 // MARK: - ShipmentDetails
@@ -2637,6 +2783,7 @@ public protocol ShipmentDetailsPartialProperties {
     var inspectionCompanySellerID: Int?? { get }
     var inspectionCompanySecondAgentID: Int?? { get }
     var conradTeamSize: Int? { get }
+    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -3004,5 +3151,27 @@ public struct PartialShipmentDetailsDTO: ShipmentDetailsPartialProperties, Codab
         self.inspectionCompanySellerID = inspectionCompanySellerID
         self.inspectionCompanySecondAgentID = inspectionCompanySecondAgentID
         self.conradTeamSize = conradTeamSize
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            creationDate: other.creationDate ?? creationDate,
+            clientReference: other.clientReference ?? clientReference,
+            logDate: other.logDate ?? logDate,
+            norTime: other.norTime ?? norTime,
+            vesselName: other.vesselName ?? vesselName,
+            clientID: other.clientID ?? clientID,
+            commodityID: other.commodityID ?? commodityID,
+            agentID: other.agentID ?? agentID,
+            traderID: other.traderID ?? traderID,
+            smelterID: other.smelterID ?? smelterID,
+            dischargePortID: other.dischargePortID ?? dischargePortID,
+            inspectionCompanyReceiverID: other.inspectionCompanyReceiverID ?? inspectionCompanyReceiverID,
+            inspectionCompanySellerID: other.inspectionCompanySellerID ?? inspectionCompanySellerID,
+            inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID ?? inspectionCompanySecondAgentID,
+            conradTeamSize: other.conradTeamSize ?? conradTeamSize
+        )
     }
 }

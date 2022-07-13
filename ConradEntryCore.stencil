@@ -17,6 +17,7 @@ public protocol {{ type.name|replace:"Template","PartialProperties" }} {
 {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
     var {{ variable.name }}: {{ variable.typeName }}? { get }
 {% endfor %}
+    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -145,6 +146,14 @@ public struct Partial{{ type.name|replace:"Template","DTO" }}: {{ type.name|repl
     {% for variable in type.storedVariables %}
         self.{{ variable.name }} = {{ variable.name }}
     {% endfor %}
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            {% for variable in type.storedVariables %}
+            {{ variable.name }}: other.{{ variable.name }}{% if variable|!annotated:"requiredInPartialDTO" %} ?? {{ variable.name }}{% endif %}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        )
     }
 }
 {% endfor %}
