@@ -6,12 +6,10 @@
 import Foundation
 
 public struct ShipmentChangesRequest: Codable {
-    public let part: ShipmentPart
     public let partID: UUID
     public let date: Date?
 
-    public init(part: ShipmentPart, partID: UUID, date: Date?) {
-        self.part = part
+    public init(partID: UUID, date: Date?) {
         self.partID = partID
         self.date = date
     }
