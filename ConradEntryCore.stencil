@@ -2,6 +2,10 @@
 
 import Foundation
 
+public protocol PartialMergable {
+    mutating func merge(from other: Self)
+}
+
 {% for type in types.implementing.ShipmentAutogen %}
 // MARK: - {{ type.name|replace:"Template","" }}
 
@@ -13,11 +17,10 @@ public protocol {{ type.name|replace:"Template","Properties" }} {
 {% endfor %}
 }
 
-public protocol {{ type.name|replace:"Template","PartialProperties" }} {
+public protocol {{ type.name|replace:"Template","PartialProperties" }}: PartialMergable {
 {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
     var {{ variable.name }}: {{ variable.typeName }}? { get }
 {% endfor %}
-    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest

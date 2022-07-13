@@ -5,6 +5,10 @@
 
 import Foundation
 
+public protocol PartialMergable {
+    mutating func merge(from other: Self)
+}
+
 // MARK: - BillOfLading
 
 // MARK: Protocol
@@ -18,14 +22,13 @@ public protocol BillOfLadingProperties {
     var dryMetricTonnes: Double { get }
 }
 
-public protocol BillOfLadingPartialProperties {
+public protocol BillOfLadingPartialProperties: PartialMergable {
     var loadPortID: Int? { get }
     var vesselHolds: Set<Int>? { get }
     var weighingMethodID: Int? { get }
     var wetMetricTonnes: Double? { get }
     var moisturePercentage: Double? { get }
     var dryMetricTonnes: Double? { get }
-    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -259,7 +262,7 @@ public protocol DischargeProperties {
     var wharfCleaned: Bool { get }
 }
 
-public protocol DischargePartialProperties {
+public protocol DischargePartialProperties: PartialMergable {
     var berthName: String? { get }
     var berthLocation: LocationDTO? { get }
     var gearID: Int? { get }
@@ -273,7 +276,6 @@ public protocol DischargePartialProperties {
     var saveAllTarpaulinsUsed: Bool? { get }
     var holdsCleaned: Bool? { get }
     var wharfCleaned: Bool? { get }
-    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -658,7 +660,7 @@ public protocol DischargeWeightProperties {
     var transparencyID: Int { get }
 }
 
-public protocol DischargeWeightPartialProperties {
+public protocol DischargeWeightPartialProperties: PartialMergable {
     var kind: DischargeWeightKind? { get }
     var methodID: Int? { get }
     var weighingPointID: Int? { get }
@@ -676,7 +678,6 @@ public protocol DischargeWeightPartialProperties {
     var abcCheck: ABCCheck?? { get }
     var tallymen: Tallymen?? { get }
     var transparencyID: Int? { get }
-    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -1138,7 +1139,7 @@ public protocol MoistureDeterminationProperties {
     var transparencyID: Int { get }
 }
 
-public protocol MoistureDeterminationPartialProperties {
+public protocol MoistureDeterminationPartialProperties: PartialMergable {
     var moistureDeterminationCompanyID: Int? { get }
     var siteID: Int? { get }
     var location: LocationDTO? { get }
@@ -1149,7 +1150,6 @@ public protocol MoistureDeterminationPartialProperties {
     var constantWeightCheck: ConstantWeightCheck?? { get }
     var resultsWaitTimeDays: Int? { get }
     var transparencyID: Int? { get }
-    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -1467,7 +1467,7 @@ public protocol SampleCollectionProperties {
     var numberOfLots: Int { get }
 }
 
-public protocol SampleCollectionPartialProperties {
+public protocol SampleCollectionPartialProperties: PartialMergable {
     var samplingCompanyID: Int? { get }
     var siteID: Int? { get }
     var location: LocationDTO? { get }
@@ -1481,7 +1481,6 @@ public protocol SampleCollectionPartialProperties {
     var lotSizeWetTonnes: Int? { get }
     var sublotSizeWetTonnes: Int?? { get }
     var numberOfLots: Int? { get }
-    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -1869,7 +1868,7 @@ public protocol SamplePreparationProperties {
     var transparencyID: Int { get }
 }
 
-public protocol SamplePreparationPartialProperties {
+public protocol SamplePreparationPartialProperties: PartialMergable {
     var preparationCompanyID: Int? { get }
     var siteID: Int? { get }
     var location: LocationDTO? { get }
@@ -1890,7 +1889,6 @@ public protocol SamplePreparationPartialProperties {
     var riffleApertureMillimetres: Int?? { get }
     var numberOfSets: Int? { get }
     var transparencyID: Int? { get }
-    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -2416,7 +2414,7 @@ public protocol SampleReductionProperties {
     var gridSizeID: Int? { get }
 }
 
-public protocol SampleReductionPartialProperties {
+public protocol SampleReductionPartialProperties: PartialMergable {
     var samplingCompanyID: Int? { get }
     var location: LocationDTO? { get }
     var siteID: Int? { get }
@@ -2428,7 +2426,6 @@ public protocol SampleReductionPartialProperties {
     var wasConedAndQuartered: Bool? { get }
     var methodID: Int? { get }
     var gridSizeID: Int?? { get }
-    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
@@ -2768,7 +2765,7 @@ public protocol ShipmentDetailsProperties {
     var conradTeamSize: Int { get }
 }
 
-public protocol ShipmentDetailsPartialProperties {
+public protocol ShipmentDetailsPartialProperties: PartialMergable {
     var clientReference: String? { get }
     var logDate: Date? { get }
     var norTime: Date? { get }
@@ -2783,7 +2780,6 @@ public protocol ShipmentDetailsPartialProperties {
     var inspectionCompanySellerID: Int?? { get }
     var inspectionCompanySecondAgentID: Int?? { get }
     var conradTeamSize: Int? { get }
-    mutating func merge(from other: Self)
 }
 
 // MARK: CreationRequest
