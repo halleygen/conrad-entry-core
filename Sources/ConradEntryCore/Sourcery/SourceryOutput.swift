@@ -6,6 +6,7 @@
 import Foundation
 
 public protocol PartialMergable {
+    static func empty() -> Self
     mutating func merge(from other: Self)
 }
 
@@ -22,7 +23,7 @@ public protocol BillOfLadingProperties {
     var dryMetricTonnes: Double { get }
 }
 
-public protocol BillOfLadingPartialProperties: PartialMergable {
+public protocol BillOfLadingPartialProperties {
     var loadPortID: Int? { get }
     var vesselHolds: Set<Int>? { get }
     var weighingMethodID: Int? { get }
@@ -80,7 +81,7 @@ public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hash
 
 // MARK: MutationRequest
 
-public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Codable, Hashable {
+public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, PartialMergable, Codable, Hashable {
     public var loadPortID: Int?
     public var vesselHolds: Set<Int>?
     public var weighingMethodID: Int?
@@ -103,6 +104,8 @@ public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Codabl
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
     }
+
+    public static func empty() -> Self { Self() }
 
     public mutating func merge(from other: Self) {
         if let updatedValue = other.loadPortID {
@@ -228,17 +231,19 @@ public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Ha
         self.dryMetricTonnes = dryMetricTonnes
     }
 
-    public mutating func merge(from other: Self) {
-        self = Self(
-            id: other.id,
-            version: other.version,
-            loadPortID: other.loadPortID ?? loadPortID,
-            vesselHolds: other.vesselHolds ?? vesselHolds,
-            weighingMethodID: other.weighingMethodID ?? weighingMethodID,
-            wetMetricTonnes: other.wetMetricTonnes ?? wetMetricTonnes,
-            moisturePercentage: other.moisturePercentage ?? moisturePercentage,
-            dryMetricTonnes: other.dryMetricTonnes ?? dryMetricTonnes
-        )
+    public init(
+        _ other: BillOfLadingMutationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.loadPortID = other.loadPortID
+        self.vesselHolds = other.vesselHolds
+        self.weighingMethodID = other.weighingMethodID
+        self.wetMetricTonnes = other.wetMetricTonnes
+        self.moisturePercentage = other.moisturePercentage
+        self.dryMetricTonnes = other.dryMetricTonnes
     }
 }
 
@@ -262,7 +267,7 @@ public protocol DischargeProperties {
     var wharfCleaned: Bool { get }
 }
 
-public protocol DischargePartialProperties: PartialMergable {
+public protocol DischargePartialProperties {
     var berthName: String? { get }
     var berthLocation: LocationDTO? { get }
     var gearID: Int? { get }
@@ -362,7 +367,7 @@ public struct DischargeCreationRequest: DischargeProperties, Codable, Hashable {
 
 // MARK: MutationRequest
 
-public struct DischargeMutationRequest: DischargePartialProperties, Codable, Hashable {
+public struct DischargeMutationRequest: DischargePartialProperties, PartialMergable, Codable, Hashable {
     public var berthName: String?
     public var berthLocation: LocationDTO?
     public var gearID: Int?
@@ -406,6 +411,8 @@ public struct DischargeMutationRequest: DischargePartialProperties, Codable, Has
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
     }
+
+    public static func empty() -> Self { Self() }
 
     public mutating func merge(from other: Self) {
         if let updatedValue = other.berthName {
@@ -615,24 +622,26 @@ public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable
         self.wharfCleaned = wharfCleaned
     }
 
-    public mutating func merge(from other: Self) {
-        self = Self(
-            id: other.id,
-            version: other.version,
-            berthName: other.berthName ?? berthName,
-            berthLocation: other.berthLocation ?? berthLocation,
-            gearID: other.gearID ?? gearID,
-            methodID: other.methodID ?? methodID,
-            cargoCondition: other.cargoCondition ?? cargoCondition,
-            weatherConditionsID: other.weatherConditionsID ?? weatherConditionsID,
-            startTime: other.startTime ?? startTime,
-            finishTimeLastGrab: other.finishTimeLastGrab ?? finishTimeLastGrab,
-            finishTimeCleanup: other.finishTimeCleanup ?? finishTimeCleanup,
-            dischargeRateTonnesPerHour: other.dischargeRateTonnesPerHour ?? dischargeRateTonnesPerHour,
-            saveAllTarpaulinsUsed: other.saveAllTarpaulinsUsed ?? saveAllTarpaulinsUsed,
-            holdsCleaned: other.holdsCleaned ?? holdsCleaned,
-            wharfCleaned: other.wharfCleaned ?? wharfCleaned
-        )
+    public init(
+        _ other: DischargeMutationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.berthName = other.berthName
+        self.berthLocation = other.berthLocation
+        self.gearID = other.gearID
+        self.methodID = other.methodID
+        self.cargoCondition = other.cargoCondition
+        self.weatherConditionsID = other.weatherConditionsID
+        self.startTime = other.startTime
+        self.finishTimeLastGrab = other.finishTimeLastGrab
+        self.finishTimeCleanup = other.finishTimeCleanup
+        self.dischargeRateTonnesPerHour = other.dischargeRateTonnesPerHour
+        self.saveAllTarpaulinsUsed = other.saveAllTarpaulinsUsed
+        self.holdsCleaned = other.holdsCleaned
+        self.wharfCleaned = other.wharfCleaned
     }
 }
 
@@ -660,7 +669,7 @@ public protocol DischargeWeightProperties {
     var transparencyID: Int { get }
 }
 
-public protocol DischargeWeightPartialProperties: PartialMergable {
+public protocol DischargeWeightPartialProperties {
     var kind: DischargeWeightKind? { get }
     var methodID: Int? { get }
     var weighingPointID: Int? { get }
@@ -784,7 +793,7 @@ public struct DischargeWeightCreationRequest: DischargeWeightProperties, Codable
 
 // MARK: MutationRequest
 
-public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, Codable, Hashable {
+public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, PartialMergable, Codable, Hashable {
     public var kind: DischargeWeightKind?
     public var methodID: Int?
     public var weighingPointID: Int?
@@ -840,6 +849,8 @@ public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, 
         self.tallymen = tallymen
         self.transparencyID = transparencyID
     }
+
+    public static func empty() -> Self { Self() }
 
     public mutating func merge(from other: Self) {
         if let updatedValue = other.kind {
@@ -1097,28 +1108,30 @@ public struct PartialDischargeWeightDTO: DischargeWeightPartialProperties, Codab
         self.transparencyID = transparencyID
     }
 
-    public mutating func merge(from other: Self) {
-        self = Self(
-            id: other.id,
-            version: other.version,
-            kind: other.kind ?? kind,
-            methodID: other.methodID ?? methodID,
-            weighingPointID: other.weighingPointID ?? weighingPointID,
-            weighingCompany: other.weighingCompany ?? weighingCompany,
-            startTime: other.startTime ?? startTime,
-            finishTime: other.finishTime ?? finishTime,
-            wetMetricTonnes: other.wetMetricTonnes ?? wetMetricTonnes,
-            moisturePercentage: other.moisturePercentage ?? moisturePercentage,
-            dryMetricTonnes: other.dryMetricTonnes ?? dryMetricTonnes,
-            equipmentName: other.equipmentName ?? equipmentName,
-            equipmentModel: other.equipmentModel ?? equipmentModel,
-            equipmentLocation: other.equipmentLocation ?? equipmentLocation,
-            equipmentCertificationDate: other.equipmentCertificationDate ?? equipmentCertificationDate,
-            calibrationCheck: other.calibrationCheck ?? calibrationCheck,
-            abcCheck: other.abcCheck ?? abcCheck,
-            tallymen: other.tallymen ?? tallymen,
-            transparencyID: other.transparencyID ?? transparencyID
-        )
+    public init(
+        _ other: DischargeWeightMutationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.kind = other.kind
+        self.methodID = other.methodID
+        self.weighingPointID = other.weighingPointID
+        self.weighingCompany = other.weighingCompany
+        self.startTime = other.startTime
+        self.finishTime = other.finishTime
+        self.wetMetricTonnes = other.wetMetricTonnes
+        self.moisturePercentage = other.moisturePercentage
+        self.dryMetricTonnes = other.dryMetricTonnes
+        self.equipmentName = other.equipmentName
+        self.equipmentModel = other.equipmentModel
+        self.equipmentLocation = other.equipmentLocation
+        self.equipmentCertificationDate = other.equipmentCertificationDate
+        self.calibrationCheck = other.calibrationCheck
+        self.abcCheck = other.abcCheck
+        self.tallymen = other.tallymen
+        self.transparencyID = other.transparencyID
     }
 }
 
@@ -1139,7 +1152,7 @@ public protocol MoistureDeterminationProperties {
     var transparencyID: Int { get }
 }
 
-public protocol MoistureDeterminationPartialProperties: PartialMergable {
+public protocol MoistureDeterminationPartialProperties {
     var moistureDeterminationCompanyID: Int? { get }
     var siteID: Int? { get }
     var location: LocationDTO? { get }
@@ -1221,7 +1234,7 @@ public struct MoistureDeterminationCreationRequest: MoistureDeterminationPropert
 
 // MARK: MutationRequest
 
-public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartialProperties, Codable, Hashable {
+public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartialProperties, PartialMergable, Codable, Hashable {
     public var moistureDeterminationCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -1256,6 +1269,8 @@ public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartial
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
     }
+
+    public static func empty() -> Self { Self() }
 
     public mutating func merge(from other: Self) {
         if let updatedValue = other.moistureDeterminationCompanyID {
@@ -1429,21 +1444,23 @@ public struct PartialMoistureDeterminationDTO: MoistureDeterminationPartialPrope
         self.transparencyID = transparencyID
     }
 
-    public mutating func merge(from other: Self) {
-        self = Self(
-            id: other.id,
-            version: other.version,
-            moistureDeterminationCompanyID: other.moistureDeterminationCompanyID ?? moistureDeterminationCompanyID,
-            siteID: other.siteID ?? siteID,
-            location: other.location ?? location,
-            lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms ?? lotSampleTrayWeightKilograms,
-            ovenOnTime: other.ovenOnTime ?? ovenOnTime,
-            ovenOffTime: other.ovenOffTime ?? ovenOffTime,
-            ovenTemperatureCelsius: other.ovenTemperatureCelsius ?? ovenTemperatureCelsius,
-            constantWeightCheck: other.constantWeightCheck ?? constantWeightCheck,
-            resultsWaitTimeDays: other.resultsWaitTimeDays ?? resultsWaitTimeDays,
-            transparencyID: other.transparencyID ?? transparencyID
-        )
+    public init(
+        _ other: MoistureDeterminationMutationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.moistureDeterminationCompanyID = other.moistureDeterminationCompanyID
+        self.siteID = other.siteID
+        self.location = other.location
+        self.lotSampleTrayWeightKilograms = other.lotSampleTrayWeightKilograms
+        self.ovenOnTime = other.ovenOnTime
+        self.ovenOffTime = other.ovenOffTime
+        self.ovenTemperatureCelsius = other.ovenTemperatureCelsius
+        self.constantWeightCheck = other.constantWeightCheck
+        self.resultsWaitTimeDays = other.resultsWaitTimeDays
+        self.transparencyID = other.transparencyID
     }
 }
 
@@ -1467,7 +1484,7 @@ public protocol SampleCollectionProperties {
     var numberOfLots: Int { get }
 }
 
-public protocol SampleCollectionPartialProperties: PartialMergable {
+public protocol SampleCollectionPartialProperties {
     var samplingCompanyID: Int? { get }
     var siteID: Int? { get }
     var location: LocationDTO? { get }
@@ -1567,7 +1584,7 @@ public struct SampleCollectionCreationRequest: SampleCollectionProperties, Codab
 
 // MARK: MutationRequest
 
-public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties, Codable, Hashable {
+public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties, PartialMergable, Codable, Hashable {
     public var samplingCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -1611,6 +1628,8 @@ public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties
         self.sublotSizeWetTonnes = sublotSizeWetTonnes
         self.numberOfLots = numberOfLots
     }
+
+    public static func empty() -> Self { Self() }
 
     public mutating func merge(from other: Self) {
         if let updatedValue = other.samplingCompanyID {
@@ -1820,24 +1839,26 @@ public struct PartialSampleCollectionDTO: SampleCollectionPartialProperties, Cod
         self.numberOfLots = numberOfLots
     }
 
-    public mutating func merge(from other: Self) {
-        self = Self(
-            id: other.id,
-            version: other.version,
-            samplingCompanyID: other.samplingCompanyID ?? samplingCompanyID,
-            siteID: other.siteID ?? siteID,
-            location: other.location ?? location,
-            samplingPointID: other.samplingPointID ?? samplingPointID,
-            startTime: other.startTime ?? startTime,
-            finishTime: other.finishTime ?? finishTime,
-            methodID: other.methodID ?? methodID,
-            sampleIncrementsWetTonnes: other.sampleIncrementsWetTonnes ?? sampleIncrementsWetTonnes,
-            typicalSampleWeightKilograms: other.typicalSampleWeightKilograms ?? typicalSampleWeightKilograms,
-            numberOfTrucksPerBag: other.numberOfTrucksPerBag ?? numberOfTrucksPerBag,
-            lotSizeWetTonnes: other.lotSizeWetTonnes ?? lotSizeWetTonnes,
-            sublotSizeWetTonnes: other.sublotSizeWetTonnes ?? sublotSizeWetTonnes,
-            numberOfLots: other.numberOfLots ?? numberOfLots
-        )
+    public init(
+        _ other: SampleCollectionMutationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.samplingCompanyID = other.samplingCompanyID
+        self.siteID = other.siteID
+        self.location = other.location
+        self.samplingPointID = other.samplingPointID
+        self.startTime = other.startTime
+        self.finishTime = other.finishTime
+        self.methodID = other.methodID
+        self.sampleIncrementsWetTonnes = other.sampleIncrementsWetTonnes
+        self.typicalSampleWeightKilograms = other.typicalSampleWeightKilograms
+        self.numberOfTrucksPerBag = other.numberOfTrucksPerBag
+        self.lotSizeWetTonnes = other.lotSizeWetTonnes
+        self.sublotSizeWetTonnes = other.sublotSizeWetTonnes
+        self.numberOfLots = other.numberOfLots
     }
 }
 
@@ -1868,7 +1889,7 @@ public protocol SamplePreparationProperties {
     var transparencyID: Int { get }
 }
 
-public protocol SamplePreparationPartialProperties: PartialMergable {
+public protocol SamplePreparationPartialProperties {
     var preparationCompanyID: Int? { get }
     var siteID: Int? { get }
     var location: LocationDTO? { get }
@@ -2010,7 +2031,7 @@ public struct SamplePreparationCreationRequest: SamplePreparationProperties, Cod
 
 // MARK: MutationRequest
 
-public struct SamplePreparationMutationRequest: SamplePreparationPartialProperties, Codable, Hashable {
+public struct SamplePreparationMutationRequest: SamplePreparationPartialProperties, PartialMergable, Codable, Hashable {
     public var preparationCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -2075,6 +2096,8 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
         self.numberOfSets = numberOfSets
         self.transparencyID = transparencyID
     }
+
+    public static func empty() -> Self { Self() }
 
     public mutating func merge(from other: Self) {
         if let updatedValue = other.preparationCompanyID {
@@ -2368,31 +2391,33 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
         self.transparencyID = transparencyID
     }
 
-    public mutating func merge(from other: Self) {
-        self = Self(
-            id: other.id,
-            version: other.version,
-            preparationCompanyID: other.preparationCompanyID ?? preparationCompanyID,
-            siteID: other.siteID ?? siteID,
-            location: other.location ?? location,
-            startTime: other.startTime ?? startTime,
-            finishTime: other.finishTime ?? finishTime,
-            standardsID: other.standardsID ?? standardsID,
-            wasScreened: other.wasScreened ?? wasScreened,
-            screenApertureID: other.screenApertureID ?? screenApertureID,
-            oversizePulverizedSeparately: other.oversizePulverizedSeparately ?? oversizePulverizedSeparately,
-            sampleChargeWeightGrams: other.sampleChargeWeightGrams ?? sampleChargeWeightGrams,
-            pulverizerID: other.pulverizerID ?? pulverizerID,
-            pulverizingDurationSeconds: other.pulverizingDurationSeconds ?? pulverizingDurationSeconds,
-            divisionMethodID: other.divisionMethodID ?? divisionMethodID,
-            rsdNumberOfSegments: other.rsdNumberOfSegments ?? rsdNumberOfSegments,
-            incrementISOScoopUsed: other.incrementISOScoopUsed ?? incrementISOScoopUsed,
-            incrementBackingPlateUsed: other.incrementBackingPlateUsed ?? incrementBackingPlateUsed,
-            incrementDividedToExtinction: other.incrementDividedToExtinction ?? incrementDividedToExtinction,
-            riffleApertureMillimetres: other.riffleApertureMillimetres ?? riffleApertureMillimetres,
-            numberOfSets: other.numberOfSets ?? numberOfSets,
-            transparencyID: other.transparencyID ?? transparencyID
-        )
+    public init(
+        _ other: SamplePreparationMutationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.preparationCompanyID = other.preparationCompanyID
+        self.siteID = other.siteID
+        self.location = other.location
+        self.startTime = other.startTime
+        self.finishTime = other.finishTime
+        self.standardsID = other.standardsID
+        self.wasScreened = other.wasScreened
+        self.screenApertureID = other.screenApertureID
+        self.oversizePulverizedSeparately = other.oversizePulverizedSeparately
+        self.sampleChargeWeightGrams = other.sampleChargeWeightGrams
+        self.pulverizerID = other.pulverizerID
+        self.pulverizingDurationSeconds = other.pulverizingDurationSeconds
+        self.divisionMethodID = other.divisionMethodID
+        self.rsdNumberOfSegments = other.rsdNumberOfSegments
+        self.incrementISOScoopUsed = other.incrementISOScoopUsed
+        self.incrementBackingPlateUsed = other.incrementBackingPlateUsed
+        self.incrementDividedToExtinction = other.incrementDividedToExtinction
+        self.riffleApertureMillimetres = other.riffleApertureMillimetres
+        self.numberOfSets = other.numberOfSets
+        self.transparencyID = other.transparencyID
     }
 }
 
@@ -2414,7 +2439,7 @@ public protocol SampleReductionProperties {
     var gridSizeID: Int? { get }
 }
 
-public protocol SampleReductionPartialProperties: PartialMergable {
+public protocol SampleReductionPartialProperties {
     var samplingCompanyID: Int? { get }
     var location: LocationDTO? { get }
     var siteID: Int? { get }
@@ -2502,7 +2527,7 @@ public struct SampleReductionCreationRequest: SampleReductionProperties, Codable
 
 // MARK: MutationRequest
 
-public struct SampleReductionMutationRequest: SampleReductionPartialProperties, Codable, Hashable {
+public struct SampleReductionMutationRequest: SampleReductionPartialProperties, PartialMergable, Codable, Hashable {
     public var samplingCompanyID: Int?
     public var location: LocationDTO?
     public var siteID: Int?
@@ -2540,6 +2565,8 @@ public struct SampleReductionMutationRequest: SampleReductionPartialProperties, 
         self.methodID = methodID
         self.gridSizeID = gridSizeID
     }
+
+    public static func empty() -> Self { Self() }
 
     public mutating func merge(from other: Self) {
         if let updatedValue = other.samplingCompanyID {
@@ -2725,22 +2752,24 @@ public struct PartialSampleReductionDTO: SampleReductionPartialProperties, Codab
         self.gridSizeID = gridSizeID
     }
 
-    public mutating func merge(from other: Self) {
-        self = Self(
-            id: other.id,
-            version: other.version,
-            samplingCompanyID: other.samplingCompanyID ?? samplingCompanyID,
-            location: other.location ?? location,
-            siteID: other.siteID ?? siteID,
-            laboratoryID: other.laboratoryID ?? laboratoryID,
-            reductionPointID: other.reductionPointID ?? reductionPointID,
-            startTime: other.startTime ?? startTime,
-            finishTime: other.finishTime ?? finishTime,
-            screenApertureMillimetres: other.screenApertureMillimetres ?? screenApertureMillimetres,
-            wasConedAndQuartered: other.wasConedAndQuartered ?? wasConedAndQuartered,
-            methodID: other.methodID ?? methodID,
-            gridSizeID: other.gridSizeID ?? gridSizeID
-        )
+    public init(
+        _ other: SampleReductionMutationRequest,
+        id: UUID,
+        version: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.samplingCompanyID = other.samplingCompanyID
+        self.location = other.location
+        self.siteID = other.siteID
+        self.laboratoryID = other.laboratoryID
+        self.reductionPointID = other.reductionPointID
+        self.startTime = other.startTime
+        self.finishTime = other.finishTime
+        self.screenApertureMillimetres = other.screenApertureMillimetres
+        self.wasConedAndQuartered = other.wasConedAndQuartered
+        self.methodID = other.methodID
+        self.gridSizeID = other.gridSizeID
     }
 }
 
@@ -2765,7 +2794,7 @@ public protocol ShipmentDetailsProperties {
     var conradTeamSize: Int { get }
 }
 
-public protocol ShipmentDetailsPartialProperties: PartialMergable {
+public protocol ShipmentDetailsPartialProperties {
     var clientReference: String? { get }
     var logDate: Date? { get }
     var norTime: Date? { get }
@@ -2871,7 +2900,7 @@ public struct ShipmentCreationRequest: ShipmentDetailsProperties, Codable, Hasha
 
 // MARK: MutationRequest
 
-public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, Codable, Hashable {
+public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, PartialMergable, Codable, Hashable {
     public var clientReference: String?
     public var logDate: Date?
     public var norTime: Date?
@@ -2918,6 +2947,8 @@ public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, 
         self.inspectionCompanySecondAgentID = inspectionCompanySecondAgentID
         self.conradTeamSize = conradTeamSize
     }
+
+    public static func empty() -> Self { Self() }
 
     public mutating func merge(from other: Self) {
         if let updatedValue = other.clientReference {
@@ -3149,25 +3180,28 @@ public struct PartialShipmentDetailsDTO: ShipmentDetailsPartialProperties, Codab
         self.conradTeamSize = conradTeamSize
     }
 
-    public mutating func merge(from other: Self) {
-        self = Self(
-            id: other.id,
-            version: other.version,
-            creationDate: other.creationDate ?? creationDate,
-            clientReference: other.clientReference ?? clientReference,
-            logDate: other.logDate ?? logDate,
-            norTime: other.norTime ?? norTime,
-            vesselName: other.vesselName ?? vesselName,
-            clientID: other.clientID ?? clientID,
-            commodityID: other.commodityID ?? commodityID,
-            agentID: other.agentID ?? agentID,
-            traderID: other.traderID ?? traderID,
-            smelterID: other.smelterID ?? smelterID,
-            dischargePortID: other.dischargePortID ?? dischargePortID,
-            inspectionCompanyReceiverID: other.inspectionCompanyReceiverID ?? inspectionCompanyReceiverID,
-            inspectionCompanySellerID: other.inspectionCompanySellerID ?? inspectionCompanySellerID,
-            inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID ?? inspectionCompanySecondAgentID,
-            conradTeamSize: other.conradTeamSize ?? conradTeamSize
-        )
+    public init(
+        _ other: ShipmentDetailsMutationRequest,
+        id: UUID,
+        version: Date,
+        creationDate: Date
+    ) {
+        self.id = id
+        self.version = version
+        self.creationDate = creationDate
+        self.clientReference = other.clientReference
+        self.logDate = other.logDate
+        self.norTime = other.norTime
+        self.vesselName = other.vesselName
+        self.clientID = other.clientID
+        self.commodityID = other.commodityID
+        self.agentID = other.agentID
+        self.traderID = other.traderID
+        self.smelterID = other.smelterID
+        self.dischargePortID = other.dischargePortID
+        self.inspectionCompanyReceiverID = other.inspectionCompanyReceiverID
+        self.inspectionCompanySellerID = other.inspectionCompanySellerID
+        self.inspectionCompanySecondAgentID = other.inspectionCompanySecondAgentID
+        self.conradTeamSize = other.conradTeamSize
     }
 }

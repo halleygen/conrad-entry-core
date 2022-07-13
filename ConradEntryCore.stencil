@@ -3,6 +3,7 @@
 import Foundation
 
 public protocol PartialMergable {
+    static func empty() -> Self
     mutating func merge(from other: Self)
 }
 
@@ -17,7 +18,7 @@ public protocol {{ type.name|replace:"Template","Properties" }} {
 {% endfor %}
 }
 
-public protocol {{ type.name|replace:"Template","PartialProperties" }}: PartialMergable {
+public protocol {{ type.name|replace:"Template","PartialProperties" }} {
 {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
     var {{ variable.name }}: {{ variable.typeName }}? { get }
 {% endfor %}
@@ -57,7 +58,7 @@ public struct {{ type.name|replace:"Template","CreationRequest"|replace:"Details
 
 // MARK: MutationRequest
 
-public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name|replace:"Template","PartialProperties" }}, Codable, Hashable {
+public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name|replace:"Template","PartialProperties" }}, PartialMergable, Codable, Hashable {
 {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
     public var {{ variable.name }}: {{ variable.typeName }}?
 {% endfor %}
@@ -71,6 +72,8 @@ public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name
         self.{{ variable.name }} = {{ variable.name }}
     {% endfor %}
     }
+
+    public static func empty() -> Self { Self() }
 
     public mutating func merge(from other: Self) {
     {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
@@ -151,6 +154,18 @@ public struct Partial{{ type.name|replace:"Template","DTO" }}: {{ type.name|repl
     {% endfor %}
     }
 
+    public init(
+        _ other: {{ type.name|replace:"Template","MutationRequest" }},
+        {% for variable in type.storedVariables|annotated:"skipMutationRequest" %}
+        {{ variable.name }}: {{ variable.typeName }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    ) {
+    {% for variable in type.storedVariables %}
+        self.{{ variable.name }} = {% if variable|!annotated:"skipMutationRequest" %}other.{% endif %}{{ variable.name }}
+    {% endfor %}
+    }
+
+    {#
     public mutating func merge(from other: Self) {
         self = Self(
             {% for variable in type.storedVariables %}
@@ -158,5 +173,6 @@ public struct Partial{{ type.name|replace:"Template","DTO" }}: {{ type.name|repl
             {% endfor %}
         )
     }
+    #}
 }
 {% endfor %}
