@@ -99,6 +99,27 @@ public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Codabl
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
     }
+
+    public mutating func merge(from other: Self) {
+        if let updatedValue = other.loadPortID {
+            loadPortID = updatedValue
+        }
+        if let updatedValue = other.vesselHolds {
+            vesselHolds = updatedValue
+        }
+        if let updatedValue = other.weighingMethodID {
+            weighingMethodID = updatedValue
+        }
+        if let updatedValue = other.wetMetricTonnes {
+            wetMetricTonnes = updatedValue
+        }
+        if let updatedValue = other.moisturePercentage {
+            moisturePercentage = updatedValue
+        }
+        if let updatedValue = other.dryMetricTonnes {
+            dryMetricTonnes = updatedValue
+        }
+    }
 }
 
 // MARK: DTO
@@ -367,6 +388,48 @@ public struct DischargeMutationRequest: DischargePartialProperties, Codable, Has
         self.saveAllTarpaulinsUsed = saveAllTarpaulinsUsed
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
+    }
+
+    public mutating func merge(from other: Self) {
+        if let updatedValue = other.berthName {
+            berthName = updatedValue
+        }
+        if let updatedValue = other.berthLocation {
+            berthLocation = updatedValue
+        }
+        if let updatedValue = other.gearID {
+            gearID = updatedValue
+        }
+        if let updatedValue = other.methodID {
+            methodID = updatedValue
+        }
+        if let updatedValue = other.cargoCondition {
+            cargoCondition = updatedValue
+        }
+        if let updatedValue = other.weatherConditionsID {
+            weatherConditionsID = updatedValue
+        }
+        if let updatedValue = other.startTime {
+            startTime = updatedValue
+        }
+        if let updatedValue = other.finishTimeLastGrab {
+            finishTimeLastGrab = updatedValue
+        }
+        if let updatedValue = other.finishTimeCleanup {
+            finishTimeCleanup = updatedValue
+        }
+        if let updatedValue = other.dischargeRateTonnesPerHour {
+            dischargeRateTonnesPerHour = updatedValue
+        }
+        if let updatedValue = other.saveAllTarpaulinsUsed {
+            saveAllTarpaulinsUsed = updatedValue
+        }
+        if let updatedValue = other.holdsCleaned {
+            holdsCleaned = updatedValue
+        }
+        if let updatedValue = other.wharfCleaned {
+            wharfCleaned = updatedValue
+        }
     }
 }
 
@@ -740,6 +803,60 @@ public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, 
         self.tallymen = tallymen
         self.transparencyID = transparencyID
     }
+
+    public mutating func merge(from other: Self) {
+        if let updatedValue = other.kind {
+            kind = updatedValue
+        }
+        if let updatedValue = other.methodID {
+            methodID = updatedValue
+        }
+        if let updatedValue = other.weighingPointID {
+            weighingPointID = updatedValue
+        }
+        if let updatedValue = other.weighingCompany {
+            weighingCompany = updatedValue
+        }
+        if let updatedValue = other.startTime {
+            startTime = updatedValue
+        }
+        if let updatedValue = other.finishTime {
+            finishTime = updatedValue
+        }
+        if let updatedValue = other.wetMetricTonnes {
+            wetMetricTonnes = updatedValue
+        }
+        if let updatedValue = other.moisturePercentage {
+            moisturePercentage = updatedValue
+        }
+        if let updatedValue = other.dryMetricTonnes {
+            dryMetricTonnes = updatedValue
+        }
+        if let updatedValue = other.equipmentName {
+            equipmentName = updatedValue
+        }
+        if let updatedValue = other.equipmentModel {
+            equipmentModel = updatedValue
+        }
+        if let updatedValue = other.equipmentLocation {
+            equipmentLocation = updatedValue
+        }
+        if let updatedValue = other.equipmentCertificationDate {
+            equipmentCertificationDate = updatedValue
+        }
+        if let updatedValue = other.calibrationCheck {
+            calibrationCheck = updatedValue
+        }
+        if let updatedValue = other.abcCheck {
+            abcCheck = updatedValue
+        }
+        if let updatedValue = other.tallymen {
+            tallymen = updatedValue
+        }
+        if let updatedValue = other.transparencyID {
+            transparencyID = updatedValue
+        }
+    }
 }
 
 // MARK: DTO
@@ -1078,6 +1195,39 @@ public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartial
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
     }
+
+    public mutating func merge(from other: Self) {
+        if let updatedValue = other.moistureDeterminationCompanyID {
+            moistureDeterminationCompanyID = updatedValue
+        }
+        if let updatedValue = other.siteID {
+            siteID = updatedValue
+        }
+        if let updatedValue = other.location {
+            location = updatedValue
+        }
+        if let updatedValue = other.lotSampleTrayWeightKilograms {
+            lotSampleTrayWeightKilograms = updatedValue
+        }
+        if let updatedValue = other.ovenOnTime {
+            ovenOnTime = updatedValue
+        }
+        if let updatedValue = other.ovenOffTime {
+            ovenOffTime = updatedValue
+        }
+        if let updatedValue = other.ovenTemperatureCelsius {
+            ovenTemperatureCelsius = updatedValue
+        }
+        if let updatedValue = other.constantWeightCheck {
+            constantWeightCheck = updatedValue
+        }
+        if let updatedValue = other.resultsWaitTimeDays {
+            resultsWaitTimeDays = updatedValue
+        }
+        if let updatedValue = other.transparencyID {
+            transparencyID = updatedValue
+        }
+    }
 }
 
 // MARK: DTO
@@ -1382,6 +1532,48 @@ public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties
         self.lotSizeWetTonnes = lotSizeWetTonnes
         self.sublotSizeWetTonnes = sublotSizeWetTonnes
         self.numberOfLots = numberOfLots
+    }
+
+    public mutating func merge(from other: Self) {
+        if let updatedValue = other.samplingCompanyID {
+            samplingCompanyID = updatedValue
+        }
+        if let updatedValue = other.siteID {
+            siteID = updatedValue
+        }
+        if let updatedValue = other.location {
+            location = updatedValue
+        }
+        if let updatedValue = other.samplingPointID {
+            samplingPointID = updatedValue
+        }
+        if let updatedValue = other.startTime {
+            startTime = updatedValue
+        }
+        if let updatedValue = other.finishTime {
+            finishTime = updatedValue
+        }
+        if let updatedValue = other.methodID {
+            methodID = updatedValue
+        }
+        if let updatedValue = other.sampleIncrementsWetTonnes {
+            sampleIncrementsWetTonnes = updatedValue
+        }
+        if let updatedValue = other.typicalSampleWeightKilograms {
+            typicalSampleWeightKilograms = updatedValue
+        }
+        if let updatedValue = other.numberOfTrucksPerBag {
+            numberOfTrucksPerBag = updatedValue
+        }
+        if let updatedValue = other.lotSizeWetTonnes {
+            lotSizeWetTonnes = updatedValue
+        }
+        if let updatedValue = other.sublotSizeWetTonnes {
+            sublotSizeWetTonnes = updatedValue
+        }
+        if let updatedValue = other.numberOfLots {
+            numberOfLots = updatedValue
+        }
     }
 }
 
@@ -1785,6 +1977,69 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
         self.numberOfSets = numberOfSets
         self.transparencyID = transparencyID
     }
+
+    public mutating func merge(from other: Self) {
+        if let updatedValue = other.preparationCompanyID {
+            preparationCompanyID = updatedValue
+        }
+        if let updatedValue = other.siteID {
+            siteID = updatedValue
+        }
+        if let updatedValue = other.location {
+            location = updatedValue
+        }
+        if let updatedValue = other.startTime {
+            startTime = updatedValue
+        }
+        if let updatedValue = other.finishTime {
+            finishTime = updatedValue
+        }
+        if let updatedValue = other.standardsID {
+            standardsID = updatedValue
+        }
+        if let updatedValue = other.wasScreened {
+            wasScreened = updatedValue
+        }
+        if let updatedValue = other.screenApertureID {
+            screenApertureID = updatedValue
+        }
+        if let updatedValue = other.oversizePulverizedSeparately {
+            oversizePulverizedSeparately = updatedValue
+        }
+        if let updatedValue = other.sampleChargeWeightGrams {
+            sampleChargeWeightGrams = updatedValue
+        }
+        if let updatedValue = other.pulverizerID {
+            pulverizerID = updatedValue
+        }
+        if let updatedValue = other.pulverizingDurationSeconds {
+            pulverizingDurationSeconds = updatedValue
+        }
+        if let updatedValue = other.divisionMethodID {
+            divisionMethodID = updatedValue
+        }
+        if let updatedValue = other.rsdNumberOfSegments {
+            rsdNumberOfSegments = updatedValue
+        }
+        if let updatedValue = other.incrementISOScoopUsed {
+            incrementISOScoopUsed = updatedValue
+        }
+        if let updatedValue = other.incrementBackingPlateUsed {
+            incrementBackingPlateUsed = updatedValue
+        }
+        if let updatedValue = other.incrementDividedToExtinction {
+            incrementDividedToExtinction = updatedValue
+        }
+        if let updatedValue = other.riffleApertureMillimetres {
+            riffleApertureMillimetres = updatedValue
+        }
+        if let updatedValue = other.numberOfSets {
+            numberOfSets = updatedValue
+        }
+        if let updatedValue = other.transparencyID {
+            transparencyID = updatedValue
+        }
+    }
 }
 
 // MARK: DTO
@@ -2160,6 +2415,42 @@ public struct SampleReductionMutationRequest: SampleReductionPartialProperties, 
         self.methodID = methodID
         self.gridSizeID = gridSizeID
     }
+
+    public mutating func merge(from other: Self) {
+        if let updatedValue = other.samplingCompanyID {
+            samplingCompanyID = updatedValue
+        }
+        if let updatedValue = other.location {
+            location = updatedValue
+        }
+        if let updatedValue = other.siteID {
+            siteID = updatedValue
+        }
+        if let updatedValue = other.laboratoryID {
+            laboratoryID = updatedValue
+        }
+        if let updatedValue = other.reductionPointID {
+            reductionPointID = updatedValue
+        }
+        if let updatedValue = other.startTime {
+            startTime = updatedValue
+        }
+        if let updatedValue = other.finishTime {
+            finishTime = updatedValue
+        }
+        if let updatedValue = other.screenApertureMillimetres {
+            screenApertureMillimetres = updatedValue
+        }
+        if let updatedValue = other.wasConedAndQuartered {
+            wasConedAndQuartered = updatedValue
+        }
+        if let updatedValue = other.methodID {
+            methodID = updatedValue
+        }
+        if let updatedValue = other.gridSizeID {
+            gridSizeID = updatedValue
+        }
+    }
 }
 
 // MARK: DTO
@@ -2483,6 +2774,51 @@ public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, 
         self.inspectionCompanySellerID = inspectionCompanySellerID
         self.inspectionCompanySecondAgentID = inspectionCompanySecondAgentID
         self.conradTeamSize = conradTeamSize
+    }
+
+    public mutating func merge(from other: Self) {
+        if let updatedValue = other.clientReference {
+            clientReference = updatedValue
+        }
+        if let updatedValue = other.logDate {
+            logDate = updatedValue
+        }
+        if let updatedValue = other.norTime {
+            norTime = updatedValue
+        }
+        if let updatedValue = other.vesselName {
+            vesselName = updatedValue
+        }
+        if let updatedValue = other.clientID {
+            clientID = updatedValue
+        }
+        if let updatedValue = other.commodityID {
+            commodityID = updatedValue
+        }
+        if let updatedValue = other.agentID {
+            agentID = updatedValue
+        }
+        if let updatedValue = other.traderID {
+            traderID = updatedValue
+        }
+        if let updatedValue = other.smelterID {
+            smelterID = updatedValue
+        }
+        if let updatedValue = other.dischargePortID {
+            dischargePortID = updatedValue
+        }
+        if let updatedValue = other.inspectionCompanyReceiverID {
+            inspectionCompanyReceiverID = updatedValue
+        }
+        if let updatedValue = other.inspectionCompanySellerID {
+            inspectionCompanySellerID = updatedValue
+        }
+        if let updatedValue = other.inspectionCompanySecondAgentID {
+            inspectionCompanySecondAgentID = updatedValue
+        }
+        if let updatedValue = other.conradTeamSize {
+            conradTeamSize = updatedValue
+        }
     }
 }
 

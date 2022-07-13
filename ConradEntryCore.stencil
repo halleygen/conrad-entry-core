@@ -67,6 +67,14 @@ public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name
         self.{{ variable.name }} = {{ variable.name }}
     {% endfor %}
     }
+
+    public mutating func merge(from other: Self) {
+    {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
+        if let updatedValue = other.{{ variable.name }} {
+            self.{{ variable.name }} = updatedValue
+        }
+    {% endfor %}
+    } 
 }
 
 // MARK: DTO
