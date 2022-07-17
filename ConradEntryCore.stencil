@@ -7,6 +7,10 @@ public protocol PartialMergable {
     mutating func merge(from other: Self)
 }
 
+public protocol MutationRequest {
+    init(keyAndValues: [String: Any])
+}
+
 {% for type in types.implementing.ShipmentAutogen %}
 // MARK: - {{ type.name|replace:"Template","" }}
 
@@ -58,7 +62,7 @@ public struct {{ type.name|replace:"Template","CreationRequest"|replace:"Details
 
 // MARK: MutationRequest
 
-public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name|replace:"Template","PartialProperties" }}, PartialMergable, Codable, Hashable {
+public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name|replace:"Template","PartialProperties" }}, PartialMergable, MutationRequest, Codable, Hashable {
 {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
     public var {{ variable.name }}: {{ variable.typeName }}?
 {% endfor %}
@@ -70,6 +74,14 @@ public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name
     ) {
     {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
         self.{{ variable.name }} = {{ variable.name }}
+    {% endfor %}
+    }
+
+    public init(keyAndValues: [String: Any]) {
+    {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
+        if let {{ variable.name }} = keyAndValues["{{ variable.name }}"] as? {{ variable.typeName }} {
+            self.{{ variable.name }} = {{ variable.name }}
+        } 
     {% endfor %}
     }
 

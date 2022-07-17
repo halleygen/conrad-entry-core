@@ -10,6 +10,10 @@ public protocol PartialMergable {
     mutating func merge(from other: Self)
 }
 
+public protocol MutationRequest {
+    init(keyAndValues: [String: Any])
+}
+
 // MARK: - BillOfLading
 
 // MARK: Protocol
@@ -81,7 +85,7 @@ public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hash
 
 // MARK: MutationRequest
 
-public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, PartialMergable, Codable, Hashable {
+public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
     public var loadPortID: Int?
     public var vesselHolds: Set<Int>?
     public var weighingMethodID: Int?
@@ -103,6 +107,27 @@ public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Partia
         self.wetMetricTonnes = wetMetricTonnes
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
+    }
+
+    public init(keyAndValues: [String: Any]) {
+        if let loadPortID = keyAndValues["loadPortID"] as? Int {
+            self.loadPortID = loadPortID
+        }
+        if let vesselHolds = keyAndValues["vesselHolds"] as? Set<Int> {
+            self.vesselHolds = vesselHolds
+        }
+        if let weighingMethodID = keyAndValues["weighingMethodID"] as? Int {
+            self.weighingMethodID = weighingMethodID
+        }
+        if let wetMetricTonnes = keyAndValues["wetMetricTonnes"] as? Double {
+            self.wetMetricTonnes = wetMetricTonnes
+        }
+        if let moisturePercentage = keyAndValues["moisturePercentage"] as? Double {
+            self.moisturePercentage = moisturePercentage
+        }
+        if let dryMetricTonnes = keyAndValues["dryMetricTonnes"] as? Double {
+            self.dryMetricTonnes = dryMetricTonnes
+        }
     }
 
     public static func empty() -> Self { Self() }
@@ -367,7 +392,7 @@ public struct DischargeCreationRequest: DischargeProperties, Codable, Hashable {
 
 // MARK: MutationRequest
 
-public struct DischargeMutationRequest: DischargePartialProperties, PartialMergable, Codable, Hashable {
+public struct DischargeMutationRequest: DischargePartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
     public var berthName: String?
     public var berthLocation: LocationDTO?
     public var gearID: Int?
@@ -410,6 +435,48 @@ public struct DischargeMutationRequest: DischargePartialProperties, PartialMerga
         self.saveAllTarpaulinsUsed = saveAllTarpaulinsUsed
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
+    }
+
+    public init(keyAndValues: [String: Any]) {
+        if let berthName = keyAndValues["berthName"] as? String {
+            self.berthName = berthName
+        }
+        if let berthLocation = keyAndValues["berthLocation"] as? LocationDTO {
+            self.berthLocation = berthLocation
+        }
+        if let gearID = keyAndValues["gearID"] as? Int {
+            self.gearID = gearID
+        }
+        if let methodID = keyAndValues["methodID"] as? Int {
+            self.methodID = methodID
+        }
+        if let cargoCondition = keyAndValues["cargoCondition"] as? CargoConditionDTO {
+            self.cargoCondition = cargoCondition
+        }
+        if let weatherConditionsID = keyAndValues["weatherConditionsID"] as? Int {
+            self.weatherConditionsID = weatherConditionsID
+        }
+        if let startTime = keyAndValues["startTime"] as? Date {
+            self.startTime = startTime
+        }
+        if let finishTimeLastGrab = keyAndValues["finishTimeLastGrab"] as? Date {
+            self.finishTimeLastGrab = finishTimeLastGrab
+        }
+        if let finishTimeCleanup = keyAndValues["finishTimeCleanup"] as? Date {
+            self.finishTimeCleanup = finishTimeCleanup
+        }
+        if let dischargeRateTonnesPerHour = keyAndValues["dischargeRateTonnesPerHour"] as? Double {
+            self.dischargeRateTonnesPerHour = dischargeRateTonnesPerHour
+        }
+        if let saveAllTarpaulinsUsed = keyAndValues["saveAllTarpaulinsUsed"] as? Bool {
+            self.saveAllTarpaulinsUsed = saveAllTarpaulinsUsed
+        }
+        if let holdsCleaned = keyAndValues["holdsCleaned"] as? Bool {
+            self.holdsCleaned = holdsCleaned
+        }
+        if let wharfCleaned = keyAndValues["wharfCleaned"] as? Bool {
+            self.wharfCleaned = wharfCleaned
+        }
     }
 
     public static func empty() -> Self { Self() }
@@ -793,7 +860,7 @@ public struct DischargeWeightCreationRequest: DischargeWeightProperties, Codable
 
 // MARK: MutationRequest
 
-public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, PartialMergable, Codable, Hashable {
+public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
     public var kind: DischargeWeightKind?
     public var methodID: Int?
     public var weighingPointID: Int?
@@ -848,6 +915,60 @@ public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, 
         self.abcCheck = abcCheck
         self.tallymen = tallymen
         self.transparencyID = transparencyID
+    }
+
+    public init(keyAndValues: [String: Any]) {
+        if let kind = keyAndValues["kind"] as? DischargeWeightKind {
+            self.kind = kind
+        }
+        if let methodID = keyAndValues["methodID"] as? Int {
+            self.methodID = methodID
+        }
+        if let weighingPointID = keyAndValues["weighingPointID"] as? Int {
+            self.weighingPointID = weighingPointID
+        }
+        if let weighingCompany = keyAndValues["weighingCompany"] as? String {
+            self.weighingCompany = weighingCompany
+        }
+        if let startTime = keyAndValues["startTime"] as? Date {
+            self.startTime = startTime
+        }
+        if let finishTime = keyAndValues["finishTime"] as? Date {
+            self.finishTime = finishTime
+        }
+        if let wetMetricTonnes = keyAndValues["wetMetricTonnes"] as? Double {
+            self.wetMetricTonnes = wetMetricTonnes
+        }
+        if let moisturePercentage = keyAndValues["moisturePercentage"] as? Double {
+            self.moisturePercentage = moisturePercentage
+        }
+        if let dryMetricTonnes = keyAndValues["dryMetricTonnes"] as? Double {
+            self.dryMetricTonnes = dryMetricTonnes
+        }
+        if let equipmentName = keyAndValues["equipmentName"] as? String? {
+            self.equipmentName = equipmentName
+        }
+        if let equipmentModel = keyAndValues["equipmentModel"] as? String? {
+            self.equipmentModel = equipmentModel
+        }
+        if let equipmentLocation = keyAndValues["equipmentLocation"] as? LocationDTO? {
+            self.equipmentLocation = equipmentLocation
+        }
+        if let equipmentCertificationDate = keyAndValues["equipmentCertificationDate"] as? Date? {
+            self.equipmentCertificationDate = equipmentCertificationDate
+        }
+        if let calibrationCheck = keyAndValues["calibrationCheck"] as? CalibrationCheck? {
+            self.calibrationCheck = calibrationCheck
+        }
+        if let abcCheck = keyAndValues["abcCheck"] as? ABCCheck? {
+            self.abcCheck = abcCheck
+        }
+        if let tallymen = keyAndValues["tallymen"] as? Tallymen? {
+            self.tallymen = tallymen
+        }
+        if let transparencyID = keyAndValues["transparencyID"] as? Int {
+            self.transparencyID = transparencyID
+        }
     }
 
     public static func empty() -> Self { Self() }
@@ -1234,7 +1355,7 @@ public struct MoistureDeterminationCreationRequest: MoistureDeterminationPropert
 
 // MARK: MutationRequest
 
-public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartialProperties, PartialMergable, Codable, Hashable {
+public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
     public var moistureDeterminationCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -1268,6 +1389,39 @@ public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartial
         self.constantWeightCheck = constantWeightCheck
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
+    }
+
+    public init(keyAndValues: [String: Any]) {
+        if let moistureDeterminationCompanyID = keyAndValues["moistureDeterminationCompanyID"] as? Int {
+            self.moistureDeterminationCompanyID = moistureDeterminationCompanyID
+        }
+        if let siteID = keyAndValues["siteID"] as? Int {
+            self.siteID = siteID
+        }
+        if let location = keyAndValues["location"] as? LocationDTO {
+            self.location = location
+        }
+        if let lotSampleTrayWeightKilograms = keyAndValues["lotSampleTrayWeightKilograms"] as? Double {
+            self.lotSampleTrayWeightKilograms = lotSampleTrayWeightKilograms
+        }
+        if let ovenOnTime = keyAndValues["ovenOnTime"] as? Date {
+            self.ovenOnTime = ovenOnTime
+        }
+        if let ovenOffTime = keyAndValues["ovenOffTime"] as? Date {
+            self.ovenOffTime = ovenOffTime
+        }
+        if let ovenTemperatureCelsius = keyAndValues["ovenTemperatureCelsius"] as? Int {
+            self.ovenTemperatureCelsius = ovenTemperatureCelsius
+        }
+        if let constantWeightCheck = keyAndValues["constantWeightCheck"] as? ConstantWeightCheck? {
+            self.constantWeightCheck = constantWeightCheck
+        }
+        if let resultsWaitTimeDays = keyAndValues["resultsWaitTimeDays"] as? Int {
+            self.resultsWaitTimeDays = resultsWaitTimeDays
+        }
+        if let transparencyID = keyAndValues["transparencyID"] as? Int {
+            self.transparencyID = transparencyID
+        }
     }
 
     public static func empty() -> Self { Self() }
@@ -1584,7 +1738,7 @@ public struct SampleCollectionCreationRequest: SampleCollectionProperties, Codab
 
 // MARK: MutationRequest
 
-public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties, PartialMergable, Codable, Hashable {
+public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
     public var samplingCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -1627,6 +1781,48 @@ public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties
         self.lotSizeWetTonnes = lotSizeWetTonnes
         self.sublotSizeWetTonnes = sublotSizeWetTonnes
         self.numberOfLots = numberOfLots
+    }
+
+    public init(keyAndValues: [String: Any]) {
+        if let samplingCompanyID = keyAndValues["samplingCompanyID"] as? Int {
+            self.samplingCompanyID = samplingCompanyID
+        }
+        if let siteID = keyAndValues["siteID"] as? Int {
+            self.siteID = siteID
+        }
+        if let location = keyAndValues["location"] as? LocationDTO {
+            self.location = location
+        }
+        if let samplingPointID = keyAndValues["samplingPointID"] as? Int {
+            self.samplingPointID = samplingPointID
+        }
+        if let startTime = keyAndValues["startTime"] as? Date {
+            self.startTime = startTime
+        }
+        if let finishTime = keyAndValues["finishTime"] as? Date {
+            self.finishTime = finishTime
+        }
+        if let methodID = keyAndValues["methodID"] as? Int {
+            self.methodID = methodID
+        }
+        if let sampleIncrementsWetTonnes = keyAndValues["sampleIncrementsWetTonnes"] as? Double {
+            self.sampleIncrementsWetTonnes = sampleIncrementsWetTonnes
+        }
+        if let typicalSampleWeightKilograms = keyAndValues["typicalSampleWeightKilograms"] as? Double {
+            self.typicalSampleWeightKilograms = typicalSampleWeightKilograms
+        }
+        if let numberOfTrucksPerBag = keyAndValues["numberOfTrucksPerBag"] as? Int? {
+            self.numberOfTrucksPerBag = numberOfTrucksPerBag
+        }
+        if let lotSizeWetTonnes = keyAndValues["lotSizeWetTonnes"] as? Int {
+            self.lotSizeWetTonnes = lotSizeWetTonnes
+        }
+        if let sublotSizeWetTonnes = keyAndValues["sublotSizeWetTonnes"] as? Int? {
+            self.sublotSizeWetTonnes = sublotSizeWetTonnes
+        }
+        if let numberOfLots = keyAndValues["numberOfLots"] as? Int {
+            self.numberOfLots = numberOfLots
+        }
     }
 
     public static func empty() -> Self { Self() }
@@ -2031,7 +2227,7 @@ public struct SamplePreparationCreationRequest: SamplePreparationProperties, Cod
 
 // MARK: MutationRequest
 
-public struct SamplePreparationMutationRequest: SamplePreparationPartialProperties, PartialMergable, Codable, Hashable {
+public struct SamplePreparationMutationRequest: SamplePreparationPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
     public var preparationCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -2095,6 +2291,69 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
         self.riffleApertureMillimetres = riffleApertureMillimetres
         self.numberOfSets = numberOfSets
         self.transparencyID = transparencyID
+    }
+
+    public init(keyAndValues: [String: Any]) {
+        if let preparationCompanyID = keyAndValues["preparationCompanyID"] as? Int {
+            self.preparationCompanyID = preparationCompanyID
+        }
+        if let siteID = keyAndValues["siteID"] as? Int {
+            self.siteID = siteID
+        }
+        if let location = keyAndValues["location"] as? LocationDTO {
+            self.location = location
+        }
+        if let startTime = keyAndValues["startTime"] as? Date {
+            self.startTime = startTime
+        }
+        if let finishTime = keyAndValues["finishTime"] as? Date {
+            self.finishTime = finishTime
+        }
+        if let standardsID = keyAndValues["standardsID"] as? Int {
+            self.standardsID = standardsID
+        }
+        if let wasScreened = keyAndValues["wasScreened"] as? Bool {
+            self.wasScreened = wasScreened
+        }
+        if let screenApertureID = keyAndValues["screenApertureID"] as? Int? {
+            self.screenApertureID = screenApertureID
+        }
+        if let oversizePulverizedSeparately = keyAndValues["oversizePulverizedSeparately"] as? Bool? {
+            self.oversizePulverizedSeparately = oversizePulverizedSeparately
+        }
+        if let sampleChargeWeightGrams = keyAndValues["sampleChargeWeightGrams"] as? Int {
+            self.sampleChargeWeightGrams = sampleChargeWeightGrams
+        }
+        if let pulverizerID = keyAndValues["pulverizerID"] as? Int {
+            self.pulverizerID = pulverizerID
+        }
+        if let pulverizingDurationSeconds = keyAndValues["pulverizingDurationSeconds"] as? TimeInterval {
+            self.pulverizingDurationSeconds = pulverizingDurationSeconds
+        }
+        if let divisionMethodID = keyAndValues["divisionMethodID"] as? Int {
+            self.divisionMethodID = divisionMethodID
+        }
+        if let rsdNumberOfSegments = keyAndValues["rsdNumberOfSegments"] as? Int? {
+            self.rsdNumberOfSegments = rsdNumberOfSegments
+        }
+        if let incrementISOScoopUsed = keyAndValues["incrementISOScoopUsed"] as? Bool? {
+            self.incrementISOScoopUsed = incrementISOScoopUsed
+        }
+        if let incrementBackingPlateUsed = keyAndValues["incrementBackingPlateUsed"] as? Bool? {
+            self.incrementBackingPlateUsed = incrementBackingPlateUsed
+        }
+        if let incrementDividedToExtinction = keyAndValues["incrementDividedToExtinction"] as? Bool? {
+            self.incrementDividedToExtinction = incrementDividedToExtinction
+        }
+        if let riffleApertureMillimetres = keyAndValues["riffleApertureMillimetres"] as? Int? {
+            self.riffleApertureMillimetres = riffleApertureMillimetres
+        }
+        if let numberOfSets = keyAndValues["numberOfSets"] as? Int {
+            self.numberOfSets = numberOfSets
+        }
+        if let transparencyID = keyAndValues["transparencyID"] as? Int {
+            self.transparencyID = transparencyID
+        }
     }
 
     public static func empty() -> Self { Self() }
@@ -2527,7 +2786,7 @@ public struct SampleReductionCreationRequest: SampleReductionProperties, Codable
 
 // MARK: MutationRequest
 
-public struct SampleReductionMutationRequest: SampleReductionPartialProperties, PartialMergable, Codable, Hashable {
+public struct SampleReductionMutationRequest: SampleReductionPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
     public var samplingCompanyID: Int?
     public var location: LocationDTO?
     public var siteID: Int?
@@ -2564,6 +2823,42 @@ public struct SampleReductionMutationRequest: SampleReductionPartialProperties, 
         self.wasConedAndQuartered = wasConedAndQuartered
         self.methodID = methodID
         self.gridSizeID = gridSizeID
+    }
+
+    public init(keyAndValues: [String: Any]) {
+        if let samplingCompanyID = keyAndValues["samplingCompanyID"] as? Int {
+            self.samplingCompanyID = samplingCompanyID
+        }
+        if let location = keyAndValues["location"] as? LocationDTO {
+            self.location = location
+        }
+        if let siteID = keyAndValues["siteID"] as? Int {
+            self.siteID = siteID
+        }
+        if let laboratoryID = keyAndValues["laboratoryID"] as? Int? {
+            self.laboratoryID = laboratoryID
+        }
+        if let reductionPointID = keyAndValues["reductionPointID"] as? Int {
+            self.reductionPointID = reductionPointID
+        }
+        if let startTime = keyAndValues["startTime"] as? Date {
+            self.startTime = startTime
+        }
+        if let finishTime = keyAndValues["finishTime"] as? Date {
+            self.finishTime = finishTime
+        }
+        if let screenApertureMillimetres = keyAndValues["screenApertureMillimetres"] as? Double? {
+            self.screenApertureMillimetres = screenApertureMillimetres
+        }
+        if let wasConedAndQuartered = keyAndValues["wasConedAndQuartered"] as? Bool {
+            self.wasConedAndQuartered = wasConedAndQuartered
+        }
+        if let methodID = keyAndValues["methodID"] as? Int {
+            self.methodID = methodID
+        }
+        if let gridSizeID = keyAndValues["gridSizeID"] as? Int? {
+            self.gridSizeID = gridSizeID
+        }
     }
 
     public static func empty() -> Self { Self() }
@@ -2900,7 +3195,7 @@ public struct ShipmentCreationRequest: ShipmentDetailsProperties, Codable, Hasha
 
 // MARK: MutationRequest
 
-public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, PartialMergable, Codable, Hashable {
+public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
     public var clientReference: String?
     public var logDate: Date?
     public var norTime: Date?
@@ -2946,6 +3241,51 @@ public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, 
         self.inspectionCompanySellerID = inspectionCompanySellerID
         self.inspectionCompanySecondAgentID = inspectionCompanySecondAgentID
         self.conradTeamSize = conradTeamSize
+    }
+
+    public init(keyAndValues: [String: Any]) {
+        if let clientReference = keyAndValues["clientReference"] as? String {
+            self.clientReference = clientReference
+        }
+        if let logDate = keyAndValues["logDate"] as? Date {
+            self.logDate = logDate
+        }
+        if let norTime = keyAndValues["norTime"] as? Date {
+            self.norTime = norTime
+        }
+        if let vesselName = keyAndValues["vesselName"] as? String {
+            self.vesselName = vesselName
+        }
+        if let clientID = keyAndValues["clientID"] as? Int {
+            self.clientID = clientID
+        }
+        if let commodityID = keyAndValues["commodityID"] as? Int {
+            self.commodityID = commodityID
+        }
+        if let agentID = keyAndValues["agentID"] as? Int? {
+            self.agentID = agentID
+        }
+        if let traderID = keyAndValues["traderID"] as? Int? {
+            self.traderID = traderID
+        }
+        if let smelterID = keyAndValues["smelterID"] as? Int {
+            self.smelterID = smelterID
+        }
+        if let dischargePortID = keyAndValues["dischargePortID"] as? Int {
+            self.dischargePortID = dischargePortID
+        }
+        if let inspectionCompanyReceiverID = keyAndValues["inspectionCompanyReceiverID"] as? Int? {
+            self.inspectionCompanyReceiverID = inspectionCompanyReceiverID
+        }
+        if let inspectionCompanySellerID = keyAndValues["inspectionCompanySellerID"] as? Int? {
+            self.inspectionCompanySellerID = inspectionCompanySellerID
+        }
+        if let inspectionCompanySecondAgentID = keyAndValues["inspectionCompanySecondAgentID"] as? Int? {
+            self.inspectionCompanySecondAgentID = inspectionCompanySecondAgentID
+        }
+        if let conradTeamSize = keyAndValues["conradTeamSize"] as? Int {
+            self.conradTeamSize = conradTeamSize
+        }
     }
 
     public static func empty() -> Self { Self() }
