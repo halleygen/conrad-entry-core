@@ -1,0 +1,6 @@
+sources:
+  - Sources/ConradEntryCore/Sourcery/SourceryInput.swift
+templates:
+  - ConradEntryCore.stencil
+output:
+  Sources/ConradEntryCore/Sourcery/SourceryOutput.swift
