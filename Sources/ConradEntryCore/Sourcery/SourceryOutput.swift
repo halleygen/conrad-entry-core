@@ -4010,7 +4010,7 @@ public struct SampleCollectionMethodValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct SampleCollectionPointValuesValue: ConfigurationConstantValue {
+public struct SampleCollectionPointValue: ConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var isFromTruck: Bool
@@ -4769,7 +4769,7 @@ public struct ConfigurationConstants: Codable {
     public var inspectionCompanyValues: [InspectionCompanyValue]
     public var maritimePortValues: [MaritimePortValue]
     public var sampleCollectionMethodValues: [SampleCollectionMethodValue]
-    public var sampleCollectionPointValuesValues: [SampleCollectionPointValuesValue]
+    public var sampleCollectionPointValues: [SampleCollectionPointValue]
     public var samplePreparationDivisionMethodValues: [SamplePreparationDivisionMethodValue]
     public var samplePreparationPulverizerValues: [SamplePreparationPulverizerValue]
     public var samplePreparationScreenApertureValues: [SamplePreparationScreenApertureValue]
@@ -4797,7 +4797,7 @@ public struct ConfigurationConstants: Codable {
         inspectionCompanyValues: [InspectionCompanyValue],
         maritimePortValues: [MaritimePortValue],
         sampleCollectionMethodValues: [SampleCollectionMethodValue],
-        sampleCollectionPointValuesValues: [SampleCollectionPointValuesValue],
+        sampleCollectionPointValues: [SampleCollectionPointValue],
         samplePreparationDivisionMethodValues: [SamplePreparationDivisionMethodValue],
         samplePreparationPulverizerValues: [SamplePreparationPulverizerValue],
         samplePreparationScreenApertureValues: [SamplePreparationScreenApertureValue],
@@ -4824,7 +4824,7 @@ public struct ConfigurationConstants: Codable {
         self.inspectionCompanyValues = inspectionCompanyValues
         self.maritimePortValues = maritimePortValues
         self.sampleCollectionMethodValues = sampleCollectionMethodValues
-        self.sampleCollectionPointValuesValues = sampleCollectionPointValuesValues
+        self.sampleCollectionPointValues = sampleCollectionPointValues
         self.samplePreparationDivisionMethodValues = samplePreparationDivisionMethodValues
         self.samplePreparationPulverizerValues = samplePreparationPulverizerValues
         self.samplePreparationScreenApertureValues = samplePreparationScreenApertureValues

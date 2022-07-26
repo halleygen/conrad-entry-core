@@ -210,7 +210,7 @@
     private protocol SamplePreparationStandard: ConstantAutogen {}
     // sourcery:end
 
-    private protocol SampleCollectionPointValues: ConstantAutogen {
+    private protocol SampleCollectionPoint: ConstantAutogen {
         var isFromTruck: Bool { get }
     }
 
