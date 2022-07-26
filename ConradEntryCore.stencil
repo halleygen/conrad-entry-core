@@ -188,3 +188,101 @@ public struct Partial{{ type.name|replace:"Template","DTO" }}: {{ type.name|repl
     #}
 }
 {% endfor %}
+
+
+//
+//
+// MARK: - Constants
+//
+//
+
+public protocol ConfigurationConstantValue: Codable, Identifiable where ID == Int {
+    var id: ID { get }
+    var value: String { get }
+    var representsOtherValue: Bool { get }
+    var isDeleted: Bool { get }
+
+    init?(keyAndValues: [String: Any])
+    func dictionaryValue() -> [String: Any]
+}
+
+{% for type in types.implementing.ConstantAutogen %}
+
+public struct {{ type.name }}Value: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    {% for variable in type.storedVariables %}
+    public var {{ variable.name }}: {{ variable.typeName }}
+    {% endfor %}
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        {% for variable in type.storedVariables %}
+        {{ variable.name }}: {{ variable.typeName }},
+        {% endfor %}
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        {% for variable in type.storedVariables %}
+        self.{{ variable.name }} = {{ variable.name }}
+        {% endfor %}
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard 
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            {% for variable in type.storedVariables %}
+            let {{ variable.name }} = keyAndValues["{{ variable.name }}"] as? {{ variable.typeName }},
+            {% endfor %}
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        {% for variable in type.storedVariables %}
+        self.{{ variable.name }} = {{ variable.name }}
+        {% endfor %}
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            {% for variable in type.storedVariables %}
+            "{{ variable.name }}": {{ variable.name }},
+            {% endfor %}
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+{% endfor %}
+
+public struct ConfigurationConstants: Codable {
+    {% for type in types.implementing.ConstantAutogen %}
+    public var {{ type.name|lowerFirstLetter }}Values: [{{ type.name }}Value]
+    {% endfor %}
+
+    public init(
+        {% for type in types.implementing.ConstantAutogen %}
+        {{ type.name|lowerFirstLetter }}Values: [{{ type.name }}Value]{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    ) {
+        {% for type in types.implementing.ConstantAutogen %}
+        self.{{ type.name|lowerFirstLetter }}Values = {{ type.name|lowerFirstLetter }}Values
+        {% endfor %}
+    }
+}

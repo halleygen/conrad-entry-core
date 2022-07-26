@@ -3545,3 +3545,1296 @@ public struct PartialShipmentDetailsDTO: ShipmentDetailsPartialProperties, Codab
         self.conradTeamSize = other.conradTeamSize
     }
 }
+
+//
+//
+
+// MARK: - Constants
+
+//
+//
+
+public protocol ConfigurationConstantValue: Codable, Identifiable where ID == Int {
+    var id: ID { get }
+    var value: String { get }
+    var representsOtherValue: Bool { get }
+    var isDeleted: Bool { get }
+
+    init?(keyAndValues: [String: Any])
+    func dictionaryValue() -> [String: Any]
+}
+
+public struct AgentValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct ClientValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct CommodityValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct DischargeGearValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct DischargeMethodValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct DischargeWeatherConditionValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct DischargeWeightWeighingPointValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct InspectionCompanyValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct MaritimePortValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var countryCode: String
+    public var timeZoneIdentifier: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        countryCode: String,
+        timeZoneIdentifier: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.countryCode = countryCode
+        self.timeZoneIdentifier = timeZoneIdentifier
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let countryCode = keyAndValues["countryCode"] as? String,
+            let timeZoneIdentifier = keyAndValues["timeZoneIdentifier"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.countryCode = countryCode
+        self.timeZoneIdentifier = timeZoneIdentifier
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "countryCode": countryCode,
+            "timeZoneIdentifier": timeZoneIdentifier,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SampleCollectionMethodValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SampleCollectionPointValuesValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var isFromTruck: Bool
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        isFromTruck: Bool,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.isFromTruck = isFromTruck
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let isFromTruck = keyAndValues["isFromTruck"] as? Bool,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.isFromTruck = isFromTruck
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "isFromTruck": isFromTruck,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SamplePreparationDivisionMethodValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var usesRotarySampleDivider: Bool
+    public var usesRiffle: Bool
+    public var usesIncrementDivision: Bool
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        usesRotarySampleDivider: Bool,
+        usesRiffle: Bool,
+        usesIncrementDivision: Bool,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.usesRotarySampleDivider = usesRotarySampleDivider
+        self.usesRiffle = usesRiffle
+        self.usesIncrementDivision = usesIncrementDivision
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let usesRotarySampleDivider = keyAndValues["usesRotarySampleDivider"] as? Bool,
+            let usesRiffle = keyAndValues["usesRiffle"] as? Bool,
+            let usesIncrementDivision = keyAndValues["usesIncrementDivision"] as? Bool,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.usesRotarySampleDivider = usesRotarySampleDivider
+        self.usesRiffle = usesRiffle
+        self.usesIncrementDivision = usesIncrementDivision
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "usesRotarySampleDivider": usesRotarySampleDivider,
+            "usesRiffle": usesRiffle,
+            "usesIncrementDivision": usesIncrementDivision,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SamplePreparationPulverizerValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SamplePreparationScreenApertureValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SamplePreparationStandardValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SampleReductionGridSizeValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SampleReductionLaboratoryValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SampleReductionMethodValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var usesGrid: Bool
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        usesGrid: Bool,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.usesGrid = usesGrid
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let usesGrid = keyAndValues["usesGrid"] as? Bool,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.usesGrid = usesGrid
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "usesGrid": usesGrid,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SampleReductionPointValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SampleReductionSiteValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var isLabFacility: Bool
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        isLabFacility: Bool,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.isLabFacility = isLabFacility
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let isLabFacility = keyAndValues["isLabFacility"] as? Bool,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.isLabFacility = isLabFacility
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "isLabFacility": isLabFacility,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SamplingCompanyValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SamplingSiteValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SamplingTransparencyValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var ranking: Int
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        ranking: Int,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.ranking = ranking
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let ranking = keyAndValues["ranking"] as? Int,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.ranking = ranking
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "ranking": ranking,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct SmelterValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct TraderValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct WeighingMethodValue: ConfigurationConstantValue {
+    public var id: Int
+    public var value: String
+    public var usesEquipment: Bool
+    public var usesTallymen: Bool
+    public var supportsABCChecks: Bool
+    public var representsOtherValue: Bool
+    public var isDeleted: Bool
+
+    public init(
+        id: ID,
+        value: String,
+        usesEquipment: Bool,
+        usesTallymen: Bool,
+        supportsABCChecks: Bool,
+        representsOtherValue: Bool = false,
+        isDeleted: Bool = false
+    ) {
+        self.id = id
+        self.value = value
+        self.usesEquipment = usesEquipment
+        self.usesTallymen = usesTallymen
+        self.supportsABCChecks = supportsABCChecks
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public init?(keyAndValues: [String: Any]) {
+        guard
+            let id = keyAndValues["id"] as? ID,
+            let value = keyAndValues["value"] as? String,
+            let usesEquipment = keyAndValues["usesEquipment"] as? Bool,
+            let usesTallymen = keyAndValues["usesTallymen"] as? Bool,
+            let supportsABCChecks = keyAndValues["supportsABCChecks"] as? Bool,
+            let representsOtherValue = keyAndValues["representsOtherValue"] as? Bool,
+            let isDeleted = keyAndValues["isDeleted"] as? Bool
+        else {
+            return nil
+        }
+        self.id = id
+        self.value = value
+        self.usesEquipment = usesEquipment
+        self.usesTallymen = usesTallymen
+        self.supportsABCChecks = supportsABCChecks
+        self.representsOtherValue = representsOtherValue
+        self.isDeleted = isDeleted
+    }
+
+    public func dictionaryValue() -> [String: Any] {
+        [
+            "id": id,
+            "value": value,
+            "usesEquipment": usesEquipment,
+            "usesTallymen": usesTallymen,
+            "supportsABCChecks": supportsABCChecks,
+            "representsOtherValue": representsOtherValue,
+            "isDeleted": isDeleted
+        ]
+    }
+}
+
+public struct ConfigurationConstants: Codable {
+    public var agentValues: [AgentValue]
+    public var clientValues: [ClientValue]
+    public var commodityValues: [CommodityValue]
+    public var dischargeGearValues: [DischargeGearValue]
+    public var dischargeMethodValues: [DischargeMethodValue]
+    public var dischargeWeatherConditionValues: [DischargeWeatherConditionValue]
+    public var dischargeWeightWeighingPointValues: [DischargeWeightWeighingPointValue]
+    public var inspectionCompanyValues: [InspectionCompanyValue]
+    public var maritimePortValues: [MaritimePortValue]
+    public var sampleCollectionMethodValues: [SampleCollectionMethodValue]
+    public var sampleCollectionPointValuesValues: [SampleCollectionPointValuesValue]
+    public var samplePreparationDivisionMethodValues: [SamplePreparationDivisionMethodValue]
+    public var samplePreparationPulverizerValues: [SamplePreparationPulverizerValue]
+    public var samplePreparationScreenApertureValues: [SamplePreparationScreenApertureValue]
+    public var samplePreparationStandardValues: [SamplePreparationStandardValue]
+    public var sampleReductionGridSizeValues: [SampleReductionGridSizeValue]
+    public var sampleReductionLaboratoryValues: [SampleReductionLaboratoryValue]
+    public var sampleReductionMethodValues: [SampleReductionMethodValue]
+    public var sampleReductionPointValues: [SampleReductionPointValue]
+    public var sampleReductionSiteValues: [SampleReductionSiteValue]
+    public var samplingCompanyValues: [SamplingCompanyValue]
+    public var samplingSiteValues: [SamplingSiteValue]
+    public var samplingTransparencyValues: [SamplingTransparencyValue]
+    public var smelterValues: [SmelterValue]
+    public var traderValues: [TraderValue]
+    public var weighingMethodValues: [WeighingMethodValue]
+
+    public init(
+        agentValues: [AgentValue],
+        clientValues: [ClientValue],
+        commodityValues: [CommodityValue],
+        dischargeGearValues: [DischargeGearValue],
+        dischargeMethodValues: [DischargeMethodValue],
+        dischargeWeatherConditionValues: [DischargeWeatherConditionValue],
+        dischargeWeightWeighingPointValues: [DischargeWeightWeighingPointValue],
+        inspectionCompanyValues: [InspectionCompanyValue],
+        maritimePortValues: [MaritimePortValue],
+        sampleCollectionMethodValues: [SampleCollectionMethodValue],
+        sampleCollectionPointValuesValues: [SampleCollectionPointValuesValue],
+        samplePreparationDivisionMethodValues: [SamplePreparationDivisionMethodValue],
+        samplePreparationPulverizerValues: [SamplePreparationPulverizerValue],
+        samplePreparationScreenApertureValues: [SamplePreparationScreenApertureValue],
+        samplePreparationStandardValues: [SamplePreparationStandardValue],
+        sampleReductionGridSizeValues: [SampleReductionGridSizeValue],
+        sampleReductionLaboratoryValues: [SampleReductionLaboratoryValue],
+        sampleReductionMethodValues: [SampleReductionMethodValue],
+        sampleReductionPointValues: [SampleReductionPointValue],
+        sampleReductionSiteValues: [SampleReductionSiteValue],
+        samplingCompanyValues: [SamplingCompanyValue],
+        samplingSiteValues: [SamplingSiteValue],
+        samplingTransparencyValues: [SamplingTransparencyValue],
+        smelterValues: [SmelterValue],
+        traderValues: [TraderValue],
+        weighingMethodValues: [WeighingMethodValue]
+    ) {
+        self.agentValues = agentValues
+        self.clientValues = clientValues
+        self.commodityValues = commodityValues
+        self.dischargeGearValues = dischargeGearValues
+        self.dischargeMethodValues = dischargeMethodValues
+        self.dischargeWeatherConditionValues = dischargeWeatherConditionValues
+        self.dischargeWeightWeighingPointValues = dischargeWeightWeighingPointValues
+        self.inspectionCompanyValues = inspectionCompanyValues
+        self.maritimePortValues = maritimePortValues
+        self.sampleCollectionMethodValues = sampleCollectionMethodValues
+        self.sampleCollectionPointValuesValues = sampleCollectionPointValuesValues
+        self.samplePreparationDivisionMethodValues = samplePreparationDivisionMethodValues
+        self.samplePreparationPulverizerValues = samplePreparationPulverizerValues
+        self.samplePreparationScreenApertureValues = samplePreparationScreenApertureValues
+        self.samplePreparationStandardValues = samplePreparationStandardValues
+        self.sampleReductionGridSizeValues = sampleReductionGridSizeValues
+        self.sampleReductionLaboratoryValues = sampleReductionLaboratoryValues
+        self.sampleReductionMethodValues = sampleReductionMethodValues
+        self.sampleReductionPointValues = sampleReductionPointValues
+        self.sampleReductionSiteValues = sampleReductionSiteValues
+        self.samplingCompanyValues = samplingCompanyValues
+        self.samplingSiteValues = samplingSiteValues
+        self.samplingTransparencyValues = samplingTransparencyValues
+        self.smelterValues = smelterValues
+        self.traderValues = traderValues
+        self.weighingMethodValues = weighingMethodValues
+    }
+}

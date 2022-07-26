@@ -180,4 +180,65 @@
         var gridSizeID: Int? { get }
     }
 
+    // MARK: -
+
+    // MARK: - Constants
+
+    // MARK: -
+
+    private protocol ConstantAutogen {}
+
+    private protocol Agent: ConstantAutogen {}
+    private protocol Commodity: ConstantAutogen {}
+    private protocol DischargeGear: ConstantAutogen {}
+    private protocol DischargeMethod: ConstantAutogen {}
+    private protocol DischargeWeatherCondition: ConstantAutogen {}
+    private protocol DischargeWeightWeighingPoint: ConstantAutogen {}
+    private protocol Smelter: ConstantAutogen {}
+    private protocol InspectionCompany: ConstantAutogen {}
+    private protocol SamplingCompany: ConstantAutogen {}
+    private protocol SampleReductionLaboratory: ConstantAutogen {}
+    private protocol SampleReductionPoint: ConstantAutogen {}
+    private protocol SamplePreparationPulverizer: ConstantAutogen {}
+    private protocol SampleReductionGridSize: ConstantAutogen {}
+    private protocol SamplePreparationScreenAperture: ConstantAutogen {}
+    private protocol Client: ConstantAutogen {}
+    private protocol Trader: ConstantAutogen {}
+    private protocol SamplingSite: ConstantAutogen {}
+    private protocol SampleCollectionMethod: ConstantAutogen {}
+    private protocol SamplePreparationStandard: ConstantAutogen {}
+
+    private protocol SampleCollectionPointValues: ConstantAutogen {
+        var isFromTruck: Bool { get }
+    }
+
+    private protocol SampleReductionSite: ConstantAutogen {
+        var isLabFacility: Bool { get }
+    }
+
+    private protocol SampleReductionMethod: ConstantAutogen {
+        var usesGrid: Bool { get }
+    }
+
+    private protocol SamplingTransparency: ConstantAutogen {
+        var ranking: Int { get }
+    }
+
+    private protocol SamplePreparationDivisionMethod: ConstantAutogen {
+        var usesRotarySampleDivider: Bool { get }
+        var usesRiffle: Bool { get }
+        var usesIncrementDivision: Bool { get }
+    }
+
+    private protocol WeighingMethod: ConstantAutogen {
+        var usesEquipment: Bool { get }
+        var usesTallymen: Bool { get }
+        var supportsABCChecks: Bool { get }
+    }
+
+    private protocol MaritimePort: ConstantAutogen {
+        var countryCode: String { get }
+        var timeZoneIdentifier: String { get }
+    }
+
 #endif
