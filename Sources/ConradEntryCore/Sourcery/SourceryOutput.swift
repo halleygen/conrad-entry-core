@@ -4841,4 +4841,33 @@ public struct ConfigurationConstants: Codable {
         self.traderValues = traderValues
         self.weighingMethodValues = weighingMethodValues
     }
+
+    public enum CodingKeys: String, CodingKey {
+        case agentValues
+        case clientValues
+        case commodityValues
+        case dischargeGearValues
+        case dischargeMethodValues
+        case dischargeWeatherConditionValues
+        case dischargeWeightWeighingPointValues
+        case inspectionCompanyValues
+        case maritimePortValues
+        case sampleCollectionMethodValues
+        case sampleCollectionPointValues
+        case samplePreparationDivisionMethodValues
+        case samplePreparationPulverizerValues
+        case samplePreparationScreenApertureValues
+        case samplePreparationStandardValues
+        case sampleReductionGridSizeValues
+        case sampleReductionLaboratoryValues
+        case sampleReductionMethodValues
+        case sampleReductionPointValues
+        case sampleReductionSiteValues
+        case samplingCompanyValues
+        case samplingSiteValues
+        case samplingTransparencyValues
+        case smelterValues
+        case traderValues
+        case weighingMethodValues
+    }
 }

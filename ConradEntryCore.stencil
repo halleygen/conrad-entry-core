@@ -289,4 +289,10 @@ public struct ConfigurationConstants: Codable {
         self.{{ type.name|lowerFirstLetter }}Values = {{ type.name|lowerFirstLetter }}Values
         {% endfor %}
     }
+
+    public enum CodingKeys: String, CodingKey {
+        {% for type in types.implementing.ConstantAutogen %}
+        case {{ type.name|lowerFirstLetter }}Values
+        {% endfor %}
+    }
 }
