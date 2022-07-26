@@ -188,6 +188,7 @@
 
     private protocol ConstantAutogen {}
 
+    // sourcery:begin: simpleConstant
     private protocol Agent: ConstantAutogen {}
     private protocol Commodity: ConstantAutogen {}
     private protocol DischargeGear: ConstantAutogen {}
@@ -207,6 +208,7 @@
     private protocol SamplingSite: ConstantAutogen {}
     private protocol SampleCollectionMethod: ConstantAutogen {}
     private protocol SamplePreparationStandard: ConstantAutogen {}
+    // sourcery:end
 
     private protocol SampleCollectionPointValues: ConstantAutogen {
         var isFromTruck: Bool { get }

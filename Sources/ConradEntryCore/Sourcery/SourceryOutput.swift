@@ -3564,7 +3564,11 @@ public protocol ConfigurationConstantValue: Codable, Identifiable where ID == In
     func dictionaryValue() -> [String: Any]
 }
 
-public struct AgentValue: ConfigurationConstantValue {
+public protocol SimpleConfigurationConstantValue: ConfigurationConstantValue {
+    init(id: ID, value: String, representsOtherValue: Bool, isDeleted: Bool)
+}
+
+public struct AgentValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3607,7 +3611,7 @@ public struct AgentValue: ConfigurationConstantValue {
     }
 }
 
-public struct ClientValue: ConfigurationConstantValue {
+public struct ClientValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3650,7 +3654,7 @@ public struct ClientValue: ConfigurationConstantValue {
     }
 }
 
-public struct CommodityValue: ConfigurationConstantValue {
+public struct CommodityValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3693,7 +3697,7 @@ public struct CommodityValue: ConfigurationConstantValue {
     }
 }
 
-public struct DischargeGearValue: ConfigurationConstantValue {
+public struct DischargeGearValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3736,7 +3740,7 @@ public struct DischargeGearValue: ConfigurationConstantValue {
     }
 }
 
-public struct DischargeMethodValue: ConfigurationConstantValue {
+public struct DischargeMethodValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3779,7 +3783,7 @@ public struct DischargeMethodValue: ConfigurationConstantValue {
     }
 }
 
-public struct DischargeWeatherConditionValue: ConfigurationConstantValue {
+public struct DischargeWeatherConditionValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3822,7 +3826,7 @@ public struct DischargeWeatherConditionValue: ConfigurationConstantValue {
     }
 }
 
-public struct DischargeWeightWeighingPointValue: ConfigurationConstantValue {
+public struct DischargeWeightWeighingPointValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3865,7 +3869,7 @@ public struct DischargeWeightWeighingPointValue: ConfigurationConstantValue {
     }
 }
 
-public struct InspectionCompanyValue: ConfigurationConstantValue {
+public struct InspectionCompanyValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3963,7 +3967,7 @@ public struct MaritimePortValue: ConfigurationConstantValue {
     }
 }
 
-public struct SampleCollectionMethodValue: ConfigurationConstantValue {
+public struct SampleCollectionMethodValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4116,7 +4120,7 @@ public struct SamplePreparationDivisionMethodValue: ConfigurationConstantValue {
     }
 }
 
-public struct SamplePreparationPulverizerValue: ConfigurationConstantValue {
+public struct SamplePreparationPulverizerValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4159,7 +4163,7 @@ public struct SamplePreparationPulverizerValue: ConfigurationConstantValue {
     }
 }
 
-public struct SamplePreparationScreenApertureValue: ConfigurationConstantValue {
+public struct SamplePreparationScreenApertureValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4202,7 +4206,7 @@ public struct SamplePreparationScreenApertureValue: ConfigurationConstantValue {
     }
 }
 
-public struct SamplePreparationStandardValue: ConfigurationConstantValue {
+public struct SamplePreparationStandardValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4245,7 +4249,7 @@ public struct SamplePreparationStandardValue: ConfigurationConstantValue {
     }
 }
 
-public struct SampleReductionGridSizeValue: ConfigurationConstantValue {
+public struct SampleReductionGridSizeValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4288,7 +4292,7 @@ public struct SampleReductionGridSizeValue: ConfigurationConstantValue {
     }
 }
 
-public struct SampleReductionLaboratoryValue: ConfigurationConstantValue {
+public struct SampleReductionLaboratoryValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4380,7 +4384,7 @@ public struct SampleReductionMethodValue: ConfigurationConstantValue {
     }
 }
 
-public struct SampleReductionPointValue: ConfigurationConstantValue {
+public struct SampleReductionPointValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4472,7 +4476,7 @@ public struct SampleReductionSiteValue: ConfigurationConstantValue {
     }
 }
 
-public struct SamplingCompanyValue: ConfigurationConstantValue {
+public struct SamplingCompanyValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4515,7 +4519,7 @@ public struct SamplingCompanyValue: ConfigurationConstantValue {
     }
 }
 
-public struct SamplingSiteValue: ConfigurationConstantValue {
+public struct SamplingSiteValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4607,7 +4611,7 @@ public struct SamplingTransparencyValue: ConfigurationConstantValue {
     }
 }
 
-public struct SmelterValue: ConfigurationConstantValue {
+public struct SmelterValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4650,7 +4654,7 @@ public struct SmelterValue: ConfigurationConstantValue {
     }
 }
 
-public struct TraderValue: ConfigurationConstantValue {
+public struct TraderValue: SimpleConfigurationConstantValue {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool

@@ -206,9 +206,13 @@ public protocol ConfigurationConstantValue: Codable, Identifiable where ID == In
     func dictionaryValue() -> [String: Any]
 }
 
+public protocol SimpleConfigurationConstantValue: ConfigurationConstantValue {
+    init(id: ID, value: String, representsOtherValue: Bool, isDeleted: Bool)
+}
+
 {% for type in types.implementing.ConstantAutogen %}
 
-public struct {{ type.name }}Value: ConfigurationConstantValue {
+public struct {{ type.name }}Value: {% if type|annotated:"simpleConstant" %}Simple{% endif %}ConfigurationConstantValue {
     public var id: Int
     public var value: String
     {% for variable in type.storedVariables %}
