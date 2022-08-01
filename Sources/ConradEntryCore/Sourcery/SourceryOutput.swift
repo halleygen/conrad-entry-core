@@ -4871,3 +4871,20 @@ public struct ConfigurationConstants: Codable {
         case weighingMethodValues
     }
 }
+
+public enum ShipmentPart: String, LosslessStringConvertible, Codable {
+    case billOfLading = "bill_of_lading"
+    case discharge
+    case dischargeWeight = "discharge_weight"
+    case moistureDetermination = "moisture_determination"
+    case sampleCollection = "sample_collection"
+    case samplePreparation = "sample_preparation"
+    case sampleReduction = "sample_reduction"
+    case details
+
+    public init?(_ description: String) {
+        self.init(rawValue: description)
+    }
+
+    public var description: String { rawValue }
+}
