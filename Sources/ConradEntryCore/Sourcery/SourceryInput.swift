@@ -22,6 +22,7 @@
         var logDate: Date { get }
         var norTime: Date { get }
         var vesselName: String { get }
+        // sourcery:begin: coreDataType = "Constant"
         var clientID: Int { get }
         var commodityID: Int { get }
         var agentID: Int? { get }
@@ -31,6 +32,7 @@
         var inspectionCompanyReceiverID: Int? { get }
         var inspectionCompanySellerID: Int? { get }
         var inspectionCompanySecondAgentID: Int? { get }
+        // sourcery:end
         var conradTeamSize: Int { get }
     }
 
@@ -40,11 +42,17 @@
         var version: Date { get }
         // sourcery:end
 
+        // sourcery: coreDataType = "Constant"
         var loadPortID: Int { get }
+        // sourcery: coreDataType = "NSSet"
         var vesselHolds: Set<Int> { get }
-        var weighingMethodID: Int { get }
+        // sourcery: coreDataType = "Constant"
+        var methodID: Int { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var wetMetricTonnes: Double { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var moisturePercentage: Double { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var dryMetricTonnes: Double { get }
     }
 
@@ -55,14 +63,19 @@
         // sourcery:end
 
         var berthName: String { get }
+        // sourcery: coreDataType = "Location"
         var berthLocation: LocationDTO { get }
+        // sourcery: coreDataType = "Constant"
         var gearID: Int { get }
+        // sourcery: coreDataType = "Constant"
         var methodID: Int { get }
         var cargoCondition: CargoConditionDTO { get }
+        // sourcery: coreDataType = "Constant"
         var weatherConditionsID: Int { get }
         var startTime: Date { get }
         var finishTimeLastGrab: Date { get }
         var finishTimeCleanup: Date { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var dischargeRateTonnesPerHour: Double { get }
         var saveAllTarpaulinsUsed: Bool { get }
         var holdsCleaned: Bool { get }
@@ -76,21 +89,28 @@
         // sourcery:end
 
         var kind: DischargeWeightKind { get }
+        // sourcery: coreDataType = "Constant"
         var methodID: Int { get }
+        // sourcery: coreDataType = "Constant"
         var weighingPointID: Int { get }
         var weighingCompany: String { get }
         var startTime: Date { get }
         var finishTime: Date { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var wetMetricTonnes: Double { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var moisturePercentage: Double { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var dryMetricTonnes: Double { get }
         var equipmentName: String? { get }
         var equipmentModel: String? { get }
+        // sourcery: coreDataType = "Location"
         var equipmentLocation: LocationDTO? { get }
         var equipmentCertificationDate: Date? { get }
         var calibrationCheck: CalibrationCheck? { get }
         var abcCheck: ABCCheck? { get }
         var tallymen: Tallymen? { get }
+        // sourcery: coreDataType = "Constant"
         var transparencyID: Int { get }
     }
 
@@ -100,15 +120,22 @@
         var version: Date { get }
         // sourcery:end
 
+        // sourcery: coreDataType = "Constant"
         var moistureDeterminationCompanyID: Int { get }
+        // sourcery: coreDataType = "Constant"
         var siteID: Int { get }
+        // sourcery: coreDataType = "Location"
         var location: LocationDTO { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var lotSampleTrayWeightKilograms: Double { get }
         var ovenOnTime: Date { get }
         var ovenOffTime: Date { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var ovenTemperatureCelsius: Int { get }
         var constantWeightCheck: ConstantWeightCheck? { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var resultsWaitTimeDays: Int { get }
+        // sourcery: coreDataType = "Constant"
         var transparencyID: Int { get }
     }
 
@@ -118,18 +145,29 @@
         var version: Date { get }
         // sourcery:end
 
+        // sourcery: coreDataType = "Constant"
         var samplingCompanyID: Int { get }
+        // sourcery: coreDataType = "Constant"
         var siteID: Int { get }
+        // sourcery: coreDataType = "Location"
         var location: LocationDTO { get }
+        // sourcery: coreDataType = "Constant"
         var samplingPointID: Int { get }
         var startTime: Date { get }
         var finishTime: Date { get }
+        // sourcery: coreDataType = "Constant"
         var methodID: Int { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var sampleIncrementsWetTonnes: Double { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var typicalSampleWeightKilograms: Double { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var numberOfTrucksPerBag: Int? { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var lotSizeWetTonnes: Int { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var sublotSizeWetTonnes: Int? { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var numberOfLots: Int { get }
     }
 
@@ -139,25 +177,38 @@
         var version: Date { get }
         // sourcery:end
 
+        // sourcery: coreDataType = "Constant"
         var preparationCompanyID: Int { get }
+        // sourcery: coreDataType = "Constant"
         var siteID: Int { get }
         var location: LocationDTO { get }
         var startTime: Date { get }
         var finishTime: Date { get }
+        // sourcery: coreDataType = "Constant"
         var standardsID: Int { get }
         var wasScreened: Bool { get }
+        // sourcery: coreDataType = "Constant"
         var screenApertureID: Int? { get }
         var oversizePulverizedSeparately: Bool? { get }
         var sampleChargeWeightGrams: Int { get }
+        // sourcery: coreDataType = "Constant"
         var pulverizerID: Int { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var pulverizingDurationSeconds: TimeInterval { get }
+        // sourcery: coreDataType = "Constant"
         var divisionMethodID: Int { get }
         var rsdNumberOfSegments: Int? { get }
+        // sourcery: coreDataType = "NSNumber.Bool"
         var incrementISOScoopUsed: Bool? { get }
+        // sourcery: coreDataType = "NSNumber.Bool"
         var incrementBackingPlateUsed: Bool? { get }
+        // sourcery: coreDataType = "NSNumber.Bool"
         var incrementDividedToExtinction: Bool? { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var riffleApertureMillimetres: Int? { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var numberOfSets: Int { get }
+        // sourcery: coreDataType = "Constant"
         var transparencyID: Int { get }
     }
 
@@ -167,16 +218,25 @@
         var version: Date { get }
         // sourcery:end
 
+        // sourcery: coreDataType = "Constant"
         var samplingCompanyID: Int { get }
+        // sourcery: coreDataType = "Location"
         var location: LocationDTO { get }
+        // sourcery: coreDataType = "Constant"
         var siteID: Int { get }
+        // sourcery: coreDataType = "Constant"
         var laboratoryID: Int? { get }
+        // sourcery: coreDataType = "Constant"
         var reductionPointID: Int { get }
         var startTime: Date { get }
         var finishTime: Date { get }
+        // sourcery: coreDataType = "NSNumber.Double"
         var screenApertureMillimetres: Double? { get }
+        // sourcery: coreDataType = "NSNumber.Bool"
         var wasConedAndQuartered: Bool { get }
+        // sourcery: coreDataType = "Constant"
         var methodID: Int { get }
+        // sourcery: coreDataType = "Constant"
         var gridSizeID: Int? { get }
     }
 

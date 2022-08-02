@@ -21,7 +21,7 @@ public protocol MutationRequest {
 public protocol BillOfLadingProperties {
     var loadPortID: Int { get }
     var vesselHolds: Set<Int> { get }
-    var weighingMethodID: Int { get }
+    var methodID: Int { get }
     var wetMetricTonnes: Double { get }
     var moisturePercentage: Double { get }
     var dryMetricTonnes: Double { get }
@@ -30,7 +30,7 @@ public protocol BillOfLadingProperties {
 public protocol BillOfLadingPartialProperties {
     var loadPortID: Int? { get }
     var vesselHolds: Set<Int>? { get }
-    var weighingMethodID: Int? { get }
+    var methodID: Int? { get }
     var wetMetricTonnes: Double? { get }
     var moisturePercentage: Double? { get }
     var dryMetricTonnes: Double? { get }
@@ -41,7 +41,7 @@ public protocol BillOfLadingPartialProperties {
 public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hashable {
     public var loadPortID: Int
     public var vesselHolds: Set<Int>
-    public var weighingMethodID: Int
+    public var methodID: Int
     public var wetMetricTonnes: Double
     public var moisturePercentage: Double
     public var dryMetricTonnes: Double
@@ -49,14 +49,14 @@ public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hash
     public init(
         loadPortID: Int,
         vesselHolds: Set<Int>,
-        weighingMethodID: Int,
+        methodID: Int,
         wetMetricTonnes: Double,
         moisturePercentage: Double,
         dryMetricTonnes: Double
     ) {
         self.loadPortID = loadPortID
         self.vesselHolds = vesselHolds
-        self.weighingMethodID = weighingMethodID
+        self.methodID = methodID
         self.wetMetricTonnes = wetMetricTonnes
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
@@ -66,7 +66,7 @@ public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hash
         guard
             let loadPortID = mutationRequest.loadPortID,
             let vesselHolds = mutationRequest.vesselHolds,
-            let weighingMethodID = mutationRequest.weighingMethodID,
+            let methodID = mutationRequest.methodID,
             let wetMetricTonnes = mutationRequest.wetMetricTonnes,
             let moisturePercentage = mutationRequest.moisturePercentage,
             let dryMetricTonnes = mutationRequest.dryMetricTonnes
@@ -76,7 +76,7 @@ public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hash
 
         self.loadPortID = loadPortID
         self.vesselHolds = vesselHolds
-        self.weighingMethodID = weighingMethodID
+        self.methodID = methodID
         self.wetMetricTonnes = wetMetricTonnes
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
@@ -88,7 +88,7 @@ public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hash
 public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
     public var loadPortID: Int?
     public var vesselHolds: Set<Int>?
-    public var weighingMethodID: Int?
+    public var methodID: Int?
     public var wetMetricTonnes: Double?
     public var moisturePercentage: Double?
     public var dryMetricTonnes: Double?
@@ -96,14 +96,14 @@ public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Partia
     public init(
         loadPortID: Int? = nil,
         vesselHolds: Set<Int>? = nil,
-        weighingMethodID: Int? = nil,
+        methodID: Int? = nil,
         wetMetricTonnes: Double? = nil,
         moisturePercentage: Double? = nil,
         dryMetricTonnes: Double? = nil
     ) {
         self.loadPortID = loadPortID
         self.vesselHolds = vesselHolds
-        self.weighingMethodID = weighingMethodID
+        self.methodID = methodID
         self.wetMetricTonnes = wetMetricTonnes
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
@@ -116,8 +116,8 @@ public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Partia
         if let vesselHolds = keyAndValues["vesselHolds"] as? Set<Int> {
             self.vesselHolds = vesselHolds
         }
-        if let weighingMethodID = keyAndValues["weighingMethodID"] as? Int {
-            self.weighingMethodID = weighingMethodID
+        if let methodID = keyAndValues["methodID"] as? Int {
+            self.methodID = methodID
         }
         if let wetMetricTonnes = keyAndValues["wetMetricTonnes"] as? Double {
             self.wetMetricTonnes = wetMetricTonnes
@@ -139,8 +139,8 @@ public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Partia
         if let updatedValue = other.vesselHolds {
             vesselHolds = updatedValue
         }
-        if let updatedValue = other.weighingMethodID {
-            weighingMethodID = updatedValue
+        if let updatedValue = other.methodID {
+            methodID = updatedValue
         }
         if let updatedValue = other.wetMetricTonnes {
             wetMetricTonnes = updatedValue
@@ -161,7 +161,7 @@ public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIRes
     public let version: Date
     public let loadPortID: Int
     public let vesselHolds: Set<Int>
-    public let weighingMethodID: Int
+    public let methodID: Int
     public let wetMetricTonnes: Double
     public let moisturePercentage: Double
     public let dryMetricTonnes: Double
@@ -171,7 +171,7 @@ public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIRes
         version: Date,
         loadPortID: Int,
         vesselHolds: Set<Int>,
-        weighingMethodID: Int,
+        methodID: Int,
         wetMetricTonnes: Double,
         moisturePercentage: Double,
         dryMetricTonnes: Double
@@ -180,7 +180,7 @@ public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIRes
         self.version = version
         self.loadPortID = loadPortID
         self.vesselHolds = vesselHolds
-        self.weighingMethodID = weighingMethodID
+        self.methodID = methodID
         self.wetMetricTonnes = wetMetricTonnes
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
@@ -190,7 +190,7 @@ public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIRes
         guard
             let loadPortID = partial.loadPortID,
             let vesselHolds = partial.vesselHolds,
-            let weighingMethodID = partial.weighingMethodID,
+            let methodID = partial.methodID,
             let wetMetricTonnes = partial.wetMetricTonnes,
             let moisturePercentage = partial.moisturePercentage,
             let dryMetricTonnes = partial.dryMetricTonnes
@@ -202,7 +202,7 @@ public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIRes
         self.version = partial.version
         self.loadPortID = loadPortID
         self.vesselHolds = vesselHolds
-        self.weighingMethodID = weighingMethodID
+        self.methodID = methodID
         self.wetMetricTonnes = wetMetricTonnes
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
@@ -217,7 +217,7 @@ public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIRes
         self.version = version
         self.loadPortID = creationRequest.loadPortID
         self.vesselHolds = creationRequest.vesselHolds
-        self.weighingMethodID = creationRequest.weighingMethodID
+        self.methodID = creationRequest.methodID
         self.wetMetricTonnes = creationRequest.wetMetricTonnes
         self.moisturePercentage = creationRequest.moisturePercentage
         self.dryMetricTonnes = creationRequest.dryMetricTonnes
@@ -231,7 +231,7 @@ public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Ha
     public let version: Date
     public let loadPortID: Int?
     public let vesselHolds: Set<Int>?
-    public let weighingMethodID: Int?
+    public let methodID: Int?
     public let wetMetricTonnes: Double?
     public let moisturePercentage: Double?
     public let dryMetricTonnes: Double?
@@ -241,7 +241,7 @@ public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Ha
         version: Date,
         loadPortID: Int? = nil,
         vesselHolds: Set<Int>? = nil,
-        weighingMethodID: Int? = nil,
+        methodID: Int? = nil,
         wetMetricTonnes: Double? = nil,
         moisturePercentage: Double? = nil,
         dryMetricTonnes: Double? = nil
@@ -250,7 +250,7 @@ public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Ha
         self.version = version
         self.loadPortID = loadPortID
         self.vesselHolds = vesselHolds
-        self.weighingMethodID = weighingMethodID
+        self.methodID = methodID
         self.wetMetricTonnes = wetMetricTonnes
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
@@ -265,7 +265,7 @@ public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Ha
         self.version = version
         self.loadPortID = other.loadPortID
         self.vesselHolds = other.vesselHolds
-        self.weighingMethodID = other.weighingMethodID
+        self.methodID = other.methodID
         self.wetMetricTonnes = other.wetMetricTonnes
         self.moisturePercentage = other.moisturePercentage
         self.dryMetricTonnes = other.dryMetricTonnes
