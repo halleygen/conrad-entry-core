@@ -281,7 +281,7 @@ public protocol DischargeProperties {
     var berthLocation: LocationDTO { get }
     var gearID: Int { get }
     var methodID: Int { get }
-    var cargoCondition: CargoConditionDTO { get }
+    var cargoCondition: CargoCondition { get }
     var weatherConditionsID: Int { get }
     var startTime: Date { get }
     var finishTimeLastGrab: Date { get }
@@ -297,7 +297,7 @@ public protocol DischargePartialProperties {
     var berthLocation: LocationDTO? { get }
     var gearID: Int? { get }
     var methodID: Int? { get }
-    var cargoCondition: CargoConditionDTO? { get }
+    var cargoCondition: CargoCondition? { get }
     var weatherConditionsID: Int? { get }
     var startTime: Date? { get }
     var finishTimeLastGrab: Date? { get }
@@ -315,7 +315,7 @@ public struct DischargeCreationRequest: DischargeProperties, Codable, Hashable {
     public var berthLocation: LocationDTO
     public var gearID: Int
     public var methodID: Int
-    public var cargoCondition: CargoConditionDTO
+    public var cargoCondition: CargoCondition
     public var weatherConditionsID: Int
     public var startTime: Date
     public var finishTimeLastGrab: Date
@@ -330,7 +330,7 @@ public struct DischargeCreationRequest: DischargeProperties, Codable, Hashable {
         berthLocation: LocationDTO,
         gearID: Int,
         methodID: Int,
-        cargoCondition: CargoConditionDTO,
+        cargoCondition: CargoCondition,
         weatherConditionsID: Int,
         startTime: Date,
         finishTimeLastGrab: Date,
@@ -397,7 +397,7 @@ public struct DischargeMutationRequest: DischargePartialProperties, PartialMerga
     public var berthLocation: LocationDTO?
     public var gearID: Int?
     public var methodID: Int?
-    public var cargoCondition: CargoConditionDTO?
+    public var cargoCondition: CargoCondition?
     public var weatherConditionsID: Int?
     public var startTime: Date?
     public var finishTimeLastGrab: Date?
@@ -412,7 +412,7 @@ public struct DischargeMutationRequest: DischargePartialProperties, PartialMerga
         berthLocation: LocationDTO? = nil,
         gearID: Int? = nil,
         methodID: Int? = nil,
-        cargoCondition: CargoConditionDTO? = nil,
+        cargoCondition: CargoCondition? = nil,
         weatherConditionsID: Int? = nil,
         startTime: Date? = nil,
         finishTimeLastGrab: Date? = nil,
@@ -450,7 +450,7 @@ public struct DischargeMutationRequest: DischargePartialProperties, PartialMerga
         if let methodID = keyAndValues["methodID"] as? Int {
             self.methodID = methodID
         }
-        if let cargoCondition = keyAndValues["cargoCondition"] as? CargoConditionDTO {
+        if let cargoCondition = keyAndValues["cargoCondition"] as? CargoCondition {
             self.cargoCondition = cargoCondition
         }
         if let weatherConditionsID = keyAndValues["weatherConditionsID"] as? Int {
@@ -533,7 +533,7 @@ public struct DischargeDTO: DischargeProperties, Codable, Hashable, APIResponseI
     public let berthLocation: LocationDTO
     public let gearID: Int
     public let methodID: Int
-    public let cargoCondition: CargoConditionDTO
+    public let cargoCondition: CargoCondition
     public let weatherConditionsID: Int
     public let startTime: Date
     public let finishTimeLastGrab: Date
@@ -550,7 +550,7 @@ public struct DischargeDTO: DischargeProperties, Codable, Hashable, APIResponseI
         berthLocation: LocationDTO,
         gearID: Int,
         methodID: Int,
-        cargoCondition: CargoConditionDTO,
+        cargoCondition: CargoCondition,
         weatherConditionsID: Int,
         startTime: Date,
         finishTimeLastGrab: Date,
@@ -645,7 +645,7 @@ public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable
     public let berthLocation: LocationDTO?
     public let gearID: Int?
     public let methodID: Int?
-    public let cargoCondition: CargoConditionDTO?
+    public let cargoCondition: CargoCondition?
     public let weatherConditionsID: Int?
     public let startTime: Date?
     public let finishTimeLastGrab: Date?
@@ -662,7 +662,7 @@ public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable
         berthLocation: LocationDTO? = nil,
         gearID: Int? = nil,
         methodID: Int? = nil,
-        cargoCondition: CargoConditionDTO? = nil,
+        cargoCondition: CargoCondition? = nil,
         weatherConditionsID: Int? = nil,
         startTime: Date? = nil,
         finishTimeLastGrab: Date? = nil,

@@ -69,7 +69,7 @@
         var gearID: Int { get }
         // sourcery: coreDataType = "Constant"
         var methodID: Int { get }
-        var cargoCondition: CargoConditionDTO { get }
+        var cargoCondition: CargoCondition { get }
         // sourcery: coreDataType = "Constant"
         var weatherConditionsID: Int { get }
         var startTime: Date { get }
@@ -181,6 +181,7 @@
         var preparationCompanyID: Int { get }
         // sourcery: coreDataType = "Constant"
         var siteID: Int { get }
+        // sourcery: coreDataType = "Location"
         var location: LocationDTO { get }
         var startTime: Date { get }
         var finishTime: Date { get }
