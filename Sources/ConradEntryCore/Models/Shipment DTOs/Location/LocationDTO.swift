@@ -6,7 +6,7 @@
 import Foundation
 
 /// The latitude, longitude, and altitude reported by the system.
-public struct LocationDTO: LocationProtocol, Hashable, Codable {
+public struct LocationDTO: LocationProtocol, Hashable, Codable, Sendable {
     public var latitude: Double
     public var longitude: Double
     public var altitude: Double?

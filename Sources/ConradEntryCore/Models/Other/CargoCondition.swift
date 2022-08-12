@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct CargoCondition: Codable, Hashable {
+public struct CargoCondition: Codable, Hashable, Sendable {
     public let isTrimmed: Bool
     public let isContaminated: Bool
     public let sufferedWaterIngress: Bool
@@ -64,7 +64,7 @@ public struct CargoCondition: Codable, Hashable {
         }
 
         @objc(CargoConditionReference)
-        public final class Reference: NSObject, NSSecureCoding, NSCopying {
+        public final class Reference: NSObject, NSSecureCoding, NSCopying, Sendable {
             public static var supportsSecureCoding: Bool { true }
 
             @objc public let isTrimmed: Bool

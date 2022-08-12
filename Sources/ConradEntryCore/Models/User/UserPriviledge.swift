@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum UserPrivilege: Int, CaseIterable, Codable {
+public enum UserPrivilege: Int, CaseIterable, Codable, Sendable {
     case readWriteAllShipments = 0
     case editConfigurationValues = 1
     case manageUsers = 2

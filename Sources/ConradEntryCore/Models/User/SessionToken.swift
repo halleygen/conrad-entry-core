@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SessionToken: Codable, Hashable {
+public struct SessionToken: Codable, Hashable, Sendable {
     public let userID: UUID
     public let value: String
     public let expiryDate: Date

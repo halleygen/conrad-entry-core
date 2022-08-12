@@ -30,7 +30,7 @@ public protocol {{ type.name|replace:"Template","PartialProperties" }} {
 
 // MARK: CreationRequest
 
-public struct {{ type.name|replace:"Template","CreationRequest"|replace:"Details","" }}: {{ type.name|replace:"Template","Properties" }}, Codable, Hashable {
+public struct {{ type.name|replace:"Template","CreationRequest"|replace:"Details","" }}: {{ type.name|replace:"Template","Properties" }}, Codable, Hashable, Sendable {
 {% for variable in type.storedVariables|!annotated:"skipCreationRequest" %}
     public var {{ variable.name }}: {{ variable.typeName }} 
 {% endfor %}
@@ -62,7 +62,7 @@ public struct {{ type.name|replace:"Template","CreationRequest"|replace:"Details
 
 // MARK: MutationRequest
 
-public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name|replace:"Template","PartialProperties" }}, PartialMergable, MutationRequest, Codable, Hashable {
+public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name|replace:"Template","PartialProperties" }}, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
 {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
     public var {{ variable.name }}: {{ variable.typeName }}?
 {% endfor %}
@@ -98,7 +98,7 @@ public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name
 
 // MARK: DTO
 
-public struct {{ type.name|replace:"Template","DTO" }}: {{ type.name|replace:"Template","Properties" }}, Codable, Hashable, APIResponseItem {
+public struct {{ type.name|replace:"Template","DTO" }}: {{ type.name|replace:"Template","Properties" }}, Codable, Hashable, APIResponseItem, Sendable {
 {% for variable in type.storedVariables %}
     public let {{ variable.name }}: {{ variable.typeName }}   
 {% endfor %}
@@ -151,7 +151,7 @@ public struct {{ type.name|replace:"Template","DTO" }}: {{ type.name|replace:"Te
 
 // MARK: PartialDTO
 
-public struct Partial{{ type.name|replace:"Template","DTO" }}: {{ type.name|replace:"Template","PartialProperties" }}, Codable, Hashable, APIResponseItem {
+public struct Partial{{ type.name|replace:"Template","DTO" }}: {{ type.name|replace:"Template","PartialProperties" }}, Codable, Hashable, APIResponseItem, Sendable {
 {% for variable in type.storedVariables %}
     public let {{ variable.name }}: {{ variable.typeName }}{% if variable|!annotated:"requiredInPartialDTO" %}?{% endif %}
 {% endfor %}
@@ -212,7 +212,7 @@ public protocol SimpleConfigurationConstantValue: ConfigurationConstantValue {
 
 {% for type in types.implementing.ConstantAutogen %}
 
-public struct {{ type.name }}Value: {% if type|annotated:"simpleConstant" %}Simple{% endif %}ConfigurationConstantValue {
+public struct {{ type.name }}Value: {% if type|annotated:"simpleConstant" %}Simple{% endif %}ConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     {% for variable in type.storedVariables %}
@@ -275,7 +275,7 @@ public struct {{ type.name }}Value: {% if type|annotated:"simpleConstant" %}Simp
 
 {% endfor %}
 
-public struct ConfigurationConstants: Codable {
+public struct ConfigurationConstants: Codable, Sendable {
     {% for type in types.implementing.ConstantAutogen %}
     public var {{ type.name|lowerFirstLetter }}Values: [{{ type.name }}Value]
     {% endfor %}
@@ -297,7 +297,7 @@ public struct ConfigurationConstants: Codable {
     }
 }
 
-public enum ShipmentPart: String, LosslessStringConvertible, Codable {
+public enum ShipmentPart: String, LosslessStringConvertible, Codable, Sendable {
     {% for type in types.implementing.ShipmentAutogen %}
     case {{ type.name|replace:"Template",""|replace:"ShipmentDetails","Details"|lowerFirstLetter }} = "{{ type.name|replace:"Template",""|replace:"ShipmentDetails","Details"|camelToSnakeCase }}"
     {% endfor %}    

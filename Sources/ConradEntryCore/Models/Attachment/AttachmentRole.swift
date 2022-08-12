@@ -5,20 +5,20 @@
 
 import Foundation
 
-public struct AttachmentRole: Hashable {
-    public enum Class: String {
+public struct AttachmentRole: Hashable, Sendable {
+    public enum Class: String, Sendable {
         case document = "doc", photo
     }
 
-    public enum Section: String {
+    public enum Section: String, Sendable {
         case details, discharge, settlementWeight, referenceWeight, sampleCollection, sampleReduction, moistureDetermination, samplePreparation
     }
 
-    public enum Subsection: String {
+    public enum Subsection: String, Sendable {
         case noticeOfReadiness, vesselPhoto, statementOfFacts, moistureCertificate, lotByLotMoistureProfile, stowagePlan
     }
 
-    public enum CountRequirement: String {
+    public enum CountRequirement: String, Sendable {
         case zeroOrMore = "*"
         case oneOrMore = "1"
     }

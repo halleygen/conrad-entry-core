@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct Device: Hashable, Identifiable, Codable {
+public struct Device: Hashable, Identifiable, Codable, Sendable {
     /// The ID uniquely identifying the device.
     ///
     /// Corresponds to `UIDevice.identifierForVendor`

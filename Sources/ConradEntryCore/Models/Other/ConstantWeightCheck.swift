@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ConstantWeightCheck: Hashable, Codable {
+public struct ConstantWeightCheck: Hashable, Codable, Sendable {
     public var duration: TimeInterval
     public var numberOfWeighBacks: Int
 
@@ -56,7 +56,7 @@ public extension ConstantWeightCheck {
         }
 
         @objc(ConstantWeightCheckReference)
-        public final class Reference: NSObject, NSSecureCoding, NSCopying {
+        public final class Reference: NSObject, NSSecureCoding, NSCopying, Sendable {
             public static var supportsSecureCoding: Bool { true }
 
             @objc public let duration: TimeInterval

@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public struct Tallymen: Hashable, Codable {
+public struct Tallymen: Hashable, Codable, Sendable {
     /// The number of tallymen.
     public var count: Int
 
@@ -52,7 +52,7 @@ public struct Tallymen: Hashable, Codable {
         }
 
         @objc(TallymenReference)
-        public final class Reference: NSObject, NSSecureCoding, NSCopying {
+        public final class Reference: NSObject, NSSecureCoding, NSCopying, Sendable {
             public static var supportsSecureCoding: Bool { true }
 
             @objc public let count: Int

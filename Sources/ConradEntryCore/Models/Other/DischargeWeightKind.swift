@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum DischargeWeightKind: String, CustomStringConvertible, Codable, CaseIterable {
+public enum DischargeWeightKind: String, CustomStringConvertible, Codable, CaseIterable, Sendable {
     case settlement, reference
 
     public var description: String {

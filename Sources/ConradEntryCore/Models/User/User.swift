@@ -46,7 +46,7 @@ public extension User {
 
 // MARK: - PublicUser
 
-public struct PublicUser: User {
+public struct PublicUser: User, Sendable {
     public let id: UUID
     public let givenName: String
     public let familyName: String
@@ -81,7 +81,7 @@ public struct PublicUser: User {
 
 // MARK: - AuthenticatedUser
 
-public struct AuthenticatedUser: User {
+public struct AuthenticatedUser: User, Sendable {
     public let id: UUID
     public let givenName: String
     public let familyName: String

@@ -38,7 +38,7 @@ public protocol BillOfLadingPartialProperties {
 
 // MARK: CreationRequest
 
-public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hashable {
+public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hashable, Sendable {
     public var loadPortID: Int
     public var vesselHolds: Set<Int>
     public var methodID: Int
@@ -85,7 +85,7 @@ public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hash
 
 // MARK: MutationRequest
 
-public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
+public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
     public var loadPortID: Int?
     public var vesselHolds: Set<Int>?
     public var methodID: Int?
@@ -156,7 +156,7 @@ public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Partia
 
 // MARK: DTO
 
-public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIResponseItem {
+public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let loadPortID: Int
@@ -226,7 +226,7 @@ public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIRes
 
 // MARK: PartialDTO
 
-public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Hashable, APIResponseItem {
+public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let loadPortID: Int?
@@ -310,7 +310,7 @@ public protocol DischargePartialProperties {
 
 // MARK: CreationRequest
 
-public struct DischargeCreationRequest: DischargeProperties, Codable, Hashable {
+public struct DischargeCreationRequest: DischargeProperties, Codable, Hashable, Sendable {
     public var berthName: String
     public var berthLocation: LocationDTO
     public var gearID: Int
@@ -392,7 +392,7 @@ public struct DischargeCreationRequest: DischargeProperties, Codable, Hashable {
 
 // MARK: MutationRequest
 
-public struct DischargeMutationRequest: DischargePartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
+public struct DischargeMutationRequest: DischargePartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
     public var berthName: String?
     public var berthLocation: LocationDTO?
     public var gearID: Int?
@@ -526,7 +526,7 @@ public struct DischargeMutationRequest: DischargePartialProperties, PartialMerga
 
 // MARK: DTO
 
-public struct DischargeDTO: DischargeProperties, Codable, Hashable, APIResponseItem {
+public struct DischargeDTO: DischargeProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let berthName: String
@@ -638,7 +638,7 @@ public struct DischargeDTO: DischargeProperties, Codable, Hashable, APIResponseI
 
 // MARK: PartialDTO
 
-public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable, APIResponseItem {
+public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let berthName: String?
@@ -758,7 +758,7 @@ public protocol DischargeWeightPartialProperties {
 
 // MARK: CreationRequest
 
-public struct DischargeWeightCreationRequest: DischargeWeightProperties, Codable, Hashable {
+public struct DischargeWeightCreationRequest: DischargeWeightProperties, Codable, Hashable, Sendable {
     public var kind: DischargeWeightKind
     public var methodID: Int
     public var weighingPointID: Int
@@ -860,7 +860,7 @@ public struct DischargeWeightCreationRequest: DischargeWeightProperties, Codable
 
 // MARK: MutationRequest
 
-public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
+public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
     public var kind: DischargeWeightKind?
     public var methodID: Int?
     public var weighingPointID: Int?
@@ -1030,7 +1030,7 @@ public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, 
 
 // MARK: DTO
 
-public struct DischargeWeightDTO: DischargeWeightProperties, Codable, Hashable, APIResponseItem {
+public struct DischargeWeightDTO: DischargeWeightProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let kind: DischargeWeightKind
@@ -1166,7 +1166,7 @@ public struct DischargeWeightDTO: DischargeWeightProperties, Codable, Hashable, 
 
 // MARK: PartialDTO
 
-public struct PartialDischargeWeightDTO: DischargeWeightPartialProperties, Codable, Hashable, APIResponseItem {
+public struct PartialDischargeWeightDTO: DischargeWeightPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let kind: DischargeWeightKind?
@@ -1288,7 +1288,7 @@ public protocol MoistureDeterminationPartialProperties {
 
 // MARK: CreationRequest
 
-public struct MoistureDeterminationCreationRequest: MoistureDeterminationProperties, Codable, Hashable {
+public struct MoistureDeterminationCreationRequest: MoistureDeterminationProperties, Codable, Hashable, Sendable {
     public var moistureDeterminationCompanyID: Int
     public var siteID: Int
     public var location: LocationDTO
@@ -1355,7 +1355,7 @@ public struct MoistureDeterminationCreationRequest: MoistureDeterminationPropert
 
 // MARK: MutationRequest
 
-public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
+public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
     public var moistureDeterminationCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -1462,7 +1462,7 @@ public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartial
 
 // MARK: DTO
 
-public struct MoistureDeterminationDTO: MoistureDeterminationProperties, Codable, Hashable, APIResponseItem {
+public struct MoistureDeterminationDTO: MoistureDeterminationProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let moistureDeterminationCompanyID: Int
@@ -1556,7 +1556,7 @@ public struct MoistureDeterminationDTO: MoistureDeterminationProperties, Codable
 
 // MARK: PartialDTO
 
-public struct PartialMoistureDeterminationDTO: MoistureDeterminationPartialProperties, Codable, Hashable, APIResponseItem {
+public struct PartialMoistureDeterminationDTO: MoistureDeterminationPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let moistureDeterminationCompanyID: Int?
@@ -1656,7 +1656,7 @@ public protocol SampleCollectionPartialProperties {
 
 // MARK: CreationRequest
 
-public struct SampleCollectionCreationRequest: SampleCollectionProperties, Codable, Hashable {
+public struct SampleCollectionCreationRequest: SampleCollectionProperties, Codable, Hashable, Sendable {
     public var samplingCompanyID: Int
     public var siteID: Int
     public var location: LocationDTO
@@ -1738,7 +1738,7 @@ public struct SampleCollectionCreationRequest: SampleCollectionProperties, Codab
 
 // MARK: MutationRequest
 
-public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
+public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
     public var samplingCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -1872,7 +1872,7 @@ public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties
 
 // MARK: DTO
 
-public struct SampleCollectionDTO: SampleCollectionProperties, Codable, Hashable, APIResponseItem {
+public struct SampleCollectionDTO: SampleCollectionProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let samplingCompanyID: Int
@@ -1984,7 +1984,7 @@ public struct SampleCollectionDTO: SampleCollectionProperties, Codable, Hashable
 
 // MARK: PartialDTO
 
-public struct PartialSampleCollectionDTO: SampleCollectionPartialProperties, Codable, Hashable, APIResponseItem {
+public struct PartialSampleCollectionDTO: SampleCollectionPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let samplingCompanyID: Int?
@@ -2110,7 +2110,7 @@ public protocol SamplePreparationPartialProperties {
 
 // MARK: CreationRequest
 
-public struct SamplePreparationCreationRequest: SamplePreparationProperties, Codable, Hashable {
+public struct SamplePreparationCreationRequest: SamplePreparationProperties, Codable, Hashable, Sendable {
     public var preparationCompanyID: Int
     public var siteID: Int
     public var location: LocationDTO
@@ -2227,7 +2227,7 @@ public struct SamplePreparationCreationRequest: SamplePreparationProperties, Cod
 
 // MARK: MutationRequest
 
-public struct SamplePreparationMutationRequest: SamplePreparationPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
+public struct SamplePreparationMutationRequest: SamplePreparationPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
     public var preparationCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -2424,7 +2424,7 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
 
 // MARK: DTO
 
-public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashable, APIResponseItem {
+public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let preparationCompanyID: Int
@@ -2578,7 +2578,7 @@ public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashab
 
 // MARK: PartialDTO
 
-public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, Codable, Hashable, APIResponseItem {
+public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let preparationCompanyID: Int?
@@ -2714,7 +2714,7 @@ public protocol SampleReductionPartialProperties {
 
 // MARK: CreationRequest
 
-public struct SampleReductionCreationRequest: SampleReductionProperties, Codable, Hashable {
+public struct SampleReductionCreationRequest: SampleReductionProperties, Codable, Hashable, Sendable {
     public var samplingCompanyID: Int
     public var location: LocationDTO
     public var siteID: Int
@@ -2786,7 +2786,7 @@ public struct SampleReductionCreationRequest: SampleReductionProperties, Codable
 
 // MARK: MutationRequest
 
-public struct SampleReductionMutationRequest: SampleReductionPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
+public struct SampleReductionMutationRequest: SampleReductionPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
     public var samplingCompanyID: Int?
     public var location: LocationDTO?
     public var siteID: Int?
@@ -2902,7 +2902,7 @@ public struct SampleReductionMutationRequest: SampleReductionPartialProperties, 
 
 // MARK: DTO
 
-public struct SampleReductionDTO: SampleReductionProperties, Codable, Hashable, APIResponseItem {
+public struct SampleReductionDTO: SampleReductionProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let samplingCompanyID: Int
@@ -3002,7 +3002,7 @@ public struct SampleReductionDTO: SampleReductionProperties, Codable, Hashable, 
 
 // MARK: PartialDTO
 
-public struct PartialSampleReductionDTO: SampleReductionPartialProperties, Codable, Hashable, APIResponseItem {
+public struct PartialSampleReductionDTO: SampleReductionPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let samplingCompanyID: Int?
@@ -3108,7 +3108,7 @@ public protocol ShipmentDetailsPartialProperties {
 
 // MARK: CreationRequest
 
-public struct ShipmentCreationRequest: ShipmentDetailsProperties, Codable, Hashable {
+public struct ShipmentCreationRequest: ShipmentDetailsProperties, Codable, Hashable, Sendable {
     public var clientReference: String
     public var logDate: Date
     public var norTime: Date
@@ -3195,7 +3195,7 @@ public struct ShipmentCreationRequest: ShipmentDetailsProperties, Codable, Hasha
 
 // MARK: MutationRequest
 
-public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, PartialMergable, MutationRequest, Codable, Hashable {
+public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
     public var clientReference: String?
     public var logDate: Date?
     public var norTime: Date?
@@ -3338,7 +3338,7 @@ public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, 
 
 // MARK: DTO
 
-public struct ShipmentDetailsDTO: ShipmentDetailsProperties, Codable, Hashable, APIResponseItem {
+public struct ShipmentDetailsDTO: ShipmentDetailsProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let creationDate: Date
@@ -3463,7 +3463,7 @@ public struct ShipmentDetailsDTO: ShipmentDetailsProperties, Codable, Hashable, 
 
 // MARK: PartialDTO
 
-public struct PartialShipmentDetailsDTO: ShipmentDetailsPartialProperties, Codable, Hashable, APIResponseItem {
+public struct PartialShipmentDetailsDTO: ShipmentDetailsPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
     public let id: UUID
     public let version: Date
     public let creationDate: Date?
@@ -3568,7 +3568,7 @@ public protocol SimpleConfigurationConstantValue: ConfigurationConstantValue {
     init(id: ID, value: String, representsOtherValue: Bool, isDeleted: Bool)
 }
 
-public struct AgentValue: SimpleConfigurationConstantValue {
+public struct AgentValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3611,7 +3611,7 @@ public struct AgentValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct ClientValue: SimpleConfigurationConstantValue {
+public struct ClientValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3654,7 +3654,7 @@ public struct ClientValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct CommodityValue: SimpleConfigurationConstantValue {
+public struct CommodityValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3697,7 +3697,7 @@ public struct CommodityValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct DischargeGearValue: SimpleConfigurationConstantValue {
+public struct DischargeGearValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3740,7 +3740,7 @@ public struct DischargeGearValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct DischargeMethodValue: SimpleConfigurationConstantValue {
+public struct DischargeMethodValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3783,7 +3783,7 @@ public struct DischargeMethodValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct DischargeWeatherConditionValue: SimpleConfigurationConstantValue {
+public struct DischargeWeatherConditionValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3826,7 +3826,7 @@ public struct DischargeWeatherConditionValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct DischargeWeightWeighingPointValue: SimpleConfigurationConstantValue {
+public struct DischargeWeightWeighingPointValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3869,7 +3869,7 @@ public struct DischargeWeightWeighingPointValue: SimpleConfigurationConstantValu
     }
 }
 
-public struct InspectionCompanyValue: SimpleConfigurationConstantValue {
+public struct InspectionCompanyValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -3912,7 +3912,7 @@ public struct InspectionCompanyValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct MaritimePortValue: ConfigurationConstantValue {
+public struct MaritimePortValue: ConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var countryCode: String
@@ -3967,7 +3967,7 @@ public struct MaritimePortValue: ConfigurationConstantValue {
     }
 }
 
-public struct SampleCollectionMethodValue: SimpleConfigurationConstantValue {
+public struct SampleCollectionMethodValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4010,7 +4010,7 @@ public struct SampleCollectionMethodValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct SampleCollectionPointValue: ConfigurationConstantValue {
+public struct SampleCollectionPointValue: ConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var isFromTruck: Bool
@@ -4059,7 +4059,7 @@ public struct SampleCollectionPointValue: ConfigurationConstantValue {
     }
 }
 
-public struct SamplePreparationDivisionMethodValue: ConfigurationConstantValue {
+public struct SamplePreparationDivisionMethodValue: ConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var usesRotarySampleDivider: Bool
@@ -4120,7 +4120,7 @@ public struct SamplePreparationDivisionMethodValue: ConfigurationConstantValue {
     }
 }
 
-public struct SamplePreparationPulverizerValue: SimpleConfigurationConstantValue {
+public struct SamplePreparationPulverizerValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4163,7 +4163,7 @@ public struct SamplePreparationPulverizerValue: SimpleConfigurationConstantValue
     }
 }
 
-public struct SamplePreparationScreenApertureValue: SimpleConfigurationConstantValue {
+public struct SamplePreparationScreenApertureValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4206,7 +4206,7 @@ public struct SamplePreparationScreenApertureValue: SimpleConfigurationConstantV
     }
 }
 
-public struct SamplePreparationStandardValue: SimpleConfigurationConstantValue {
+public struct SamplePreparationStandardValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4249,7 +4249,7 @@ public struct SamplePreparationStandardValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct SampleReductionGridSizeValue: SimpleConfigurationConstantValue {
+public struct SampleReductionGridSizeValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4292,7 +4292,7 @@ public struct SampleReductionGridSizeValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct SampleReductionLaboratoryValue: SimpleConfigurationConstantValue {
+public struct SampleReductionLaboratoryValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4335,7 +4335,7 @@ public struct SampleReductionLaboratoryValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct SampleReductionMethodValue: ConfigurationConstantValue {
+public struct SampleReductionMethodValue: ConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var usesGrid: Bool
@@ -4384,7 +4384,7 @@ public struct SampleReductionMethodValue: ConfigurationConstantValue {
     }
 }
 
-public struct SampleReductionPointValue: SimpleConfigurationConstantValue {
+public struct SampleReductionPointValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4427,7 +4427,7 @@ public struct SampleReductionPointValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct SampleReductionSiteValue: ConfigurationConstantValue {
+public struct SampleReductionSiteValue: ConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var isLabFacility: Bool
@@ -4476,7 +4476,7 @@ public struct SampleReductionSiteValue: ConfigurationConstantValue {
     }
 }
 
-public struct SamplingCompanyValue: SimpleConfigurationConstantValue {
+public struct SamplingCompanyValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4519,7 +4519,7 @@ public struct SamplingCompanyValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct SamplingSiteValue: SimpleConfigurationConstantValue {
+public struct SamplingSiteValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4562,7 +4562,7 @@ public struct SamplingSiteValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct SamplingTransparencyValue: ConfigurationConstantValue {
+public struct SamplingTransparencyValue: ConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var ranking: Int
@@ -4611,7 +4611,7 @@ public struct SamplingTransparencyValue: ConfigurationConstantValue {
     }
 }
 
-public struct SmelterValue: SimpleConfigurationConstantValue {
+public struct SmelterValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4654,7 +4654,7 @@ public struct SmelterValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct TraderValue: SimpleConfigurationConstantValue {
+public struct TraderValue: SimpleConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var representsOtherValue: Bool
@@ -4697,7 +4697,7 @@ public struct TraderValue: SimpleConfigurationConstantValue {
     }
 }
 
-public struct WeighingMethodValue: ConfigurationConstantValue {
+public struct WeighingMethodValue: ConfigurationConstantValue, Sendable {
     public var id: Int
     public var value: String
     public var usesEquipment: Bool
@@ -4758,7 +4758,7 @@ public struct WeighingMethodValue: ConfigurationConstantValue {
     }
 }
 
-public struct ConfigurationConstants: Codable {
+public struct ConfigurationConstants: Codable, Sendable {
     public var agentValues: [AgentValue]
     public var clientValues: [ClientValue]
     public var commodityValues: [CommodityValue]
@@ -4872,7 +4872,7 @@ public struct ConfigurationConstants: Codable {
     }
 }
 
-public enum ShipmentPart: String, LosslessStringConvertible, Codable {
+public enum ShipmentPart: String, LosslessStringConvertible, Codable, Sendable {
     case billOfLading = "bill_of_lading"
     case discharge
     case dischargeWeight = "discharge_weight"

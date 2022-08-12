@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public enum CalibrationCheck: Hashable, Codable {
+public enum CalibrationCheck: Hashable, Codable, Sendable {
     case singleScale(Result)
     case doubleScale(tare: Result, laden: Result)
 
@@ -16,7 +16,7 @@ public enum CalibrationCheck: Hashable, Codable {
 
     // MARK: - Result
 
-    public struct Result: Hashable, Codable {
+    public struct Result: Hashable, Codable, Sendable {
         public let maxTonnes: Double
         public let maxVarianceKilograms: Double
 
@@ -85,7 +85,7 @@ public enum CalibrationCheck: Hashable, Codable {
         }
 
         @objc(CalibrationCheckReference)
-        public final class Reference: NSObject, NSSecureCoding, NSCopying {
+        public final class Reference: NSObject, NSSecureCoding, NSCopying, Sendable {
             public static var supportsSecureCoding: Bool { true }
 
             @objc public let scale: Scale
@@ -189,12 +189,12 @@ public enum CalibrationCheck: Hashable, Codable {
 
     public extension CalibrationCheck.Reference {
         @objc(CalibrationCheckReferenceScale)
-        enum Scale: Int {
+        enum Scale: Int, Sendable {
             case single = 1, double = 2
         }
 
         @objc(CalibrationCheckReferenceResult)
-        final class Result: NSObject, NSSecureCoding, NSCopying {
+        final class Result: NSObject, NSSecureCoding, NSCopying, Sendable {
             public static var supportsSecureCoding: Bool { true }
 
             @objc public let maxTonnes: Double

@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public struct ABCCheck: Hashable, Codable {
+public struct ABCCheck: Hashable, Codable, Sendable {
     public var tareWeightVarianceKilograms: Double
     public var ladenWeightVarianceKilograms: Double
 
@@ -58,7 +58,7 @@ public struct ABCCheck: Hashable, Codable {
         }
 
         @objc(ABCCheckReference)
-        public final class Reference: NSObject, NSSecureCoding, NSCopying {
+        public final class Reference: NSObject, NSSecureCoding, NSCopying, Sendable {
             public static var supportsSecureCoding: Bool { true }
 
             @objc public let tareWeightVarianceKilograms: Double
