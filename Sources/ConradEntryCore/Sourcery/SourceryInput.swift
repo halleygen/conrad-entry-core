@@ -33,6 +33,7 @@
         var inspectionCompanySellerID: Int? { get }
         var inspectionCompanySecondAgentID: Int? { get }
         // sourcery:end
+        // sourcery: coreDataType = "NSNumber.Int"
         var conradTeamSize: Int { get }
     }
 
@@ -77,8 +78,11 @@
         var finishTimeCleanup: Date { get }
         // sourcery: coreDataType = "NSNumber.Double"
         var dischargeRateTonnesPerHour: Double { get }
+        // sourcery: coreDataType = "NSNumber.Bool"
         var saveAllTarpaulinsUsed: Bool { get }
+        // sourcery: coreDataType = "NSNumber.Bool"
         var holdsCleaned: Bool { get }
+        // sourcery: coreDataType = "NSNumber.Bool"
         var wharfCleaned: Bool { get }
     }
 
@@ -88,6 +92,7 @@
         var version: Date { get }
         // sourcery:end
 
+        // sourcery: coreDataReadOnly
         var kind: DischargeWeightKind { get }
         // sourcery: coreDataType = "Constant"
         var methodID: Int { get }
@@ -187,10 +192,13 @@
         var finishTime: Date { get }
         // sourcery: coreDataType = "Constant"
         var standardsID: Int { get }
+        // sourcery: coreDataType = "NSNumber.Bool"
         var wasScreened: Bool { get }
         // sourcery: coreDataType = "Constant"
         var screenApertureID: Int? { get }
+        // sourcery: coreDataType = "NSNumber.Bool"
         var oversizePulverizedSeparately: Bool? { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var sampleChargeWeightGrams: Int { get }
         // sourcery: coreDataType = "Constant"
         var pulverizerID: Int { get }
@@ -198,6 +206,7 @@
         var pulverizingDurationSeconds: TimeInterval { get }
         // sourcery: coreDataType = "Constant"
         var divisionMethodID: Int { get }
+        // sourcery: coreDataType = "NSNumber.Int"
         var rsdNumberOfSegments: Int? { get }
         // sourcery: coreDataType = "NSNumber.Bool"
         var incrementISOScoopUsed: Bool? { get }

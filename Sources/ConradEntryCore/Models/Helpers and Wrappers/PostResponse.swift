@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public struct CreateResponse<Item: VersionedResource & Identifiable>: VersionedResource, Identifiable {
+public struct PostResponse<Item: VersionedResource & Identifiable>: VersionedResource, Identifiable {
     public let id: Item.ID
     public let version: Item.Version
     public let wasCreated: Bool
@@ -23,8 +23,8 @@ public struct CreateResponse<Item: VersionedResource & Identifiable>: VersionedR
     }
 }
 
-extension CreateResponse: Encodable where ID: Encodable, Version: Encodable {}
-extension CreateResponse: Decodable where ID: Decodable, Version: Decodable {}
-extension CreateResponse: Equatable where ID: Equatable, Version: Equatable {}
-extension CreateResponse: Hashable where ID: Hashable, Version: Hashable {}
-extension CreateResponse: APIResponse where Item: APIResponseItem {}
+extension PostResponse: Encodable where ID: Encodable, Version: Encodable {}
+extension PostResponse: Decodable where ID: Decodable, Version: Decodable {}
+extension PostResponse: Equatable where ID: Equatable, Version: Equatable {}
+extension PostResponse: Hashable where ID: Hashable, Version: Hashable {}
+extension PostResponse: APIResponse where Item: APIResponseItem {}
