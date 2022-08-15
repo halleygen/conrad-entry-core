@@ -5,6 +5,7 @@ import Foundation
 public protocol PartialMergable {
     static func empty() -> Self
     mutating func merge(from other: Self)
+    var isEmpty: Bool { get }
 }
 
 public protocol MutationRequest {
@@ -93,7 +94,13 @@ public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name
             self.{{ variable.name }} = updatedValue
         }
     {% endfor %}
-    } 
+    }
+    
+    public var isEmpty: Bool {
+    {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
+        {{ variable.name }} == nil {% if not forloop.last %}&&{% endif %}
+    {% endfor %}
+    }
 }
 
 // MARK: DTO

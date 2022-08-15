@@ -8,6 +8,7 @@ import Foundation
 public protocol PartialMergable {
     static func empty() -> Self
     mutating func merge(from other: Self)
+    var isEmpty: Bool { get }
 }
 
 public protocol MutationRequest {
@@ -151,6 +152,15 @@ public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Partia
         if let updatedValue = other.dryMetricTonnes {
             dryMetricTonnes = updatedValue
         }
+    }
+
+    public var isEmpty: Bool {
+        loadPortID == nil &&
+            vesselHolds == nil &&
+            methodID == nil &&
+            wetMetricTonnes == nil &&
+            moisturePercentage == nil &&
+            dryMetricTonnes == nil
     }
 }
 
@@ -521,6 +531,22 @@ public struct DischargeMutationRequest: DischargePartialProperties, PartialMerga
         if let updatedValue = other.wharfCleaned {
             wharfCleaned = updatedValue
         }
+    }
+
+    public var isEmpty: Bool {
+        berthName == nil &&
+            berthLocation == nil &&
+            gearID == nil &&
+            methodID == nil &&
+            cargoCondition == nil &&
+            weatherConditionsID == nil &&
+            startTime == nil &&
+            finishTimeLastGrab == nil &&
+            finishTimeCleanup == nil &&
+            dischargeRateTonnesPerHour == nil &&
+            saveAllTarpaulinsUsed == nil &&
+            holdsCleaned == nil &&
+            wharfCleaned == nil
     }
 }
 
@@ -1026,6 +1052,26 @@ public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, 
             transparencyID = updatedValue
         }
     }
+
+    public var isEmpty: Bool {
+        kind == nil &&
+            methodID == nil &&
+            weighingPointID == nil &&
+            weighingCompany == nil &&
+            startTime == nil &&
+            finishTime == nil &&
+            wetMetricTonnes == nil &&
+            moisturePercentage == nil &&
+            dryMetricTonnes == nil &&
+            equipmentName == nil &&
+            equipmentModel == nil &&
+            equipmentLocation == nil &&
+            equipmentCertificationDate == nil &&
+            calibrationCheck == nil &&
+            abcCheck == nil &&
+            tallymen == nil &&
+            transparencyID == nil
+    }
 }
 
 // MARK: DTO
@@ -1458,6 +1504,19 @@ public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartial
             transparencyID = updatedValue
         }
     }
+
+    public var isEmpty: Bool {
+        moistureDeterminationCompanyID == nil &&
+            siteID == nil &&
+            location == nil &&
+            lotSampleTrayWeightKilograms == nil &&
+            ovenOnTime == nil &&
+            ovenOffTime == nil &&
+            ovenTemperatureCelsius == nil &&
+            constantWeightCheck == nil &&
+            resultsWaitTimeDays == nil &&
+            transparencyID == nil
+    }
 }
 
 // MARK: DTO
@@ -1867,6 +1926,22 @@ public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties
         if let updatedValue = other.numberOfLots {
             numberOfLots = updatedValue
         }
+    }
+
+    public var isEmpty: Bool {
+        samplingCompanyID == nil &&
+            siteID == nil &&
+            location == nil &&
+            samplingPointID == nil &&
+            startTime == nil &&
+            finishTime == nil &&
+            methodID == nil &&
+            sampleIncrementsWetTonnes == nil &&
+            typicalSampleWeightKilograms == nil &&
+            numberOfTrucksPerBag == nil &&
+            lotSizeWetTonnes == nil &&
+            sublotSizeWetTonnes == nil &&
+            numberOfLots == nil
     }
 }
 
@@ -2420,6 +2495,29 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
             transparencyID = updatedValue
         }
     }
+
+    public var isEmpty: Bool {
+        preparationCompanyID == nil &&
+            siteID == nil &&
+            location == nil &&
+            startTime == nil &&
+            finishTime == nil &&
+            standardsID == nil &&
+            wasScreened == nil &&
+            screenApertureID == nil &&
+            oversizePulverizedSeparately == nil &&
+            sampleChargeWeightGrams == nil &&
+            pulverizerID == nil &&
+            pulverizingDurationSeconds == nil &&
+            divisionMethodID == nil &&
+            rsdNumberOfSegments == nil &&
+            incrementISOScoopUsed == nil &&
+            incrementBackingPlateUsed == nil &&
+            incrementDividedToExtinction == nil &&
+            riffleApertureMillimetres == nil &&
+            numberOfSets == nil &&
+            transparencyID == nil
+    }
 }
 
 // MARK: DTO
@@ -2898,6 +2996,20 @@ public struct SampleReductionMutationRequest: SampleReductionPartialProperties, 
             gridSizeID = updatedValue
         }
     }
+
+    public var isEmpty: Bool {
+        samplingCompanyID == nil &&
+            location == nil &&
+            siteID == nil &&
+            laboratoryID == nil &&
+            reductionPointID == nil &&
+            startTime == nil &&
+            finishTime == nil &&
+            screenApertureMillimetres == nil &&
+            wasConedAndQuartered == nil &&
+            methodID == nil &&
+            gridSizeID == nil
+    }
 }
 
 // MARK: DTO
@@ -3333,6 +3445,23 @@ public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, 
         if let updatedValue = other.conradTeamSize {
             conradTeamSize = updatedValue
         }
+    }
+
+    public var isEmpty: Bool {
+        clientReference == nil &&
+            logDate == nil &&
+            norTime == nil &&
+            vesselName == nil &&
+            clientID == nil &&
+            commodityID == nil &&
+            agentID == nil &&
+            traderID == nil &&
+            smelterID == nil &&
+            dischargePortID == nil &&
+            inspectionCompanyReceiverID == nil &&
+            inspectionCompanySellerID == nil &&
+            inspectionCompanySecondAgentID == nil &&
+            conradTeamSize == nil
     }
 }
 
