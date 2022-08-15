@@ -4,6 +4,7 @@
 //
 
 public enum ShipmentChangesResponse<T: Codable>: Codable {
+    case noChanges
     case changes(T)
     case stale
 }
