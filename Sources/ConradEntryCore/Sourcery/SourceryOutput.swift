@@ -5,10 +5,13 @@
 
 import Foundation
 
-public protocol PartialMergable {
-    static func empty() -> Self
-    mutating func merge(from other: Self)
+public protocol Partial {
     var isEmpty: Bool { get }
+    mutating func merge(from other: Self)
+}
+
+public protocol PartialMutationRequest: Partial {
+    static func empty() -> Self
 }
 
 public protocol MutationRequest {
@@ -86,7 +89,7 @@ public struct BillOfLadingCreationRequest: BillOfLadingProperties, Codable, Hash
 
 // MARK: MutationRequest
 
-public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
+public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, PartialMutationRequest, MutationRequest, Codable, Hashable, Sendable {
     public var loadPortID: Int?
     public var vesselHolds: Set<Int>?
     public var methodID: Int?
@@ -236,7 +239,7 @@ public struct BillOfLadingDTO: BillOfLadingProperties, Codable, Hashable, APIRes
 
 // MARK: PartialDTO
 
-public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
+public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Hashable, APIResponseItem, Partial, Sendable {
     public let id: UUID
     public let version: Date
     public let loadPortID: Int?
@@ -279,6 +282,28 @@ public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Ha
         self.wetMetricTonnes = other.wetMetricTonnes
         self.moisturePercentage = other.moisturePercentage
         self.dryMetricTonnes = other.dryMetricTonnes
+    }
+
+    public var isEmpty: Bool {
+        loadPortID == nil &&
+            vesselHolds == nil &&
+            methodID == nil &&
+            wetMetricTonnes == nil &&
+            moisturePercentage == nil &&
+            dryMetricTonnes == nil
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            loadPortID: other.loadPortID ?? loadPortID,
+            vesselHolds: other.vesselHolds ?? vesselHolds,
+            methodID: other.methodID ?? methodID,
+            wetMetricTonnes: other.wetMetricTonnes ?? wetMetricTonnes,
+            moisturePercentage: other.moisturePercentage ?? moisturePercentage,
+            dryMetricTonnes: other.dryMetricTonnes ?? dryMetricTonnes
+        )
     }
 }
 
@@ -402,7 +427,7 @@ public struct DischargeCreationRequest: DischargeProperties, Codable, Hashable, 
 
 // MARK: MutationRequest
 
-public struct DischargeMutationRequest: DischargePartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
+public struct DischargeMutationRequest: DischargePartialProperties, PartialMutationRequest, MutationRequest, Codable, Hashable, Sendable {
     public var berthName: String?
     public var berthLocation: LocationDTO?
     public var gearID: Int?
@@ -664,7 +689,7 @@ public struct DischargeDTO: DischargeProperties, Codable, Hashable, APIResponseI
 
 // MARK: PartialDTO
 
-public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable, APIResponseItem, Sendable {
+public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable, APIResponseItem, Partial, Sendable {
     public let id: UUID
     public let version: Date
     public let berthName: String?
@@ -735,6 +760,42 @@ public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable
         self.saveAllTarpaulinsUsed = other.saveAllTarpaulinsUsed
         self.holdsCleaned = other.holdsCleaned
         self.wharfCleaned = other.wharfCleaned
+    }
+
+    public var isEmpty: Bool {
+        berthName == nil &&
+            berthLocation == nil &&
+            gearID == nil &&
+            methodID == nil &&
+            cargoCondition == nil &&
+            weatherConditionsID == nil &&
+            startTime == nil &&
+            finishTimeLastGrab == nil &&
+            finishTimeCleanup == nil &&
+            dischargeRateTonnesPerHour == nil &&
+            saveAllTarpaulinsUsed == nil &&
+            holdsCleaned == nil &&
+            wharfCleaned == nil
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            berthName: other.berthName ?? berthName,
+            berthLocation: other.berthLocation ?? berthLocation,
+            gearID: other.gearID ?? gearID,
+            methodID: other.methodID ?? methodID,
+            cargoCondition: other.cargoCondition ?? cargoCondition,
+            weatherConditionsID: other.weatherConditionsID ?? weatherConditionsID,
+            startTime: other.startTime ?? startTime,
+            finishTimeLastGrab: other.finishTimeLastGrab ?? finishTimeLastGrab,
+            finishTimeCleanup: other.finishTimeCleanup ?? finishTimeCleanup,
+            dischargeRateTonnesPerHour: other.dischargeRateTonnesPerHour ?? dischargeRateTonnesPerHour,
+            saveAllTarpaulinsUsed: other.saveAllTarpaulinsUsed ?? saveAllTarpaulinsUsed,
+            holdsCleaned: other.holdsCleaned ?? holdsCleaned,
+            wharfCleaned: other.wharfCleaned ?? wharfCleaned
+        )
     }
 }
 
@@ -886,7 +947,7 @@ public struct DischargeWeightCreationRequest: DischargeWeightProperties, Codable
 
 // MARK: MutationRequest
 
-public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
+public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, PartialMutationRequest, MutationRequest, Codable, Hashable, Sendable {
     public var kind: DischargeWeightKind?
     public var methodID: Int?
     public var weighingPointID: Int?
@@ -1212,7 +1273,7 @@ public struct DischargeWeightDTO: DischargeWeightProperties, Codable, Hashable, 
 
 // MARK: PartialDTO
 
-public struct PartialDischargeWeightDTO: DischargeWeightPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
+public struct PartialDischargeWeightDTO: DischargeWeightPartialProperties, Codable, Hashable, APIResponseItem, Partial, Sendable {
     public let id: UUID
     public let version: Date
     public let kind: DischargeWeightKind?
@@ -1299,6 +1360,50 @@ public struct PartialDischargeWeightDTO: DischargeWeightPartialProperties, Codab
         self.abcCheck = other.abcCheck
         self.tallymen = other.tallymen
         self.transparencyID = other.transparencyID
+    }
+
+    public var isEmpty: Bool {
+        kind == nil &&
+            methodID == nil &&
+            weighingPointID == nil &&
+            weighingCompany == nil &&
+            startTime == nil &&
+            finishTime == nil &&
+            wetMetricTonnes == nil &&
+            moisturePercentage == nil &&
+            dryMetricTonnes == nil &&
+            equipmentName == nil &&
+            equipmentModel == nil &&
+            equipmentLocation == nil &&
+            equipmentCertificationDate == nil &&
+            calibrationCheck == nil &&
+            abcCheck == nil &&
+            tallymen == nil &&
+            transparencyID == nil
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            kind: other.kind ?? kind,
+            methodID: other.methodID ?? methodID,
+            weighingPointID: other.weighingPointID ?? weighingPointID,
+            weighingCompany: other.weighingCompany ?? weighingCompany,
+            startTime: other.startTime ?? startTime,
+            finishTime: other.finishTime ?? finishTime,
+            wetMetricTonnes: other.wetMetricTonnes ?? wetMetricTonnes,
+            moisturePercentage: other.moisturePercentage ?? moisturePercentage,
+            dryMetricTonnes: other.dryMetricTonnes ?? dryMetricTonnes,
+            equipmentName: other.equipmentName ?? equipmentName,
+            equipmentModel: other.equipmentModel ?? equipmentModel,
+            equipmentLocation: other.equipmentLocation ?? equipmentLocation,
+            equipmentCertificationDate: other.equipmentCertificationDate ?? equipmentCertificationDate,
+            calibrationCheck: other.calibrationCheck ?? calibrationCheck,
+            abcCheck: other.abcCheck ?? abcCheck,
+            tallymen: other.tallymen ?? tallymen,
+            transparencyID: other.transparencyID ?? transparencyID
+        )
     }
 }
 
@@ -1401,7 +1506,7 @@ public struct MoistureDeterminationCreationRequest: MoistureDeterminationPropert
 
 // MARK: MutationRequest
 
-public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
+public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartialProperties, PartialMutationRequest, MutationRequest, Codable, Hashable, Sendable {
     public var moistureDeterminationCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -1615,7 +1720,7 @@ public struct MoistureDeterminationDTO: MoistureDeterminationProperties, Codable
 
 // MARK: PartialDTO
 
-public struct PartialMoistureDeterminationDTO: MoistureDeterminationPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
+public struct PartialMoistureDeterminationDTO: MoistureDeterminationPartialProperties, Codable, Hashable, APIResponseItem, Partial, Sendable {
     public let id: UUID
     public let version: Date
     public let moistureDeterminationCompanyID: Int?
@@ -1674,6 +1779,36 @@ public struct PartialMoistureDeterminationDTO: MoistureDeterminationPartialPrope
         self.constantWeightCheck = other.constantWeightCheck
         self.resultsWaitTimeDays = other.resultsWaitTimeDays
         self.transparencyID = other.transparencyID
+    }
+
+    public var isEmpty: Bool {
+        moistureDeterminationCompanyID == nil &&
+            siteID == nil &&
+            location == nil &&
+            lotSampleTrayWeightKilograms == nil &&
+            ovenOnTime == nil &&
+            ovenOffTime == nil &&
+            ovenTemperatureCelsius == nil &&
+            constantWeightCheck == nil &&
+            resultsWaitTimeDays == nil &&
+            transparencyID == nil
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            moistureDeterminationCompanyID: other.moistureDeterminationCompanyID ?? moistureDeterminationCompanyID,
+            siteID: other.siteID ?? siteID,
+            location: other.location ?? location,
+            lotSampleTrayWeightKilograms: other.lotSampleTrayWeightKilograms ?? lotSampleTrayWeightKilograms,
+            ovenOnTime: other.ovenOnTime ?? ovenOnTime,
+            ovenOffTime: other.ovenOffTime ?? ovenOffTime,
+            ovenTemperatureCelsius: other.ovenTemperatureCelsius ?? ovenTemperatureCelsius,
+            constantWeightCheck: other.constantWeightCheck ?? constantWeightCheck,
+            resultsWaitTimeDays: other.resultsWaitTimeDays ?? resultsWaitTimeDays,
+            transparencyID: other.transparencyID ?? transparencyID
+        )
     }
 }
 
@@ -1797,7 +1932,7 @@ public struct SampleCollectionCreationRequest: SampleCollectionProperties, Codab
 
 // MARK: MutationRequest
 
-public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
+public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties, PartialMutationRequest, MutationRequest, Codable, Hashable, Sendable {
     public var samplingCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -2059,7 +2194,7 @@ public struct SampleCollectionDTO: SampleCollectionProperties, Codable, Hashable
 
 // MARK: PartialDTO
 
-public struct PartialSampleCollectionDTO: SampleCollectionPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
+public struct PartialSampleCollectionDTO: SampleCollectionPartialProperties, Codable, Hashable, APIResponseItem, Partial, Sendable {
     public let id: UUID
     public let version: Date
     public let samplingCompanyID: Int?
@@ -2130,6 +2265,42 @@ public struct PartialSampleCollectionDTO: SampleCollectionPartialProperties, Cod
         self.lotSizeWetTonnes = other.lotSizeWetTonnes
         self.sublotSizeWetTonnes = other.sublotSizeWetTonnes
         self.numberOfLots = other.numberOfLots
+    }
+
+    public var isEmpty: Bool {
+        samplingCompanyID == nil &&
+            siteID == nil &&
+            location == nil &&
+            samplingPointID == nil &&
+            startTime == nil &&
+            finishTime == nil &&
+            methodID == nil &&
+            sampleIncrementsWetTonnes == nil &&
+            typicalSampleWeightKilograms == nil &&
+            numberOfTrucksPerBag == nil &&
+            lotSizeWetTonnes == nil &&
+            sublotSizeWetTonnes == nil &&
+            numberOfLots == nil
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            samplingCompanyID: other.samplingCompanyID ?? samplingCompanyID,
+            siteID: other.siteID ?? siteID,
+            location: other.location ?? location,
+            samplingPointID: other.samplingPointID ?? samplingPointID,
+            startTime: other.startTime ?? startTime,
+            finishTime: other.finishTime ?? finishTime,
+            methodID: other.methodID ?? methodID,
+            sampleIncrementsWetTonnes: other.sampleIncrementsWetTonnes ?? sampleIncrementsWetTonnes,
+            typicalSampleWeightKilograms: other.typicalSampleWeightKilograms ?? typicalSampleWeightKilograms,
+            numberOfTrucksPerBag: other.numberOfTrucksPerBag ?? numberOfTrucksPerBag,
+            lotSizeWetTonnes: other.lotSizeWetTonnes ?? lotSizeWetTonnes,
+            sublotSizeWetTonnes: other.sublotSizeWetTonnes ?? sublotSizeWetTonnes,
+            numberOfLots: other.numberOfLots ?? numberOfLots
+        )
     }
 }
 
@@ -2302,7 +2473,7 @@ public struct SamplePreparationCreationRequest: SamplePreparationProperties, Cod
 
 // MARK: MutationRequest
 
-public struct SamplePreparationMutationRequest: SamplePreparationPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
+public struct SamplePreparationMutationRequest: SamplePreparationPartialProperties, PartialMutationRequest, MutationRequest, Codable, Hashable, Sendable {
     public var preparationCompanyID: Int?
     public var siteID: Int?
     public var location: LocationDTO?
@@ -2676,7 +2847,7 @@ public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashab
 
 // MARK: PartialDTO
 
-public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
+public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, Codable, Hashable, APIResponseItem, Partial, Sendable {
     public let id: UUID
     public let version: Date
     public let preparationCompanyID: Int?
@@ -2775,6 +2946,56 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
         self.riffleApertureMillimetres = other.riffleApertureMillimetres
         self.numberOfSets = other.numberOfSets
         self.transparencyID = other.transparencyID
+    }
+
+    public var isEmpty: Bool {
+        preparationCompanyID == nil &&
+            siteID == nil &&
+            location == nil &&
+            startTime == nil &&
+            finishTime == nil &&
+            standardsID == nil &&
+            wasScreened == nil &&
+            screenApertureID == nil &&
+            oversizePulverizedSeparately == nil &&
+            sampleChargeWeightGrams == nil &&
+            pulverizerID == nil &&
+            pulverizingDurationSeconds == nil &&
+            divisionMethodID == nil &&
+            rsdNumberOfSegments == nil &&
+            incrementISOScoopUsed == nil &&
+            incrementBackingPlateUsed == nil &&
+            incrementDividedToExtinction == nil &&
+            riffleApertureMillimetres == nil &&
+            numberOfSets == nil &&
+            transparencyID == nil
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            preparationCompanyID: other.preparationCompanyID ?? preparationCompanyID,
+            siteID: other.siteID ?? siteID,
+            location: other.location ?? location,
+            startTime: other.startTime ?? startTime,
+            finishTime: other.finishTime ?? finishTime,
+            standardsID: other.standardsID ?? standardsID,
+            wasScreened: other.wasScreened ?? wasScreened,
+            screenApertureID: other.screenApertureID ?? screenApertureID,
+            oversizePulverizedSeparately: other.oversizePulverizedSeparately ?? oversizePulverizedSeparately,
+            sampleChargeWeightGrams: other.sampleChargeWeightGrams ?? sampleChargeWeightGrams,
+            pulverizerID: other.pulverizerID ?? pulverizerID,
+            pulverizingDurationSeconds: other.pulverizingDurationSeconds ?? pulverizingDurationSeconds,
+            divisionMethodID: other.divisionMethodID ?? divisionMethodID,
+            rsdNumberOfSegments: other.rsdNumberOfSegments ?? rsdNumberOfSegments,
+            incrementISOScoopUsed: other.incrementISOScoopUsed ?? incrementISOScoopUsed,
+            incrementBackingPlateUsed: other.incrementBackingPlateUsed ?? incrementBackingPlateUsed,
+            incrementDividedToExtinction: other.incrementDividedToExtinction ?? incrementDividedToExtinction,
+            riffleApertureMillimetres: other.riffleApertureMillimetres ?? riffleApertureMillimetres,
+            numberOfSets: other.numberOfSets ?? numberOfSets,
+            transparencyID: other.transparencyID ?? transparencyID
+        )
     }
 }
 
@@ -2884,7 +3105,7 @@ public struct SampleReductionCreationRequest: SampleReductionProperties, Codable
 
 // MARK: MutationRequest
 
-public struct SampleReductionMutationRequest: SampleReductionPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
+public struct SampleReductionMutationRequest: SampleReductionPartialProperties, PartialMutationRequest, MutationRequest, Codable, Hashable, Sendable {
     public var samplingCompanyID: Int?
     public var location: LocationDTO?
     public var siteID: Int?
@@ -3114,7 +3335,7 @@ public struct SampleReductionDTO: SampleReductionProperties, Codable, Hashable, 
 
 // MARK: PartialDTO
 
-public struct PartialSampleReductionDTO: SampleReductionPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
+public struct PartialSampleReductionDTO: SampleReductionPartialProperties, Codable, Hashable, APIResponseItem, Partial, Sendable {
     public let id: UUID
     public let version: Date
     public let samplingCompanyID: Int?
@@ -3177,6 +3398,38 @@ public struct PartialSampleReductionDTO: SampleReductionPartialProperties, Codab
         self.wasConedAndQuartered = other.wasConedAndQuartered
         self.methodID = other.methodID
         self.gridSizeID = other.gridSizeID
+    }
+
+    public var isEmpty: Bool {
+        samplingCompanyID == nil &&
+            location == nil &&
+            siteID == nil &&
+            laboratoryID == nil &&
+            reductionPointID == nil &&
+            startTime == nil &&
+            finishTime == nil &&
+            screenApertureMillimetres == nil &&
+            wasConedAndQuartered == nil &&
+            methodID == nil &&
+            gridSizeID == nil
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            samplingCompanyID: other.samplingCompanyID ?? samplingCompanyID,
+            location: other.location ?? location,
+            siteID: other.siteID ?? siteID,
+            laboratoryID: other.laboratoryID ?? laboratoryID,
+            reductionPointID: other.reductionPointID ?? reductionPointID,
+            startTime: other.startTime ?? startTime,
+            finishTime: other.finishTime ?? finishTime,
+            screenApertureMillimetres: other.screenApertureMillimetres ?? screenApertureMillimetres,
+            wasConedAndQuartered: other.wasConedAndQuartered ?? wasConedAndQuartered,
+            methodID: other.methodID ?? methodID,
+            gridSizeID: other.gridSizeID ?? gridSizeID
+        )
     }
 }
 
@@ -3307,7 +3560,7 @@ public struct ShipmentCreationRequest: ShipmentDetailsProperties, Codable, Hasha
 
 // MARK: MutationRequest
 
-public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, PartialMergable, MutationRequest, Codable, Hashable, Sendable {
+public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, PartialMutationRequest, MutationRequest, Codable, Hashable, Sendable {
     public var clientReference: String?
     public var logDate: Date?
     public var norTime: Date?
@@ -3592,7 +3845,7 @@ public struct ShipmentDetailsDTO: ShipmentDetailsProperties, Codable, Hashable, 
 
 // MARK: PartialDTO
 
-public struct PartialShipmentDetailsDTO: ShipmentDetailsPartialProperties, Codable, Hashable, APIResponseItem, Sendable {
+public struct PartialShipmentDetailsDTO: ShipmentDetailsPartialProperties, Codable, Hashable, APIResponseItem, Partial, Sendable {
     public let id: UUID
     public let version: Date
     public let creationDate: Date?
@@ -3672,6 +3925,46 @@ public struct PartialShipmentDetailsDTO: ShipmentDetailsPartialProperties, Codab
         self.inspectionCompanySellerID = other.inspectionCompanySellerID
         self.inspectionCompanySecondAgentID = other.inspectionCompanySecondAgentID
         self.conradTeamSize = other.conradTeamSize
+    }
+
+    public var isEmpty: Bool {
+        creationDate == nil &&
+            clientReference == nil &&
+            logDate == nil &&
+            norTime == nil &&
+            vesselName == nil &&
+            clientID == nil &&
+            commodityID == nil &&
+            agentID == nil &&
+            traderID == nil &&
+            smelterID == nil &&
+            dischargePortID == nil &&
+            inspectionCompanyReceiverID == nil &&
+            inspectionCompanySellerID == nil &&
+            inspectionCompanySecondAgentID == nil &&
+            conradTeamSize == nil
+    }
+
+    public mutating func merge(from other: Self) {
+        self = Self(
+            id: other.id,
+            version: other.version,
+            creationDate: other.creationDate ?? creationDate,
+            clientReference: other.clientReference ?? clientReference,
+            logDate: other.logDate ?? logDate,
+            norTime: other.norTime ?? norTime,
+            vesselName: other.vesselName ?? vesselName,
+            clientID: other.clientID ?? clientID,
+            commodityID: other.commodityID ?? commodityID,
+            agentID: other.agentID ?? agentID,
+            traderID: other.traderID ?? traderID,
+            smelterID: other.smelterID ?? smelterID,
+            dischargePortID: other.dischargePortID ?? dischargePortID,
+            inspectionCompanyReceiverID: other.inspectionCompanyReceiverID ?? inspectionCompanyReceiverID,
+            inspectionCompanySellerID: other.inspectionCompanySellerID ?? inspectionCompanySellerID,
+            inspectionCompanySecondAgentID: other.inspectionCompanySecondAgentID ?? inspectionCompanySecondAgentID,
+            conradTeamSize: other.conradTeamSize ?? conradTeamSize
+        )
     }
 }
 
