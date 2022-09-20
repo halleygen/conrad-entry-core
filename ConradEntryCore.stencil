@@ -7,12 +7,15 @@ public protocol Partial {
     mutating func merge(from other: Self)
 }
 
-public protocol PartialMutationRequest: Partial {
-    static func empty() -> Self
-}
-
 public protocol MutationRequest {
     init(keyAndValues: [String: Any])
+}
+
+public protocol PartialMutationRequest: Partial, MutationRequest {
+    {# associatedtype PartialDTO: Partial #}
+
+    static func empty() -> Self
+    {# func asPartialDTO() -> PartialDTO #}
 }
 
 {% for type in types.implementing.ShipmentAutogen %}
@@ -30,6 +33,14 @@ public protocol {{ type.name|replace:"Template","PartialProperties" }} {
 {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
     var {{ variable.name }}: {{ variable.typeName }}? { get }
 {% endfor %}
+}
+
+// MARK: CodingKeys
+
+private enum {{ type.name|replace:"Template","CodingKeys" }}: String, CodingKey {
+    {% for variable in type.storedVariables %}
+    case {{ variable.name }}
+    {% endfor %}
 }
 
 // MARK: CreationRequest
@@ -79,6 +90,17 @@ public struct {{ type.name|replace:"Template","MutationRequest" }}: {{ type.name
     {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
         self.{{ variable.name }} = {{ variable.name }}
     {% endfor %}
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: {{ type.name|replace:"Template","CodingKeys" }}.self)
+        {% for variable in type.storedVariables|!annotated:"skipMutationRequest" %}
+            if container.contains(.{{ variable.name }}) {
+                self.{{ variable.name }} = try container.decode({{ variable.typeName }}.self, forKey: .{{ variable.name }})
+            } else {
+                self.{{ variable.name }} = nil
+            }
+        {% endfor %}
     }
 
     public init(keyAndValues: [String: Any]) {
@@ -186,6 +208,21 @@ public struct Partial{{ type.name|replace:"Template","DTO" }}: {{ type.name|repl
         self.{{ variable.name }} = {% if variable|!annotated:"skipMutationRequest" %}other.{% endif %}{{ variable.name }}
     {% endfor %}
     } 
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: {{ type.name|replace:"Template","CodingKeys" }}.self)
+        {% for variable in type.storedVariables %}
+        {% if variable|annotated:"requiredInPartialDTO" %}
+        self.{{ variable.name }} = try container.decode({{ variable.typeName }}.self, forKey: .{{ variable.name }})
+        {% else %}
+        if container.contains(.{{ variable.name }}) {
+            self.{{ variable.name }} = try container.decode({{ variable.typeName }}.self, forKey: .{{ variable.name }})
+        } else {
+            self.{{ variable.name }} = nil
+        }
+        {% endif %}
+        {% endfor %}
+    }
 
     public var isEmpty: Bool {
     {% for variable in type.storedVariables|!annotated:"requiredInPartialDTO" %}

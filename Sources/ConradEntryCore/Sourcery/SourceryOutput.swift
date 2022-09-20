@@ -10,12 +10,12 @@ public protocol Partial {
     mutating func merge(from other: Self)
 }
 
-public protocol PartialMutationRequest: Partial {
-    static func empty() -> Self
-}
-
 public protocol MutationRequest {
     init(keyAndValues: [String: Any])
+}
+
+public protocol PartialMutationRequest: Partial, MutationRequest {
+    static func empty() -> Self
 }
 
 // MARK: - BillOfLading
@@ -38,6 +38,19 @@ public protocol BillOfLadingPartialProperties {
     var wetMetricTonnes: Double? { get }
     var moisturePercentage: Double? { get }
     var dryMetricTonnes: Double? { get }
+}
+
+// MARK: CodingKeys
+
+private enum BillOfLadingCodingKeys: String, CodingKey {
+    case id
+    case version
+    case loadPortID
+    case vesselHolds
+    case methodID
+    case wetMetricTonnes
+    case moisturePercentage
+    case dryMetricTonnes
 }
 
 // MARK: CreationRequest
@@ -111,6 +124,40 @@ public struct BillOfLadingMutationRequest: BillOfLadingPartialProperties, Partia
         self.wetMetricTonnes = wetMetricTonnes
         self.moisturePercentage = moisturePercentage
         self.dryMetricTonnes = dryMetricTonnes
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: BillOfLadingCodingKeys.self)
+        if container.contains(.loadPortID) {
+            self.loadPortID = try container.decode(Int.self, forKey: .loadPortID)
+        } else {
+            self.loadPortID = nil
+        }
+        if container.contains(.vesselHolds) {
+            self.vesselHolds = try container.decode(Set<Int>.self, forKey: .vesselHolds)
+        } else {
+            self.vesselHolds = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.wetMetricTonnes) {
+            self.wetMetricTonnes = try container.decode(Double.self, forKey: .wetMetricTonnes)
+        } else {
+            self.wetMetricTonnes = nil
+        }
+        if container.contains(.moisturePercentage) {
+            self.moisturePercentage = try container.decode(Double.self, forKey: .moisturePercentage)
+        } else {
+            self.moisturePercentage = nil
+        }
+        if container.contains(.dryMetricTonnes) {
+            self.dryMetricTonnes = try container.decode(Double.self, forKey: .dryMetricTonnes)
+        } else {
+            self.dryMetricTonnes = nil
+        }
     }
 
     public init(keyAndValues: [String: Any]) {
@@ -284,6 +331,42 @@ public struct PartialBillOfLadingDTO: BillOfLadingPartialProperties, Codable, Ha
         self.dryMetricTonnes = other.dryMetricTonnes
     }
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: BillOfLadingCodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.version = try container.decode(Date.self, forKey: .version)
+        if container.contains(.loadPortID) {
+            self.loadPortID = try container.decode(Int.self, forKey: .loadPortID)
+        } else {
+            self.loadPortID = nil
+        }
+        if container.contains(.vesselHolds) {
+            self.vesselHolds = try container.decode(Set<Int>.self, forKey: .vesselHolds)
+        } else {
+            self.vesselHolds = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.wetMetricTonnes) {
+            self.wetMetricTonnes = try container.decode(Double.self, forKey: .wetMetricTonnes)
+        } else {
+            self.wetMetricTonnes = nil
+        }
+        if container.contains(.moisturePercentage) {
+            self.moisturePercentage = try container.decode(Double.self, forKey: .moisturePercentage)
+        } else {
+            self.moisturePercentage = nil
+        }
+        if container.contains(.dryMetricTonnes) {
+            self.dryMetricTonnes = try container.decode(Double.self, forKey: .dryMetricTonnes)
+        } else {
+            self.dryMetricTonnes = nil
+        }
+    }
+
     public var isEmpty: Bool {
         loadPortID == nil &&
             vesselHolds == nil &&
@@ -341,6 +424,26 @@ public protocol DischargePartialProperties {
     var saveAllTarpaulinsUsed: Bool? { get }
     var holdsCleaned: Bool? { get }
     var wharfCleaned: Bool? { get }
+}
+
+// MARK: CodingKeys
+
+private enum DischargeCodingKeys: String, CodingKey {
+    case id
+    case version
+    case berthName
+    case berthLocation
+    case gearID
+    case methodID
+    case cargoCondition
+    case weatherConditionsID
+    case startTime
+    case finishTimeLastGrab
+    case finishTimeCleanup
+    case dischargeRateTonnesPerHour
+    case saveAllTarpaulinsUsed
+    case holdsCleaned
+    case wharfCleaned
 }
 
 // MARK: CreationRequest
@@ -470,6 +573,75 @@ public struct DischargeMutationRequest: DischargePartialProperties, PartialMutat
         self.saveAllTarpaulinsUsed = saveAllTarpaulinsUsed
         self.holdsCleaned = holdsCleaned
         self.wharfCleaned = wharfCleaned
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DischargeCodingKeys.self)
+        if container.contains(.berthName) {
+            self.berthName = try container.decode(String.self, forKey: .berthName)
+        } else {
+            self.berthName = nil
+        }
+        if container.contains(.berthLocation) {
+            self.berthLocation = try container.decode(LocationDTO.self, forKey: .berthLocation)
+        } else {
+            self.berthLocation = nil
+        }
+        if container.contains(.gearID) {
+            self.gearID = try container.decode(Int.self, forKey: .gearID)
+        } else {
+            self.gearID = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.cargoCondition) {
+            self.cargoCondition = try container.decode(CargoCondition.self, forKey: .cargoCondition)
+        } else {
+            self.cargoCondition = nil
+        }
+        if container.contains(.weatherConditionsID) {
+            self.weatherConditionsID = try container.decode(Int.self, forKey: .weatherConditionsID)
+        } else {
+            self.weatherConditionsID = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTimeLastGrab) {
+            self.finishTimeLastGrab = try container.decode(Date.self, forKey: .finishTimeLastGrab)
+        } else {
+            self.finishTimeLastGrab = nil
+        }
+        if container.contains(.finishTimeCleanup) {
+            self.finishTimeCleanup = try container.decode(Date.self, forKey: .finishTimeCleanup)
+        } else {
+            self.finishTimeCleanup = nil
+        }
+        if container.contains(.dischargeRateTonnesPerHour) {
+            self.dischargeRateTonnesPerHour = try container.decode(Double.self, forKey: .dischargeRateTonnesPerHour)
+        } else {
+            self.dischargeRateTonnesPerHour = nil
+        }
+        if container.contains(.saveAllTarpaulinsUsed) {
+            self.saveAllTarpaulinsUsed = try container.decode(Bool.self, forKey: .saveAllTarpaulinsUsed)
+        } else {
+            self.saveAllTarpaulinsUsed = nil
+        }
+        if container.contains(.holdsCleaned) {
+            self.holdsCleaned = try container.decode(Bool.self, forKey: .holdsCleaned)
+        } else {
+            self.holdsCleaned = nil
+        }
+        if container.contains(.wharfCleaned) {
+            self.wharfCleaned = try container.decode(Bool.self, forKey: .wharfCleaned)
+        } else {
+            self.wharfCleaned = nil
+        }
     }
 
     public init(keyAndValues: [String: Any]) {
@@ -762,6 +934,77 @@ public struct PartialDischargeDTO: DischargePartialProperties, Codable, Hashable
         self.wharfCleaned = other.wharfCleaned
     }
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DischargeCodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.version = try container.decode(Date.self, forKey: .version)
+        if container.contains(.berthName) {
+            self.berthName = try container.decode(String.self, forKey: .berthName)
+        } else {
+            self.berthName = nil
+        }
+        if container.contains(.berthLocation) {
+            self.berthLocation = try container.decode(LocationDTO.self, forKey: .berthLocation)
+        } else {
+            self.berthLocation = nil
+        }
+        if container.contains(.gearID) {
+            self.gearID = try container.decode(Int.self, forKey: .gearID)
+        } else {
+            self.gearID = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.cargoCondition) {
+            self.cargoCondition = try container.decode(CargoCondition.self, forKey: .cargoCondition)
+        } else {
+            self.cargoCondition = nil
+        }
+        if container.contains(.weatherConditionsID) {
+            self.weatherConditionsID = try container.decode(Int.self, forKey: .weatherConditionsID)
+        } else {
+            self.weatherConditionsID = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTimeLastGrab) {
+            self.finishTimeLastGrab = try container.decode(Date.self, forKey: .finishTimeLastGrab)
+        } else {
+            self.finishTimeLastGrab = nil
+        }
+        if container.contains(.finishTimeCleanup) {
+            self.finishTimeCleanup = try container.decode(Date.self, forKey: .finishTimeCleanup)
+        } else {
+            self.finishTimeCleanup = nil
+        }
+        if container.contains(.dischargeRateTonnesPerHour) {
+            self.dischargeRateTonnesPerHour = try container.decode(Double.self, forKey: .dischargeRateTonnesPerHour)
+        } else {
+            self.dischargeRateTonnesPerHour = nil
+        }
+        if container.contains(.saveAllTarpaulinsUsed) {
+            self.saveAllTarpaulinsUsed = try container.decode(Bool.self, forKey: .saveAllTarpaulinsUsed)
+        } else {
+            self.saveAllTarpaulinsUsed = nil
+        }
+        if container.contains(.holdsCleaned) {
+            self.holdsCleaned = try container.decode(Bool.self, forKey: .holdsCleaned)
+        } else {
+            self.holdsCleaned = nil
+        }
+        if container.contains(.wharfCleaned) {
+            self.wharfCleaned = try container.decode(Bool.self, forKey: .wharfCleaned)
+        } else {
+            self.wharfCleaned = nil
+        }
+    }
+
     public var isEmpty: Bool {
         berthName == nil &&
             berthLocation == nil &&
@@ -841,6 +1084,30 @@ public protocol DischargeWeightPartialProperties {
     var abcCheck: ABCCheck?? { get }
     var tallymen: Tallymen?? { get }
     var transparencyID: Int? { get }
+}
+
+// MARK: CodingKeys
+
+private enum DischargeWeightCodingKeys: String, CodingKey {
+    case id
+    case version
+    case kind
+    case methodID
+    case weighingPointID
+    case weighingCompany
+    case startTime
+    case finishTime
+    case wetMetricTonnes
+    case moisturePercentage
+    case dryMetricTonnes
+    case equipmentName
+    case equipmentModel
+    case equipmentLocation
+    case equipmentCertificationDate
+    case calibrationCheck
+    case abcCheck
+    case tallymen
+    case transparencyID
 }
 
 // MARK: CreationRequest
@@ -1002,6 +1269,95 @@ public struct DischargeWeightMutationRequest: DischargeWeightPartialProperties, 
         self.abcCheck = abcCheck
         self.tallymen = tallymen
         self.transparencyID = transparencyID
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DischargeWeightCodingKeys.self)
+        if container.contains(.kind) {
+            self.kind = try container.decode(DischargeWeightKind.self, forKey: .kind)
+        } else {
+            self.kind = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.weighingPointID) {
+            self.weighingPointID = try container.decode(Int.self, forKey: .weighingPointID)
+        } else {
+            self.weighingPointID = nil
+        }
+        if container.contains(.weighingCompany) {
+            self.weighingCompany = try container.decode(String.self, forKey: .weighingCompany)
+        } else {
+            self.weighingCompany = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTime) {
+            self.finishTime = try container.decode(Date.self, forKey: .finishTime)
+        } else {
+            self.finishTime = nil
+        }
+        if container.contains(.wetMetricTonnes) {
+            self.wetMetricTonnes = try container.decode(Double.self, forKey: .wetMetricTonnes)
+        } else {
+            self.wetMetricTonnes = nil
+        }
+        if container.contains(.moisturePercentage) {
+            self.moisturePercentage = try container.decode(Double.self, forKey: .moisturePercentage)
+        } else {
+            self.moisturePercentage = nil
+        }
+        if container.contains(.dryMetricTonnes) {
+            self.dryMetricTonnes = try container.decode(Double.self, forKey: .dryMetricTonnes)
+        } else {
+            self.dryMetricTonnes = nil
+        }
+        if container.contains(.equipmentName) {
+            self.equipmentName = try container.decode(String?.self, forKey: .equipmentName)
+        } else {
+            self.equipmentName = nil
+        }
+        if container.contains(.equipmentModel) {
+            self.equipmentModel = try container.decode(String?.self, forKey: .equipmentModel)
+        } else {
+            self.equipmentModel = nil
+        }
+        if container.contains(.equipmentLocation) {
+            self.equipmentLocation = try container.decode(LocationDTO?.self, forKey: .equipmentLocation)
+        } else {
+            self.equipmentLocation = nil
+        }
+        if container.contains(.equipmentCertificationDate) {
+            self.equipmentCertificationDate = try container.decode(Date?.self, forKey: .equipmentCertificationDate)
+        } else {
+            self.equipmentCertificationDate = nil
+        }
+        if container.contains(.calibrationCheck) {
+            self.calibrationCheck = try container.decode(CalibrationCheck?.self, forKey: .calibrationCheck)
+        } else {
+            self.calibrationCheck = nil
+        }
+        if container.contains(.abcCheck) {
+            self.abcCheck = try container.decode(ABCCheck?.self, forKey: .abcCheck)
+        } else {
+            self.abcCheck = nil
+        }
+        if container.contains(.tallymen) {
+            self.tallymen = try container.decode(Tallymen?.self, forKey: .tallymen)
+        } else {
+            self.tallymen = nil
+        }
+        if container.contains(.transparencyID) {
+            self.transparencyID = try container.decode(Int.self, forKey: .transparencyID)
+        } else {
+            self.transparencyID = nil
+        }
     }
 
     public init(keyAndValues: [String: Any]) {
@@ -1362,6 +1718,97 @@ public struct PartialDischargeWeightDTO: DischargeWeightPartialProperties, Codab
         self.transparencyID = other.transparencyID
     }
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DischargeWeightCodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.version = try container.decode(Date.self, forKey: .version)
+        if container.contains(.kind) {
+            self.kind = try container.decode(DischargeWeightKind.self, forKey: .kind)
+        } else {
+            self.kind = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.weighingPointID) {
+            self.weighingPointID = try container.decode(Int.self, forKey: .weighingPointID)
+        } else {
+            self.weighingPointID = nil
+        }
+        if container.contains(.weighingCompany) {
+            self.weighingCompany = try container.decode(String.self, forKey: .weighingCompany)
+        } else {
+            self.weighingCompany = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTime) {
+            self.finishTime = try container.decode(Date.self, forKey: .finishTime)
+        } else {
+            self.finishTime = nil
+        }
+        if container.contains(.wetMetricTonnes) {
+            self.wetMetricTonnes = try container.decode(Double.self, forKey: .wetMetricTonnes)
+        } else {
+            self.wetMetricTonnes = nil
+        }
+        if container.contains(.moisturePercentage) {
+            self.moisturePercentage = try container.decode(Double.self, forKey: .moisturePercentage)
+        } else {
+            self.moisturePercentage = nil
+        }
+        if container.contains(.dryMetricTonnes) {
+            self.dryMetricTonnes = try container.decode(Double.self, forKey: .dryMetricTonnes)
+        } else {
+            self.dryMetricTonnes = nil
+        }
+        if container.contains(.equipmentName) {
+            self.equipmentName = try container.decode(String?.self, forKey: .equipmentName)
+        } else {
+            self.equipmentName = nil
+        }
+        if container.contains(.equipmentModel) {
+            self.equipmentModel = try container.decode(String?.self, forKey: .equipmentModel)
+        } else {
+            self.equipmentModel = nil
+        }
+        if container.contains(.equipmentLocation) {
+            self.equipmentLocation = try container.decode(LocationDTO?.self, forKey: .equipmentLocation)
+        } else {
+            self.equipmentLocation = nil
+        }
+        if container.contains(.equipmentCertificationDate) {
+            self.equipmentCertificationDate = try container.decode(Date?.self, forKey: .equipmentCertificationDate)
+        } else {
+            self.equipmentCertificationDate = nil
+        }
+        if container.contains(.calibrationCheck) {
+            self.calibrationCheck = try container.decode(CalibrationCheck?.self, forKey: .calibrationCheck)
+        } else {
+            self.calibrationCheck = nil
+        }
+        if container.contains(.abcCheck) {
+            self.abcCheck = try container.decode(ABCCheck?.self, forKey: .abcCheck)
+        } else {
+            self.abcCheck = nil
+        }
+        if container.contains(.tallymen) {
+            self.tallymen = try container.decode(Tallymen?.self, forKey: .tallymen)
+        } else {
+            self.tallymen = nil
+        }
+        if container.contains(.transparencyID) {
+            self.transparencyID = try container.decode(Int.self, forKey: .transparencyID)
+        } else {
+            self.transparencyID = nil
+        }
+    }
+
     public var isEmpty: Bool {
         kind == nil &&
             methodID == nil &&
@@ -1435,6 +1882,23 @@ public protocol MoistureDeterminationPartialProperties {
     var constantWeightCheck: ConstantWeightCheck?? { get }
     var resultsWaitTimeDays: Int? { get }
     var transparencyID: Int? { get }
+}
+
+// MARK: CodingKeys
+
+private enum MoistureDeterminationCodingKeys: String, CodingKey {
+    case id
+    case version
+    case moistureDeterminationCompanyID
+    case siteID
+    case location
+    case lotSampleTrayWeightKilograms
+    case ovenOnTime
+    case ovenOffTime
+    case ovenTemperatureCelsius
+    case constantWeightCheck
+    case resultsWaitTimeDays
+    case transparencyID
 }
 
 // MARK: CreationRequest
@@ -1540,6 +2004,60 @@ public struct MoistureDeterminationMutationRequest: MoistureDeterminationPartial
         self.constantWeightCheck = constantWeightCheck
         self.resultsWaitTimeDays = resultsWaitTimeDays
         self.transparencyID = transparencyID
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: MoistureDeterminationCodingKeys.self)
+        if container.contains(.moistureDeterminationCompanyID) {
+            self.moistureDeterminationCompanyID = try container.decode(Int.self, forKey: .moistureDeterminationCompanyID)
+        } else {
+            self.moistureDeterminationCompanyID = nil
+        }
+        if container.contains(.siteID) {
+            self.siteID = try container.decode(Int.self, forKey: .siteID)
+        } else {
+            self.siteID = nil
+        }
+        if container.contains(.location) {
+            self.location = try container.decode(LocationDTO.self, forKey: .location)
+        } else {
+            self.location = nil
+        }
+        if container.contains(.lotSampleTrayWeightKilograms) {
+            self.lotSampleTrayWeightKilograms = try container.decode(Double.self, forKey: .lotSampleTrayWeightKilograms)
+        } else {
+            self.lotSampleTrayWeightKilograms = nil
+        }
+        if container.contains(.ovenOnTime) {
+            self.ovenOnTime = try container.decode(Date.self, forKey: .ovenOnTime)
+        } else {
+            self.ovenOnTime = nil
+        }
+        if container.contains(.ovenOffTime) {
+            self.ovenOffTime = try container.decode(Date.self, forKey: .ovenOffTime)
+        } else {
+            self.ovenOffTime = nil
+        }
+        if container.contains(.ovenTemperatureCelsius) {
+            self.ovenTemperatureCelsius = try container.decode(Int.self, forKey: .ovenTemperatureCelsius)
+        } else {
+            self.ovenTemperatureCelsius = nil
+        }
+        if container.contains(.constantWeightCheck) {
+            self.constantWeightCheck = try container.decode(ConstantWeightCheck?.self, forKey: .constantWeightCheck)
+        } else {
+            self.constantWeightCheck = nil
+        }
+        if container.contains(.resultsWaitTimeDays) {
+            self.resultsWaitTimeDays = try container.decode(Int.self, forKey: .resultsWaitTimeDays)
+        } else {
+            self.resultsWaitTimeDays = nil
+        }
+        if container.contains(.transparencyID) {
+            self.transparencyID = try container.decode(Int.self, forKey: .transparencyID)
+        } else {
+            self.transparencyID = nil
+        }
     }
 
     public init(keyAndValues: [String: Any]) {
@@ -1781,6 +2299,62 @@ public struct PartialMoistureDeterminationDTO: MoistureDeterminationPartialPrope
         self.transparencyID = other.transparencyID
     }
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: MoistureDeterminationCodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.version = try container.decode(Date.self, forKey: .version)
+        if container.contains(.moistureDeterminationCompanyID) {
+            self.moistureDeterminationCompanyID = try container.decode(Int.self, forKey: .moistureDeterminationCompanyID)
+        } else {
+            self.moistureDeterminationCompanyID = nil
+        }
+        if container.contains(.siteID) {
+            self.siteID = try container.decode(Int.self, forKey: .siteID)
+        } else {
+            self.siteID = nil
+        }
+        if container.contains(.location) {
+            self.location = try container.decode(LocationDTO.self, forKey: .location)
+        } else {
+            self.location = nil
+        }
+        if container.contains(.lotSampleTrayWeightKilograms) {
+            self.lotSampleTrayWeightKilograms = try container.decode(Double.self, forKey: .lotSampleTrayWeightKilograms)
+        } else {
+            self.lotSampleTrayWeightKilograms = nil
+        }
+        if container.contains(.ovenOnTime) {
+            self.ovenOnTime = try container.decode(Date.self, forKey: .ovenOnTime)
+        } else {
+            self.ovenOnTime = nil
+        }
+        if container.contains(.ovenOffTime) {
+            self.ovenOffTime = try container.decode(Date.self, forKey: .ovenOffTime)
+        } else {
+            self.ovenOffTime = nil
+        }
+        if container.contains(.ovenTemperatureCelsius) {
+            self.ovenTemperatureCelsius = try container.decode(Int.self, forKey: .ovenTemperatureCelsius)
+        } else {
+            self.ovenTemperatureCelsius = nil
+        }
+        if container.contains(.constantWeightCheck) {
+            self.constantWeightCheck = try container.decode(ConstantWeightCheck?.self, forKey: .constantWeightCheck)
+        } else {
+            self.constantWeightCheck = nil
+        }
+        if container.contains(.resultsWaitTimeDays) {
+            self.resultsWaitTimeDays = try container.decode(Int.self, forKey: .resultsWaitTimeDays)
+        } else {
+            self.resultsWaitTimeDays = nil
+        }
+        if container.contains(.transparencyID) {
+            self.transparencyID = try container.decode(Int.self, forKey: .transparencyID)
+        } else {
+            self.transparencyID = nil
+        }
+    }
+
     public var isEmpty: Bool {
         moistureDeterminationCompanyID == nil &&
             siteID == nil &&
@@ -1846,6 +2420,26 @@ public protocol SampleCollectionPartialProperties {
     var lotSizeWetTonnes: Int? { get }
     var sublotSizeWetTonnes: Int?? { get }
     var numberOfLots: Int? { get }
+}
+
+// MARK: CodingKeys
+
+private enum SampleCollectionCodingKeys: String, CodingKey {
+    case id
+    case version
+    case samplingCompanyID
+    case siteID
+    case location
+    case samplingPointID
+    case startTime
+    case finishTime
+    case methodID
+    case sampleIncrementsWetTonnes
+    case typicalSampleWeightKilograms
+    case numberOfTrucksPerBag
+    case lotSizeWetTonnes
+    case sublotSizeWetTonnes
+    case numberOfLots
 }
 
 // MARK: CreationRequest
@@ -1975,6 +2569,75 @@ public struct SampleCollectionMutationRequest: SampleCollectionPartialProperties
         self.lotSizeWetTonnes = lotSizeWetTonnes
         self.sublotSizeWetTonnes = sublotSizeWetTonnes
         self.numberOfLots = numberOfLots
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: SampleCollectionCodingKeys.self)
+        if container.contains(.samplingCompanyID) {
+            self.samplingCompanyID = try container.decode(Int.self, forKey: .samplingCompanyID)
+        } else {
+            self.samplingCompanyID = nil
+        }
+        if container.contains(.siteID) {
+            self.siteID = try container.decode(Int.self, forKey: .siteID)
+        } else {
+            self.siteID = nil
+        }
+        if container.contains(.location) {
+            self.location = try container.decode(LocationDTO.self, forKey: .location)
+        } else {
+            self.location = nil
+        }
+        if container.contains(.samplingPointID) {
+            self.samplingPointID = try container.decode(Int.self, forKey: .samplingPointID)
+        } else {
+            self.samplingPointID = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTime) {
+            self.finishTime = try container.decode(Date.self, forKey: .finishTime)
+        } else {
+            self.finishTime = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.sampleIncrementsWetTonnes) {
+            self.sampleIncrementsWetTonnes = try container.decode(Double.self, forKey: .sampleIncrementsWetTonnes)
+        } else {
+            self.sampleIncrementsWetTonnes = nil
+        }
+        if container.contains(.typicalSampleWeightKilograms) {
+            self.typicalSampleWeightKilograms = try container.decode(Double.self, forKey: .typicalSampleWeightKilograms)
+        } else {
+            self.typicalSampleWeightKilograms = nil
+        }
+        if container.contains(.numberOfTrucksPerBag) {
+            self.numberOfTrucksPerBag = try container.decode(Int?.self, forKey: .numberOfTrucksPerBag)
+        } else {
+            self.numberOfTrucksPerBag = nil
+        }
+        if container.contains(.lotSizeWetTonnes) {
+            self.lotSizeWetTonnes = try container.decode(Int.self, forKey: .lotSizeWetTonnes)
+        } else {
+            self.lotSizeWetTonnes = nil
+        }
+        if container.contains(.sublotSizeWetTonnes) {
+            self.sublotSizeWetTonnes = try container.decode(Int?.self, forKey: .sublotSizeWetTonnes)
+        } else {
+            self.sublotSizeWetTonnes = nil
+        }
+        if container.contains(.numberOfLots) {
+            self.numberOfLots = try container.decode(Int.self, forKey: .numberOfLots)
+        } else {
+            self.numberOfLots = nil
+        }
     }
 
     public init(keyAndValues: [String: Any]) {
@@ -2267,6 +2930,77 @@ public struct PartialSampleCollectionDTO: SampleCollectionPartialProperties, Cod
         self.numberOfLots = other.numberOfLots
     }
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: SampleCollectionCodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.version = try container.decode(Date.self, forKey: .version)
+        if container.contains(.samplingCompanyID) {
+            self.samplingCompanyID = try container.decode(Int.self, forKey: .samplingCompanyID)
+        } else {
+            self.samplingCompanyID = nil
+        }
+        if container.contains(.siteID) {
+            self.siteID = try container.decode(Int.self, forKey: .siteID)
+        } else {
+            self.siteID = nil
+        }
+        if container.contains(.location) {
+            self.location = try container.decode(LocationDTO.self, forKey: .location)
+        } else {
+            self.location = nil
+        }
+        if container.contains(.samplingPointID) {
+            self.samplingPointID = try container.decode(Int.self, forKey: .samplingPointID)
+        } else {
+            self.samplingPointID = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTime) {
+            self.finishTime = try container.decode(Date.self, forKey: .finishTime)
+        } else {
+            self.finishTime = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.sampleIncrementsWetTonnes) {
+            self.sampleIncrementsWetTonnes = try container.decode(Double.self, forKey: .sampleIncrementsWetTonnes)
+        } else {
+            self.sampleIncrementsWetTonnes = nil
+        }
+        if container.contains(.typicalSampleWeightKilograms) {
+            self.typicalSampleWeightKilograms = try container.decode(Double.self, forKey: .typicalSampleWeightKilograms)
+        } else {
+            self.typicalSampleWeightKilograms = nil
+        }
+        if container.contains(.numberOfTrucksPerBag) {
+            self.numberOfTrucksPerBag = try container.decode(Int?.self, forKey: .numberOfTrucksPerBag)
+        } else {
+            self.numberOfTrucksPerBag = nil
+        }
+        if container.contains(.lotSizeWetTonnes) {
+            self.lotSizeWetTonnes = try container.decode(Int.self, forKey: .lotSizeWetTonnes)
+        } else {
+            self.lotSizeWetTonnes = nil
+        }
+        if container.contains(.sublotSizeWetTonnes) {
+            self.sublotSizeWetTonnes = try container.decode(Int?.self, forKey: .sublotSizeWetTonnes)
+        } else {
+            self.sublotSizeWetTonnes = nil
+        }
+        if container.contains(.numberOfLots) {
+            self.numberOfLots = try container.decode(Int.self, forKey: .numberOfLots)
+        } else {
+            self.numberOfLots = nil
+        }
+    }
+
     public var isEmpty: Bool {
         samplingCompanyID == nil &&
             siteID == nil &&
@@ -2352,6 +3086,33 @@ public protocol SamplePreparationPartialProperties {
     var riffleApertureMillimetres: Int?? { get }
     var numberOfSets: Int? { get }
     var transparencyID: Int? { get }
+}
+
+// MARK: CodingKeys
+
+private enum SamplePreparationCodingKeys: String, CodingKey {
+    case id
+    case version
+    case preparationCompanyID
+    case siteID
+    case location
+    case startTime
+    case finishTime
+    case standardsID
+    case wasScreened
+    case screenApertureID
+    case oversizePulverizedSeparately
+    case sampleChargeWeightGrams
+    case pulverizerID
+    case pulverizingDurationSeconds
+    case divisionMethodID
+    case rsdNumberOfSegments
+    case incrementISOScoopUsed
+    case incrementBackingPlateUsed
+    case incrementDividedToExtinction
+    case riffleApertureMillimetres
+    case numberOfSets
+    case transparencyID
 }
 
 // MARK: CreationRequest
@@ -2537,6 +3298,110 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
         self.riffleApertureMillimetres = riffleApertureMillimetres
         self.numberOfSets = numberOfSets
         self.transparencyID = transparencyID
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: SamplePreparationCodingKeys.self)
+        if container.contains(.preparationCompanyID) {
+            self.preparationCompanyID = try container.decode(Int.self, forKey: .preparationCompanyID)
+        } else {
+            self.preparationCompanyID = nil
+        }
+        if container.contains(.siteID) {
+            self.siteID = try container.decode(Int.self, forKey: .siteID)
+        } else {
+            self.siteID = nil
+        }
+        if container.contains(.location) {
+            self.location = try container.decode(LocationDTO.self, forKey: .location)
+        } else {
+            self.location = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTime) {
+            self.finishTime = try container.decode(Date.self, forKey: .finishTime)
+        } else {
+            self.finishTime = nil
+        }
+        if container.contains(.standardsID) {
+            self.standardsID = try container.decode(Int.self, forKey: .standardsID)
+        } else {
+            self.standardsID = nil
+        }
+        if container.contains(.wasScreened) {
+            self.wasScreened = try container.decode(Bool.self, forKey: .wasScreened)
+        } else {
+            self.wasScreened = nil
+        }
+        if container.contains(.screenApertureID) {
+            self.screenApertureID = try container.decode(Int?.self, forKey: .screenApertureID)
+        } else {
+            self.screenApertureID = nil
+        }
+        if container.contains(.oversizePulverizedSeparately) {
+            self.oversizePulverizedSeparately = try container.decode(Bool?.self, forKey: .oversizePulverizedSeparately)
+        } else {
+            self.oversizePulverizedSeparately = nil
+        }
+        if container.contains(.sampleChargeWeightGrams) {
+            self.sampleChargeWeightGrams = try container.decode(Int.self, forKey: .sampleChargeWeightGrams)
+        } else {
+            self.sampleChargeWeightGrams = nil
+        }
+        if container.contains(.pulverizerID) {
+            self.pulverizerID = try container.decode(Int.self, forKey: .pulverizerID)
+        } else {
+            self.pulverizerID = nil
+        }
+        if container.contains(.pulverizingDurationSeconds) {
+            self.pulverizingDurationSeconds = try container.decode(TimeInterval.self, forKey: .pulverizingDurationSeconds)
+        } else {
+            self.pulverizingDurationSeconds = nil
+        }
+        if container.contains(.divisionMethodID) {
+            self.divisionMethodID = try container.decode(Int.self, forKey: .divisionMethodID)
+        } else {
+            self.divisionMethodID = nil
+        }
+        if container.contains(.rsdNumberOfSegments) {
+            self.rsdNumberOfSegments = try container.decode(Int?.self, forKey: .rsdNumberOfSegments)
+        } else {
+            self.rsdNumberOfSegments = nil
+        }
+        if container.contains(.incrementISOScoopUsed) {
+            self.incrementISOScoopUsed = try container.decode(Bool?.self, forKey: .incrementISOScoopUsed)
+        } else {
+            self.incrementISOScoopUsed = nil
+        }
+        if container.contains(.incrementBackingPlateUsed) {
+            self.incrementBackingPlateUsed = try container.decode(Bool?.self, forKey: .incrementBackingPlateUsed)
+        } else {
+            self.incrementBackingPlateUsed = nil
+        }
+        if container.contains(.incrementDividedToExtinction) {
+            self.incrementDividedToExtinction = try container.decode(Bool?.self, forKey: .incrementDividedToExtinction)
+        } else {
+            self.incrementDividedToExtinction = nil
+        }
+        if container.contains(.riffleApertureMillimetres) {
+            self.riffleApertureMillimetres = try container.decode(Int?.self, forKey: .riffleApertureMillimetres)
+        } else {
+            self.riffleApertureMillimetres = nil
+        }
+        if container.contains(.numberOfSets) {
+            self.numberOfSets = try container.decode(Int.self, forKey: .numberOfSets)
+        } else {
+            self.numberOfSets = nil
+        }
+        if container.contains(.transparencyID) {
+            self.transparencyID = try container.decode(Int.self, forKey: .transparencyID)
+        } else {
+            self.transparencyID = nil
+        }
     }
 
     public init(keyAndValues: [String: Any]) {
@@ -2948,6 +3813,112 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
         self.transparencyID = other.transparencyID
     }
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: SamplePreparationCodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.version = try container.decode(Date.self, forKey: .version)
+        if container.contains(.preparationCompanyID) {
+            self.preparationCompanyID = try container.decode(Int.self, forKey: .preparationCompanyID)
+        } else {
+            self.preparationCompanyID = nil
+        }
+        if container.contains(.siteID) {
+            self.siteID = try container.decode(Int.self, forKey: .siteID)
+        } else {
+            self.siteID = nil
+        }
+        if container.contains(.location) {
+            self.location = try container.decode(LocationDTO.self, forKey: .location)
+        } else {
+            self.location = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTime) {
+            self.finishTime = try container.decode(Date.self, forKey: .finishTime)
+        } else {
+            self.finishTime = nil
+        }
+        if container.contains(.standardsID) {
+            self.standardsID = try container.decode(Int.self, forKey: .standardsID)
+        } else {
+            self.standardsID = nil
+        }
+        if container.contains(.wasScreened) {
+            self.wasScreened = try container.decode(Bool.self, forKey: .wasScreened)
+        } else {
+            self.wasScreened = nil
+        }
+        if container.contains(.screenApertureID) {
+            self.screenApertureID = try container.decode(Int?.self, forKey: .screenApertureID)
+        } else {
+            self.screenApertureID = nil
+        }
+        if container.contains(.oversizePulverizedSeparately) {
+            self.oversizePulverizedSeparately = try container.decode(Bool?.self, forKey: .oversizePulverizedSeparately)
+        } else {
+            self.oversizePulverizedSeparately = nil
+        }
+        if container.contains(.sampleChargeWeightGrams) {
+            self.sampleChargeWeightGrams = try container.decode(Int.self, forKey: .sampleChargeWeightGrams)
+        } else {
+            self.sampleChargeWeightGrams = nil
+        }
+        if container.contains(.pulverizerID) {
+            self.pulverizerID = try container.decode(Int.self, forKey: .pulverizerID)
+        } else {
+            self.pulverizerID = nil
+        }
+        if container.contains(.pulverizingDurationSeconds) {
+            self.pulverizingDurationSeconds = try container.decode(TimeInterval.self, forKey: .pulverizingDurationSeconds)
+        } else {
+            self.pulverizingDurationSeconds = nil
+        }
+        if container.contains(.divisionMethodID) {
+            self.divisionMethodID = try container.decode(Int.self, forKey: .divisionMethodID)
+        } else {
+            self.divisionMethodID = nil
+        }
+        if container.contains(.rsdNumberOfSegments) {
+            self.rsdNumberOfSegments = try container.decode(Int?.self, forKey: .rsdNumberOfSegments)
+        } else {
+            self.rsdNumberOfSegments = nil
+        }
+        if container.contains(.incrementISOScoopUsed) {
+            self.incrementISOScoopUsed = try container.decode(Bool?.self, forKey: .incrementISOScoopUsed)
+        } else {
+            self.incrementISOScoopUsed = nil
+        }
+        if container.contains(.incrementBackingPlateUsed) {
+            self.incrementBackingPlateUsed = try container.decode(Bool?.self, forKey: .incrementBackingPlateUsed)
+        } else {
+            self.incrementBackingPlateUsed = nil
+        }
+        if container.contains(.incrementDividedToExtinction) {
+            self.incrementDividedToExtinction = try container.decode(Bool?.self, forKey: .incrementDividedToExtinction)
+        } else {
+            self.incrementDividedToExtinction = nil
+        }
+        if container.contains(.riffleApertureMillimetres) {
+            self.riffleApertureMillimetres = try container.decode(Int?.self, forKey: .riffleApertureMillimetres)
+        } else {
+            self.riffleApertureMillimetres = nil
+        }
+        if container.contains(.numberOfSets) {
+            self.numberOfSets = try container.decode(Int.self, forKey: .numberOfSets)
+        } else {
+            self.numberOfSets = nil
+        }
+        if container.contains(.transparencyID) {
+            self.transparencyID = try container.decode(Int.self, forKey: .transparencyID)
+        } else {
+            self.transparencyID = nil
+        }
+    }
+
     public var isEmpty: Bool {
         preparationCompanyID == nil &&
             siteID == nil &&
@@ -3029,6 +4000,24 @@ public protocol SampleReductionPartialProperties {
     var wasConedAndQuartered: Bool? { get }
     var methodID: Int? { get }
     var gridSizeID: Int?? { get }
+}
+
+// MARK: CodingKeys
+
+private enum SampleReductionCodingKeys: String, CodingKey {
+    case id
+    case version
+    case samplingCompanyID
+    case location
+    case siteID
+    case laboratoryID
+    case reductionPointID
+    case startTime
+    case finishTime
+    case screenApertureMillimetres
+    case wasConedAndQuartered
+    case methodID
+    case gridSizeID
 }
 
 // MARK: CreationRequest
@@ -3142,6 +4131,65 @@ public struct SampleReductionMutationRequest: SampleReductionPartialProperties, 
         self.wasConedAndQuartered = wasConedAndQuartered
         self.methodID = methodID
         self.gridSizeID = gridSizeID
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: SampleReductionCodingKeys.self)
+        if container.contains(.samplingCompanyID) {
+            self.samplingCompanyID = try container.decode(Int.self, forKey: .samplingCompanyID)
+        } else {
+            self.samplingCompanyID = nil
+        }
+        if container.contains(.location) {
+            self.location = try container.decode(LocationDTO.self, forKey: .location)
+        } else {
+            self.location = nil
+        }
+        if container.contains(.siteID) {
+            self.siteID = try container.decode(Int.self, forKey: .siteID)
+        } else {
+            self.siteID = nil
+        }
+        if container.contains(.laboratoryID) {
+            self.laboratoryID = try container.decode(Int?.self, forKey: .laboratoryID)
+        } else {
+            self.laboratoryID = nil
+        }
+        if container.contains(.reductionPointID) {
+            self.reductionPointID = try container.decode(Int.self, forKey: .reductionPointID)
+        } else {
+            self.reductionPointID = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTime) {
+            self.finishTime = try container.decode(Date.self, forKey: .finishTime)
+        } else {
+            self.finishTime = nil
+        }
+        if container.contains(.screenApertureMillimetres) {
+            self.screenApertureMillimetres = try container.decode(Double?.self, forKey: .screenApertureMillimetres)
+        } else {
+            self.screenApertureMillimetres = nil
+        }
+        if container.contains(.wasConedAndQuartered) {
+            self.wasConedAndQuartered = try container.decode(Bool.self, forKey: .wasConedAndQuartered)
+        } else {
+            self.wasConedAndQuartered = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.gridSizeID) {
+            self.gridSizeID = try container.decode(Int?.self, forKey: .gridSizeID)
+        } else {
+            self.gridSizeID = nil
+        }
     }
 
     public init(keyAndValues: [String: Any]) {
@@ -3400,6 +4448,67 @@ public struct PartialSampleReductionDTO: SampleReductionPartialProperties, Codab
         self.gridSizeID = other.gridSizeID
     }
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: SampleReductionCodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.version = try container.decode(Date.self, forKey: .version)
+        if container.contains(.samplingCompanyID) {
+            self.samplingCompanyID = try container.decode(Int.self, forKey: .samplingCompanyID)
+        } else {
+            self.samplingCompanyID = nil
+        }
+        if container.contains(.location) {
+            self.location = try container.decode(LocationDTO.self, forKey: .location)
+        } else {
+            self.location = nil
+        }
+        if container.contains(.siteID) {
+            self.siteID = try container.decode(Int.self, forKey: .siteID)
+        } else {
+            self.siteID = nil
+        }
+        if container.contains(.laboratoryID) {
+            self.laboratoryID = try container.decode(Int?.self, forKey: .laboratoryID)
+        } else {
+            self.laboratoryID = nil
+        }
+        if container.contains(.reductionPointID) {
+            self.reductionPointID = try container.decode(Int.self, forKey: .reductionPointID)
+        } else {
+            self.reductionPointID = nil
+        }
+        if container.contains(.startTime) {
+            self.startTime = try container.decode(Date.self, forKey: .startTime)
+        } else {
+            self.startTime = nil
+        }
+        if container.contains(.finishTime) {
+            self.finishTime = try container.decode(Date.self, forKey: .finishTime)
+        } else {
+            self.finishTime = nil
+        }
+        if container.contains(.screenApertureMillimetres) {
+            self.screenApertureMillimetres = try container.decode(Double?.self, forKey: .screenApertureMillimetres)
+        } else {
+            self.screenApertureMillimetres = nil
+        }
+        if container.contains(.wasConedAndQuartered) {
+            self.wasConedAndQuartered = try container.decode(Bool.self, forKey: .wasConedAndQuartered)
+        } else {
+            self.wasConedAndQuartered = nil
+        }
+        if container.contains(.methodID) {
+            self.methodID = try container.decode(Int.self, forKey: .methodID)
+        } else {
+            self.methodID = nil
+        }
+        if container.contains(.gridSizeID) {
+            self.gridSizeID = try container.decode(Int?.self, forKey: .gridSizeID)
+        } else {
+            self.gridSizeID = nil
+        }
+    }
+
     public var isEmpty: Bool {
         samplingCompanyID == nil &&
             location == nil &&
@@ -3469,6 +4578,28 @@ public protocol ShipmentDetailsPartialProperties {
     var inspectionCompanySellerID: Int?? { get }
     var inspectionCompanySecondAgentID: Int?? { get }
     var conradTeamSize: Int? { get }
+}
+
+// MARK: CodingKeys
+
+private enum ShipmentDetailsCodingKeys: String, CodingKey {
+    case id
+    case version
+    case creationDate
+    case clientReference
+    case logDate
+    case norTime
+    case vesselName
+    case clientID
+    case commodityID
+    case agentID
+    case traderID
+    case smelterID
+    case dischargePortID
+    case inspectionCompanyReceiverID
+    case inspectionCompanySellerID
+    case inspectionCompanySecondAgentID
+    case conradTeamSize
 }
 
 // MARK: CreationRequest
@@ -3606,6 +4737,80 @@ public struct ShipmentDetailsMutationRequest: ShipmentDetailsPartialProperties, 
         self.inspectionCompanySellerID = inspectionCompanySellerID
         self.inspectionCompanySecondAgentID = inspectionCompanySecondAgentID
         self.conradTeamSize = conradTeamSize
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ShipmentDetailsCodingKeys.self)
+        if container.contains(.clientReference) {
+            self.clientReference = try container.decode(String.self, forKey: .clientReference)
+        } else {
+            self.clientReference = nil
+        }
+        if container.contains(.logDate) {
+            self.logDate = try container.decode(Date.self, forKey: .logDate)
+        } else {
+            self.logDate = nil
+        }
+        if container.contains(.norTime) {
+            self.norTime = try container.decode(Date.self, forKey: .norTime)
+        } else {
+            self.norTime = nil
+        }
+        if container.contains(.vesselName) {
+            self.vesselName = try container.decode(String.self, forKey: .vesselName)
+        } else {
+            self.vesselName = nil
+        }
+        if container.contains(.clientID) {
+            self.clientID = try container.decode(Int.self, forKey: .clientID)
+        } else {
+            self.clientID = nil
+        }
+        if container.contains(.commodityID) {
+            self.commodityID = try container.decode(Int.self, forKey: .commodityID)
+        } else {
+            self.commodityID = nil
+        }
+        if container.contains(.agentID) {
+            self.agentID = try container.decode(Int?.self, forKey: .agentID)
+        } else {
+            self.agentID = nil
+        }
+        if container.contains(.traderID) {
+            self.traderID = try container.decode(Int?.self, forKey: .traderID)
+        } else {
+            self.traderID = nil
+        }
+        if container.contains(.smelterID) {
+            self.smelterID = try container.decode(Int.self, forKey: .smelterID)
+        } else {
+            self.smelterID = nil
+        }
+        if container.contains(.dischargePortID) {
+            self.dischargePortID = try container.decode(Int.self, forKey: .dischargePortID)
+        } else {
+            self.dischargePortID = nil
+        }
+        if container.contains(.inspectionCompanyReceiverID) {
+            self.inspectionCompanyReceiverID = try container.decode(Int?.self, forKey: .inspectionCompanyReceiverID)
+        } else {
+            self.inspectionCompanyReceiverID = nil
+        }
+        if container.contains(.inspectionCompanySellerID) {
+            self.inspectionCompanySellerID = try container.decode(Int?.self, forKey: .inspectionCompanySellerID)
+        } else {
+            self.inspectionCompanySellerID = nil
+        }
+        if container.contains(.inspectionCompanySecondAgentID) {
+            self.inspectionCompanySecondAgentID = try container.decode(Int?.self, forKey: .inspectionCompanySecondAgentID)
+        } else {
+            self.inspectionCompanySecondAgentID = nil
+        }
+        if container.contains(.conradTeamSize) {
+            self.conradTeamSize = try container.decode(Int.self, forKey: .conradTeamSize)
+        } else {
+            self.conradTeamSize = nil
+        }
     }
 
     public init(keyAndValues: [String: Any]) {
@@ -3925,6 +5130,87 @@ public struct PartialShipmentDetailsDTO: ShipmentDetailsPartialProperties, Codab
         self.inspectionCompanySellerID = other.inspectionCompanySellerID
         self.inspectionCompanySecondAgentID = other.inspectionCompanySecondAgentID
         self.conradTeamSize = other.conradTeamSize
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ShipmentDetailsCodingKeys.self)
+        self.id = try container.decode(UUID.self, forKey: .id)
+        self.version = try container.decode(Date.self, forKey: .version)
+        if container.contains(.creationDate) {
+            self.creationDate = try container.decode(Date.self, forKey: .creationDate)
+        } else {
+            self.creationDate = nil
+        }
+        if container.contains(.clientReference) {
+            self.clientReference = try container.decode(String.self, forKey: .clientReference)
+        } else {
+            self.clientReference = nil
+        }
+        if container.contains(.logDate) {
+            self.logDate = try container.decode(Date.self, forKey: .logDate)
+        } else {
+            self.logDate = nil
+        }
+        if container.contains(.norTime) {
+            self.norTime = try container.decode(Date.self, forKey: .norTime)
+        } else {
+            self.norTime = nil
+        }
+        if container.contains(.vesselName) {
+            self.vesselName = try container.decode(String.self, forKey: .vesselName)
+        } else {
+            self.vesselName = nil
+        }
+        if container.contains(.clientID) {
+            self.clientID = try container.decode(Int.self, forKey: .clientID)
+        } else {
+            self.clientID = nil
+        }
+        if container.contains(.commodityID) {
+            self.commodityID = try container.decode(Int.self, forKey: .commodityID)
+        } else {
+            self.commodityID = nil
+        }
+        if container.contains(.agentID) {
+            self.agentID = try container.decode(Int?.self, forKey: .agentID)
+        } else {
+            self.agentID = nil
+        }
+        if container.contains(.traderID) {
+            self.traderID = try container.decode(Int?.self, forKey: .traderID)
+        } else {
+            self.traderID = nil
+        }
+        if container.contains(.smelterID) {
+            self.smelterID = try container.decode(Int.self, forKey: .smelterID)
+        } else {
+            self.smelterID = nil
+        }
+        if container.contains(.dischargePortID) {
+            self.dischargePortID = try container.decode(Int.self, forKey: .dischargePortID)
+        } else {
+            self.dischargePortID = nil
+        }
+        if container.contains(.inspectionCompanyReceiverID) {
+            self.inspectionCompanyReceiverID = try container.decode(Int?.self, forKey: .inspectionCompanyReceiverID)
+        } else {
+            self.inspectionCompanyReceiverID = nil
+        }
+        if container.contains(.inspectionCompanySellerID) {
+            self.inspectionCompanySellerID = try container.decode(Int?.self, forKey: .inspectionCompanySellerID)
+        } else {
+            self.inspectionCompanySellerID = nil
+        }
+        if container.contains(.inspectionCompanySecondAgentID) {
+            self.inspectionCompanySecondAgentID = try container.decode(Int?.self, forKey: .inspectionCompanySecondAgentID)
+        } else {
+            self.inspectionCompanySecondAgentID = nil
+        }
+        if container.contains(.conradTeamSize) {
+            self.conradTeamSize = try container.decode(Int.self, forKey: .conradTeamSize)
+        } else {
+            self.conradTeamSize = nil
+        }
     }
 
     public var isEmpty: Bool {
