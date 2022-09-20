@@ -97,7 +97,7 @@ public extension ConstantWeightCheck {
             }
 
             public func copy(with zone: NSZone? = nil) -> Any {
-                ConstantWeightCheck.Reference(duration: duration, numberOfWeighBacks: numberOfWeighBacks)
+                self
             }
 
             public func encode(with coder: NSCoder) {

@@ -90,7 +90,7 @@ public struct CargoCondition: Codable, Hashable, Sendable {
             }
 
             public func copy(with zone: NSZone? = nil) -> Any {
-                CargoCondition.Reference(isTrimmed: isTrimmed, isContaminated: isContaminated, sufferedWaterIngress: sufferedWaterIngress, comment: comment)
+                self
             }
 
             override public func isEqual(_ object: Any?) -> Bool {

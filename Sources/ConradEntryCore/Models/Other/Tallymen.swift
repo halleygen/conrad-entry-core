@@ -72,7 +72,7 @@ public struct Tallymen: Hashable, Codable, Sendable {
             }
 
             public func copy(with zone: NSZone? = nil) -> Any {
-                Reference(count: count, location: location)
+                self
             }
 
             override public func isEqual(_ object: Any?) -> Bool {

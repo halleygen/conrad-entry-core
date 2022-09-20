@@ -128,10 +128,7 @@ public enum CalibrationCheck: Hashable, Codable, Sendable {
             }
 
             public func copy(with zone: NSZone? = nil) -> Any {
-                switch scale {
-                case .single: return Reference(singleScaleResult: singleScaleResult!)
-                case .double: return Reference(tareResult: doubleScaleTareResult!, ladenResult: doubleScaleLadenResult!)
-                }
+                self
             }
 
             override public func isEqual(_ object: Any?) -> Bool {

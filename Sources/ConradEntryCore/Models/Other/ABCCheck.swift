@@ -78,7 +78,7 @@ public struct ABCCheck: Hashable, Codable, Sendable {
             }
 
             public func copy(with zone: NSZone? = nil) -> Any {
-                Reference(tareWeightVarianceKilograms: tareWeightVarianceKilograms, ladenWeightVarianceKilograms: ladenWeightVarianceKilograms)
+                self
             }
 
             override public func isEqual(_ object: Any?) -> Bool {
