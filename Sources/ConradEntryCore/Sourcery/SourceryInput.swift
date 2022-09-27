@@ -192,12 +192,7 @@
         var finishTime: Date { get }
         // sourcery: coreDataType = "Constant"
         var standardsID: Int { get }
-        // sourcery: coreDataType = "NSNumber.Bool"
-        var wasScreened: Bool { get }
-        // sourcery: coreDataType = "Constant"
-        var screenApertureID: Int? { get }
-        // sourcery: coreDataType = "NSNumber.Bool"
-        var oversizePulverizedSeparately: Bool? { get }
+        var screening: QualityLotScreening? { get }
         // sourcery: coreDataType = "NSNumber.Int"
         var sampleChargeWeightGrams: Int { get }
         // sourcery: coreDataType = "Constant"

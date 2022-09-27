@@ -3049,9 +3049,7 @@ public protocol SamplePreparationProperties {
     var startTime: Date { get }
     var finishTime: Date { get }
     var standardsID: Int { get }
-    var wasScreened: Bool { get }
-    var screenApertureID: Int? { get }
-    var oversizePulverizedSeparately: Bool? { get }
+    var screening: QualityLotScreening? { get }
     var sampleChargeWeightGrams: Int { get }
     var pulverizerID: Int { get }
     var pulverizingDurationSeconds: TimeInterval { get }
@@ -3072,9 +3070,7 @@ public protocol SamplePreparationPartialProperties {
     var startTime: Date? { get }
     var finishTime: Date? { get }
     var standardsID: Int? { get }
-    var wasScreened: Bool? { get }
-    var screenApertureID: Int?? { get }
-    var oversizePulverizedSeparately: Bool?? { get }
+    var screening: QualityLotScreening?? { get }
     var sampleChargeWeightGrams: Int? { get }
     var pulverizerID: Int? { get }
     var pulverizingDurationSeconds: TimeInterval? { get }
@@ -3099,9 +3095,7 @@ private enum SamplePreparationCodingKeys: String, CodingKey {
     case startTime
     case finishTime
     case standardsID
-    case wasScreened
-    case screenApertureID
-    case oversizePulverizedSeparately
+    case screening
     case sampleChargeWeightGrams
     case pulverizerID
     case pulverizingDurationSeconds
@@ -3124,9 +3118,7 @@ public struct SamplePreparationCreationRequest: SamplePreparationProperties, Cod
     public var startTime: Date
     public var finishTime: Date
     public var standardsID: Int
-    public var wasScreened: Bool
-    public var screenApertureID: Int?
-    public var oversizePulverizedSeparately: Bool?
+    public var screening: QualityLotScreening?
     public var sampleChargeWeightGrams: Int
     public var pulverizerID: Int
     public var pulverizingDurationSeconds: TimeInterval
@@ -3146,9 +3138,7 @@ public struct SamplePreparationCreationRequest: SamplePreparationProperties, Cod
         startTime: Date,
         finishTime: Date,
         standardsID: Int,
-        wasScreened: Bool,
-        screenApertureID: Int?,
-        oversizePulverizedSeparately: Bool?,
+        screening: QualityLotScreening?,
         sampleChargeWeightGrams: Int,
         pulverizerID: Int,
         pulverizingDurationSeconds: TimeInterval,
@@ -3167,9 +3157,7 @@ public struct SamplePreparationCreationRequest: SamplePreparationProperties, Cod
         self.startTime = startTime
         self.finishTime = finishTime
         self.standardsID = standardsID
-        self.wasScreened = wasScreened
-        self.screenApertureID = screenApertureID
-        self.oversizePulverizedSeparately = oversizePulverizedSeparately
+        self.screening = screening
         self.sampleChargeWeightGrams = sampleChargeWeightGrams
         self.pulverizerID = pulverizerID
         self.pulverizingDurationSeconds = pulverizingDurationSeconds
@@ -3191,9 +3179,7 @@ public struct SamplePreparationCreationRequest: SamplePreparationProperties, Cod
             let startTime = mutationRequest.startTime,
             let finishTime = mutationRequest.finishTime,
             let standardsID = mutationRequest.standardsID,
-            let wasScreened = mutationRequest.wasScreened,
-            let screenApertureID = mutationRequest.screenApertureID,
-            let oversizePulverizedSeparately = mutationRequest.oversizePulverizedSeparately,
+            let screening = mutationRequest.screening,
             let sampleChargeWeightGrams = mutationRequest.sampleChargeWeightGrams,
             let pulverizerID = mutationRequest.pulverizerID,
             let pulverizingDurationSeconds = mutationRequest.pulverizingDurationSeconds,
@@ -3215,9 +3201,7 @@ public struct SamplePreparationCreationRequest: SamplePreparationProperties, Cod
         self.startTime = startTime
         self.finishTime = finishTime
         self.standardsID = standardsID
-        self.wasScreened = wasScreened
-        self.screenApertureID = screenApertureID
-        self.oversizePulverizedSeparately = oversizePulverizedSeparately
+        self.screening = screening
         self.sampleChargeWeightGrams = sampleChargeWeightGrams
         self.pulverizerID = pulverizerID
         self.pulverizingDurationSeconds = pulverizingDurationSeconds
@@ -3241,9 +3225,7 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
     public var startTime: Date?
     public var finishTime: Date?
     public var standardsID: Int?
-    public var wasScreened: Bool?
-    public var screenApertureID: Int??
-    public var oversizePulverizedSeparately: Bool??
+    public var screening: QualityLotScreening??
     public var sampleChargeWeightGrams: Int?
     public var pulverizerID: Int?
     public var pulverizingDurationSeconds: TimeInterval?
@@ -3263,9 +3245,7 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
         startTime: Date? = nil,
         finishTime: Date? = nil,
         standardsID: Int? = nil,
-        wasScreened: Bool? = nil,
-        screenApertureID: Int?? = nil,
-        oversizePulverizedSeparately: Bool?? = nil,
+        screening: QualityLotScreening?? = nil,
         sampleChargeWeightGrams: Int? = nil,
         pulverizerID: Int? = nil,
         pulverizingDurationSeconds: TimeInterval? = nil,
@@ -3284,9 +3264,7 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
         self.startTime = startTime
         self.finishTime = finishTime
         self.standardsID = standardsID
-        self.wasScreened = wasScreened
-        self.screenApertureID = screenApertureID
-        self.oversizePulverizedSeparately = oversizePulverizedSeparately
+        self.screening = screening
         self.sampleChargeWeightGrams = sampleChargeWeightGrams
         self.pulverizerID = pulverizerID
         self.pulverizingDurationSeconds = pulverizingDurationSeconds
@@ -3332,20 +3310,10 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
         } else {
             self.standardsID = nil
         }
-        if container.contains(.wasScreened) {
-            self.wasScreened = try container.decode(Bool.self, forKey: .wasScreened)
+        if container.contains(.screening) {
+            self.screening = try container.decode(QualityLotScreening?.self, forKey: .screening)
         } else {
-            self.wasScreened = nil
-        }
-        if container.contains(.screenApertureID) {
-            self.screenApertureID = try container.decode(Int?.self, forKey: .screenApertureID)
-        } else {
-            self.screenApertureID = nil
-        }
-        if container.contains(.oversizePulverizedSeparately) {
-            self.oversizePulverizedSeparately = try container.decode(Bool?.self, forKey: .oversizePulverizedSeparately)
-        } else {
-            self.oversizePulverizedSeparately = nil
+            self.screening = nil
         }
         if container.contains(.sampleChargeWeightGrams) {
             self.sampleChargeWeightGrams = try container.decode(Int.self, forKey: .sampleChargeWeightGrams)
@@ -3423,14 +3391,8 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
         if let standardsID = keyAndValues["standardsID"] as? Int {
             self.standardsID = standardsID
         }
-        if let wasScreened = keyAndValues["wasScreened"] as? Bool {
-            self.wasScreened = wasScreened
-        }
-        if let screenApertureID = keyAndValues["screenApertureID"] as? Int? {
-            self.screenApertureID = screenApertureID
-        }
-        if let oversizePulverizedSeparately = keyAndValues["oversizePulverizedSeparately"] as? Bool? {
-            self.oversizePulverizedSeparately = oversizePulverizedSeparately
+        if let screening = keyAndValues["screening"] as? QualityLotScreening? {
+            self.screening = screening
         }
         if let sampleChargeWeightGrams = keyAndValues["sampleChargeWeightGrams"] as? Int {
             self.sampleChargeWeightGrams = sampleChargeWeightGrams
@@ -3488,14 +3450,8 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
         if let updatedValue = other.standardsID {
             standardsID = updatedValue
         }
-        if let updatedValue = other.wasScreened {
-            wasScreened = updatedValue
-        }
-        if let updatedValue = other.screenApertureID {
-            screenApertureID = updatedValue
-        }
-        if let updatedValue = other.oversizePulverizedSeparately {
-            oversizePulverizedSeparately = updatedValue
+        if let updatedValue = other.screening {
+            screening = updatedValue
         }
         if let updatedValue = other.sampleChargeWeightGrams {
             sampleChargeWeightGrams = updatedValue
@@ -3539,9 +3495,7 @@ public struct SamplePreparationMutationRequest: SamplePreparationPartialProperti
             startTime == nil &&
             finishTime == nil &&
             standardsID == nil &&
-            wasScreened == nil &&
-            screenApertureID == nil &&
-            oversizePulverizedSeparately == nil &&
+            screening == nil &&
             sampleChargeWeightGrams == nil &&
             pulverizerID == nil &&
             pulverizingDurationSeconds == nil &&
@@ -3567,9 +3521,7 @@ public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashab
     public let startTime: Date
     public let finishTime: Date
     public let standardsID: Int
-    public let wasScreened: Bool
-    public let screenApertureID: Int?
-    public let oversizePulverizedSeparately: Bool?
+    public let screening: QualityLotScreening?
     public let sampleChargeWeightGrams: Int
     public let pulverizerID: Int
     public let pulverizingDurationSeconds: TimeInterval
@@ -3591,9 +3543,7 @@ public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashab
         startTime: Date,
         finishTime: Date,
         standardsID: Int,
-        wasScreened: Bool,
-        screenApertureID: Int?,
-        oversizePulverizedSeparately: Bool?,
+        screening: QualityLotScreening?,
         sampleChargeWeightGrams: Int,
         pulverizerID: Int,
         pulverizingDurationSeconds: TimeInterval,
@@ -3614,9 +3564,7 @@ public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashab
         self.startTime = startTime
         self.finishTime = finishTime
         self.standardsID = standardsID
-        self.wasScreened = wasScreened
-        self.screenApertureID = screenApertureID
-        self.oversizePulverizedSeparately = oversizePulverizedSeparately
+        self.screening = screening
         self.sampleChargeWeightGrams = sampleChargeWeightGrams
         self.pulverizerID = pulverizerID
         self.pulverizingDurationSeconds = pulverizingDurationSeconds
@@ -3638,9 +3586,7 @@ public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashab
             let startTime = partial.startTime,
             let finishTime = partial.finishTime,
             let standardsID = partial.standardsID,
-            let wasScreened = partial.wasScreened,
-            let screenApertureID = partial.screenApertureID,
-            let oversizePulverizedSeparately = partial.oversizePulverizedSeparately,
+            let screening = partial.screening,
             let sampleChargeWeightGrams = partial.sampleChargeWeightGrams,
             let pulverizerID = partial.pulverizerID,
             let pulverizingDurationSeconds = partial.pulverizingDurationSeconds,
@@ -3664,9 +3610,7 @@ public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashab
         self.startTime = startTime
         self.finishTime = finishTime
         self.standardsID = standardsID
-        self.wasScreened = wasScreened
-        self.screenApertureID = screenApertureID
-        self.oversizePulverizedSeparately = oversizePulverizedSeparately
+        self.screening = screening
         self.sampleChargeWeightGrams = sampleChargeWeightGrams
         self.pulverizerID = pulverizerID
         self.pulverizingDurationSeconds = pulverizingDurationSeconds
@@ -3693,9 +3637,7 @@ public struct SamplePreparationDTO: SamplePreparationProperties, Codable, Hashab
         self.startTime = creationRequest.startTime
         self.finishTime = creationRequest.finishTime
         self.standardsID = creationRequest.standardsID
-        self.wasScreened = creationRequest.wasScreened
-        self.screenApertureID = creationRequest.screenApertureID
-        self.oversizePulverizedSeparately = creationRequest.oversizePulverizedSeparately
+        self.screening = creationRequest.screening
         self.sampleChargeWeightGrams = creationRequest.sampleChargeWeightGrams
         self.pulverizerID = creationRequest.pulverizerID
         self.pulverizingDurationSeconds = creationRequest.pulverizingDurationSeconds
@@ -3721,9 +3663,7 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
     public let startTime: Date?
     public let finishTime: Date?
     public let standardsID: Int?
-    public let wasScreened: Bool?
-    public let screenApertureID: Int??
-    public let oversizePulverizedSeparately: Bool??
+    public let screening: QualityLotScreening??
     public let sampleChargeWeightGrams: Int?
     public let pulverizerID: Int?
     public let pulverizingDurationSeconds: TimeInterval?
@@ -3745,9 +3685,7 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
         startTime: Date? = nil,
         finishTime: Date? = nil,
         standardsID: Int? = nil,
-        wasScreened: Bool? = nil,
-        screenApertureID: Int?? = nil,
-        oversizePulverizedSeparately: Bool?? = nil,
+        screening: QualityLotScreening?? = nil,
         sampleChargeWeightGrams: Int? = nil,
         pulverizerID: Int? = nil,
         pulverizingDurationSeconds: TimeInterval? = nil,
@@ -3768,9 +3706,7 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
         self.startTime = startTime
         self.finishTime = finishTime
         self.standardsID = standardsID
-        self.wasScreened = wasScreened
-        self.screenApertureID = screenApertureID
-        self.oversizePulverizedSeparately = oversizePulverizedSeparately
+        self.screening = screening
         self.sampleChargeWeightGrams = sampleChargeWeightGrams
         self.pulverizerID = pulverizerID
         self.pulverizingDurationSeconds = pulverizingDurationSeconds
@@ -3797,9 +3733,7 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
         self.startTime = other.startTime
         self.finishTime = other.finishTime
         self.standardsID = other.standardsID
-        self.wasScreened = other.wasScreened
-        self.screenApertureID = other.screenApertureID
-        self.oversizePulverizedSeparately = other.oversizePulverizedSeparately
+        self.screening = other.screening
         self.sampleChargeWeightGrams = other.sampleChargeWeightGrams
         self.pulverizerID = other.pulverizerID
         self.pulverizingDurationSeconds = other.pulverizingDurationSeconds
@@ -3847,20 +3781,10 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
         } else {
             self.standardsID = nil
         }
-        if container.contains(.wasScreened) {
-            self.wasScreened = try container.decode(Bool.self, forKey: .wasScreened)
+        if container.contains(.screening) {
+            self.screening = try container.decode(QualityLotScreening?.self, forKey: .screening)
         } else {
-            self.wasScreened = nil
-        }
-        if container.contains(.screenApertureID) {
-            self.screenApertureID = try container.decode(Int?.self, forKey: .screenApertureID)
-        } else {
-            self.screenApertureID = nil
-        }
-        if container.contains(.oversizePulverizedSeparately) {
-            self.oversizePulverizedSeparately = try container.decode(Bool?.self, forKey: .oversizePulverizedSeparately)
-        } else {
-            self.oversizePulverizedSeparately = nil
+            self.screening = nil
         }
         if container.contains(.sampleChargeWeightGrams) {
             self.sampleChargeWeightGrams = try container.decode(Int.self, forKey: .sampleChargeWeightGrams)
@@ -3926,9 +3850,7 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
             startTime == nil &&
             finishTime == nil &&
             standardsID == nil &&
-            wasScreened == nil &&
-            screenApertureID == nil &&
-            oversizePulverizedSeparately == nil &&
+            screening == nil &&
             sampleChargeWeightGrams == nil &&
             pulverizerID == nil &&
             pulverizingDurationSeconds == nil &&
@@ -3952,9 +3874,7 @@ public struct PartialSamplePreparationDTO: SamplePreparationPartialProperties, C
             startTime: other.startTime ?? startTime,
             finishTime: other.finishTime ?? finishTime,
             standardsID: other.standardsID ?? standardsID,
-            wasScreened: other.wasScreened ?? wasScreened,
-            screenApertureID: other.screenApertureID ?? screenApertureID,
-            oversizePulverizedSeparately: other.oversizePulverizedSeparately ?? oversizePulverizedSeparately,
+            screening: other.screening ?? screening,
             sampleChargeWeightGrams: other.sampleChargeWeightGrams ?? sampleChargeWeightGrams,
             pulverizerID: other.pulverizerID ?? pulverizerID,
             pulverizingDurationSeconds: other.pulverizingDurationSeconds ?? pulverizingDurationSeconds,

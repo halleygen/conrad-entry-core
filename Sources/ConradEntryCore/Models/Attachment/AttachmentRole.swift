@@ -133,3 +133,48 @@ extension AttachmentRole: CaseIterable {
         [.dischargePhotos, .settlementWeightPhotos, .referenceWeightPhotos, .sampleCollectionPhotos, .sampleReductionPhotos, .moistureDeterminationPhotos, .samplePreparationPhotos, .noticeOfReadiness, .vesselPhoto, .statementOfFacts, .moistureCertificate, .lotByLotMoistureProfile, .stowagePlan]
     }
 }
+
+// #if !os(Linux)
+//
+// public extension AttachmentRole {
+//    var ref: Reference {
+//        Reference
+//    }
+//
+//    init(_ ref: Reference) {
+//
+//    }
+//
+//    final class Reference: NSObject, NSCopying, NSSecureCoding {
+//        public static var supportsSecureCoding: Bool { true }
+//
+//        public let `class`: Class
+//        public let section: Section
+//        public let subsection: Subsection?
+//        public let requirement: CountRequirement
+//
+//        public init(class: Class, section: Section, subsection: Subsection?, requirement: CountRequirement) {
+//            self.class = `class`
+//            self.section = section
+//            self.subsection = subsection
+//            self.requirement = requirement
+//        }
+//
+//        public convenience init(_ other: AttachmentRole) {
+//            self.init(class: other.class, section: other.section, subsection: other.subsection, requirement: other.requirement)
+//        }
+//
+//        public override func isEqual(_ object: Any?) -> Bool {
+//            switch object {
+//            case let other as Reference:
+//                return `class` == other.class && section == other.section && subsection == other.subsection && requirement == other.requirement
+//
+//            case let other as AttachmentRole:
+//            default:
+//                return false
+//            }
+//        }
+//    }
+// }
+//
+// #endif
