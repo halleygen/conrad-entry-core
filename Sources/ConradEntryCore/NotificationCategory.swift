@@ -8,8 +8,12 @@ public enum NotificationCategory: String, CaseIterable {
     case newUserSignup = "NEW_USER_SIGNUP"
 }
 
-public enum NotificationUserInfoKey {
-    public static let userID = "USER_ID"
+public struct NewAccountSignupNotificationPayload: Codable {
+    public let userID: UUID
+    
+    public enum CodingKeys: String, CodingKey {
+        case userID = "USER_ID"
+    }
 }
 
 public enum BackgroundNotificationAction {
