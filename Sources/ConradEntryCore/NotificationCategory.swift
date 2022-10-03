@@ -20,8 +20,26 @@ public struct NewAccountSignupNotificationPayload: Codable {
     }
 }
 
-public enum BackgroundNotificationAction {
-    public static let signOut = "SIGN_OUT"
+public struct AccountLockStateChangedNotificationPayload: Codable {
+    public init() {}
+    public init(from decoder: Decoder) throws {}
+    public func encode(to encoder: Encoder) throws {}
+}
+
+public struct BackgroundNotificationPayload: Codable {
+    public enum CodingKeys: String, CodingKey {
+        case action
+    }
+
+    public enum Action: String, Codable {
+        case signOut = "SIGN_OUT"
+    }
+
+    public let action: Action
+
+    public init(action: Action) {
+        self.action = action
+    }
 }
 
 #if canImport(UserNotifications)
