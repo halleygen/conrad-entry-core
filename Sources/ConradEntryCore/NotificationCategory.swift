@@ -3,6 +3,8 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
+import Foundation
+
 public enum NotificationCategory: String, CaseIterable {
     case accountLockStateChanged = "ACCOUNT_LOCK_STATUS_CHANGED"
     case newUserSignup = "NEW_USER_SIGNUP"
