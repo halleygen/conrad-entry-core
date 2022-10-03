@@ -10,7 +10,11 @@ public enum NotificationCategory: String, CaseIterable {
 
 public struct NewAccountSignupNotificationPayload: Codable {
     public let userID: UUID
-    
+
+    public init(userID: UUID) {
+        self.userID = userID
+    }
+
     public enum CodingKeys: String, CodingKey {
         case userID = "USER_ID"
     }
