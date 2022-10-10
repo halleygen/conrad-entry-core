@@ -52,7 +52,7 @@
         #if os(macOS)
             static func currentDeviceIdentifierForVendor(service: io_service_t? = nil) -> UUID {
                 let uuidString: String
-                if let service = service {
+                if let service {
                     uuidString = IORegistryEntryCreateCFProperty(service, kIOPlatformUUIDKey as CFString, nil, 0).takeRetainedValue() as! String
                 } else {
                     let service = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
@@ -64,7 +64,7 @@
 
             private static func currentDeviceModel(service: io_service_t? = nil) -> String? {
                 let modelData: Data
-                if let service = service {
+                if let service {
                     modelData = IORegistryEntryCreateCFProperty(service, "model" as CFString, nil, 0).takeRetainedValue() as! Data
                 } else {
                     let service = IOServiceGetMatchingService(kIOMainPortDefault, IOServiceMatching("IOPlatformExpertDevice"))

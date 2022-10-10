@@ -9,7 +9,7 @@ public extension SampleReductionProperties {
 
 public extension SampleReductionPartialProperties {
     var wasScreened: Bool? {
-        guard let screenApertureMillimetres = screenApertureMillimetres else { return nil }
+        guard let screenApertureMillimetres else { return nil }
         return screenApertureMillimetres != nil
     }
 }

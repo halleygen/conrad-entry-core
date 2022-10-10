@@ -44,7 +44,7 @@
 
             public static func contentDisposition(name: String, file: (name: String, contentType: UTType)? = nil) -> Header {
                 let value: String
-                if let file = file {
+                if let file {
                     if let filenameExtension = file.contentType.preferredFilenameExtension {
                         value = "form-data; name=\"\(name)\"; filename=\"\(file.name).\(filenameExtension)\""
                     } else {

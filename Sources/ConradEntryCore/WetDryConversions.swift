@@ -21,17 +21,17 @@ public enum WetDryConversion {
 
 public extension WetDryConversion {
     static func dryWeight<Value: BinaryFloatingPoint>(wetWeight: Value?, moisturePercentage: Value?) -> Value? {
-        guard let wetWeight = wetWeight, let moisturePercentage = moisturePercentage else { return nil }
+        guard let wetWeight, let moisturePercentage else { return nil }
         return dryWeight(wetWeight: wetWeight, moisturePercentage: moisturePercentage)
     }
 
     static func wetWeight<Value: BinaryFloatingPoint>(dryWeight: Value?, moisturePercentage: Value?) -> Value? {
-        guard let dryWeight = dryWeight, let moisturePercentage = moisturePercentage else { return nil }
+        guard let dryWeight, let moisturePercentage else { return nil }
         return wetWeight(dryWeight: dryWeight, moisturePercentage: moisturePercentage)
     }
 
     static func moisturePercentage<Value: BinaryFloatingPoint>(wetWeight: Value?, dryWeight: Value?) -> Value? {
-        guard let wetWeight = wetWeight, let dryWeight = dryWeight else { return nil }
+        guard let wetWeight, let dryWeight else { return nil }
         return moisturePercentage(wetWeight: wetWeight, dryWeight: dryWeight)
     }
 }

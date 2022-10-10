@@ -27,7 +27,7 @@ extension UserPrivilege: CustomStringConvertible {
     }
 }
 
-public extension Set where Element == UserPrivilege {
+public extension Set<UserPrivilege> {
     static var all: Set<Element> { Set(Element.allCases) }
     static var none: Set<Element> { Set() }
 }

@@ -24,7 +24,7 @@ public enum ETag: Hashable {
 }
 
 public extension ETag {
-    static func fromResource<T: VersionedResource>(_ resource: T) -> Self {
+    static func fromResource(_ resource: some VersionedResource) -> Self {
         resource.version.eTag
     }
 }
@@ -42,15 +42,13 @@ extension ETag: LosslessStringConvertible {
 
         let valueEndIndex = description.index(before: description.endIndex)
 
-        if description.hasPrefix("W/") {
+        if description.hasPrefix("W/\"") {
             guard let valueStartIndex = description.index(description.startIndex, offsetBy: 3, limitedBy: valueEndIndex) else { return nil }
             let value = String(description[valueStartIndex ..< valueEndIndex])
-            guard !value.isEmpty else { return nil }
             self = .weakValidator(value)
         } else if description.hasPrefix("\"") {
             guard let valueStartIndex = description.index(description.startIndex, offsetBy: 1, limitedBy: valueEndIndex) else { return nil }
             let value = String(description[valueStartIndex ..< valueEndIndex])
-            guard !value.isEmpty else { return nil }
             self = .strongValidator(value)
         } else {
             return nil

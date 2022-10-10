@@ -11,7 +11,7 @@ public extension MoistureDeterminationProperties {
 
 public extension MoistureDeterminationPartialProperties {
     @inlinable var durationInOven: TimeInterval? {
-        guard let ovenOffTime = ovenOffTime, let ovenOnTime = ovenOnTime else { return nil }
+        guard let ovenOffTime, let ovenOnTime else { return nil }
         return ovenOffTime.timeIntervalSince(ovenOnTime)
     }
 }

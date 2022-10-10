@@ -89,7 +89,7 @@ extension AttachmentRole: LosslessStringConvertible {
     }
 
     public var description: String {
-        if let subsection = subsection {
+        if let subsection {
             return "\(`class`.rawValue).\(section.rawValue).\(subsection.rawValue).\(requirement.rawValue)"
         } else {
             return "\(`class`.rawValue).\(section.rawValue).\(requirement.rawValue)"

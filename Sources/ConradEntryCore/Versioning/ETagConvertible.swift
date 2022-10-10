@@ -15,7 +15,7 @@ public protocol LosslessETagConvertible: ETagConvertible {
 
 extension Optional: ETagConvertible where Wrapped: ETagConvertible {
     public var eTag: ETag {
-        if let self = self {
+        if let self {
             return self.eTag
         } else {
             return .catchAll

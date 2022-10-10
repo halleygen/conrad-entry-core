@@ -17,7 +17,7 @@ public extension DischargePartialProperties {
     @inlinable var finishTimeForCalculations: Date? { finishTimeCleanup }
 
     @inlinable var interval: DateInterval? {
-        guard let startTime = startTime, let finishTimeCleanup = finishTimeCleanup else { return nil }
+        guard let startTime, let finishTimeCleanup else { return nil }
         return DateInterval(start: startTime, end: finishTimeCleanup)
     }
 }

@@ -21,7 +21,8 @@ final class ConradEntryCoreTests: XCTestCase {
             "123456789": nil,
             "W/123456789": nil,
             "\"": nil,
-            "\"\"": nil,
+            "\"\"": .strongValidator(""),
+            "W/\"\"": .weakValidator(""),
             "\"123456789": nil,
             "123456789\"": nil,
             "\"123\"456789\"": .strongValidator("123\"456789"),
@@ -31,7 +32,7 @@ final class ConradEntryCoreTests: XCTestCase {
         for (string, expectedResult) in values {
             XCTAssertEqual(ETag(string), expectedResult)
 
-            if let expectedResult = expectedResult {
+            if let expectedResult {
                 XCTAssertEqual(string, String(expectedResult))
             }
         }
