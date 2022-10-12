@@ -18,6 +18,18 @@ public protocol PartialMutationRequest: Partial, MutationRequest {
     {# func asPartialDTO() -> PartialDTO #}
 }
 
+enum Test {
+{% for variable in type.SourceryTest.storedVariables %}
+    static var {{ variable.name }}: [String] {
+        [
+    {% for annotation in variable.annotations.keys %}
+        {{ annotation }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+        ]
+    }
+{% endfor %}
+}
+
 {% for type in types.implementing.ShipmentAutogen %}
 // MARK: - {{ type.name|replace:"Template","" }}
 

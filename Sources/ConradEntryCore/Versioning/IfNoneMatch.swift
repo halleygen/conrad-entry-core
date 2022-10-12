@@ -27,6 +27,17 @@ public enum IfNoneMatch {
 
     /// Returns a Boolean value that indicates whether the specified ETag matches the conditions that the predicate specifies.
     ///
+    /// The requested method must not be performed if this condition evaluates to `false`.
+    ///
+    /// See [RFC 9110](https://httpwg.org/specs/rfc9110.html#field.if-none-match)\.
+    public func evaluate(with value: (some EntityTagConvertible)?) -> Bool {
+        evaluate(with: value?.entityTag)
+    }
+
+    /// Returns a Boolean value that indicates whether the specified ETag matches the conditions that the predicate specifies.
+    ///
+    /// The requested method must not be performed if this condition evaluates to `false`.
+    ///
     /// See [RFC 9110](https://httpwg.org/specs/rfc9110.html#field.if-none-match)\.
     public func evaluate(with entityTag: EntityTag?) -> Bool {
         switch self {
@@ -76,6 +87,17 @@ public enum IfMatch {
     case tags([EntityTag])
 
     /// Returns a Boolean value that indicates whether the specified ETag matches the conditions that the predicate specifies.
+    ///
+    /// The requested method must not be performed if this condition evaluates to `false`.
+    ///
+    /// See [RFC 9110](https://httpwg.org/specs/rfc9110.html#field.if-match)\.
+    public func evaluate(with value: (some EntityTagConvertible)?) -> Bool {
+        evaluate(with: value?.entityTag)
+    }
+
+    /// Returns a Boolean value that indicates whether the specified ETag matches the conditions that the predicate specifies.
+    ///
+    /// The requested method must not be performed if this condition evaluates to `false`.
     ///
     /// See [RFC 9110](https://httpwg.org/specs/rfc9110.html#field.if-match)\.
     public func evaluate(with entityTag: EntityTag?) -> Bool {
