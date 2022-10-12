@@ -33,8 +33,9 @@ public struct EntityTag: Hashable {
 }
 
 public extension EntityTag {
-    init(_ value: some EntityTagConvertible) {
-        self = value.entityTag
+    init?(_ value: some EntityTagConvertible) {
+        guard let entityTag = value.entityTag else { return nil }
+        self = entityTag
     }
 
     static func strongValidator(_ value: String) -> Self {
