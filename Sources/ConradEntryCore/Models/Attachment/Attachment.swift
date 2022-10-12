@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct Attachment: Codable, Hashable, Identifiable, VersionedResource, Sendable {
+public struct Attachment: Codable, Hashable, Identifiable, Versioned, Sendable {
     public var id: UUID
     public var shipmentID: UUID
     public var role: AttachmentRole
