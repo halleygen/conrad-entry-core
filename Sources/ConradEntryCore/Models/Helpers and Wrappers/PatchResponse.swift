@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public enum PatchResponse<Item: VersionedResource & Identifiable>: Identifiable, VersionedResource {
+public enum PatchResponse<Item: Versioned & Identifiable>: Identifiable, Versioned {
     case patched(id: Item.ID, version: Item.Version)
     case conflict(item: Item)
 

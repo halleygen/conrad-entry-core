@@ -13,7 +13,7 @@ final class ConradEntryCoreTests: XCTestCase {
     }
 
     func testETag() throws {
-        let values: KeyValuePairs<String, ETag?> = [
+        let values: KeyValuePairs<String, EntityTag?> = [
             "\"123456789\"": .strongValidator("123456789"),
             "\"123456789\"": .strongValidator("123456789"),
             "W/\"123456789\"": .weakValidator("123456789"),
@@ -30,7 +30,7 @@ final class ConradEntryCoreTests: XCTestCase {
         ]
 
         for (string, expectedResult) in values {
-            XCTAssertEqual(ETag(string), expectedResult)
+            XCTAssertEqual(EntityTag(string), expectedResult)
 
             if let expectedResult {
                 XCTAssertEqual(string, String(expectedResult))

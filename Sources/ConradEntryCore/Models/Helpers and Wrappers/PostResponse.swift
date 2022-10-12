@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public struct PostResponse<Item: VersionedResource & Identifiable>: VersionedResource, Identifiable {
+public struct PostResponse<Item: Versioned & Identifiable>: Versioned, Identifiable {
     public let id: Item.ID
     public let version: Item.Version
     public let wasCreated: Bool

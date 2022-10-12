@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public enum VersionedValueOrID<Item: Identifiable & VersionedResource>: Identifiable, VersionedResource {
+public enum VersionedValueOrID<Item: Identifiable & Versioned>: Identifiable, Versioned {
     public typealias ID = Item.ID
     public typealias Version = Item.Version
 

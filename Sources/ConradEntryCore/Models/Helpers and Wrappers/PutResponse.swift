@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public enum PutResponse<Item: VersionedResource & Identifiable>: Identifiable, VersionedResource {
+public enum PutResponse<Item: Versioned & Identifiable>: Identifiable, Versioned {
     case created(id: Item.ID, version: Item.Version)
     case updated(id: Item.ID, version: Item.Version)
     case conflict(item: Item)

@@ -3,7 +3,7 @@
 // Copyright © 2022 Jesse Halley. All rights reserved.
 //
 
-public struct VersionedID<ID: Hashable, Version: ETagConvertible>: Identifiable, VersionedResource {
+public struct VersionedID<ID: Hashable, Version: EntityTagConvertible>: Identifiable, Versioned {
     public let id: ID
     public let version: Version
 
@@ -12,7 +12,7 @@ public struct VersionedID<ID: Hashable, Version: ETagConvertible>: Identifiable,
         self.version = version
     }
 
-    public init<T: VersionedResource & Identifiable>(_ item: T) where T.ID == ID, T.Version == Version {
+    public init<T: Versioned & Identifiable>(_ item: T) where T.ID == ID, T.Version == Version {
         self.init(id: item.id, version: item.version)
     }
 }
