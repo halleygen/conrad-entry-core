@@ -6,5 +6,5 @@
 import Foundation
 
 public extension Locale {
-    static var `default`: Locale { Locale(identifier: "en_GB@calendar=iso8601;currency=USD") }
+    static var `default`: Locale { Locale(identifier: "en-AU@ca=iso8601;cu=usd") }
 }
